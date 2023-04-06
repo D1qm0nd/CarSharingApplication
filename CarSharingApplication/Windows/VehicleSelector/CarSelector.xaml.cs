@@ -23,7 +23,7 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
-namespace CourseWorkProject
+namespace CarSharingApplication
 {
     /// <summary>
     /// Логика взаимодействия для CarSelector.xaml

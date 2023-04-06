@@ -125,7 +125,7 @@
     <Compile Include="Windows\Moderating\AdminWindows.xaml.cs">
       <DependentUpon>AdminWindows.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Moderating\EditVehicles\EditVehiclesWindow.xaml.cs">
+    <Compile Include="Windows\Moderating\EditWindows\Vehicles\EditVehiclesWindow.xaml.cs">
       <DependentUpon>EditVehiclesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Moderating\EditWindows\Users\EditUsersWindow.xaml.cs">
@@ -152,7 +152,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Moderating\EditVehicles\EditVehiclesWindow.xaml">
+    <Page Include="Windows\Moderating\EditWindows\Vehicles\EditVehiclesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

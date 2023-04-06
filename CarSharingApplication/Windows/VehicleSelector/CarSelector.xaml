@@ -1,4 +1,4 @@
-﻿<Window x:Class="CourseWorkProject.CarSelector"
+﻿<Window x:Class="CarSharingApplication.CarSelector"
       xmlns:WindowsPresentation="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
