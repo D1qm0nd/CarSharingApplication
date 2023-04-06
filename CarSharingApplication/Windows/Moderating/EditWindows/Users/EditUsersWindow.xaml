@@ -1,0 +1,44 @@
+﻿<Window x:Class="CarSharingApplication.EditUsersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarSharingApplication"
+        mc:Ignorable="d"
+        Height="450" Width="850"
+        Closing="Window_Closing"
+    >
+
+    <Grid>
+        <ScrollViewer MaxHeight="400" VerticalAlignment="Top">
+            <DataGrid 
+                ItemsSource="{Binding}"
+                AlternatingRowBackground="White"
+                SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                x:Name="dt_grid"
+                AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding ID_User}" Header="Код" MinWidth="100" MaxWidth="300" CanUserSort="True" SortDirection="Descending"/>
+                    <DataGridTextColumn Binding="{Binding UserEMail}" Header="Почтовый ящик" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding UserSurname}" Header="Фамилия" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding UserName}" Header="Имя" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding UserMiddleName}" Header="Отчество" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding UserBirthDay}" Header="Дата рождения" MinWidth="200" MaxWidth="200"/>
+                    <DataGridTemplateColumn Visibility="Visible">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <CheckBox x:Name="DelVerify" Content="" Height="30" Width="35"></CheckBox>
+                                    <Button Background="red" BorderBrush="DarkRed" Command="Delete">Удалить</Button>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+        <Grid VerticalAlignment="Bottom" Height="61">
+            <Button VerticalAlignment="Bottom" Click="SubmitButton_Click" Height="30">Подвердить изменения</Button>
+        </Grid>
+    </Grid>
+</Window>

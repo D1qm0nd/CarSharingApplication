@@ -13,5 +13,9 @@ namespace CarSharingApplication
     /// </summary>
     public partial class App : Application
     {
+        public string GetConnectionString(string connectionName)
+        {
+            return ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
+        }
     }
 }
