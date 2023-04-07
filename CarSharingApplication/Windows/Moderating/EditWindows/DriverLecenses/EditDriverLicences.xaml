@@ -1,4 +1,4 @@
-﻿<Window x:Class="CarSharingApplication.EditUsersWindow"
+﻿<Window x:Class="CarSharingApplication.EditDriverLicenses"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,12 +17,9 @@
                 x:Name="dt_grid"
                 AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID_User}" Header="Код" MinWidth="100" MaxWidth="300" CanUserSort="True" SortDirection="Descending"/>
-                    <DataGridTextColumn Binding="{Binding UserEMail}" Header="Почтовый ящик" MinWidth="100" MaxWidth="300"/>
-                    <DataGridTextColumn Binding="{Binding UserSurname}" Header="Фамилия" MinWidth="100" MaxWidth="300"/>
-                    <DataGridTextColumn Binding="{Binding UserName}" Header="Имя" MinWidth="100" MaxWidth="300"/>
-                    <DataGridTextColumn Binding="{Binding UserMiddleName}" Header="Отчество" MinWidth="100" MaxWidth="300"/>
-                    <DataGridTextColumn Binding="{Binding UserBirthDay}" Header="Дата рождения" MinWidth="200" MaxWidth="200"/>
+                    <DataGridTextColumn Binding="{Binding ID_DriverLicence}" Header="Серия номер" MinWidth="200" MaxWidth="300" CanUserSort="True" SortDirection="Descending"/>
+                    <DataGridTextColumn Binding="{Binding ReceiptDate}" Header="Дата получения" MinWidth="200" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding ID_User}" Header="Код пользователя" MinWidth="200" MaxWidth="300"/>
                     <DataGridTemplateColumn Visibility="Visible">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Height="280" MinHeight="280" MaxHeight="280"
         Width="650" MinWidth="650" MaxWidth="650"
-        Icon="../images/icon.jpeg">
+        Icon="../images/icon.jpeg"
+        Closing="Window_Closing"
+        >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="40" MaxHeight="40"/>
