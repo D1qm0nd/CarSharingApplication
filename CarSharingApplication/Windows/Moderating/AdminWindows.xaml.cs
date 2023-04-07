@@ -39,7 +39,7 @@ namespace CarSharingApplication
 
         private void DriverLicencesButton_Click(object sender, RoutedEventArgs e)
         {
-            var EditWindow = new EditUsersWindow();
+            var EditWindow = new EditDriverLicenses();
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
@@ -115,5 +115,9 @@ namespace CarSharingApplication
             this.Close();
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Owner.Visibility = Visibility.Visible;
+        }
     }
 }

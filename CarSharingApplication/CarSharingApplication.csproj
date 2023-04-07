@@ -119,11 +119,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VehicleRentalDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Authorization\AddUserDataWindow.xaml.cs">
+      <DependentUpon>AddUserDataWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Authorization\Autorization.xaml.cs">
       <DependentUpon>Autorization.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Moderating\AdminWindows.xaml.cs">
       <DependentUpon>AdminWindows.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Moderating\EditWindows\DriverLecenses\EditDriverLicences.xaml.cs">
+      <DependentUpon>EditDriverLicences.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Moderating\EditWindows\Vehicles\EditVehiclesWindow.xaml.cs">
       <DependentUpon>EditVehiclesWindow.xaml</DependentUpon>
@@ -144,11 +150,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\Authorization\AddUserDataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Authorization\Autorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Moderating\AdminWindows.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\DriverLecenses\EditDriverLicences.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +228,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="SQL\CreateDataBase.sql" />
+    <Content Include="SQL\FillUp.sql" />
     <Resource Include="Windows\Images\icon.jpeg" />
     <Resource Include="Windows\Images\mustang.jpg" />
   </ItemGroup>

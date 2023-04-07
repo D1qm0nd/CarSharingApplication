@@ -504,27 +504,21 @@ GO
 		GRANT INSERT, SELECT, UPDATE, DELETE ON Rentals TO DB_ADMIN_HANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON TrafficAccidents TO DB_ADMIN_HANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON TrafficAccidentTypes TO DB_ADMIN_HANDLER
-
-
 		
 		GRANT EXEC ON REG_USER TO DB_USER_USERHANDLER
 
+--GO
+--	USE VehicleRental
+--	INSERT Classes (Class) VALUES
+--		('Бизнес'),
+--		('Эконом')
 
+--GO
+--	USE VehicleRental
 
-
-
-GO
-	USE VehicleRental
-	INSERT Classes (Class) VALUES
-		('Бизнес'),
-		('Эконом')
-
-GO
-	USE VehicleRental
-
-	INSERT Vehicles (NumberTemplate, PricePerHour, Class) VALUES
-		('А771ЕТ777', 1000.0, 'Бизнес'),
-		('А761ВА091', 1000.0, 'Эконом')
+--	INSERT Vehicles (NumberTemplate, PricePerHour, Class) VALUES
+--		('А771ЕТ777', 1000.0, 'Бизнес'),
+--		('А761ВА091', 1000.0, 'Эконом')
 
 --GO
 --	USE VehicleRental

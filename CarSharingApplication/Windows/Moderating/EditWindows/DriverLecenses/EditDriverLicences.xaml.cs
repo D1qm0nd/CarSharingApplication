@@ -20,25 +20,20 @@ namespace CarSharingApplication
     /// <summary>
     /// Логика взаимодействия для EditUsersWindow.xaml
     /// </summary>
-    public partial class EditUsersWindow : Window
+    public partial class EditDriverLicenses : Window
     {
         private string ConnectionString = (Application.Current as App).GetConnectionString("DBADMINConnection");
-        
+
         private CarSharingDataBaseClassesDataContext db;
-        public EditUsersWindow()
+        public EditDriverLicenses()
         {
-            try 
-            { 
+            try
+            {
                 InitializeComponent();
                 db = new CarSharingDataBaseClassesDataContext(ConnectionString);
-                dt_grid.ItemsSource = db.Rental_Users;
-                
-                    //from user in
-                    //                      ru
-                    //                  join admin in ra
-                    //                  on user.ID_User equals admin.ID_User select new { user.ID_User, user.UserEMail, user.UserSurname, user.UserName, user.UserMiddleName} ;
+                dt_grid.ItemsSource = db.DriversLicences;
             }
-            catch (SqlException sqlex) 
+            catch (SqlException sqlex)
             {
                 MessageBox.Show(sqlex.Message);
             }
@@ -52,16 +47,16 @@ namespace CarSharingApplication
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            try 
+            try
             {
                 db.SubmitChanges();
             }
-            catch (SqlException sqlex) 
+            catch (SqlException sqlex)
             {
                 MessageBox.Show(sqlex.Message);
                 dt_grid.ItemsSource = db.Rental_Users;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

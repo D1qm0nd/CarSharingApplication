@@ -85,7 +85,7 @@ namespace CarSharingApplication
             gMapControl1.CanDragMap = true; // перетаскивание карты мышью
             gMapControl1.DragButton = MouseButton.Left; // какой кнопкой осуществляется перетаскивание
             gMapControl1.ShowCenter = false; //показывать или скрывать красный крестик в центре
-            gMapControl1.ShowTileGridLines = false; //показывать или скрывать тайлы
+            gMapControl1.ShowTileGridLines = false; //показывать или скрывать тайтлы
             GMapMarker marker = new GMapMarker(new PointLatLng(55.752004, 37.617734));
             //BitmapImage bitmap = new BitmapImage();
             //bitmap.BeginInit();

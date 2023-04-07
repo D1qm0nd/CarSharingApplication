@@ -8,7 +8,6 @@
         Height="450" Width="850"
         Closing="Window_Closing"
     >
-
     <Grid>
         <ScrollViewer MaxHeight="400" VerticalAlignment="Top">
             <DataGrid 
