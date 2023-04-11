@@ -248,6 +248,7 @@ GO
 		--		  ),
 		PermissibleMaximumWeightKg INTEGER NOT NULL,
 		WeightWithoutLoadKg INTEGER NOT NULL,
+		DateOfRecord DATE NOT NULL,
 		PRIMARY KEY (CertificateSeries, CertificateNumber)
 	)
 
@@ -482,7 +483,7 @@ GO
 		GRANT INSERT, SELECT, UPDATE, DELETE ON Vehicles TO DB_USER_CARHANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON VehicleCoordinates TO DB_USER_CARHANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON Classes TO DB_USER_CARHANDLER
-		GRANT INSERT, SELECT, UPDATE, DELETE ON VehiclesPassports TO DB_USER_CARHANDLER
+		--GRANT INSERT, SELECT, UPDATE, DELETE ON VehiclesPassports TO DB_USER_CARHANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON VehicleRegistrCertificates TO DB_USER_CARHANDLER
 
 		CREATE LOGIN DLHANDLER WITH PASSWORD = 'DLHANDLER'
@@ -506,23 +507,3 @@ GO
 		GRANT INSERT, SELECT, UPDATE, DELETE ON TrafficAccidentTypes TO DB_ADMIN_HANDLER
 		
 		GRANT EXEC ON REG_USER TO DB_USER_USERHANDLER
-
---GO
---	USE VehicleRental
---	INSERT Classes (Class) VALUES
---		('Бизнес'),
---		('Эконом')
-
---GO
---	USE VehicleRental
-
---	INSERT Vehicles (NumberTemplate, PricePerHour, Class) VALUES
---		('А771ЕТ777', 1000.0, 'Бизнес'),
---		('А761ВА091', 1000.0, 'Эконом')
-
---GO
---	USE VehicleRental
-
---INSERT INTO VehiclesPassports VALUES 
---		(1, '52УЕ011514', '11111111111111', 'McLaren', 'прицеп', 2023, 'a23sdf', 'Задний привод', '123124', 'Зелёный/Green', 250.0, 50, 'Гибридный', 1270, 1100, 'Germany', 'Спортивный', 'Germany', '12345678/123456/1234567', 'Нет', 'Московская Северная таможня', 'Бауманская 3', 'sfsdfsdfs', 'ASA', GETDATE()),
---		(1, '53УЕ021525', '22222222222222', 'Lamborghini', 'прицеп', 2023, 'sdfsds', 'Задний привод', '123124', 'Зелёный/Green', 250.0, 40, 'Гибридный', 1270, 1100, 'Italy', 'Спортивный', 'Italy', '12345632/143456/1124437', 'Нет', 'Московская Северная таможня', 'Бауманская 3', 'sfsdfsdfs', 'fds', GETDATE())

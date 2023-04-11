@@ -221,6 +221,7 @@
     <None Include="VehicleRentalDataSet.xss">
       <DependentUpon>VehicleRentalDataSet.xsd</DependentUpon>
     </None>
+    <None Include="Разработка информационной системы для проката.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
