@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="VehicleRental" Class="CarSharingDataBaseClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-RN9AI5Q;Initial Catalog=VehicleRental;Integrated Security=True" SettingsObjectName="CarSharingApplication.Properties.Settings" SettingsPropertyName="VehicleRentalConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-RN9AI5Q;Initial Catalog=VehicleRental;Integrated Security=True" SettingsObjectName="CarSharingApplication.Properties.Settings" SettingsPropertyName="VehicleRentalConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Categories" Member="Categories">
     <Type Name="Categories">
       <Column Name="ID_Category" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -124,6 +124,20 @@
       <Association Name="Vehicles_VehicleCoordinates" Member="VehicleCoordinates" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="VehicleCoordinates" />
       <Association Name="Vehicles_VehicleRegistrCertificates" Member="VehicleRegistrCertificates" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="VehicleRegistrCertificates" />
       <Association Name="Classes_Vehicles" Member="Classes" ThisKey="Class" OtherKey="Class" Type="Classes" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VehiclesINFO" Member="VehiclesINFO">
+    <Type Name="VehiclesINFO">
+      <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Brand" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Mark" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Color" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
+      <Column Name="Class" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="PricePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CarPicture" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Lat" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Lng" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AccessStatus" Type="System.String" DbType="Char(8)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

@@ -63,7 +63,7 @@ namespace CarSharingApplication.SQL.Linq
     #endregion
 		
 		public CarSharingDataBaseClassesDataContext() : 
-				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString, mappingSource)
+				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -177,6 +177,14 @@ namespace CarSharingApplication.SQL.Linq
 			get
 			{
 				return this.GetTable<Vehicles>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VehiclesINFO> VehiclesINFO
+		{
+			get
+			{
+				return this.GetTable<VehiclesINFO>();
 			}
 		}
 	}
@@ -2685,6 +2693,195 @@ namespace CarSharingApplication.SQL.Linq
 		{
 			this.SendPropertyChanging();
 			entity.Vehicles = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VehiclesINFO")]
+	public partial class VehiclesINFO
+	{
+		
+		private int _ID_Vehicle;
+		
+		private string _Brand;
+		
+		private string _Mark;
+		
+		private string _Color;
+		
+		private string _Class;
+		
+		private decimal _PricePerHour;
+		
+		private System.Data.Linq.Binary _CarPicture;
+		
+		private System.Nullable<double> _Lat;
+		
+		private System.Nullable<double> _Lng;
+		
+		private string _AccessStatus;
+		
+		public VehiclesINFO()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
+		public int ID_Vehicle
+		{
+			get
+			{
+				return this._ID_Vehicle;
+			}
+			set
+			{
+				if ((this._ID_Vehicle != value))
+				{
+					this._ID_Vehicle = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Brand", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Brand
+		{
+			get
+			{
+				return this._Brand;
+			}
+			set
+			{
+				if ((this._Brand != value))
+				{
+					this._Brand = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mark", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Mark
+		{
+			get
+			{
+				return this._Mark;
+			}
+			set
+			{
+				if ((this._Mark != value))
+				{
+					this._Mark = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(120) NOT NULL", CanBeNull=false)]
+		public string Color
+		{
+			get
+			{
+				return this._Color;
+			}
+			set
+			{
+				if ((this._Color != value))
+				{
+					this._Color = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Class", DbType="Char(20) NOT NULL", CanBeNull=false)]
+		public string Class
+		{
+			get
+			{
+				return this._Class;
+			}
+			set
+			{
+				if ((this._Class != value))
+				{
+					this._Class = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PricePerHour", DbType="Money NOT NULL")]
+		public decimal PricePerHour
+		{
+			get
+			{
+				return this._PricePerHour;
+			}
+			set
+			{
+				if ((this._PricePerHour != value))
+				{
+					this._PricePerHour = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CarPicture", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary CarPicture
+		{
+			get
+			{
+				return this._CarPicture;
+			}
+			set
+			{
+				if ((this._CarPicture != value))
+				{
+					this._CarPicture = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lat", DbType="Float")]
+		public System.Nullable<double> Lat
+		{
+			get
+			{
+				return this._Lat;
+			}
+			set
+			{
+				if ((this._Lat != value))
+				{
+					this._Lat = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lng", DbType="Float")]
+		public System.Nullable<double> Lng
+		{
+			get
+			{
+				return this._Lng;
+			}
+			set
+			{
+				if ((this._Lng != value))
+				{
+					this._Lng = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccessStatus", DbType="Char(8)")]
+		public string AccessStatus
+		{
+			get
+			{
+				return this._AccessStatus;
+			}
+			set
+			{
+				if ((this._AccessStatus != value))
+				{
+					this._AccessStatus = value;
+				}
+			}
 		}
 	}
 }

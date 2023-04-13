@@ -230,6 +230,8 @@
   <ItemGroup>
     <Content Include="SQL\CreateDataBase.sql" />
     <Content Include="SQL\FillUp.sql" />
+    <Resource Include="Windows\Images\MapCar.png" />
+    <Resource Include="Windows\Images\NullImage.png" />
     <Resource Include="Windows\Images\icon.jpeg" />
     <Resource Include="Windows\Images\mustang.jpg" />
   </ItemGroup>
