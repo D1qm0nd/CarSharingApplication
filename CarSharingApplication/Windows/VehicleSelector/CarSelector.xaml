@@ -73,9 +73,9 @@
                     BorderThickness="3"
                     Margin="0 10 10 0"
                     >
-                    <StackPanel>
-                        <Image Panel.ZIndex="10" Source="../images/mustang.jpg" Height="260" Width="380" Margin="0,-15,0,0"/>
-                        <ListView>
+                    <StackPanel x:Name="InfoPanel">
+                        <Image Panel.ZIndex="10" Source="../Images/NullImage.png" MaxHeight="460" MaxWidth="480" Margin="0,0,0,0"/>
+                        <ListView x:Name="VehicleInfoList">
                         </ListView>
                     </StackPanel>
                 </Border>

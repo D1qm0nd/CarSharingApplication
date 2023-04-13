@@ -448,9 +448,75 @@ GO
 --			WHERE UserLogin = @UserLogin AND UserPassword = @UserPassword)
 --	END
 
+
+GO
+	PRINT '==================================Функции======================================='
+GO
+	CREATE FUNCTION GetCoordinatesFunc(
+		@Vehicle_ID INT
+	)
+	RETURNS table
+	AS
+	RETURN(
+		SELECT TOP(1) *
+		FROM VehicleCoordinates
+		WHERE VehicleCoordinates.ID_Vehicle = @Vehicle_ID
+		ORDER BY StayDateTime DESC
+	)
+
+GO	
+	CREATE FUNCTION GetVehicleStatus(
+		@Vehicle_ID INT
+	)
+	RETURNS char(8)
+	AS
+	BEGIN
+		IF NOT EXISTS (SELECT *, 
+			DATEADD(HOUR, ABS(DATEDIFF(HOUR,RentalTime,0))+ABS(CountOfHours),Convert(datetime, StartDate, 102)) as rt
+					FROM Rentals 
+					WHERE DATEADD(HOUR, ABS(DATEDIFF(HOUR,RentalTime,0))+ABS(CountOfHours),Convert(datetime, StartDate, 0)) 
+					> GETDATE() 
+					AND ID_Vehicle = @Vehicle_ID
+					AND YEAR(DATEADD(HOUR, ABS(DATEDIFF(HOUR,RentalTime,0))+ABS(CountOfHours),Convert(datetime, StartDate, 0))) 
+					= YEAR(GETDATE()))
+		BEGIN
+			RETURN 'доступен'
+		END
+		RETURN 'занят'
+	END
+
+GO
+	PRINT '==================================Представления======================================='
+	USE VehicleRental
+
+USE VehicleRental
+GO
+	CREATE VIEW VehiclesINFO
+	AS
+	SELECT DISTINCT
+		Vehicles.ID_Vehicle, 
+		VehicleRegistrCertificates.Brand,
+		VehicleRegistrCertificates.Mark,
+		VehicleRegistrCertificates.Color,
+		Vehicles.Class, 
+		Vehicles.PricePerHour, 
+		Vehicles.CarPicture, 
+		VehicleCoordinates.Latitude, 
+		VehicleCoordinates.Longitude, 
+		[dbo].GetVehicleStatus(Vehicles.ID_Vehicle) as AccessStatus 
+	FROM
+		Vehicles INNER JOIN VehicleRegistrCertificates
+		ON Vehicles.ID_Vehicle = VehicleRegistrCertificates.ID_Vehicle
+		FULL JOIN VehicleCoordinates
+		ON Vehicles.ID_Vehicle = VehicleCoordinates.ID_Vehicle
+
+
+
+
+
 GO
 	PRINT '==================================Пользователи======================================='
-	USE VehicleRental
+	--USE VehicleRental
 --GO
 --	EXEC REG_USER 
 --		@UserLogin='rental_admin', 
