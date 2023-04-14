@@ -49,6 +49,7 @@ namespace CarSharingApplication
             SetMarkers();
         }
 
+
         private void GMapControl_Loaded(object sender, RoutedEventArgs e)
         {
             GMaps.Instance.Mode = AccessMode.ServerAndCache; //выбор подгрузки карты – онлайн или из ресурсов
