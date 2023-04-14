@@ -36,7 +36,6 @@ namespace CarSharingApplication
         private VehiclesINFO vehicleInfo;
         private List<VehiclesINFO> vehiclesInfoList;
 
-
         private string ConnectionString = ConfigurationManager.ConnectionStrings["CARHANDLERConnection"].ConnectionString;
 
         public CarSelector(ref Rental_Users user)
