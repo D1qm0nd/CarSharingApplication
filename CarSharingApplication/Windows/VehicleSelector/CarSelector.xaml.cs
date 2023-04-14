@@ -22,6 +22,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.ComponentModel;
 
 namespace CarSharingApplication
 {
@@ -49,11 +50,12 @@ namespace CarSharingApplication
             SetMarkers();
         }
 
+
         private void GMapControl_Loaded(object sender, RoutedEventArgs e)
         {
             GMaps.Instance.Mode = AccessMode.ServerAndCache; //выбор подгрузки карты – онлайн или из ресурсов
             gMapControl1.MapProvider = GoogleMapProvider.Instance; //какой провайдер карт используется (в нашем случае гугл) 
-            gMapControl1.MinZoom = 1; //минимальный зум
+            gMapControl1.MinZoom = 14; //минимальный зум
             gMapControl1.MaxZoom = 18; //максимальный зум
             gMapControl1.Zoom = 14; // какой используется зум при открытии
             gMapControl1.Position = new PointLatLng(55.752004, 37.617734);
@@ -62,6 +64,7 @@ namespace CarSharingApplication
             gMapControl1.DragButton = MouseButton.Left; // какой кнопкой осуществляется перетаскивание
             gMapControl1.ShowCenter = false; //показывать или скрывать красный крестик в центре
             gMapControl1.ShowTileGridLines = false; //показывать или скрывать тайтлы
+
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -78,24 +81,21 @@ namespace CarSharingApplication
                 {
                     if (vehicle.Lat != null && vehicle.Lng != null)
                     {
-                        GMapMarker marker = new GMapMarker(new PointLatLng((double)vehicle.Lat, (double)vehicle.Lng));
+                        GMapMarker marker = new GMapMarker(new PointLatLng((double)vehicle.Lat, (double)vehicle.Lng) );
 
                         marker.Shape = new Image
                         {
                             Source = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\MapCar.png")),
-                            Width = 10,
-                            Height = 10,
-                            ToolTip = "Транспортное средство",
+                            Width = 30,
+                            Height = 30,
+                            ToolTip = $"{vehicle.Brand} {vehicle.Mark}",
                             Visibility = Visibility.Visible,
+                            Tag = vehicle
                         };
 
-                        gMapControl1.Markers.Add(marker);
 
-                        foreach (GMapMarker mark in gMapControl1.Markers)
-                        {
-                            ((Image)mark.Shape).Width = gMapControl1.Zoom * 5;
-                            ((Image)mark.Shape).Height = gMapControl1.Zoom * 5;
-                        }
+                        marker.Shape.MouseEnter += MarkerMouseEnter;
+                        gMapControl1.Markers.Add(marker);
                     }
                 }
             }
@@ -105,9 +105,27 @@ namespace CarSharingApplication
             }
         }
 
-        private void SetData()
+        private void SetVehicleInfo(VehiclesINFO info)
         {
-            
+            List<string> infolist = new List<string>();
+            infolist.Add(info.Brand);
+            infolist.Add(info.Mark);
+            infolist.Add(info.Class);
+            infolist.Add(info.Color);
+            infolist.Add(info.PricePerHour.ToString());
+            VehicleInfoList.ItemsSource = infolist;
+            if (info.CarPicture != null)
+            {
+                //CarPicture.Source = info.CarPicture;
+                CarPicture.Source = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\mustang.jpg"));
+            } else CarPicture.Source = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\NullImage.png"));
+        }
+
+        private void MarkerMouseEnter(object sender, MouseEventArgs args)
+        {
+            var marker = (Image)sender;
+            var info = (VehiclesINFO)(marker.Tag);
+            SetVehicleInfo(info);
         }
 
         private List<string> GetVehicleClasses()
