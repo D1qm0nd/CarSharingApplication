@@ -23,6 +23,8 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using System.Reflection;
+using System.Threading;
 
 namespace CarSharingApplication
 {
@@ -32,11 +34,11 @@ namespace CarSharingApplication
     public partial class CarSelector : Window
     {
         private Rental_Users User;
-
         private VehiclesINFO vehicleInfo;
         private List<VehiclesINFO> vehiclesInfoList;
-
         private string ConnectionString = ConfigurationManager.ConnectionStrings["CARHANDLERConnection"].ConnectionString;
+        private bool isOpen = true;
+
 
         public CarSelector(ref Rental_Users user)
         {
@@ -47,6 +49,7 @@ namespace CarSharingApplication
             ListViewVehicleBrands.ItemsSource = GetVehicleBrands();
             vehiclesInfoList = GetVehiclesInfo();
             SetMarkers();
+            //Task MapReloader = Application.Current.Dispatcher.Invoke(() => AsyncGetVehicleInfo());
         }
 
 
@@ -91,16 +94,18 @@ namespace CarSharingApplication
                             Visibility = Visibility.Visible,
                             Tag = vehicle
                         };
-
-
                         marker.Shape.MouseEnter += MarkerMouseEnter;
-                        gMapControl1.Markers.Add(marker);
+                        Application.Current.Dispatcher.Invoke(() => gMapControl1.Markers.Add(marker));
                     }
                 }
             }
             catch (SqlException sqelx)
             {
                 MessageBox.Show(sqelx.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -172,10 +177,28 @@ namespace CarSharingApplication
             return listBrands;
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async Task AsyncGetVehicleInfo()
         {
-            this.Owner.Visibility = Visibility.Visible;
-            this.Owner.Activate();
+            await Task.Run(() => ReloadVehiclesInfo());
+        }
+
+        private void ReloadVehiclesInfo()
+        {
+            while (isOpen)
+            {
+                try
+                {
+                    //gMapControl1.Markers.Clear();
+                    vehiclesInfoList = GetVehiclesInfo();
+                    SetMarkers();
+                    MessageBox.Show($"Thread {Task.CurrentId.ToString()}: MapReloader");
+                    Thread.Sleep(10000);
+                }
+                catch 
+                {
+
+                }
+            }
         }
 
         private List<VehiclesINFO> GetVehiclesInfo()
@@ -183,10 +206,10 @@ namespace CarSharingApplication
             List<VehiclesINFO> infolist = null;
             try
             {
-                using (var db = new CarSharingDataBaseClassesDataContext(ConnectionString))
+                using (CarSharingDataBaseClassesDataContext db = new CarSharingDataBaseClassesDataContext(ConnectionString))
                 {
                     db.Connection.Open();
-                    infolist = db.VehiclesINFO.ToList();
+                    infolist = db.ExecuteQuery<VehiclesINFO>("SELECT * FROM VehiclesWithStatus ('доступен')").ToList();
                     db.Connection.Close();
                 }
             }
@@ -196,5 +219,13 @@ namespace CarSharingApplication
             }
             return infolist;
         }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            isOpen = false;
+            GC.Collect();
+            this.Owner.Visibility = Visibility.Visible;
+            this.Owner.Activate();
+        }
+
     }
 }

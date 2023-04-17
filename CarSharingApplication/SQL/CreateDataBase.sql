@@ -448,7 +448,6 @@ GO
 --			WHERE UserLogin = @UserLogin AND UserPassword = @UserPassword)
 --	END
 
-
 GO
 	PRINT '==================================Функции======================================='
 GO
@@ -463,6 +462,9 @@ GO
 		WHERE VehicleCoordinates.ID_Vehicle = @Vehicle_ID
 		ORDER BY StayDateTime DESC
 	)
+
+GO
+	PRINT 'Создал Функцию GetCoordinatesFunc'
 
 GO	
 	CREATE FUNCTION GetVehicleStatus(
@@ -486,6 +488,9 @@ GO
 	END
 
 GO
+	PRINT 'Создал Функцию GetVehicleStatus'
+
+GO
 	CREATE FUNCTION GetCoordinates(
 		@Vehicle_ID INT
 	)
@@ -496,6 +501,9 @@ GO
 			FROM VehicleCoordinates 
 			WHERE ID_Vehicle = @Vehicle_ID
 			ORDER BY StayDateTime DESC
+
+GO
+	PRINT 'Создал Функцию GetCoordinates'
 
 GO
 	PRINT '==================================Представления======================================='
@@ -526,8 +534,20 @@ GO
 		Vehicles INNER JOIN VehicleRegistrCertificates
 		ON Vehicles.ID_Vehicle = VehicleRegistrCertificates.ID_Vehicle
 
-
-
+GO
+	PRINT '==================================Функции 2====================================='
+GO
+	CREATE FUNCTION VehiclesWithStatus 
+	(
+		@Status char(8)
+	)
+		RETURNS table
+	AS
+	RETURN (
+		SELECT * FROM VehiclesINFO
+		WHERE LOWER(AccessStatus) = LOWER(@Status))
+GO
+	PRINT 'Создал Функцию VehiclesWithStatus'
 
 
 GO
@@ -568,6 +588,7 @@ GO
 		--GRANT INSERT, SELECT, UPDATE, DELETE ON VehiclesPassports TO DB_USER_CARHANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON VehicleRegistrCertificates TO DB_USER_CARHANDLER
 		GRANT SELECT ON VehiclesINFO TO DB_USER_CARHANDLER
+		GRANT SELECT ON VehiclesWithStatus TO DB_USER_CARHANDLER
 
 		CREATE LOGIN DLHANDLER WITH PASSWORD = 'DLHANDLER'
 		CREATE USER DB_USER_DLHANDLER FOR LOGIN DLHANDLER
