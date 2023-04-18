@@ -3,6 +3,9 @@
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion Condition="'$(MSBuildProjectExtension)'=='.csproj'">preview</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5A00D0EC-B2AD-4B0E-AD21-A7377FC524C8}</ProjectGuid>
@@ -230,6 +233,7 @@
   <ItemGroup>
     <Content Include="SQL\CreateDataBase.sql" />
     <Content Include="SQL\FillUp.sql" />
+    <Resource Include="Windows\Images\NullImage2.png" />
     <Resource Include="Windows\Images\MapCar.png" />
     <Resource Include="Windows\Images\NullImage.png" />
     <Resource Include="Windows\Images\icon.jpeg" />

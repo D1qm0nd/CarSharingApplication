@@ -25,6 +25,8 @@ using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.Reflection;
 using System.Threading;
+using System.Data.Linq;
+using System.Diagnostics;
 
 namespace CarSharingApplication
 {
@@ -34,22 +36,36 @@ namespace CarSharingApplication
     public partial class CarSelector : Window
     {
         private Rental_Users User;
-        private VehiclesINFO vehicleInfo;
+        //private VehiclesINFO vehicleInfo;
         private List<VehiclesINFO> vehiclesInfoList;
         private string ConnectionString = ConfigurationManager.ConnectionStrings["CARHANDLERConnection"].ConnectionString;
         private bool isOpen = true;
 
-
         public CarSelector(ref Rental_Users user)
         {
             InitializeComponent();
+            GMapControl_Loaded(null, null);
             User = user;
             this.Title = $"CarSharing [{User.UserSurname} {User.UserName} {User.UserMiddleName}]";
-            ListViewVehicleClasses.ItemsSource = GetVehicleClasses();
-            ListViewVehicleBrands.ItemsSource = GetVehicleBrands();
-            vehiclesInfoList = GetVehiclesInfo();
-            SetMarkers();
-            //Task MapReloader = Application.Current.Dispatcher.Invoke(() => AsyncGetVehicleInfo());
+
+            ListViewVehicleClasses.ItemsSource = GetQueryResult<string>(
+                new CarSharingDataBaseClassesDataContext(ConnectionString),
+                "SELECT TRIM(LOWER(Class)) FROM Classes").OrderBy(str => str);
+
+            ListViewVehicleBrands.ItemsSource = GetQueryResult<string>(
+                new CarSharingDataBaseClassesDataContext(ConnectionString),
+                "SELECT DISTINCT TRIM(LOWER(Brand)) FROM VehicleRegistrCertificates").OrderBy(str => str);
+
+            vehiclesInfoList = GetQueryResult<VehiclesINFO>(
+                new CarSharingDataBaseClassesDataContext(ConnectionString),
+                "SELECT * FROM VehiclesWithStatus ('доступен')");
+
+            PriceSlider.Minimum = Double.Parse((vehiclesInfoList.Min(veh => veh.PricePerHour)).ToString());
+            PriceSlider.Maximum = Double.Parse((vehiclesInfoList.Max(veh => veh.PricePerHour)).ToString());
+
+            SetMarkers(GetMarkers(vehiclesInfoList));
+
+            //Task tsk = Task.Run(new Action(() => { while (isOpen) MessageBox.Show("Hello");}));
         }
 
 
@@ -75,16 +91,29 @@ namespace CarSharingApplication
             this.Close();
         }
 
-        private void SetMarkers()
+        private void SetMarkers(List<GMapMarker> markers)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            gMapControl1.Markers.Clear();
+            stopwatch.Stop();
+            foreach (GMapMarker marker in markers) 
+            {
+                gMapControl1.Markers.Add(marker);
+            }
+        }
+
+        private List<GMapMarker> GetMarkers(List<VehiclesINFO> vehiclesINFOs)
         {
             try
             {
-                foreach (var vehicle in vehiclesInfoList)
+                List<GMapMarker> VehiclesMarkers = new List<GMapMarker>();
+                foreach (var vehicle in vehiclesINFOs)
                 {
+                    gMapControl1.Markers.OrderBy(mark => mark.Tag);
                     if (vehicle.Lat != null && vehicle.Lng != null)
                     {
                         GMapMarker marker = new GMapMarker(new PointLatLng((double)vehicle.Lat, (double)vehicle.Lng) );
-
+                        marker.Tag = vehicle.ID_Vehicle;
                         marker.Shape = new Image
                         {
                             Source = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\MapCar.png")),
@@ -95,17 +124,21 @@ namespace CarSharingApplication
                             Tag = vehicle
                         };
                         marker.Shape.MouseEnter += MarkerMouseEnter;
-                        Application.Current.Dispatcher.Invoke(() => gMapControl1.Markers.Add(marker));
+                        VehiclesMarkers.Add(marker);
+                        //gMapControl1.Markers.Add(marker);
                     }
                 }
+                return VehiclesMarkers;
             }
             catch (SqlException sqelx)
             {
                 MessageBox.Show(sqelx.Message);
+                return null;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return null;
             }
         }
 
@@ -121,8 +154,8 @@ namespace CarSharingApplication
             if (info.CarPicture != null)
             {
                 //CarPicture.Source = info.CarPicture;
-                CarPicture.Source = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\mustang.jpg"));
-            } else CarPicture.Source = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\NullImage.png"));
+                CarPicture.ImageSource = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\mustang.jpg"));
+            } else CarPicture.ImageSource = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\NullImage2.png"));
         }
 
         private void MarkerMouseEnter(object sender, MouseEventArgs args)
@@ -132,93 +165,24 @@ namespace CarSharingApplication
             SetVehicleInfo(info);
         }
 
-        private List<string> GetVehicleClasses()
-        {
-            List<string> listClasses = null;
-            try 
-            {
-                using (var db = new CarSharingDataBaseClassesDataContext(ConnectionString))
-                {
-                    db.Connection.Open();
-                    string command = "SELECT Class FROM Classes";
-                    listClasses = db.ExecuteQuery<string>(command).ToList();
-                    db.Connection.Close();
-                }
-            }
-            catch (SqlException sqlex) 
-            {
-                MessageBox.Show(sqlex.Message);
-            }
-            return listClasses;
-        }
 
-        private List<string> GetVehicleBrands()
+#nullable enable
+        public static List<T>? GetQueryResult<T>(DataContext context, string query_command)
         {
-            List<string> listBrands = null;
             try
             {
-                using (var db = new CarSharingDataBaseClassesDataContext(ConnectionString))
-                {
-                    db.Connection.Open();
-                    string command = "SELECT DISTINCT TRIM(LOWER(Brand)) FROM VehicleRegistrCertificates";
-                    var arr = db.ExecuteQuery<string>(command).ToArray();
-                    for (int i = 0; i < arr.Length - 1; i++)
-                    {
-                        arr[i] = arr[i].Trim();
-                    }
-                    listBrands = arr.ToList();
-                    db.Connection.Close();
-                }
+                context.Connection.Open();
+                List<T> list = context.ExecuteQuery<T>(query_command).ToList();
+                context.Connection.Close();
+                return list;
             }
-            catch (SqlException sqlex)
+            catch (Exception ex)
             {
-                MessageBox.Show(sqlex.Message);
-            }
-            return listBrands;
-        }
-
-        private async Task AsyncGetVehicleInfo()
-        {
-            await Task.Run(() => ReloadVehiclesInfo());
-        }
-
-        private void ReloadVehiclesInfo()
-        {
-            while (isOpen)
-            {
-                try
-                {
-                    //gMapControl1.Markers.Clear();
-                    vehiclesInfoList = GetVehiclesInfo();
-                    SetMarkers();
-                    MessageBox.Show($"Thread {Task.CurrentId.ToString()}: MapReloader");
-                    Thread.Sleep(10000);
-                }
-                catch 
-                {
-
-                }
+                MessageBox.Show(ex.Message);
+                return null;
             }
         }
 
-        private List<VehiclesINFO> GetVehiclesInfo()
-        {
-            List<VehiclesINFO> infolist = null;
-            try
-            {
-                using (CarSharingDataBaseClassesDataContext db = new CarSharingDataBaseClassesDataContext(ConnectionString))
-                {
-                    db.Connection.Open();
-                    infolist = db.ExecuteQuery<VehiclesINFO>("SELECT * FROM VehiclesWithStatus ('доступен')").ToList();
-                    db.Connection.Close();
-                }
-            }
-            catch (SqlException sqlex)
-            {
-                MessageBox.Show(sqlex.Message);
-            }
-            return infolist;
-        }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             isOpen = false;
@@ -227,5 +191,12 @@ namespace CarSharingApplication
             this.Owner.Activate();
         }
 
+        private void SearchByCriteries(object sender, RoutedEventArgs e)
+        {
+            List<VehiclesINFO> newvehicleslist = vehiclesInfoList.Where(vehicle => Double.Parse(vehicle.PricePerHour.ToString()) <= PriceSlider.Value).ToList();
+            MessageBox.Show($"{(string)ListViewVehicleClasses.SelectedValue}\n{(string)ListViewVehicleBrands.SelectedValue}");
+            gMapControl1.Markers.Clear();
+            SetMarkers(GetMarkers(newvehicleslist));
+        }
     }
 }

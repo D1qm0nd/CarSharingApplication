@@ -12,8 +12,7 @@
       Width="1359" 
       ResizeMode="NoResize"
       WindowStartupLocation="CenterScreen"
-      Closing="Window_Closing"
-      >
+      Closing="Window_Closing">
 
     <Grid>
         <StackPanel Margin="10" MaxWidth="1339">
@@ -36,8 +35,7 @@
                     Background="DarkOrange"
                     BorderBrush="Orange"
                     BorderThickness="3"
-                    Margin="0 10 10 0"
-                    >
+                    Margin="0 10 10 0">
                     <ScrollViewer Margin="10" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
                             <Expander Header="Класс ТС" Width="280" Foreground="White" FontSize="36" Background="Transparent" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="segoi ui">
@@ -48,14 +46,16 @@
                             </Expander>
                             <Expander Header="Ценовая категория" Width="280" Foreground="White" FontSize="36" Background="Transparent" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="segoi ui">
                                 <ListView x:Name="ListPrice" Padding="0" Foreground="White" FontSize="15" FontWeight="DemiBold" Margin="40 0" HorizontalAlignment="Left">
-                                    <WrapPanel>
+                                    <Slider x:Name="PriceSlider" Width="180"></Slider>
+                                    <TextBox x:Name="MaxPrice" Text="{Binding ElementName=PriceSlider, Path=Value, StringFormat=N2}" FontWeight="Bold" IsEnabled="False" materialDesign:TextFieldAssist.UnderlineBrush="Transparent"/>
+                                    <!--<WrapPanel>
                                         <Label VerticalAlignment="Center" Foreground="White" Background="Green" MinWidth="42" BorderBrush="Black" BorderThickness="1">мин</Label>
                                         <TextBox x:Name="MinPrice" Background="White" MinWidth="130" Foreground="Black" BorderBrush="Black" BorderThickness="1"></TextBox>
                                     </WrapPanel>
                                     <WrapPanel>
                                         <Label VerticalAlignment="Center" Foreground="White" Background="Red" BorderBrush="Black" BorderThickness="1">макс</Label>
                                         <TextBox x:Name="MaxPrice" Background="White" MinWidth="130" Foreground="Black" BorderBrush="Black" BorderThickness="1"></TextBox>
-                                    </WrapPanel>
+                                    </WrapPanel>-->
                                 </ListView>
                             </Expander>
                         </StackPanel>
@@ -74,14 +74,22 @@
                     Margin="0 10 10 0"
                     >
                     <StackPanel x:Name="InfoPanel">
-                        <Image x:Name="CarPicture" Panel.ZIndex="10" Source="../Images/NullImage.png" MaxHeight="460" MaxWidth="480" Margin="0,0,0,0"/>
+                        <Border CornerRadius="10" MinHeight="210" MaxHeight="310" MaxWidth="480" Margin="3,3,3,0">
+                            <Border.Background>
+                                <ImageBrush x:Name="CarPicture" ImageSource="../Images/NullImage2.png"/>
+                            </Border.Background>
+                            <!--<Image x:Name="CarPicture" Source="../Images/mustang.jpg"  />-->
+                        </Border>
                         <ListView x:Name="VehicleInfoList" 
-                                  Foreground="White" 
-                                  FontSize="36" 
+                                  Foreground="White"
+                                  FontSize="28"
                                   Background="Transparent" 
                                   HorizontalAlignment="Left" 
                                   FontWeight="Bold" 
-                                  FontFamily="segoi ui">
+                                  FontFamily="segoi ui"  
+                                  BorderBrush="Transparent" 
+                                  Height="300" Width="400"
+                                  >
                         </ListView>
                     </StackPanel>
                 </Border>
@@ -112,7 +120,7 @@
                         <ColumnDefinition MinWidth="410"/>
                         <ColumnDefinition MinWidth="610"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Height="100" FontSize="16">Поиск По Критериям</Button>
+                    <Button Grid.Column="0" Height="100" FontSize="16" Click="SearchByCriteries">Поиск По Критериям</Button>
                     <Button Grid.Column="1" Margin="10 0 0 0" Height="100" FontSize="16">Поиск Ближайшего Транспортного Средства</Button>
                     <WrapPanel Grid.Column="2" Height="100">
                         <Button Margin="10 0 0 0" Height="100" FontSize="16" Width="300">

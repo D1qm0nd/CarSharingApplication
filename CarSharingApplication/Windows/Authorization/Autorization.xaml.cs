@@ -23,9 +23,8 @@ using System.Xml.Serialization;
 using System.Security.Cryptography;
 using static System.Net.Mime.MediaTypeNames;
 using CarSharingApplication.SQL.Linq;
-using CarSharingApplication;
 
-namespace CourseWorkProject
+namespace CarSharingApplication
 {
     /// <summary>
     /// Логика взаимодействия для Autorization.xaml
