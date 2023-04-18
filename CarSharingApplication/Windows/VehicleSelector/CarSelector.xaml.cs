@@ -87,7 +87,7 @@ namespace CarSharingApplication
 
                         marker.Shape = new Image
                         {
-                            Source = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\MapCar.png")),
+                            Source = new BitmapImage(new Uri(@"C:\Users\Max\source\repos\D1qm0nd\CarSharingApplication\CarSharingApplication\Windows\Images\MapCar.png")),
                             Width = 30,
                             Height = 30,
                             ToolTip = $"{vehicle.Brand} {vehicle.Mark}",
@@ -121,8 +121,8 @@ namespace CarSharingApplication
             if (info.CarPicture != null)
             {
                 //CarPicture.Source = info.CarPicture;
-                CarPicture.Source = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\mustang.jpg"));
-            } else CarPicture.Source = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\NullImage.png"));
+                CarPicture.Source = new BitmapImage(new Uri(@"C:\Users\Max\source\repos\D1qm0nd\CarSharingApplication\CarSharingApplication\Windows\Images\mustang.jpg"));
+            } else CarPicture.Source = new BitmapImage(new Uri(@"C:\Users\Max\source\repos\D1qm0nd\CarSharingApplication\CarSharingApplication\Windows\Images\NullImage.png"));
         }
 
         private void MarkerMouseEnter(object sender, MouseEventArgs args)
