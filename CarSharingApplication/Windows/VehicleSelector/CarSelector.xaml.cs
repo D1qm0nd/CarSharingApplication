@@ -39,11 +39,15 @@ namespace CarSharingApplication
         //private VehiclesINFO vehicleInfo;
         private List<VehiclesINFO> vehiclesInfoList;
         private string ConnectionString = ConfigurationManager.ConnectionStrings["CARHANDLERConnection"].ConnectionString;
+        public string path = Environment.CurrentDirectory;
         //private bool isOpen = true;
 
         public CarSelector(ref Rental_Users user)
         {
             InitializeComponent();
+
+            path = path.Remove(path.Length - 9);
+
             GMapControl_Loaded(null, null);
             User = user;
             this.Title = $"CarSharing [{User.UserSurname} {User.UserName} {User.UserMiddleName}]";
@@ -64,7 +68,7 @@ namespace CarSharingApplication
             PriceSlider.Maximum = Double.Parse((vehiclesInfoList.Max(veh => veh.PricePerHour)).ToString());
 
             SetMarkers(GetMarkers(vehiclesInfoList));
-
+            
             //Task tsk = Task.Run(new Action(() => { while (isOpen) MessageBox.Show("Hello");}));
         }
 
@@ -94,11 +98,14 @@ namespace CarSharingApplication
         private void SetMarkers(List<GMapMarker> markers)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
-            gMapControl1.Markers.Clear();
-            stopwatch.Stop();
-            foreach (GMapMarker marker in markers) 
-            {
-                gMapControl1.Markers.Add(marker);
+            if (markers != null ) 
+            { 
+                gMapControl1.Markers.Clear();
+                stopwatch.Stop();
+                foreach (GMapMarker marker in markers) 
+                {
+                    gMapControl1.Markers.Add(marker);
+                }
             }
         }
 
@@ -116,7 +123,7 @@ namespace CarSharingApplication
                         marker.Tag = vehicle.ID_Vehicle;
                         marker.Shape = new Image
                         {
-                            Source = new BitmapImage(new Uri(@"C:\Users\Max\source\repos\D1qm0nd\CarSharingApplication\CarSharingApplication\Windows\Images\MapCar.png")),
+                            Source = new BitmapImage(new Uri($@"{path}\Windows\Images\MapCar.png")),
                             Width = 30,
                             Height = 30,
                             ToolTip = $"{vehicle.Brand} {vehicle.Mark}",
@@ -125,7 +132,6 @@ namespace CarSharingApplication
                         };
                         marker.Shape.MouseEnter += MarkerMouseEnter;
                         VehiclesMarkers.Add(marker);
-                        //gMapControl1.Markers.Add(marker);
                     }
                 }
                 return VehiclesMarkers;
@@ -154,8 +160,8 @@ namespace CarSharingApplication
             if (info.CarPicture != null)
             {
                 //CarPicture.Source = info.CarPicture;
-                CarPicture.ImageSource = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\mustang.jpg"));
-            } else CarPicture.ImageSource = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\NullImage2.png"));
+                CarPicture.ImageSource = new BitmapImage(new Uri($@"{path}\Windows\Images\mustang.jpg"));
+            } else CarPicture.ImageSource = new BitmapImage(new Uri($@"{path}\Windows\Images\NullImage2.png"));
         }
 
         private void MarkerMouseEnter(object sender, MouseEventArgs args)
