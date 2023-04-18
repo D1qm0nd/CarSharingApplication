@@ -39,7 +39,7 @@ namespace CarSharingApplication
         //private VehiclesINFO vehicleInfo;
         private List<VehiclesINFO> vehiclesInfoList;
         private string ConnectionString = ConfigurationManager.ConnectionStrings["CARHANDLERConnection"].ConnectionString;
-        private bool isOpen = true;
+        //private bool isOpen = true;
 
         public CarSelector(ref Rental_Users user)
         {
@@ -116,7 +116,7 @@ namespace CarSharingApplication
                         marker.Tag = vehicle.ID_Vehicle;
                         marker.Shape = new Image
                         {
-                            Source = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\MapCar.png")),
+                            Source = new BitmapImage(new Uri(@"C:\Users\Max\source\repos\D1qm0nd\CarSharingApplication\CarSharingApplication\Windows\Images\MapCar.png")),
                             Width = 30,
                             Height = 30,
                             ToolTip = $"{vehicle.Brand} {vehicle.Mark}",
@@ -185,7 +185,7 @@ namespace CarSharingApplication
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            isOpen = false;
+            //isOpen = false;
             GC.Collect();
             this.Owner.Visibility = Visibility.Visible;
             this.Owner.Activate();
