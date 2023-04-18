@@ -116,7 +116,7 @@ namespace CarSharingApplication
                         marker.Tag = vehicle.ID_Vehicle;
                         marker.Shape = new Image
                         {
-                            Source = new BitmapImage(new Uri(@"D:\C#\CarSharingApplication\CarSharingApplication\Windows\Images\MapCar.png")),
+                            Source = new BitmapImage(new Uri(@"C:\Users\Max\source\repos\D1qm0nd\CarSharingApplication\CarSharingApplication\Windows\Images\MapCar.png")),
                             Width = 30,
                             Height = 30,
                             ToolTip = $"{vehicle.Brand} {vehicle.Mark}",
