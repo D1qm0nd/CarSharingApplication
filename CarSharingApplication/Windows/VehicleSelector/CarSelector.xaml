@@ -48,14 +48,6 @@
                                 <ListView x:Name="ListPrice" Padding="0" Foreground="White" FontSize="15" FontWeight="DemiBold" Margin="40 0" HorizontalAlignment="Left">
                                     <Slider x:Name="PriceSlider" Width="180"></Slider>
                                     <TextBox x:Name="MaxPrice" Text="{Binding ElementName=PriceSlider, Path=Value, StringFormat=N2}" FontWeight="Bold" IsEnabled="False" materialDesign:TextFieldAssist.UnderlineBrush="Transparent"/>
-                                    <!--<WrapPanel>
-                                        <Label VerticalAlignment="Center" Foreground="White" Background="Green" MinWidth="42" BorderBrush="Black" BorderThickness="1">мин</Label>
-                                        <TextBox x:Name="MinPrice" Background="White" MinWidth="130" Foreground="Black" BorderBrush="Black" BorderThickness="1"></TextBox>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <Label VerticalAlignment="Center" Foreground="White" Background="Red" BorderBrush="Black" BorderThickness="1">макс</Label>
-                                        <TextBox x:Name="MaxPrice" Background="White" MinWidth="130" Foreground="Black" BorderBrush="Black" BorderThickness="1"></TextBox>
-                                    </WrapPanel>-->
                                 </ListView>
                             </Expander>
                         </StackPanel>

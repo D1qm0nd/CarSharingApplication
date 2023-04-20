@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-//using System.Device.Location;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsPresentation;
@@ -38,6 +37,8 @@ namespace CarSharingApplication
         private Rental_Users User;
         //private VehiclesINFO vehicleInfo;
         private List<VehiclesINFO> vehiclesInfoList;
+        private List<string> vehClasses;
+        private List<string> vehBrands;
         private string ConnectionString = ConfigurationManager.ConnectionStrings["CARHANDLERConnection"].ConnectionString;
         public string path = Environment.CurrentDirectory;
         //private bool isOpen = true;
@@ -47,32 +48,51 @@ namespace CarSharingApplication
             InitializeComponent();
 
             path = path.Remove(path.Length - 9);
-
+            
             GMapControl_Loaded(null, null);
             User = user;
             this.Title = $"CarSharing [{User.UserSurname} {User.UserName} {User.UserMiddleName}]";
 
-            ListViewVehicleClasses.ItemsSource = GetQueryResult<string>(
-                new CarSharingDataBaseClassesDataContext(ConnectionString),
-                "SELECT TRIM(LOWER(Class)) FROM Classes").OrderBy(str => str);
-
-            ListViewVehicleBrands.ItemsSource = GetQueryResult<string>(
-                new CarSharingDataBaseClassesDataContext(ConnectionString),
-                "SELECT DISTINCT TRIM(LOWER(Brand)) FROM VehicleRegistrCertificates").OrderBy(str => str);
-
-            vehiclesInfoList = GetQueryResult<VehiclesINFO>(
-                new CarSharingDataBaseClassesDataContext(ConnectionString),
-                "SELECT * FROM VehiclesWithStatus ('доступен')");
+            GetData();
+            
+            ListViewVehicleClasses.ItemsSource = vehClasses.OrderBy(str => str);
+            ListViewVehicleBrands.ItemsSource = vehBrands.OrderBy(str => str);
+            
 
             PriceSlider.Minimum = Double.Parse((vehiclesInfoList.Min(veh => veh.PricePerHour)).ToString());
             PriceSlider.Maximum = Double.Parse((vehiclesInfoList.Max(veh => veh.PricePerHour)).ToString());
+            PriceSlider.Value = PriceSlider.Maximum;
 
             SetMarkers(GetMarkers(vehiclesInfoList));
             
             //Task tsk = Task.Run(new Action(() => { while (isOpen) MessageBox.Show("Hello");}));
         }
 
+        /// <summary>
+        /// Получение/обновление данных о авто
+        /// </summary>
+        private void GetData()
+        {
+            vehClasses = GetQueryResult<string>(
+                new CarSharingDataBaseClassesDataContext(ConnectionString),
+                "SELECT TRIM(LOWER(Class)) FROM Classes");
+            vehClasses.Add("*ВСЕ");
 
+            vehBrands = GetQueryResult<string>(
+                new CarSharingDataBaseClassesDataContext(ConnectionString),
+                "SELECT DISTINCT TRIM(LOWER(Brand)) FROM VehicleRegistrCertificates");
+            vehBrands.Add("*ВСЕ");
+
+            vehiclesInfoList = GetQueryResult<VehiclesINFO>(
+                new CarSharingDataBaseClassesDataContext(ConnectionString),
+                "SELECT * FROM VehiclesWithStatus ('доступен')");
+        }
+
+        /// <summary>
+        /// Загрузка карты
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GMapControl_Loaded(object sender, RoutedEventArgs e)
         {
             GMaps.Instance.Mode = AccessMode.ServerAndCache; //выбор подгрузки карты – онлайн или из ресурсов
@@ -86,15 +106,24 @@ namespace CarSharingApplication
             gMapControl1.DragButton = MouseButton.Left; // какой кнопкой осуществляется перетаскивание
             gMapControl1.ShowCenter = false; //показывать или скрывать красный крестик в центре
             gMapControl1.ShowTileGridLines = false; //показывать или скрывать тайтлы
-
         }
 
+        /// <summary>
+        /// Нажатие кнопки, выхода
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.Owner.Visibility = Visibility.Visible;
             this.Close();
         }
 
+        /// <summary>
+        /// Установить маркеры на карте
+        /// Возможно только после загрузки карты
+        /// </summary>
+        /// <param name="markers"></param>
         private void SetMarkers(List<GMapMarker> markers)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -109,6 +138,11 @@ namespace CarSharingApplication
             }
         }
 
+        /// <summary>
+        /// Получить список маркеров из списка информации об авто
+        /// </summary>
+        /// <param name="vehiclesINFOs"></param>
+        /// <returns></returns>
         private List<GMapMarker> GetMarkers(List<VehiclesINFO> vehiclesINFOs)
         {
             try
@@ -148,6 +182,10 @@ namespace CarSharingApplication
             }
         }
 
+        /// <summary>
+        /// Вывести информацию о авто
+        /// </summary>
+        /// <param name="info"></param>
         private void SetVehicleInfo(VehiclesINFO info)
         {
             List<string> infolist = new List<string>();
@@ -164,6 +202,11 @@ namespace CarSharingApplication
             } else CarPicture.ImageSource = new BitmapImage(new Uri($@"{path}\Windows\Images\NullImage2.png"));
         }
 
+        /// <summary>
+        /// Наведение на маркер авто
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void MarkerMouseEnter(object sender, MouseEventArgs args)
         {
             var marker = (Image)sender;
@@ -173,6 +216,13 @@ namespace CarSharingApplication
 
 
 #nullable enable
+        /// <summary>
+        /// Получить данные по запросу
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="context"></param>
+        /// <param name="query_command"></param>
+        /// <returns></returns>
         public static List<T>? GetQueryResult<T>(DataContext context, string query_command)
         {
             try
@@ -189,6 +239,12 @@ namespace CarSharingApplication
             }
         }
 
+
+        /// <summary>
+        /// Событие закрытия окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //isOpen = false;
@@ -197,10 +253,26 @@ namespace CarSharingApplication
             this.Owner.Activate();
         }
 
+        /// <summary>
+        /// Найти авто по критериям
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void SearchByCriteries(object sender, RoutedEventArgs e)
         {
             List<VehiclesINFO> newvehicleslist = vehiclesInfoList.Where(vehicle => Double.Parse(vehicle.PricePerHour.ToString()) <= PriceSlider.Value).ToList();
-            MessageBox.Show($"{(string)ListViewVehicleClasses.SelectedValue}\n{(string)ListViewVehicleBrands.SelectedValue}");
+#nullable enable
+            if ((string)ListViewVehicleClasses.SelectedValue != "*ВСЕ" && ListViewVehicleClasses.SelectedValue != null)
+            {
+                newvehicleslist = newvehicleslist.Where(vehicle => vehicle.Class.ToLower().TrimEnd() == (string)ListViewVehicleClasses.SelectedValue).ToList();
+            }
+#nullable enable
+            if ((string)ListViewVehicleBrands.SelectedValue != "*ВСЕ" && ListViewVehicleBrands.SelectedValue != null)
+            {
+                newvehicleslist = newvehicleslist.Where(vehicle => vehicle.Brand.ToLower().TrimEnd() == (string)ListViewVehicleBrands.SelectedValue).ToList();
+            }
+
             gMapControl1.Markers.Clear();
             SetMarkers(GetMarkers(newvehicleslist));
         }
