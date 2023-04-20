@@ -224,7 +224,10 @@
     <None Include="VehicleRentalDataSet.xss">
       <DependentUpon>VehicleRentalDataSet.xsd</DependentUpon>
     </None>
+    <None Include="Методич рекомендации по КП МДК 02 02  %281%29.doc" />
+    <None Include="Пояснительная записка.docx" />
     <None Include="Разработка информационной системы для проката.docx" />
+    <None Include="ТЗ_Разухин ПКС-303.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
