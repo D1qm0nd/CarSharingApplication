@@ -165,14 +165,14 @@ namespace CarSharingApplication
                         marker.Tag = vehicle.ID_Vehicle;
                         marker.Shape = new Image
                         {
-                            Source = new BitmapImage(new Uri($@"{path}\Windows\Images\MapCar.png")),
+                            Source = new BitmapImage(new Uri($@"{path}\Windows\Images\CarMarker2.png")),
                             Width = 30,
                             Height = 30,
                             ToolTip = $"{vehicle.Brand} {vehicle.Mark}",
                             Visibility = Visibility.Visible,
                             Tag = vehicle
                         };
-                        marker.Shape.MouseEnter += MarkerMouseEnter;
+                        marker.Shape.MouseLeftButtonDown += MarkerClick;
                         VehiclesMarkers.Add(marker);
                     }
                 }
@@ -215,11 +215,12 @@ namespace CarSharingApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void MarkerMouseEnter(object sender, MouseEventArgs args)
+        private void MarkerClick(object sender, MouseEventArgs args)
         {
             var marker = (Image)sender;
-            var info = (VehiclesINFO)(marker.Tag);
-            SetVehicleInfo(info);
+            selectedVehicle = (VehiclesINFO)(marker.Tag);
+            SetVehicleInfo(selectedVehicle);
+            gMapControl1.Position = new PointLatLng((double)selectedVehicle.Lat!, (double)selectedVehicle.Lng!);
         }
 
 

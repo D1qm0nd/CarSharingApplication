@@ -231,6 +231,7 @@
     <None Include="VehicleRentalDataSet.xss">
       <DependentUpon>VehicleRentalDataSet.xsd</DependentUpon>
     </None>
+    <None Include="Windows\Images\Marker.psd" />
     <None Include="Методич рекомендации по КП МДК 02 02  %281%29.doc" />
     <None Include="Пояснительная записка.docx" />
     <None Include="Разработка информационной системы для проката.docx" />
@@ -243,6 +244,8 @@
   <ItemGroup>
     <Content Include="SQL\CreateDataBase.sql" />
     <Content Include="SQL\FillUp.sql" />
+    <Resource Include="Windows\Images\CarMarker2.png" />
+    <Resource Include="Windows\Images\CarMarker.png" />
     <Resource Include="Windows\Images\NullImage2.png" />
     <Resource Include="Windows\Images\MapCar.png" />
     <Resource Include="Windows\Images\NullImage.png" />
