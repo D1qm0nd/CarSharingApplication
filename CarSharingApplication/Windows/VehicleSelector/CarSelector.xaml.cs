@@ -244,7 +244,7 @@ namespace CarSharingApplication
             var marker = (System.Windows.Controls.Image)sender;
             selectedVehicle = (VehiclesINFO)(marker.Tag);
             SetVehicleInfo(selectedVehicle);
-            MoveCursorToSelectVehicleOnMap();
+            gMapControl1.Position = new PointLatLng((double)selectedVehicle.Lat!, (double)selectedVehicle.Lng!);
         }
 
         private void MoveCursorToSelectVehicleOnMap()
