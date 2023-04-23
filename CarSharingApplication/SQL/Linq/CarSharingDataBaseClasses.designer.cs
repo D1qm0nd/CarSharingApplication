@@ -2710,6 +2710,8 @@ namespace CarSharingApplication.SQL.Linq
 		
 		private string _Class;
 		
+		private string _Vehicle_Category;
+		
 		private decimal _PricePerHour;
 		
 		private System.Data.Linq.Binary _CarPicture;
@@ -2800,6 +2802,22 @@ namespace CarSharingApplication.SQL.Linq
 				if ((this._Class != value))
 				{
 					this._Class = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vehicle_Category", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
+		public string Vehicle_Category
+		{
+			get
+			{
+				return this._Vehicle_Category;
+			}
+			set
+			{
+				if ((this._Vehicle_Category != value))
+				{
+					this._Vehicle_Category = value;
 				}
 			}
 		}

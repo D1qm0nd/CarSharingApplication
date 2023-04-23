@@ -141,8 +141,11 @@
     <Compile Include="Windows\Moderating\AdminWindows.xaml.cs">
       <DependentUpon>AdminWindows.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Moderating\EditWindows\DriverLecenses\EditDriverLicences.xaml.cs">
+    <Compile Include="Windows\Moderating\EditWindows\Users\EditDriverLicences.xaml.cs">
       <DependentUpon>EditDriverLicences.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Moderating\EditWindows\Users\PersonalAccount.xaml.cs">
+      <DependentUpon>PersonalAccount.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Moderating\EditWindows\Vehicles\EditVehiclesWindow.xaml.cs">
       <DependentUpon>EditVehiclesWindow.xaml</DependentUpon>
@@ -178,7 +181,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Moderating\EditWindows\DriverLecenses\EditDriverLicences.xaml">
+    <Page Include="Windows\Moderating\EditWindows\Users\EditDriverLicences.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\Users\PersonalAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,6 +262,14 @@
   <ItemGroup>
     <Content Include="SQL\CreateDataBase.sql" />
     <Content Include="SQL\FillUp.sql" />
+    <Resource Include="Windows\Images\aventador.png" />
+    <Resource Include="Windows\Images\c_class.png" />
+    <Resource Include="Windows\Images\gallrdo.png" />
+    <Resource Include="Windows\Images\Gelentwagen.png" />
+    <Resource Include="Windows\Images\granta.png" />
+    <Resource Include="Windows\Images\kalina.png" />
+    <Resource Include="Windows\Images\priora.png" />
+    <Resource Include="Windows\Images\rio.png" />
     <Resource Include="Windows\Images\Upload.png" />
     <Resource Include="Windows\Images\CarMarker2.png" />
     <Resource Include="Windows\Images\CarMarker.png" />

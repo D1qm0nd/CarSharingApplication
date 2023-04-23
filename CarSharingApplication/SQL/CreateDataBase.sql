@@ -519,6 +519,7 @@ GO
 		VehicleRegistrCertificates.Mark,
 		VehicleRegistrCertificates.Color,
 		Vehicles.Class, 
+		VehicleRegistrCertificates.Vehicle_Category,
 		Vehicles.PricePerHour, 
 		Vehicles.CarPicture,
 		(SELECT TOP(1) Latitude 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17.75, 9.25" name="CarSharingDataBaseClasses">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17.75, 9.875" name="CarSharingDataBaseClasses">
   <DataContextMoniker Name="/CarSharingDataBaseClassesDataContext" />
   <nestedChildShapes>
     <classShape Id="a450ac15-08fa-420d-ae2b-e33fa188aa7e" absoluteBounds="2.125, 3.625, 2, 1.7708968098958331">
@@ -145,10 +145,10 @@
         <classShapeMoniker Id="d6e5e4a7-8c53-4bcb-b4af-cabfdf23edb1" />
       </nodes>
     </associationConnector>
-    <classShape Id="85abc0fa-5e40-43b2-b8e0-5f5e3d6f73b6" absoluteBounds="0.875, 6.25, 2, 2.7324039713541666">
+    <classShape Id="a237075a-ed14-4372-bee7-310d7891e7e4" absoluteBounds="1.875, 6.75, 2, 2.9247054036458331">
       <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/VehiclesINFO" />
       <nestedChildShapes>
-        <elementListCompartment Id="e6ab905a-f524-4f31-b6b7-21c387915f25" absoluteBounds="0.89000000000000012, 6.71, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ccc76018-5a96-4cae-9f43-b2daf655e1c4" absoluteBounds="1.8900000000000001, 7.2100000000000009, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

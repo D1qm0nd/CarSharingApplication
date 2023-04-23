@@ -12,6 +12,7 @@ namespace CarSharingApplication
 {
     public static class ImageConvertor
     {
+
         public static Image Base64ToImage(string base64String)
         {
             // Convert base 64 string to byte[]
@@ -23,6 +24,7 @@ namespace CarSharingApplication
                 return image;
             }
         }
+
         public static string ImageToBase64(Image image, System.Drawing.Imaging.ImageFormat format)
         {
             using (MemoryStream ms = new MemoryStream())
@@ -37,7 +39,7 @@ namespace CarSharingApplication
             }
         }
 
-        public static BitmapImage Base64ToBitmapImage(string base64String) 
+        public static BitmapImage Base64ToBitmapImage(string base64String)
         {
             var bi = new BitmapImage();
             bi.BeginInit();
@@ -48,21 +50,21 @@ namespace CarSharingApplication
 
         public static byte[] ImageToBytes(Image image, System.Drawing.Imaging.ImageFormat format)
         {
+            byte[] imageBytes;
             using (MemoryStream ms = new MemoryStream())
             {
-                // Convert Image to byte[]
                 image.Save(ms, format);
-                byte[] imageBytes = ms.ToArray();
-                return imageBytes;
+                imageBytes = ms.ToArray();
             }
+            return imageBytes;
         }
 
-        public static string BitmapImageToBase64(BitmapImage image)
-        {
-            byte[] bytes = new byte[1024];
-            image.StreamSource.Read(bytes,0,bytes.Length);
-            return Convert.ToBase64String(bytes);
-        }
+        //public static string BitmapImageToBase64(BitmapImage image)
+        //{
+        //    byte[] bytes = new byte[1024];
+        //    image.StreamSource.Read(bytes, 0, bytes.Length);
+        //    return Convert.ToBase64String(bytes);
+        //}
 
         private static MemoryStream GetImageSource(string base64String)
         {
@@ -70,6 +72,5 @@ namespace CarSharingApplication
             MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
             return ms;
         }
-        
     }
 }

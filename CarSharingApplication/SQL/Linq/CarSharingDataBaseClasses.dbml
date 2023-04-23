@@ -133,6 +133,7 @@
       <Column Name="Mark" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Color" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
       <Column Name="Class" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Vehicle_Category" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
       <Column Name="PricePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="CarPicture" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Lat" Type="System.Double" DbType="Float" CanBeNull="true" />
