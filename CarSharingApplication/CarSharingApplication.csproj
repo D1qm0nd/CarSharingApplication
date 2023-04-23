@@ -140,6 +140,9 @@
     <Compile Include="Windows\Moderating\EditWindows\Users\EditUsersWindow.xaml.cs">
       <DependentUpon>EditUsersWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\VehicleRent\VehicleRent.xaml.cs">
+      <DependentUpon>VehicleRent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\VehicleSelector\CarSelector.xaml.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -174,6 +177,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Moderating\EditWindows\Users\EditUsersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\VehicleRent\VehicleRent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -26,6 +26,7 @@ using System.Reflection;
 using System.Threading;
 using System.Data.Linq;
 using System.Diagnostics;
+using CarSharingApplication.Windows.VehicleRent;
 
 namespace CarSharingApplication
 {
@@ -37,6 +38,7 @@ namespace CarSharingApplication
         private Rental_Users User;
         //private VehiclesINFO vehicleInfo;
         private List<VehiclesINFO> vehiclesInfoList;
+        private VehiclesINFO selectedVehicle { get; set; }
         private List<string> vehClasses;
         private List<string> vehBrands;
         private string ConnectionString = ConfigurationManager.ConnectionStrings["CARHANDLERConnection"].ConnectionString;
@@ -64,7 +66,13 @@ namespace CarSharingApplication
             PriceSlider.Value = PriceSlider.Maximum;
 
             SetMarkers(GetMarkers(vehiclesInfoList));
-            
+
+            if (vehiclesInfoList.Count > 0)
+            {
+                selectedVehicle = vehiclesInfoList.ToArray()[0];
+                SetVehicleInfo(selectedVehicle);
+            }
+
             //Task tsk = Task.Run(new Action(() => { while (isOpen) MessageBox.Show("Hello");}));
         }
 
@@ -97,9 +105,9 @@ namespace CarSharingApplication
         {
             GMaps.Instance.Mode = AccessMode.ServerAndCache; //выбор подгрузки карты – онлайн или из ресурсов
             gMapControl1.MapProvider = GoogleMapProvider.Instance; //какой провайдер карт используется (в нашем случае гугл) 
-            gMapControl1.MinZoom = 14; //минимальный зум
+            gMapControl1.MinZoom = 13; //минимальный зум
             gMapControl1.MaxZoom = 18; //максимальный зум
-            gMapControl1.Zoom = 14; // какой используется зум при открытии
+            gMapControl1.Zoom = 13; // какой используется зум при открытии
             gMapControl1.Position = new PointLatLng(55.752004, 37.617734);
             gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter; // как приближает (просто в центр карты или по положению мыши)
             gMapControl1.CanDragMap = true; // перетаскивание карты мышью
@@ -126,11 +134,11 @@ namespace CarSharingApplication
         /// <param name="markers"></param>
         private void SetMarkers(List<GMapMarker> markers)
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
             if (markers != null ) 
-            { 
+            {
+                //Stopwatch stopwatch = Stopwatch.StartNew();
                 gMapControl1.Markers.Clear();
-                stopwatch.Stop();
+                //stopwatch.Stop();
                 foreach (GMapMarker marker in markers) 
                 {
                     gMapControl1.Markers.Add(marker);
@@ -272,9 +280,31 @@ namespace CarSharingApplication
             {
                 newvehicleslist = newvehicleslist.Where(vehicle => vehicle.Brand.ToLower().TrimEnd() == (string)ListViewVehicleBrands.SelectedValue).ToList();
             }
-
             gMapControl1.Markers.Clear();
+            GC.Collect();
             SetMarkers(GetMarkers(newvehicleslist));
+            if (newvehicleslist.Count > 0)
+            {
+                selectedVehicle = newvehicleslist.ToArray()[0];
+                SetVehicleInfo(selectedVehicle);
+            }
+        }
+
+        /// <summary>
+        /// BitmapImage
+        /// BeginInit();
+        /// source* = (filestream) fr;
+        /// EndInit();
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var rent = new VehicleRent(selectedVehicle);
+            rent.Owner = this;
+            this.Visibility = Visibility.Collapsed;
+            rent.Show();
         }
     }
 }
