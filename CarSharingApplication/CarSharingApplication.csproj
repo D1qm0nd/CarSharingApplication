@@ -85,6 +85,15 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.117.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.117.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.7.0.0\lib\net462\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Primitives.4.3.0\lib\net45\System.Drawing.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
       <Private>True</Private>
@@ -112,6 +121,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DBEncryptor.cs" />
+    <Compile Include="ImageConvertor.cs" />
     <Compile Include="SQL\Linq\CarSharingDataBaseClasses.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -232,6 +242,7 @@
       <DependentUpon>VehicleRentalDataSet.xsd</DependentUpon>
     </None>
     <None Include="Windows\Images\Marker.psd" />
+    <None Include="Windows\Images\Upload.psd" />
     <None Include="Методич рекомендации по КП МДК 02 02  %281%29.doc" />
     <None Include="Пояснительная записка.docx" />
     <None Include="Разработка информационной системы для проката.docx" />
@@ -244,6 +255,7 @@
   <ItemGroup>
     <Content Include="SQL\CreateDataBase.sql" />
     <Content Include="SQL\FillUp.sql" />
+    <Resource Include="Windows\Images\Upload.png" />
     <Resource Include="Windows\Images\CarMarker2.png" />
     <Resource Include="Windows\Images\CarMarker.png" />
     <Resource Include="Windows\Images\NullImage2.png" />

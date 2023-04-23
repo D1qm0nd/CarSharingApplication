@@ -27,6 +27,7 @@ using System.Threading;
 using System.Data.Linq;
 using System.Diagnostics;
 using CarSharingApplication.Windows.VehicleRent;
+using System.Drawing;
 
 namespace CarSharingApplication
 {
@@ -50,7 +51,7 @@ namespace CarSharingApplication
             InitializeComponent();
 
             path = path.Remove(path.Length - 9);
-            
+
             GMapControl_Loaded(null, null);
             User = user;
             this.Title = $"CarSharing [{User.UserSurname} {User.UserName} {User.UserMiddleName}]";
@@ -163,7 +164,7 @@ namespace CarSharingApplication
                     {
                         GMapMarker marker = new GMapMarker(new PointLatLng((double)vehicle.Lat, (double)vehicle.Lng) );
                         marker.Tag = vehicle.ID_Vehicle;
-                        marker.Shape = new Image
+                        marker.Shape = new System.Windows.Controls.Image
                         {
                             Source = new BitmapImage(new Uri($@"{path}\Windows\Images\CarMarker2.png")),
                             Width = 30,
@@ -217,7 +218,7 @@ namespace CarSharingApplication
         /// <param name="args"></param>
         private void MarkerClick(object sender, MouseEventArgs args)
         {
-            var marker = (Image)sender;
+            var marker = (System.Windows.Controls.Image)sender;
             selectedVehicle = (VehiclesINFO)(marker.Tag);
             SetVehicleInfo(selectedVehicle);
             gMapControl1.Position = new PointLatLng((double)selectedVehicle.Lat!, (double)selectedVehicle.Lng!);
@@ -292,6 +293,7 @@ namespace CarSharingApplication
         }
 
         /// <summary>
+        /// https://stackoverflow.com/questions/18827081/c-sharp-base64-string-to-jpeg-image
         /// BitmapImage
         /// BeginInit();
         /// source* = (filestream) fr;

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using Microsoft.Win32;
+using System.Data.Linq;
 
 namespace CarSharingApplication
 {
@@ -33,11 +35,11 @@ namespace CarSharingApplication
                 InitializeComponent();
                 db = new CarSharingDataBaseClassesDataContext(ConnectionString);
                 dt_grid.ItemsSource = db.Vehicles;
-
                 //from user in
                 //                      ru
                 //                  join admin in ra
                 //                  on user.ID_User equals admin.ID_User select new { user.ID_User, user.UserEMail, user.UserSurname, user.UserName, user.UserMiddleName} ;
+                
             }
             catch (SqlException sqlex)
             {
@@ -64,46 +66,42 @@ namespace CarSharingApplication
             }
         }
 
-        private Byte[] ImageToByte(BitmapImage imageSource)
-        {
-            Stream stream = imageSource.StreamSource;
-            Byte[] buffer = null;
-            if (stream != null && stream.Length > 0)
-            {
-                using (BinaryReader br = new BinaryReader(stream))
-                {
-                    buffer = br.ReadBytes((Int32)stream.Length);
-                }
-            }
-
-            return buffer;
-        }
-
         private void DragTb_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                // Note that you can have more than one file.
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-
-                // Assuming you have one file that you care about, pass it off to whatever
-                // handling code you have defined.
-                //HandleFileOpen(files[0]);
                 try 
                 { 
-                    var img = new ImageBrush();
-                    img.ImageSource = new BitmapImage(new Uri(files[0]));
-                    ((StackPanel)sender).Background = img;
-                    ImagesBytes.Text = ImageToByte(new BitmapImage(new Uri(files[0]))).ToString();
-                    //ImagesBytes.Text = new StringBuilder().ToString(); 
-
+                    var base64 = ImageConvertor.ImageToBase64(System.Drawing.Image.FromFile(files[0]), ImageFormat.Png);
+                    var image = ImageConvertor.Base64ToBitmapImage(base64);
                 }
-                catch 
+                catch
                 {
-                    ((StackPanel)sender).Background = Brushes.Aqua;
+                    ((StackPanel)sender).Background = System.Windows.Media.Brushes.Aqua;
                 }
-                //((StackPanel)sender).Children.Add();
             }
+        }
+
+        private void UploadPicture(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Multiselect = false;
+            dialog.Filter = " |*.png| |*jpeg";
+            dialog.Title = "Выберите изображение Транспортного средства";
+            dialog.FileOk += (a, e) => 
+            {
+                if (dialog.FileName.Contains(".png"))
+                    ((Vehicles)dt_grid.Items[dt_grid.SelectedIndex]).CarPicture = Encoding.UTF8.GetBytes(ImageConvertor.ImageToBase64(System.Drawing.Image.FromFile(dialog.FileName),ImageFormat.Png));
+                if (dialog.FileName.Contains(".jpeg"))
+                    ((Vehicles)dt_grid.Items[dt_grid.SelectedIndex]).CarPicture = Encoding.UTF8.GetBytes(ImageConvertor.ImageToBase64(System.Drawing.Image.FromFile(dialog.FileName), ImageFormat.Jpeg));
+            };
+            dialog.ShowDialog();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e) 
+        {
+
         }
     }
 }
