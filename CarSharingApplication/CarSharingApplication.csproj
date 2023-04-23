@@ -141,8 +141,11 @@
     <Compile Include="Windows\Moderating\AdminWindows.xaml.cs">
       <DependentUpon>AdminWindows.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Moderating\EditWindows\DriverLecenses\EditDriverLicences.xaml.cs">
+    <Compile Include="Windows\Moderating\EditWindows\Users\EditDriverLicences.xaml.cs">
       <DependentUpon>EditDriverLicences.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Moderating\EditWindows\Users\PersonalAccount.xaml.cs">
+      <DependentUpon>PersonalAccount.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Moderating\EditWindows\Vehicles\EditVehiclesWindow.xaml.cs">
       <DependentUpon>EditVehiclesWindow.xaml</DependentUpon>
@@ -178,7 +181,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Moderating\EditWindows\DriverLecenses\EditDriverLicences.xaml">
+    <Page Include="Windows\Moderating\EditWindows\Users\EditDriverLicences.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\Users\PersonalAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

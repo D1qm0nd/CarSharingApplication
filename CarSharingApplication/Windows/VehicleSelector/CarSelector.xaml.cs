@@ -28,6 +28,9 @@ using System.Data.Linq;
 using System.Diagnostics;
 using CarSharingApplication.Windows.VehicleRent;
 using System.Drawing;
+using static GMap.NET.Entity.OpenStreetMapRouteEntity;
+using System.Drawing.Imaging;
+using CarSharingApplication.Windows.Moderating.EditWindows.Users;
 
 namespace CarSharingApplication
 {
@@ -57,10 +60,10 @@ namespace CarSharingApplication
             this.Title = $"CarSharing [{User.UserSurname} {User.UserName} {User.UserMiddleName}]";
 
             GetData();
-            
+
             ListViewVehicleClasses.ItemsSource = vehClasses.OrderBy(str => str);
             ListViewVehicleBrands.ItemsSource = vehBrands.OrderBy(str => str);
-            
+
 
             PriceSlider.Minimum = Double.Parse((vehiclesInfoList.Min(veh => veh.PricePerHour)).ToString());
             PriceSlider.Maximum = Double.Parse((vehiclesInfoList.Max(veh => veh.PricePerHour)).ToString());
@@ -70,7 +73,7 @@ namespace CarSharingApplication
 
             if (vehiclesInfoList.Count > 0)
             {
-                selectedVehicle = vehiclesInfoList.ToArray()[0];
+                selectedVehicle = vehiclesInfoList.First();
                 SetVehicleInfo(selectedVehicle);
             }
 
@@ -95,6 +98,9 @@ namespace CarSharingApplication
             vehiclesInfoList = GetQueryResult<VehiclesINFO>(
                 new CarSharingDataBaseClassesDataContext(ConnectionString),
                 "SELECT * FROM VehiclesWithStatus ('доступен')");
+
+            vehiclesInfoList = OrderByPricePerHourDesc(vehiclesInfoList);
+
         }
 
         /// <summary>
@@ -135,12 +141,12 @@ namespace CarSharingApplication
         /// <param name="markers"></param>
         private void SetMarkers(List<GMapMarker> markers)
         {
-            if (markers != null ) 
+            if (markers != null)
             {
                 //Stopwatch stopwatch = Stopwatch.StartNew();
                 gMapControl1.Markers.Clear();
                 //stopwatch.Stop();
-                foreach (GMapMarker marker in markers) 
+                foreach (GMapMarker marker in markers)
                 {
                     gMapControl1.Markers.Add(marker);
                 }
@@ -162,7 +168,7 @@ namespace CarSharingApplication
                     gMapControl1.Markers.OrderBy(mark => mark.Tag);
                     if (vehicle.Lat != null && vehicle.Lng != null)
                     {
-                        GMapMarker marker = new GMapMarker(new PointLatLng((double)vehicle.Lat, (double)vehicle.Lng) );
+                        GMapMarker marker = new GMapMarker(new PointLatLng((double)vehicle.Lat, (double)vehicle.Lng));
                         marker.Tag = vehicle.ID_Vehicle;
                         marker.Shape = new System.Windows.Controls.Image
                         {
@@ -195,20 +201,38 @@ namespace CarSharingApplication
         /// Вывести информацию о авто
         /// </summary>
         /// <param name="info"></param>
-        private void SetVehicleInfo(VehiclesINFO info)
+#nullable enable
+        private void SetVehicleInfo(VehiclesINFO? info)
         {
             List<string> infolist = new List<string>();
-            infolist.Add(info.Brand);
-            infolist.Add(info.Mark);
-            infolist.Add(info.Class);
-            infolist.Add(info.Color);
-            infolist.Add(info.PricePerHour.ToString());
-            VehicleInfoList.ItemsSource = infolist;
-            if (info.CarPicture != null)
+            if (info != null)
             {
-                //CarPicture.Source = info.CarPicture;
-                CarPicture.ImageSource = new BitmapImage(new Uri($@"{path}\Windows\Images\mustang.jpg"));
-            } else CarPicture.ImageSource = new BitmapImage(new Uri($@"{path}\Windows\Images\NullImage2.png"));
+                infolist.Add(info.Brand);
+                infolist.Add(info.Mark);
+                infolist.Add(info.Class);
+                infolist.Add(info.Color);
+                infolist.Add(info.PricePerHour.ToString());
+                VehicleInfoList.ItemsSource = infolist;
+                if (info.CarPicture != null)
+                {
+                    var a = info.CarPicture.ToString();
+                    try
+                    {
+                        a = a.Replace("\"","");
+                        CarPicture.ImageSource = ImageConvertor.Base64ToBitmapImage(a);                            //ImageConvertor.Base64ToBitmapImage(a);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else CarPicture.ImageSource = new BitmapImage(new Uri($@"{path}\Windows\Images\NullImage2.png"));
+            }
+            else 
+            {
+                CarPicture.ImageSource = new BitmapImage(new Uri(path + @"Windows\Images\NullImage2.png"));
+                infolist.Add("Отсутствуют транспотрные средтва соответствующие заданным критериям");
+            } 
         }
 
         /// <summary>
@@ -221,19 +245,24 @@ namespace CarSharingApplication
             var marker = (System.Windows.Controls.Image)sender;
             selectedVehicle = (VehiclesINFO)(marker.Tag);
             SetVehicleInfo(selectedVehicle);
-            gMapControl1.Position = new PointLatLng((double)selectedVehicle.Lat!, (double)selectedVehicle.Lng!);
+            MoveCursorToSelectVehicleOnMap();
+        }
+
+        private void MoveCursorToSelectVehicleOnMap()
+        {
+            gMapControl1.Position = new PointLatLng((double) selectedVehicle.Lat!, (double) selectedVehicle.Lng!);
         }
 
 
 #nullable enable
-        /// <summary>
-        /// Получить данные по запросу
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="context"></param>
-        /// <param name="query_command"></param>
-        /// <returns></returns>
-        public static List<T>? GetQueryResult<T>(DataContext context, string query_command)
+    /// <summary>
+    /// Получить данные по запросу
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="context"></param>
+    /// <param name="query_command"></param>
+    /// <returns></returns>
+    public static List<T>? GetQueryResult<T>(DataContext context, string query_command)
         {
             try
             {
@@ -282,15 +311,30 @@ namespace CarSharingApplication
             {
                 newvehicleslist = newvehicleslist.Where(vehicle => vehicle.Brand.ToLower().TrimEnd() == (string)ListViewVehicleBrands.SelectedValue).ToList();
             }
+
+            newvehicleslist = OrderByPricePerHourDesc(newvehicleslist);
+
             gMapControl1.Markers.Clear();
+
             GC.Collect();
             SetMarkers(GetMarkers(newvehicleslist));
             if (newvehicleslist.Count > 0)
             {
-                selectedVehicle = newvehicleslist.ToArray()[0];
+                selectedVehicle = newvehicleslist.First();
                 SetVehicleInfo(selectedVehicle);
+                MoveCursorToSelectVehicleOnMap();
+            }
+            else
+            { 
+                selectedVehicle = null;
+                SetVehicleInfo(null);
             }
         }
+
+        public List<VehiclesINFO> OrderByPricePerHourDesc(List<VehiclesINFO> list) => (from vehicle
+            in list
+            orderby vehicle.PricePerHour descending
+            select vehicle).ToList();
 
         /// <summary>
         /// https://stackoverflow.com/questions/18827081/c-sharp-base64-string-to-jpeg-image
@@ -302,12 +346,17 @@ namespace CarSharingApplication
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void RentalButton_Click(object sender, RoutedEventArgs e)
         {
-            var rent = new VehicleRent(selectedVehicle);
-            rent.Owner = this;
+            var rentWindow = new VehicleRent(selectedVehicle);
+            rentWindow.Owner = this;
             this.Visibility = Visibility.Collapsed;
-            rent.Show();
+            rentWindow.Show();
+        }
+
+        private void PersonalAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+            var persWindow = new PersonalAccount(ref User);
         }
     }
 }
