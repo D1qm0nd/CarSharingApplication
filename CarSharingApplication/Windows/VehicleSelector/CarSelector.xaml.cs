@@ -45,8 +45,10 @@ namespace CarSharingApplication
         private VehiclesINFO selectedVehicle { get; set; }
         private List<string> vehClasses;
         private List<string> vehBrands;
-        private string ConnectionString = ConfigurationManager.ConnectionStrings["CARHANDLERConnection"].ConnectionString;
-        public string path = Environment.CurrentDirectory;
+        private string ConnectionString = App.GetConnectionString("CARHANDLERConnection");
+        private string path = Environment.CurrentDirectory;
+        private string ZeroVehiclesByCriteries = "Отсутствуют транспотрные\nсредтва соответствующие\nзаданным критериям";
+        private string HaveNotAvaliableVehicles = "В данный момент\nнет свободных авто\nзаходите позже";
         //private bool isOpen = true;
 
         public CarSelector(ref Rental_Users user)
@@ -55,51 +57,58 @@ namespace CarSharingApplication
 
             path = path.Remove(path.Length - 9);
 
-            GMapControl_Loaded(null, null);
             User = user;
             this.Title = $"CarSharing [{User.UserSurname} {User.UserName} {User.UserMiddleName}]";
 
-            GetData();
-
-            ListViewVehicleClasses.ItemsSource = vehClasses.OrderBy(str => str);
-            ListViewVehicleBrands.ItemsSource = vehBrands.OrderBy(str => str);
-
-
-            PriceSlider.Minimum = Double.Parse((vehiclesInfoList.Min(veh => veh.PricePerHour)).ToString());
-            PriceSlider.Maximum = Double.Parse((vehiclesInfoList.Max(veh => veh.PricePerHour)).ToString());
-            PriceSlider.Value = PriceSlider.Maximum;
-
-            SetMarkers(GetMarkers(vehiclesInfoList));
-
-            if (vehiclesInfoList.Count > 0)
-            {
-                selectedVehicle = vehiclesInfoList.First();
-                SetVehicleInfo(selectedVehicle);
-            }
-
-            //Task tsk = Task.Run(new Action(() => { while (isOpen) MessageBox.Show("Hello");}));
+            GetVehiclesData();
+            
         }
 
         /// <summary>
         /// Получение/обновление данных о авто
         /// </summary>
-        private void GetData()
+        private void GetVehiclesData()
         {
-            vehClasses = GetQueryResult<string>(
+            vehClasses = App.GetQueryResult<string>(
                 new CarSharingDataBaseClassesDataContext(ConnectionString),
                 "SELECT TRIM(LOWER(Class)) FROM Classes");
             vehClasses.Add("*ВСЕ");
 
-            vehBrands = GetQueryResult<string>(
+            vehBrands = App.GetQueryResult<string>(
                 new CarSharingDataBaseClassesDataContext(ConnectionString),
                 "SELECT DISTINCT TRIM(LOWER(Brand)) FROM VehicleRegistrCertificates");
             vehBrands.Add("*ВСЕ");
 
-            vehiclesInfoList = GetQueryResult<VehiclesINFO>(
+            vehiclesInfoList = App.GetQueryResult<VehiclesINFO>(
                 new CarSharingDataBaseClassesDataContext(ConnectionString),
                 "SELECT * FROM VehiclesWithStatus ('доступен')");
 
             vehiclesInfoList = OrderByPricePerHourDesc(vehiclesInfoList);
+
+            ListViewVehicleClasses.ItemsSource = vehClasses.OrderBy(str => str);
+            ListViewVehicleBrands.ItemsSource = vehBrands.OrderBy(str => str);
+
+            try
+            {
+                PriceSlider.Minimum = Double.Parse((vehiclesInfoList.Min(veh => veh.PricePerHour)).ToString());
+                PriceSlider.Maximum = Double.Parse((vehiclesInfoList.Max(veh => veh.PricePerHour)).ToString());
+                PriceSlider.Value = PriceSlider.Maximum;
+
+                if (vehiclesInfoList.Count > 0)
+                {
+                    selectedVehicle = vehiclesInfoList.First();
+                    SetMarkers(GetMarkers(vehiclesInfoList));
+                    SetVehicleInfo(selectedVehicle, ZeroVehiclesByCriteries);
+                }
+            }
+            catch
+            {
+                PriceSlider.Minimum = 0.0;
+                PriceSlider.Maximum = 0.0;
+                PriceSlider.Value = 0.0;
+                SetVehicleInfo(null, HaveNotAvaliableVehicles);
+            }
+
 
         }
 
@@ -115,7 +124,10 @@ namespace CarSharingApplication
             gMapControl1.MinZoom = 13; //минимальный зум
             gMapControl1.MaxZoom = 18; //максимальный зум
             gMapControl1.Zoom = 13; // какой используется зум при открытии
-            gMapControl1.Position = new PointLatLng(55.752004, 37.617734);
+            if (selectedVehicle != null)
+                MoveCursorToVehicleOnMap(selectedVehicle);
+            else gMapControl1.Position = new PointLatLng(55.752004, 37.617734);
+
             gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter; // как приближает (просто в центр карты или по положению мыши)
             gMapControl1.CanDragMap = true; // перетаскивание карты мышью
             gMapControl1.DragButton = MouseButton.Left; // какой кнопкой осуществляется перетаскивание
@@ -202,7 +214,7 @@ namespace CarSharingApplication
         /// </summary>
         /// <param name="info"></param>
 #nullable enable
-        private void SetVehicleInfo(VehiclesINFO? info)
+        private void SetVehicleInfo(VehiclesINFO? info, string errorMessage)
         {
             List<string> infolist = new List<string>();
             if (info != null)
@@ -229,7 +241,7 @@ namespace CarSharingApplication
             else 
             {
                 CarPicture.ImageSource = new BitmapImage(new Uri(path + @"Windows\Images\NullImage2.png"));
-                infolist.Add("Отсутствуют транспотрные\nсредтва соответствующие\nзаданным критериям");
+                infolist.Add(errorMessage);
                 VehicleInfoList.ItemsSource = infolist;
             } 
         }
@@ -243,39 +255,18 @@ namespace CarSharingApplication
         {
             var marker = (System.Windows.Controls.Image)sender;
             selectedVehicle = (VehiclesINFO)(marker.Tag);
-            SetVehicleInfo(selectedVehicle);
-            gMapControl1.Position = new PointLatLng((double)selectedVehicle.Lat!, (double)selectedVehicle.Lng!);
+            SetVehicleInfo(selectedVehicle, ZeroVehiclesByCriteries);
+            MoveCursorToVehicleOnMap(selectedVehicle);
         }
 
-        private void MoveCursorToSelectVehicleOnMap()
+        private void MoveCursorToVehicleOnMap(VehiclesINFO vehicle)
         {
-            gMapControl1.Position = new PointLatLng((double) selectedVehicle.Lat!, (double) selectedVehicle.Lng!);
+            gMapControl1.Position = new PointLatLng((double)vehicle.Lat!, (double)vehicle.Lng!);
         }
 
 
-#nullable enable
-    /// <summary>
-    /// Получить данные по запросу
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="context"></param>
-    /// <param name="query_command"></param>
-    /// <returns></returns>
-    public static List<T>? GetQueryResult<T>(DataContext context, string query_command)
-        {
-            try
-            {
-                context.Connection.Open();
-                List<T> list = context.ExecuteQuery<T>(query_command).ToList();
-                context.Connection.Close();
-                return list;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
-        }
+
+    
 
 
         /// <summary>
@@ -320,13 +311,13 @@ namespace CarSharingApplication
             if (newvehicleslist.Count > 0)
             {
                 selectedVehicle = newvehicleslist.First();
-                SetVehicleInfo(selectedVehicle);
-                MoveCursorToSelectVehicleOnMap();
+                SetVehicleInfo(selectedVehicle, ZeroVehiclesByCriteries);
+                MoveCursorToVehicleOnMap(selectedVehicle);
             }
             else
             { 
                 selectedVehicle = null;
-                SetVehicleInfo(null);
+                SetVehicleInfo(null, ZeroVehiclesByCriteries);
             }
         }
 
@@ -347,15 +338,25 @@ namespace CarSharingApplication
 
         private void RentalButton_Click(object sender, RoutedEventArgs e)
         {
-            var rentWindow = new VehicleRent(selectedVehicle);
-            rentWindow.Owner = this;
-            this.Visibility = Visibility.Collapsed;
-            rentWindow.Show();
+            if (selectedVehicle != null)
+            {
+                var rentWindow = new VehicleRent(selectedVehicle);
+                rentWindow.Owner = this;
+                this.Visibility = Visibility.Collapsed;
+                rentWindow.Show();
+            }
+            else 
+            {
+                MessageBox.Show("Вы не выбрали авто");
+            }
         }
 
         private void PersonalAccountButton_Click(object sender, RoutedEventArgs e)
         {
             var persWindow = new PersonalAccount(ref User);
+            persWindow.Owner = this;
+            persWindow.Show();
+            this.Visibility = Visibility.Collapsed;
         }
     }
 }

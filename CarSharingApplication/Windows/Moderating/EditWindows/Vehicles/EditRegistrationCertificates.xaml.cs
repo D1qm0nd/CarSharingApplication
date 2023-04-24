@@ -14,35 +14,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-
-namespace CarSharingApplication
+namespace CarSharingApplication.Windows.Moderating.EditWindows.Vehicles
 {
     /// <summary>
-    /// Логика взаимодействия для EditUsersWindow.xaml
+    /// Логика взаимодействия для EditRegistrationCertificates.xaml
     /// </summary>
-    public partial class EditDriverLicenses : Window
+    public partial class EditRegistrationCertificates : Window
     {
         private string ConnectionString = App.GetConnectionString("DBADMINConnection");
-
         private CarSharingDataBaseClassesDataContext db;
-        public EditDriverLicenses()
+        public EditRegistrationCertificates()
         {
             try
             {
                 InitializeComponent();
                 db = new CarSharingDataBaseClassesDataContext(ConnectionString);
-                dt_grid.ItemsSource = db.DriversLicences;
+                dt_grid.ItemsSource = db.VehicleRegistrCertificates;
             }
             catch (SqlException sqlex)
             {
                 MessageBox.Show(sqlex.Message);
             }
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            db.Connection.Close();
-            this.Owner.Visibility = Visibility.Visible;
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -54,12 +46,18 @@ namespace CarSharingApplication
             catch (SqlException sqlex)
             {
                 MessageBox.Show(sqlex.Message);
-                dt_grid.ItemsSource = db.Rental_Users;
+                dt_grid.ItemsSource = db.VehicleRegistrCertificates;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Owner.Visibility = Visibility.Visible;
         }
     }
 }

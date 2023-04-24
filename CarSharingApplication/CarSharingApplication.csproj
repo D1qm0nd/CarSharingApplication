@@ -30,6 +30,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -121,6 +123,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DBEncryptor.cs" />
+    <Compile Include="DriverLicencesCategories.cs" />
     <Compile Include="ImageConvertor.cs" />
     <Compile Include="SQL\Linq\CarSharingDataBaseClasses.designer.cs">
       <AutoGen>True</AutoGen>
@@ -132,11 +135,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VehicleRentalDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Authorization\AddUserDataWindow.xaml.cs">
-      <DependentUpon>AddUserDataWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Authorization\Autorization.xaml.cs">
       <DependentUpon>Autorization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Authorization\ChoiceLoginWindow.xaml.cs">
+      <DependentUpon>ChoiceLoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Moderating\AdminWindows.xaml.cs">
       <DependentUpon>AdminWindows.xaml</DependentUpon>
@@ -146,6 +149,9 @@
     </Compile>
     <Compile Include="Windows\Moderating\EditWindows\Users\PersonalAccount.xaml.cs">
       <DependentUpon>PersonalAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Moderating\EditWindows\Vehicles\EditRegistrationCertificates.xaml.cs">
+      <DependentUpon>EditRegistrationCertificates.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Moderating\EditWindows\Vehicles\EditVehiclesWindow.xaml.cs">
       <DependentUpon>EditVehiclesWindow.xaml</DependentUpon>
@@ -157,6 +163,12 @@
       <DependentUpon>VehicleRent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\VehicleSelector\CarSelector.xaml.cs" />
+    <Compile Include="Windows\XAMLModels\CategoryPicker.xaml.cs">
+      <DependentUpon>CategoryPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\XAMLModels\UCDriverLicenceCategories.xaml.cs">
+      <DependentUpon>UCDriverLicenceCategories.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -169,11 +181,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\Authorization\AddUserDataWindow.xaml">
+    <Page Include="Windows\Authorization\Autorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Authorization\Autorization.xaml">
+    <Page Include="Windows\Authorization\ChoiceLoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,6 +198,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Moderating\EditWindows\Users\PersonalAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\Vehicles\EditRegistrationCertificates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,6 +220,14 @@
     <Page Include="Windows\VehicleSelector\CarSelector.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\XAMLModels\CategoryPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\XAMLModels\UCDriverLicenceCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

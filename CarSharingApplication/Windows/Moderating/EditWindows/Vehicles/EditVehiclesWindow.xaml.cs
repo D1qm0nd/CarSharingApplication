@@ -25,7 +25,7 @@ namespace CarSharingApplication
     /// </summary>
     public partial class EditVehiclesWindow : Window
     {
-        private string ConnectionString = (Application.Current as App).GetConnectionString("DBADMINConnection");
+        private string ConnectionString = App.GetConnectionString("DBADMINConnection");
 
         private CarSharingDataBaseClassesDataContext db;
         public EditVehiclesWindow()
@@ -35,11 +35,6 @@ namespace CarSharingApplication
                 InitializeComponent();
                 db = new CarSharingDataBaseClassesDataContext(ConnectionString);
                 dt_grid.ItemsSource = db.Vehicles;
-                //from user in
-                //                      ru
-                //                  join admin in ra
-                //                  on user.ID_User equals admin.ID_User select new { user.ID_User, user.UserEMail, user.UserSurname, user.UserName, user.UserMiddleName} ;
-                
             }
             catch (SqlException sqlex)
             {
@@ -66,22 +61,22 @@ namespace CarSharingApplication
             }
         }
 
-        private void DragTb_Drop(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                try 
-                { 
-                    var base64 = ImageConvertor.ImageToBase64(System.Drawing.Image.FromFile(files[0]), ImageFormat.Png);
-                    var image = ImageConvertor.Base64ToBitmapImage(base64);
-                }
-                catch
-                {
-                    ((StackPanel)sender).Background = System.Windows.Media.Brushes.Aqua;
-                }
-            }
-        }
+        //private void DragTb_Drop(object sender, DragEventArgs e)
+        //{
+        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        //    {
+        //        string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+        //        try 
+        //        { 
+        //            var base64 = ImageConvertor.ImageToBase64(System.Drawing.Image.FromFile(files[0]), ImageFormat.Png);
+        //            var image = ImageConvertor.Base64ToBitmapImage(base64);
+        //        }
+        //        catch
+        //        {
+        //            ((StackPanel)sender).Background = System.Windows.Media.Brushes.Aqua;
+        //        }
+        //    }
+        //}
 
         private void UploadPicture(object sender, RoutedEventArgs e)
         {

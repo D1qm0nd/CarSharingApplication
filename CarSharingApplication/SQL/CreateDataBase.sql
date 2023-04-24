@@ -72,7 +72,7 @@ GO
 			CHECK (
 				ID_DriverLicence LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
 				),
-		ReceiptDate DATE NOT NULL,
+		ReceiptDate SMALLDATETIME NOT NULL,
 		ID_User INT NOT NULL
 	)
 	PRINT 'Создал Таблицу DriversLicences'
@@ -85,8 +85,8 @@ GO
 				ID_DriverLicence LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
 				),
 		Category CHAR(3) NOT NULL,
-		ReceiptDate DATE NOT NULL,
-		EndDate DATE NOT NULL
+		ReceiptDate SMALLDATETIME NOT NULL,
+		EndDate SMALLDATETIME NOT NULL
 		PRIMARY KEY (ID_Category)
 	)
 	PRINT 'Создал Таблицу Categories'
@@ -128,7 +128,7 @@ GO
 				ID_DriverLicence LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
 				),
 		ID_Vehicle INT NOT NULL,
-		StartDate DATE NOT NULL,
+		StartDate SMALLDATETIME NOT NULL,
 		RentalTime TIME NOT NULL,
 		CountOfHours FLOAT NOT NULL
 		PRIMARY KEY (ID_Rental)
@@ -449,6 +449,54 @@ GO
 --	END
 
 GO
+	CREATE PROCEDURE GetDriverLicenceByUserID(
+		@User_ID INT
+	)
+	AS
+	BEGIN
+		SELECT TOP(1) * 
+		FROM DriversLicences
+		WHERE ID_User = @User_ID
+		ORDER BY ReceiptDate DESC
+	END
+GO	
+	PRINT 'Создал Хранимую процедуру GetDriverLicenceByUserID'
+
+GO 
+	CREATE PROCEDURE AddDriverLicenceToUser
+	(
+		@User_ID INT,
+		@DriverLicence CHAR(10),
+		@ReceiptDate SMALLDATETIME
+	)
+	AS
+	BEGIN 
+		INSERT DriversLicences VALUES
+		(@DriverLicence, @ReceiptDate, @User_ID)
+	END 
+
+GO
+	PRINT 'Создал Хранимую процедуру AddDriverLicenceToUser'
+
+GO 
+	CREATE PROCEDURE AddCategoryToDriverLicence
+	(
+		@DriverLicence_ID CHAR(10),
+		@Category CHAR(3),
+		@ReceiptDate SMALLDATETIME,
+		@EndDate SMALLDATETIME
+	)
+	AS
+	BEGIN
+		INSERT Categories VALUES
+		(@DriverLicence_ID, @Category, @ReceiptDate, @EndDate)
+	END
+
+GO
+	PRINT 'Создал Хранимую процедуру AddCategoryToDriverLicence'
+
+
+GO
 	PRINT '==================================Функции======================================='
 GO
 	CREATE FUNCTION GetCoordinatesFunc(
@@ -504,6 +552,8 @@ GO
 
 GO
 	PRINT 'Создал Функцию GetCoordinates'
+
+	
 
 GO
 	PRINT '==================================Представления======================================='
@@ -574,9 +624,12 @@ GO
 	USE VehicleRental
 		CREATE LOGIN USERHANDLER WITH PASSWORD = 'USERHANDLER'
 		CREATE USER DB_USER_USERHANDLER FOR LOGIN USERHANDLER
+		
 		GRANT INSERT, SELECT ON Rental_Users to DB_USER_USERHANDLER
 		GRANT SELECT ON Rental_Admins to DB_USER_USERHANDLER
-
+		GRANT EXEC ON GetDriverLicenceByUserID to DB_USER_USERHANDLER
+		GRANT EXEC ON AddDriverLicenceToUser to DB_USER_USERHANDLER
+		GRANT EXEC ON AddCategoryToDriverLicence to DB_USER_USERHANDLER
 		GRANT EXEC ON REG_USER TO DB_USER_USERHANDLER
 		--GRANT EXEC ON CHECK_USER TO DB_USER_USERHANDLER
 

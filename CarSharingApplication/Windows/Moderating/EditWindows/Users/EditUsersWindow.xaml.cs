@@ -22,7 +22,7 @@ namespace CarSharingApplication
     /// </summary>
     public partial class EditUsersWindow : Window
     {
-        private string ConnectionString = (Application.Current as App).GetConnectionString("DBADMINConnection");
+        private string ConnectionString = App.GetConnectionString("DBADMINConnection");
         
         private CarSharingDataBaseClassesDataContext db;
         public EditUsersWindow()

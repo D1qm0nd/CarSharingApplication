@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="CarSharingApplication.Windows.XAMLModels.UCDriverLicencesCategories"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CarSharingApplication.Windows.XAMLModels"
+             xmlns:models="clr-namespace:CarSharingApplication.Windows.XAMLModels"
+             mc:Ignorable="d" 
+             d:DesignWidth="400">
+    <StackPanel Width="400">
+        <Label FontSize="20" Foreground="BlueViolet" FontFamily="Arial" FontWeight="DemiBold" HorizontalAlignment="Center">Категории</Label>
+        <ScrollViewer VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden" Width="400" Height="340">
+            <StackPanel HorizontalAlignment="Center" x:Name="Categories">
+                <models:CategoryPicker x:Name="CategoryA" Text="A" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryA1" Text="A1" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryB" Text="B" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryBE" Text="BE" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryB1" Text="B1" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryC" Text="C" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryCE" Text="CE" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryC1" Text="C1" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryC1E" Text="C1E" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryD" Text="D" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryDE" Text="DE" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryD1" Text="D1" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryD1E" Text="D1E" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryM" Text="M" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryTm" Text="Tm" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+                <models:CategoryPicker x:Name="CategoryTb" Text="Tb" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
+            </StackPanel>
+        </ScrollViewer>
+    </StackPanel>
+</UserControl>

@@ -23,6 +23,7 @@ using System.Xml.Serialization;
 using System.Security.Cryptography;
 using static System.Net.Mime.MediaTypeNames;
 using CarSharingApplication.SQL.Linq;
+using CarSharingApplication.Windows.Authorization;
 
 namespace CarSharingApplication
 {
@@ -78,7 +79,7 @@ namespace CarSharingApplication
             {
                 try
                 {
-                    using (var db = new CarSharingDataBaseClassesDataContext(ConfigurationManager.ConnectionStrings["USERHANDLERConnection"].ConnectionString))
+                    using (var db = new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")))
                     {
                         db.Connection.Open();
                         
@@ -159,9 +160,9 @@ namespace CarSharingApplication
                                 this.Visibility = Visibility.Hidden;
                                 if (db.ExecuteQuery<int>($"SELECT COUNT(*) FROM Rental_Admins WHERE ID_User = {user.ID_User}").ToArray()[0] == 1)
                                 {
-                                    var AdmWindow = new AdminWindow(user);
-                                    AdmWindow.Owner = this;
-                                    AdmWindow.Show();
+                                    var wnd = new ChoiceLoginWindow(ref user);
+                                    wnd.Owner = this;
+                                    wnd.Show();
                                 }
                                 else
                                 {

@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="CarSharingApplication.Windows.XAMLModels.CategoryPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CarSharingApplication.Windows.XAMLModels"
+             mc:Ignorable="d" 
+             Height="40" 
+             MinWidth="100">
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="{Binding TextMinWidth}" MaxWidth="{Binding TextMaxWidth}"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="{Binding Text}" Grid.Column="0" VerticalAlignment="Center" FontWeight="DemiBold" FontFamily="Arial" FontSize="20" Foreground="BlueViolet"></Label>
+        <ToggleButton x:Name="CategoryButton" Margin="3" Grid.Column="1" Checked="CategoryButton_Checked"></ToggleButton>
+        <DatePicker x:Name="CategoryReceiptDate" Grid.Column="2" Margin="3"/>
+        <DatePicker x:Name="CategoryEndDate" Grid.Column="3" Margin="3"/>
+    </Grid>
+</UserControl>

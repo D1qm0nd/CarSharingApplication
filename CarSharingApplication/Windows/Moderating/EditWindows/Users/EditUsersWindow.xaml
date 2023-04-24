@@ -17,12 +17,12 @@
                 x:Name="dt_grid"
                 AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID_User}" Header="Код" MinWidth="100" MaxWidth="300" CanUserSort="True" SortDirection="Descending"/>
+                    <DataGridTextColumn Binding="{Binding ID_User}" Header="Код" MinWidth="50" MaxWidth="300" CanUserSort="True" SortDirection="Descending"/>
                     <DataGridTextColumn Binding="{Binding UserEMail}" Header="Почтовый ящик" MinWidth="100" MaxWidth="300"/>
                     <DataGridTextColumn Binding="{Binding UserSurname}" Header="Фамилия" MinWidth="100" MaxWidth="300"/>
                     <DataGridTextColumn Binding="{Binding UserName}" Header="Имя" MinWidth="100" MaxWidth="300"/>
                     <DataGridTextColumn Binding="{Binding UserMiddleName}" Header="Отчество" MinWidth="100" MaxWidth="300"/>
-                    <DataGridTextColumn Binding="{Binding UserBirthDay}" Header="Дата рождения" MinWidth="200" MaxWidth="200"/>
+                    <DataGridTextColumn Binding="{Binding UserBirthDay, StringFormat=dd.MM.yyyy}" Header="Дата рождения" MinWidth="150" MaxWidth="150"/>
                     <DataGridTemplateColumn Visibility="Visible">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

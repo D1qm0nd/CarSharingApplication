@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CarSharingApplication.SQL.Linq;
+using CarSharingApplication.Windows.Moderating.EditWindows.Vehicles;
 
 namespace CarSharingApplication
 {
@@ -22,7 +23,7 @@ namespace CarSharingApplication
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public AdminWindow(Rental_Users user)
+        public AdminWindow(ref Rental_Users user)
         {
             InitializeComponent();
             this.Title = $"CarSharing Окно администратора [{user.UserSurname} {user.UserName} {user.UserMiddleName}]";
@@ -70,7 +71,7 @@ namespace CarSharingApplication
 
         private void VehiclesPassportsButton_Click(object sender, RoutedEventArgs e)
         {
-            var EditWindow = new EditUsersWindow();
+            var EditWindow = new EditRegistrationCertificates();
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();

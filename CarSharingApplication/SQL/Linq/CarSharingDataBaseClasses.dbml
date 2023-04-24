@@ -91,28 +91,6 @@
       <Association Name="Vehicles_VehicleCoordinates" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.VehicleRegistrCertificates" Member="VehicleRegistrCertificates">
-    <Type Name="VehicleRegistrCertificates">
-      <Column Name="CertificateSeries" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CertificateNumber" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="VIN" Type="System.String" DbType="Char(14) NOT NULL" CanBeNull="false" />
-      <Column Name="RegistrationNum" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Brand" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Mark" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Vehicle_Type" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Vehicle_Category" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
-      <Column Name="ManufactureYear" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Chassis" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="BodyNo" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
-      <Column Name="Color" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
-      <Column Name="EngineHP_kW" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="EcologicalClass" Type="System.String" DbType="Char(100) NOT NULL" CanBeNull="false" />
-      <Column Name="PermissibleMaximumWeightKg" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="WeightWithoutLoadKg" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Vehicles_VehicleRegistrCertificates" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Vehicles" Member="Vehicles">
     <Type Name="Vehicles">
       <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -139,6 +117,29 @@
       <Column Name="Lat" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Lng" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="AccessStatus" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VehicleRegistrCertificates" Member="VehicleRegistrCertificates">
+    <Type Name="VehicleRegistrCertificates">
+      <Column Name="CertificateSeries" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CertificateNumber" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VIN" Type="System.String" DbType="Char(14) NOT NULL" CanBeNull="false" />
+      <Column Name="RegistrationNum" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Brand" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Mark" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Vehicle_Type" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Vehicle_Category" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="ManufactureYear" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Chassis" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="BodyNo" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Color" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
+      <Column Name="EngineHP_kW" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="EcologicalClass" Type="System.String" DbType="Char(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PermissibleMaximumWeightKg" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WeightWithoutLoadKg" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DateOfRecord" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Vehicles_VehicleRegistrCertificates" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
