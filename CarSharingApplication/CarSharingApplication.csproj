@@ -261,6 +261,7 @@
     <None Include="SQL\Linq\CarSharingDataBaseClasses.dbml.layout">
       <DependentUpon>CarSharingDataBaseClasses.dbml</DependentUpon>
     </None>
+    <None Include="SQL\LogicalModelCarsharingBD.erd" />
     <None Include="VehicleRentalDataSet.xsc">
       <DependentUpon>VehicleRentalDataSet.xsd</DependentUpon>
     </None>

@@ -76,7 +76,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
                                 if (!App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
                                     $"EXEC AddCategoryToDriverLicence @DriverLicence_ID='{uDriverLicence.Text}', @Category='{category.Name}', @ReceiptDate = '{category.ReceiptDate}', @EndDate = '{category.EndDate}'"))
                                 {
-                                    throw new Exception($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
+                                     throw new Exception($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
                                 }
                             }
                         }

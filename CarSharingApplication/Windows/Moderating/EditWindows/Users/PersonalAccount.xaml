@@ -6,16 +6,22 @@
         xmlns:local="clr-namespace:CarSharingApplication.Windows.Moderating.EditWindows.Users"
         xmlns:models="clr-namespace:CarSharingApplication.Windows.XAMLModels"
         mc:Ignorable="d"
-        Title="Личный кабинет" Height="580" Width="400"
+        Title="Личный кабинет" Height="580" Width="800"
         ResizeMode="NoResize"
         Closing="Window_Closing"
         >
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Border
             Margin="10"
+            Width="380"
+            Height="520"
             CornerRadius="20"
             BorderBrush="LightGray"
-            BorderThickness="1"
+            BorderThickness="1" Grid.Column="0"
             >
             <Grid>
                 <Grid>

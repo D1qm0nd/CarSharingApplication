@@ -152,7 +152,7 @@ GO
 				ID_DriverLicence LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
 				),
 		ID_TrafficAccidentType INT NOT NULL,
-		Damage NVARCHAR(1) NOT NULL,
+		Damage MONEY NOT NULL,
 		TrafficAccidentDescription NVARCHAR(MAX) NOT NULL
 		 PRIMARY KEY (ID_TrafficAccident)
 	)
@@ -398,42 +398,21 @@ GO
 		@UserMiddleName NVARCHAR(MAX),
 		@UserBirthDayDate NVARCHAR(10)
 	AS
-	BEGIN
-		--DECLARE @SqlCommand1 NVARCHAR(MAX) =
-		--'CREATE LOGIN '+ @UserLogin + ' WITH PASSWORD = '''+@UserPassword+''' '+
-		--'CREATE USER USER_'+ @UserLogin + ' FOR LOGIN '+ @UserLogin
-		--EXEC (@SqlCommand1)
-
-		--DECLARE @ID NVARCHAR(MAX) = USER_ID('USER_'+@UserLogin) 
-		
-		--PRINT @SqlCommand1
-
-		--DECLARE @SqlCommand2 NVARCHAR(MAX) = 
-		--'USE VehicleRental '+
-		--'INSERT Rental_Users VALUES ('+
-		--	@ID+', '''+@UserLogin+''', '''+@UserEmail+''', '''+@UserPassword+''', '+
-		--	'1, '''+@UserSurname+''', '''+@UserName+''', '''+@UserMiddleName+''', '''+@UserBirthDayDate+''')'
-
-		DECLARE @SqlCommand2 NVARCHAR(MAX) = 
+	BEGIN TRANSACTION
+		DECLARE @SqlCommand NVARCHAR(MAX) = 
 		'USE VehicleRental '+
 		'INSERT INTO Rental_Users '+
 		'(UserLogin, UserEMail, UserPassword, UserStatus, UserSurname, UserName, UserMiddleName, UserBirthDay) VALUES ('+
 			''''+@UserLogin+''', '''+@UserEmail+''', '''+@UserPassword+''', '+
 			'1, '''+@UserSurname+''', '''+@UserName+''', '''+@UserMiddleName+''', '''+@UserBirthDayDate+''')'
-
-		EXEC (@SqlCommand2)
 		
-		--PRINT @SqlCommand2
+			EXEC (@SqlCommand)
+	COMMIT TRANSACTION
 
-		--DECLARE @SqlCommand3 NVARCHAR(MAX) =
-		--'USE VehicleRental '+
-		--'ALTER ROLE Rental_Customer ADD MEMBER USER_'+@UserLogin
-		--EXEC (@SqlCommand3)
 
-		--PRINT @SqlCommand3
-	END
 GO
 	PRINT 'Создал Хранимую процедуру REG_USER'
+
 
 
 --GO
@@ -449,16 +428,15 @@ GO
 --	END
 
 GO
-	CREATE PROCEDURE GetDriverLicenceByUserID(
+	CREATE FUNCTION GetDriverLicenceByUserID(
 		@User_ID INT
 	)
+	RETURNS TABLE
 	AS
-	BEGIN
-		SELECT TOP(1) * 
-		FROM DriversLicences
-		WHERE ID_User = @User_ID
-		ORDER BY ReceiptDate DESC
-	END
+		RETURN SELECT TOP(1) * 
+			FROM DriversLicences
+			WHERE ID_User = @User_ID
+			ORDER BY ReceiptDate DESC
 GO	
 	PRINT 'Создал Хранимую процедуру GetDriverLicenceByUserID'
 
@@ -498,6 +476,26 @@ GO
 
 GO
 	PRINT '==================================Функции======================================='
+
+GO
+	CREATE FUNCTION DBStatus(
+		@ID_User INT
+	)
+	RETURNS char(24) 
+	BEGIN
+		DECLARE @answ CHAR(24); 
+		IF (EXISTS (SELECT * FROM Rental_Admins WHERE ID_User = @ID_User))
+			SET @answ = 'админ'
+		ELSE IF (EXISTS (SELECT * FROM Rental_Users WHERE ID_User = @ID_User)) 
+			SET @answ = 'пользователь'
+		ELSE SET @answ = 'пользователь отсутствует'
+
+		RETURN @answ
+	END
+GO
+	PRINT 'Создал Функции DBStatus'
+
+
 GO
 	CREATE FUNCTION GetCoordinatesFunc(
 		@Vehicle_ID INT
@@ -553,7 +551,99 @@ GO
 GO
 	PRINT 'Создал Функцию GetCoordinates'
 
-	
+USE VehicleRental
+GO
+	CREATE FUNCTION GetUserDriverLicences
+	(
+		@ID_USER INT
+	)
+	RETURNS TABLE
+	AS
+	RETURN (SELECT * FROM DriversLicences WHERE DriversLicences.ID_User = @ID_USER)
+GO
+	PRINT 'Создал Функцию GetUserDriverLicences'
+
+USE VehicleRental
+GO
+	CREATE FUNCTION UserRentalCount
+	(
+		@ID_USER INT
+	)
+	RETURNS INT
+	AS
+	BEGIN
+		DECLARE @Count INT = 0
+		SELECT @Count = COUNT(*) FROM Rentals
+		INNER JOIN [dbo].GetUserDriverLicences(@ID_USER) as LICENCES
+		ON LICENCES.ID_DriverLicence = Rentals.ID_DriverLicence
+		RETURN @Count
+	END
+GO
+	PRINT 'Создал Функцию UserRentalCount'
+
+	USE VehicleRental
+GO
+	CREATE FUNCTION CountUserAccidents
+	(
+		@ID_User INT
+	)
+	RETURNS INT
+	AS
+	BEGIN
+		DECLARE @Count INT
+			SELECT @Count=COUNT(*) FROM TrafficAccidents
+			INNER JOIN [dbo].GetUserDriverLicences(@ID_User) as LICENCES
+			ON LICENCES.ID_DriverLicence = TrafficAccidents.ID_DriverLicence
+		RETURN @Count
+	END
+
+GO
+	PRINT 'Создал Функцию CountUserAccidents'
+
+GO
+	CREATE FUNCTION VehicleAccidents
+	(
+		@ID_Vehicle INT 
+	)
+	RETURNS	TABLE
+	AS
+	RETURN SELECT * FROM TrafficAccidents WHERE ID_Vehicle = @ID_Vehicle
+
+GO
+	PRINT 'Создал Функцию VehicleAccidents'
+
+GO
+	CREATE FUNCTION CountVehicleAccidents
+	(
+		@ID_Vehicle INT
+	)
+	RETURNS INT
+	AS
+	BEGIN
+		DECLARE @Count INT
+			SELECT @Count = COUNT(*) FROM TrafficAccidents WHERE ID_Vehicle = @ID_Vehicle
+		RETURN @Count
+	END
+
+GO
+	PRINT 'Создал Функцию CountVehicleAccidents'
+
+GO
+	CREATE FUNCTION TotalVehicleDamage
+	(
+		@ID_Vehicle INT
+	)
+	RETURNS MONEY
+	AS
+	BEGIN
+		DECLARE @TotalSum MONEY
+			SELECT @TotalSum = SUM(Damage) FROM [dbo].VehicleAccidents(@ID_Vehicle) 
+		RETURN @TotalSum
+	END
+
+GO
+	PRINT 'Создал Функцию TotalVehicleDamage'
+
 
 GO
 	PRINT '==================================Представления======================================='
@@ -580,10 +670,36 @@ GO
 			FROM VehicleCoordinates 
 			WHERE VehicleCoordinates.ID_Vehicle = Vehicles.ID_Vehicle
 			ORDER BY StayDateTime DESC) as Lng,
-		[dbo].GetVehicleStatus(Vehicles.ID_Vehicle) as AccessStatus 
+		[dbo].GetVehicleStatus(Vehicles.ID_Vehicle) as AccessStatus,
+		[dbo].TotalVehicleDamage(Vehicles.ID_Vehicle) as DamageCost
+
 	FROM
 		Vehicles INNER JOIN VehicleRegistrCertificates
 		ON Vehicles.ID_Vehicle = VehicleRegistrCertificates.ID_Vehicle
+
+GO 
+	PRINT 'Создал представление VehiclesINFO'
+
+USE VehicleRental
+GO
+	CREATE VIEW UsersINFO
+	AS
+		SELECT 
+			ID_User, 
+			UserEMail, 
+			UserSurname, 
+			UserName, 
+			UserMiddleName, 
+			UserBirthDay, 
+			[dbo].DBStatus(Rental_Users.ID_User) as Previlege, 
+			[dbo].UserRentalCount(Rental_Users.ID_User) as RentalsCount, 
+			[dbo].CountUserAccidents(Rental_Users.ID_User) as AccidentsCount,
+			(SELECT ID_DriverLicence FROM [dbo].GetDriverLicenceByUserID(Rental_Users.ID_User)) as ID_DriverLicence, --??
+			(SELECT ReceiptDate FROM [dbo].GetDriverLicenceByUserID(Rental_Users.ID_User)) as ReceiptDate --??
+		FROM Rental_Users 
+
+GO 
+	PRINT 'Создал представление UsersINFO'
 
 GO
 	PRINT '==================================Функции 2====================================='
@@ -665,3 +781,4 @@ GO
 		GRANT INSERT, SELECT, UPDATE, DELETE ON TrafficAccidentTypes TO DB_ADMIN_HANDLER
 		
 		GRANT EXEC ON REG_USER TO DB_USER_USERHANDLER
+

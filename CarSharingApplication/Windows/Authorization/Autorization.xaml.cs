@@ -82,7 +82,6 @@ namespace CarSharingApplication
                     using (var db = new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")))
                     {
                         db.Connection.Open();
-                        
                        
                         using (DESCryptoServiceProvider des = new DESCryptoServiceProvider())
                         {

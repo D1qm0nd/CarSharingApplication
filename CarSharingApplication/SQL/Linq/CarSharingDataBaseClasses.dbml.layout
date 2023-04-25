@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17.75, 9.875" name="CarSharingDataBaseClasses">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17.75, 10.875" name="CarSharingDataBaseClasses">
   <DataContextMoniker Name="/CarSharingDataBaseClassesDataContext" />
   <nestedChildShapes>
     <classShape Id="a450ac15-08fa-420d-ae2b-e33fa188aa7e" absoluteBounds="2.125, 3.625, 2, 1.7708968098958331">
@@ -59,7 +59,7 @@
         <elementListCompartment Id="96353fb5-d2c7-4a49-a9d3-b69e2a4f6352" absoluteBounds="9.515, 7.3350000000000009, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.33751889153913 : 5.2612939453125); (6.33751889153913 : 7.85659912109375); (9.5 : 7.85659912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6.59375 : 5.2612939453125); (6.59375 : 7.28125); (9.5 : 7.28125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/DriversLicences/DriversLicences_Rentals" />
       <nodes>
         <classShapeMoniker Id="dbf95deb-6c70-43ec-97ab-e48ce12c93ce" />
@@ -132,24 +132,30 @@
         <classShapeMoniker Id="d6e5e4a7-8c53-4bcb-b4af-cabfdf23edb1" />
       </nodes>
     </associationConnector>
-    <classShape Id="a237075a-ed14-4372-bee7-310d7891e7e4" absoluteBounds="1.875, 6.75, 2, 2.9247054036458331">
-      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/VehiclesINFO" />
-      <nestedChildShapes>
-        <elementListCompartment Id="ccc76018-5a96-4cae-9f43-b2daf655e1c4" absoluteBounds="1.8900000000000001, 7.2100000000000009, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="54cef759-3b39-4b0f-b2d7-ec6af815ccf7" absoluteBounds="15.5, 3.375, 2, 4.2708154296875">
       <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/VehicleRegistrCertificates" />
       <nestedChildShapes>
         <elementListCompartment Id="0e3c64e8-83d6-4ba6-b255-5b49321a1469" absoluteBounds="15.515, 3.835, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(14.164065625 : 2.32859537760417); (14.164065625 : 6.37620727539062); (15.5 : 6.37620727539062)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(14.164065625 : 2.32859537760417); (14.164065625 : 6.37620727539062); (15.5 : 6.37620727539062)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/Vehicles/Vehicles_VehicleRegistrCertificates" />
       <nodes>
         <classShapeMoniker Id="d6e5e4a7-8c53-4bcb-b4af-cabfdf23edb1" />
         <classShapeMoniker Id="54cef759-3b39-4b0f-b2d7-ec6af815ccf7" />
       </nodes>
     </associationConnector>
+    <classShape Id="6bec7cc7-c790-451e-9312-a40e8ca8c5ba" absoluteBounds="0.625, 7.5, 2, 3.1170068359375">
+      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/VehiclesINFO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2e39d581-6a9e-4380-acee-61833c8ecff0" absoluteBounds="0.64000000000000012, 7.9600000000000009, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="90c63d4e-20a1-4771-ae44-1675d3be1a33" absoluteBounds="3.375, 7.625, 2, 2.9247054036458331">
+      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/UsersINFO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8a49e8bc-2aa0-4fd0-9857-b1f696782132" absoluteBounds="3.3899999999999997, 8.085, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

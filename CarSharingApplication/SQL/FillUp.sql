@@ -105,6 +105,14 @@ GO
 	('8989834554', 4 , GETDATE(), '12:00', 1),
 	('5463454355', 7 , GETDATE(), '15:00', 3)
 
+GO
+	USE VehicleRental
+	INSERT TrafficAccidentTypes VALUES ('ДТП')
+
+GO 
+	USE VehicleRental
+	INSERT TrafficAccidents VALUES (3, 5463454355,1, 7600.0, 'Врезался в киоск')
+
 GO 
 	USE VehicleRental
 	INSERT Rental_Admins VALUES
