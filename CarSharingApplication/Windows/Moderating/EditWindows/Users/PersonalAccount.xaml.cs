@@ -22,25 +22,18 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
     public partial class PersonalAccount : Window
     {
         private string connectionString = App.GetConnectionString("USERHANDLERConnection");
-        private List<DriversLicences> Licence;
-        private Rental_Users User;
-        public PersonalAccount(ref Rental_Users user)
+        private UsersINFO User;
+        public PersonalAccount(ref UsersINFO UserInfo)
         {
             InitializeComponent();
-            User = user;
+            User = UserInfo;
             SetHints();
-            Licence = App.GetQueryResult<DriversLicences>(new CarSharingDataBaseClassesDataContext(connectionString), $"EXEC GetDriverLicenceByUserID @User_ID = {user.ID_User}");
-            if (Licence.Count > 0)
-            { 
-                uDriverLicence.Text = Licence[0].ID_DriverLicence;
-                uLicenceDatePic.Text = Licence[0].ReceiptDate.ToString();
-            }
-            //a.Clear();
-            GC.Collect();
+            uDriverLicence.Text = User.ID_DriverLicence;
+            uLicenceDatePic.Text = User.ReceiptDate.ToString();
             // позволить изменять юзера только по (его собственному айди)
         }
 
-        public void SetHints()
+        public void SetHints() //Переложить это на WPF
         {
             HintAssist.SetHint(uDriverLicence, "Водительское удостоверение");
             HintAssist.SetHint(uLicenceDatePic, "Дата получения удостоверения");
@@ -57,35 +50,60 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
         {
             if (uDriverLicence.Text != "" && uLicenceDatePic.Text != "")
             {
-                if (Licence != null)
+                #region NEW CODE SUPPORT FROM 25.04.2023
                 {
-                    if (Licence.Count > 0)
+                    if (uDriverLicence.Text != User.ID_DriverLicence && DateTime.Parse(uLicenceDatePic.Text) != User.ReceiptDate)
                     {
-                        if (Licence[0].ReceiptDate.ToString() != uLicenceDatePic.Text && Licence[0].ID_DriverLicence != uDriverLicence.Text)
+                        App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
+                            $"AddDriverLicenceToUser @User_ID = {User.ID_User}, @DriverLicence = '{uDriverLicence.Text}', @ReceiptDate = '{uLicenceDatePic.Text}'");
+                        User.ID_DriverLicence = uDriverLicence.Text;
+                        User.ReceiptDate = DateTime.Parse(uLicenceDatePic.Text);
+                        var categories = uLicenceCategories.GetGategories();
+                        foreach (DriverLicencesCategories category in categories)
                         {
-                            App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
-                                $"AddDriverLicenceToUser @User_ID = {User.ID_User} @DriverLicence = {uDriverLicence.Text} @ReceiptDate = {uLicenceDatePic.Text}");
-                        }
-                        try
-                        {
-                            var newLicence = App.GetQueryResult<DriversLicences>(new CarSharingDataBaseClassesDataContext(connectionString),
-                                $"EXEC GetDriverLicenceByUserID @User_ID = {User.ID_User}")[0];
-                            var categories = uLicenceCategories.GetGategories();
-                            foreach (DriverLicencesCategories category in categories)
-                            {
+                            if (category.ReceiptDate != "" && category.EndDate != "")
+                            {    
                                 if (!App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
                                     $"EXEC AddCategoryToDriverLicence @DriverLicence_ID='{uDriverLicence.Text}', @Category='{category.Name}', @ReceiptDate = '{category.ReceiptDate}', @EndDate = '{category.EndDate}'"))
                                 {
-                                     throw new Exception($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
+                                    throw new Exception($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
                                 }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
+                            } else throw new Exception($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
                         }
                     }
                 }
+                #endregion
+                #region OLD CODE SUPPORT TO 25.04.2023
+                //if (Licence != null)
+                //{
+                //    if (Licence.Count > 0)
+                //    {
+                //        if (Licence[0].ReceiptDate.ToString() != uLicenceDatePic.Text && Licence[0].ID_DriverLicence != uDriverLicence.Text)
+                //        {
+                //            App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
+                //                $"AddDriverLicenceToUser @User_ID = {User.ID_User} @DriverLicence = {uDriverLicence.Text} @ReceiptDate = {uLicenceDatePic.Text}");
+                //        }
+                //        try
+                //        {
+                //            var newLicence = App.GetQueryResult<DriversLicences>(new CarSharingDataBaseClassesDataContext(connectionString),
+                //                $"EXEC GetDriverLicenceByUserID @User_ID = {User.ID_User}")[0];
+                //            var categories = uLicenceCategories.GetGategories();
+                //            foreach (DriverLicencesCategories category in categories)
+                //            {
+                //                if (!App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
+                //                    $"EXEC AddCategoryToDriverLicence @DriverLicence_ID='{uDriverLicence.Text}', @Category='{category.Name}', @ReceiptDate = '{category.ReceiptDate}', @EndDate = '{category.EndDate}'"))
+                //                {
+                //                     throw new Exception($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
+                //                }
+                //            }
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            MessageBox.Show(ex.Message);
+                //        }
+                //    }
+                //}
+                #endregion
             }
         }
     }

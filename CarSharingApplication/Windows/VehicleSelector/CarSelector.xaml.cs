@@ -39,7 +39,7 @@ namespace CarSharingApplication
     /// </summary>
     public partial class CarSelector : Window
     {
-        private Rental_Users User;
+        private UsersINFO User;
         //private VehiclesINFO vehicleInfo;
         private List<VehiclesINFO> vehiclesInfoList;
         private VehiclesINFO selectedVehicle { get; set; }
@@ -51,7 +51,7 @@ namespace CarSharingApplication
         private string HaveNotAvaliableVehicles = "В данный момент\nнет свободных авто\nзаходите позже";
         //private bool isOpen = true;
 
-        public CarSelector(ref Rental_Users user)
+        public CarSelector(ref UsersINFO user)
         {
             InitializeComponent();
 

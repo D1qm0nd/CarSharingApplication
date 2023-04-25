@@ -23,7 +23,7 @@ namespace CarSharingApplication
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public AdminWindow(ref Rental_Users user)
+        public AdminWindow(ref UsersINFO user)
         {
             InitializeComponent();
             this.Title = $"CarSharing Окно администратора [{user.UserSurname} {user.UserName} {user.UserMiddleName}]";

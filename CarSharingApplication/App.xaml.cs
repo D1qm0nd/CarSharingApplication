@@ -46,6 +46,26 @@ namespace CarSharingApplication
                 return null;
             }
         }
+#nullable enable
+        public static T? GetScalarResult<T>(DataContext context, string query_command)
+        {
+            try
+            {
+                List<T> list;
+                context.Connection.Open();
+                using (context)
+                {
+                    list = context.ExecuteQuery<T>(query_command).ToList();
+                    context.Connection.Close();
+                }
+                return list[0];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return default;
+            }
+        }
 
         public static bool ExecuteNonQuery(DataContext context, string command)
         {
@@ -57,8 +77,9 @@ namespace CarSharingApplication
                 }
                 return true;
             }
-            catch 
+            catch (Exception ex)
             { 
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }

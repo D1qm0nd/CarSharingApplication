@@ -477,6 +477,23 @@ GO
 GO
 	PRINT '==================================Функции======================================='
 
+
+GO 
+	CREATE FUNCTION CheckExistingUser
+	(
+		@login NVARCHAR(MAX),
+		@Password NVARCHAR(MAX)
+	) 
+	RETURNS INT
+	AS
+	BEGIN
+		DECLARE @ID INT = -1
+		(SELECT @ID = ID_User FROM Rental_Users WHERE Rental_Users.UserLogin = @login AND UserPassword = @Password)
+		RETURN @ID
+	END
+GO
+	PRINT 'Создал Функции CheckExistingUser'
+
 GO
 	CREATE FUNCTION DBStatus(
 		@ID_User INT
@@ -742,6 +759,8 @@ GO
 		CREATE USER DB_USER_USERHANDLER FOR LOGIN USERHANDLER
 		
 		GRANT INSERT, SELECT ON Rental_Users to DB_USER_USERHANDLER
+		GRANT EXECUTE ON CheckExistingUser to DB_USER_USERHANDLER
+		GRANT SELECT ON UsersINFO to DB_USER_USERHANDLER
 		GRANT SELECT ON Rental_Admins to DB_USER_USERHANDLER
 		GRANT EXEC ON GetDriverLicenceByUserID to DB_USER_USERHANDLER
 		GRANT EXEC ON AddDriverLicenceToUser to DB_USER_USERHANDLER

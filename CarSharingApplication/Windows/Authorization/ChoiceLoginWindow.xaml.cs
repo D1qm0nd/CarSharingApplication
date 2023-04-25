@@ -20,8 +20,8 @@ namespace CarSharingApplication.Windows.Authorization
     /// </summary>
     public partial class ChoiceLoginWindow : Window
     {
-        private Rental_Users User;
-        public ChoiceLoginWindow(ref Rental_Users user)
+        private UsersINFO User;
+        public ChoiceLoginWindow(ref UsersINFO user)
         {
             User = user;
             InitializeComponent();
