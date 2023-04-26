@@ -4,10 +4,38 @@ GO
 	USE VehicleRental
 
 	INSERT Rental_Users VALUES
-	('eqYY5T3L49ZRJbW/V9rosA==', 'rental_admin@rental_admin.rental_admin', 'eqYY5T3L49ZRJbW/V9rosA==', 1, 'AdminSurname', 'AdminName', 'AdminMiddlename', '2023-04-01'),
-	('/dnKYZHqiXNRZX3gcUdwwg==', 'rental_user@rental_user.rental_user', '/dnKYZHqiXNRZX3gcUdwwg==', 1, 'rental_user', 'rental_user', 'rental_user','2023-04-06')
+	('eqYY5T3L49ZRJbW/V9rosA==', 'rental_admin@rental_admin.rental_admin',	'eqYY5T3L49ZRJbW/V9rosA==', 'AdminSurname', 'AdminName',	'AdminMiddlename',	'2023-04-01'),
+	('/dnKYZHqiXNRZX3gcUdwwg==', 'rental_user@rental_user.rental_user',		'/dnKYZHqiXNRZX3gcUdwwg==', 'rental_user',  'rental_user',  'rental_user',		'2023-04-06'),
+	('jp6uPv45moXS5qVs0UkNwA==', 'chaki@me.com',							'/gzw+eMOrPavQsQwRWU5dw==', 'Журавлев',		'Георгий',		'Никитич',			'27.06.1976'),
+	('OUE1lvANhEI=',			 'drolsky@verizon.net',						'yWOdkJjT2OhE+GyLsNBQhg==', 'Данилов',		'Фёдор',		'Даниилович',		'28.03.1995'),
+	('/niF9okVx9M=',			 'sekiya@icloud.com',						'5rhTvoSsG/GgqucpRZnPtQ==', 'Абрамов',		'Лука',			'Андреевич',		'20.04.2004'),
+	('F0CnAOR1XnjlDV1NlgToQg==', 'wbarker@yahoo.com',						'WjJce2gIy+eqxPZ/igAynQ==', 'Дмитриев',		'Ибрагим',		'Вячеславович',		'20.03.1987'),
+	('TgYb56aMtz3x4BI0aDEBWQ==', 'rgiersig@live.com',						'q7s22MRGK9Q7FIqJDxdTJg==', 'Никифорова',	'Мария',		'Тимуровна',		'31.07.1980'),
+	('wco4QPqNMnj5QduIrnDeeA==', 'aibrahim@me.com',							'T20KYiCgB4j+yhvqLzZ58g==', 'Голубева',		'Алёна',		'Артёмовна',		'11.01.1973'),
+	('cgS+lczeUTw=',			 'falcao@outlook.com',						'RgjqSmu+4y1lXdv9u1U4PA==', 'Марков',		'Фёдор',		'Егорович',			'25.09.1978'),
+	('d+qxcyHz+Ng=',			 'kramulous@sbcglobal.net',					'Y1CnhCWNVY0GpdbuBkSi8A==', 'Лапшин',		'Константин',	'Кириллович',		'11.03.1996'),
+	('LuDnU2xPKnRsK1gnXUa+lg==', 'draper@comcast.net',						'Sbt/J/FbmuWmvU1fAcBirw==', 'Королева',		'Алиса',		'Фёдоровна',		'27.12.2001'),
+	('p6zKL1c1vck=',			 'multiplx@icloud.com',						'tRAOb7dBifcO9mNoQ7M3tg==', 'Ананьев',		'Марк',			'Романович',		'05.03.1984'),
+	('72hLvgWDLRQ=',			 'zeitlin@aol.com',							'BgPFPhbG1jZL9W4my2wj7g==', 'Седов',		'Данил',		'Максимович',		'29.04.2004'),
+	('Y3Q3p+gxPLg=',			 'caidaperl@aol.com',						'9Lb+O8n8XDnHcyxMKqzpwA==', 'Иванов',		'Роберт',		'Фёдорович',		'14.04.1979'),
+	('4xgobG9ZXYg=',			 'miturria@aol.com',						'H0XUoAx8KKu1hi8CqNwx6Q==', 'Петрова',		'Виктория',		'Григорьевна',		'06.01.1993'),
+	('NMAvQVgTACZ6/YBFhj+yTw==', 'malin@gmail.com',							'UOFgto+c+wWUR4Ibnyq+Jg==', 'Денисова',		'Арина',		'Романовна',		'27.06.1999'),
+	('pOCii6Aj53jnl8lqKTdBXA==', 'phizntrg@icloud.com',						'MEteP3+9OXGK52nCED2nvw==', 'Тихомиров',	'Марк',			'Леонидович',		'30.07.1995'),
+	('CfpfoogLm/52Rgp/XtQ+SQ==', 'leslie@outlook.com',						'GvgNDZ+2Oaq/McmXw60NHA==', 'Медведев',		'Марк',			'Михайлович',		'22.08.2003'),
+	('IoKkAeLDFnU=',			 'bsikdar@yahoo.ca',						'BMkfbs7m76UjZwHTSazceA==', 'Ульянов',		'Борис',		'Артёмович',		'10.02.1973'),
+	('KK3HyGlsbpogb2F4baJPTQ==', 'kaiser@hotmail.com',						'Cr9BBzcRk8TW1v0Dp5VedQ==', 'Винокуров',	'Кирилл',		'Арсентьевич',		'08.03.1974'),
+	('1QskxW76iM4=',			 'jsbach@aol.com',							'wDHCrHCRhYxuUTq50NVurQ==', 'Панин',		'Максим',		'Маркович',			'20.09.1995'),
+	('xECcRbiwcoLWy4r0a/XOAA==', 'benanov@sbcglobal.net',					'6+I0pJRGljj+jgrcgsZ64g==', 'Васильев',		'Тимур',		'Максимович',		'10.12.2003'),
+	('87VyEy0SEg14hB0ud6WzCg==', 'eidac@sbcglobal.net',						'U1fxfzlDrnVJ87ByHqJfkQ==', 'Дементьева',	'Полина',		'Викторовна',		'30.09.1971'),
+	('lnC1Htm3kpk=',			 'parasite@outlook.com',					'lD3qXWkqJ3G5bT4xXgv1hQ==', 'Андреев',		'Александр',	'Тимофеевич',		'07.01.1981'),
+	('PyQi8acKryj+X/r0IpG/Ng==', 'moxfulder@yahoo.com',						'XermscU5w6YJuUDIaZI0hQ==', 'Кудрявцев',	'Сергей',		'Дмитриевич',		'16.05.2000'),
+	('1DD8/KCSlXYQWWOpkVRDcw==', 'animats@optonline.net',					'y1Z/E4huq7CcLK5WLb7hVA==', 'Александров',  'Семён',		'Андреевич',		'11.04.2002'),
+	('PIbgzNreJZY=',			 'jeteve@me.com',							'q5pI3eYae9XROuF+pylTTg==', 'Хохлов',		'Ярослав',		'Иванович',			'20.11.1978'),
+	('cYRfx32GTbQ=',			 'lamky@icloud.com',						'CIJYXKYn/HgtqomdzsNcTQ==', 'Лебедев',		'Богдан',		'Александрович',	'17.07.1984'),
+	('/niF9okVx9M=',			 'kmself@optonline.net',					'/p9c1YWrESY7AuMRc+4unQ==', 'Абрамов',		'Николай',		'Арсентьевич',		'19.06.1990')
 
 GO 
+
 	USE VehicleRental
 	INSERT DriversLicences VALUES
 	('7878443544', '2013-03-12' ,2),

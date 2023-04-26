@@ -43,10 +43,10 @@ GO
 	CREATE TABLE Rental_Users
 	(
 		ID_User INT IDENTITY(1,1) NOT NULL,
-		UserLogin NVARCHAR(120) UNIQUE NOT NULL,
+		UserLogin NVARCHAR(120) NOT NULL,
 		UserEMail NVARCHAR(120) UNIQUE NOT NULL,
 		UserPassword NVARCHAR(120) NOT NULL,
-		UserStatus INT NOT NULL,
+		--UserStatus INT NOT NULL,
 		UserSurname NVARCHAR(120) NOT NULL,
 		UserName NVARCHAR(120) NOT NULL,
 		UserMiddleName NVARCHAR(120) NOT NULL,
@@ -403,9 +403,8 @@ GO
 		DECLARE @SqlCommand NVARCHAR(MAX) = 
 		'USE VehicleRental '+
 		'INSERT INTO Rental_Users '+
-		'(UserLogin, UserEMail, UserPassword, UserStatus, UserSurname, UserName, UserMiddleName, UserBirthDay) VALUES ('+
-			''''+@UserLogin+''', '''+@UserEmail+''', '''+@UserPassword+''', '+
-			'1, '''+@UserSurname+''', '''+@UserName+''', '''+@UserMiddleName+''', '''+@UserBirthDayDate+''')'
+		'(UserLogin, UserEMail, UserPassword, UserSurname, UserName, UserMiddleName, UserBirthDay) VALUES ('+
+			''''+@UserLogin+''', '''+@UserEmail+''', '''+@UserPassword+''', '+''''+@UserSurname+''', '''+@UserName+''', '''+@UserMiddleName+''', '''+@UserBirthDayDate+''')'
 		
 			EXEC (@SqlCommand)
 	COMMIT TRANSACTION
@@ -790,7 +789,7 @@ GO
 		GRANT EXECUTE ON CheckExistingUser to DB_USER_USERHANDLER
 		GRANT SELECT ON UsersINFO to DB_USER_USERHANDLER
 		GRANT SELECT ON Rental_Admins to DB_USER_USERHANDLER
-		GRANT EXEC ON GetDriverLicenceByUserID to DB_USER_USERHANDLER
+		GRANT SELECT ON GetDriverLicenceByUserID to DB_USER_USERHANDLER
 		GRANT EXEC ON AddDriverLicenceToUser to DB_USER_USERHANDLER
 		GRANT EXEC ON AddCategoryToDriverLicence to DB_USER_USERHANDLER
 		GRANT EXEC ON REG_USER TO DB_USER_USERHANDLER
@@ -830,5 +829,3 @@ GO
 		GRANT EXEC ON REG_USER TO DB_USER_USERHANDLER
 
 
-GO
-	EXEC Rent  @DriverLicence = '8989834554', @ID_Vehicle = 3, @RentalTime = CONVERT(TIME,GETDATE()), @CountOfHours = 2
