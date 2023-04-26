@@ -39,9 +39,6 @@ namespace CarSharingApplication.SQL.Linq
     partial void InsertDriversLicences(DriversLicences instance);
     partial void UpdateDriversLicences(DriversLicences instance);
     partial void DeleteDriversLicences(DriversLicences instance);
-    partial void InsertRental_Users(Rental_Users instance);
-    partial void UpdateRental_Users(Rental_Users instance);
-    partial void DeleteRental_Users(Rental_Users instance);
     partial void InsertRentals(Rentals instance);
     partial void UpdateRentals(Rentals instance);
     partial void DeleteRentals(Rentals instance);
@@ -60,10 +57,13 @@ namespace CarSharingApplication.SQL.Linq
     partial void InsertVehicleRegistrCertificates(VehicleRegistrCertificates instance);
     partial void UpdateVehicleRegistrCertificates(VehicleRegistrCertificates instance);
     partial void DeleteVehicleRegistrCertificates(VehicleRegistrCertificates instance);
+    partial void InsertRental_Users(Rental_Users instance);
+    partial void UpdateRental_Users(Rental_Users instance);
+    partial void DeleteRental_Users(Rental_Users instance);
     #endregion
 		
 		public CarSharingDataBaseClassesDataContext() : 
-				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString, mappingSource)
+				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -121,14 +121,6 @@ namespace CarSharingApplication.SQL.Linq
 			get
 			{
 				return this.GetTable<Rental_Admins>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Rental_Users> Rental_Users
-		{
-			get
-			{
-				return this.GetTable<Rental_Users>();
 			}
 		}
 		
@@ -193,6 +185,14 @@ namespace CarSharingApplication.SQL.Linq
 			get
 			{
 				return this.GetTable<UsersINFO>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Rental_Users> Rental_Users
+		{
+			get
+			{
+				return this.GetTable<Rental_Users>();
 			}
 		}
 	}
@@ -763,288 +763,6 @@ namespace CarSharingApplication.SQL.Linq
 					this._ID_User = value;
 				}
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rental_Users")]
-	public partial class Rental_Users : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_User;
-		
-		private string _UserLogin;
-		
-		private string _UserEMail;
-		
-		private string _UserPassword;
-		
-		private int _UserStatus;
-		
-		private string _UserSurname;
-		
-		private string _UserName;
-		
-		private string _UserMiddleName;
-		
-		private System.DateTime _UserBirthDay;
-		
-		private EntitySet<DriversLicences> _DriversLicences;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_UserChanging(int value);
-    partial void OnID_UserChanged();
-    partial void OnUserLoginChanging(string value);
-    partial void OnUserLoginChanged();
-    partial void OnUserEMailChanging(string value);
-    partial void OnUserEMailChanged();
-    partial void OnUserPasswordChanging(string value);
-    partial void OnUserPasswordChanged();
-    partial void OnUserStatusChanging(int value);
-    partial void OnUserStatusChanged();
-    partial void OnUserSurnameChanging(string value);
-    partial void OnUserSurnameChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnUserMiddleNameChanging(string value);
-    partial void OnUserMiddleNameChanged();
-    partial void OnUserBirthDayChanging(System.DateTime value);
-    partial void OnUserBirthDayChanged();
-    #endregion
-		
-		public Rental_Users()
-		{
-			this._DriversLicences = new EntitySet<DriversLicences>(new Action<DriversLicences>(this.attach_DriversLicences), new Action<DriversLicences>(this.detach_DriversLicences));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_User
-		{
-			get
-			{
-				return this._ID_User;
-			}
-			set
-			{
-				if ((this._ID_User != value))
-				{
-					this.OnID_UserChanging(value);
-					this.SendPropertyChanging();
-					this._ID_User = value;
-					this.SendPropertyChanged("ID_User");
-					this.OnID_UserChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserLogin", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
-		public string UserLogin
-		{
-			get
-			{
-				return this._UserLogin;
-			}
-			set
-			{
-				if ((this._UserLogin != value))
-				{
-					this.OnUserLoginChanging(value);
-					this.SendPropertyChanging();
-					this._UserLogin = value;
-					this.SendPropertyChanged("UserLogin");
-					this.OnUserLoginChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserEMail", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
-		public string UserEMail
-		{
-			get
-			{
-				return this._UserEMail;
-			}
-			set
-			{
-				if ((this._UserEMail != value))
-				{
-					this.OnUserEMailChanging(value);
-					this.SendPropertyChanging();
-					this._UserEMail = value;
-					this.SendPropertyChanged("UserEMail");
-					this.OnUserEMailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserPassword", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
-		public string UserPassword
-		{
-			get
-			{
-				return this._UserPassword;
-			}
-			set
-			{
-				if ((this._UserPassword != value))
-				{
-					this.OnUserPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._UserPassword = value;
-					this.SendPropertyChanged("UserPassword");
-					this.OnUserPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserStatus", DbType="Int NOT NULL")]
-		public int UserStatus
-		{
-			get
-			{
-				return this._UserStatus;
-			}
-			set
-			{
-				if ((this._UserStatus != value))
-				{
-					this.OnUserStatusChanging(value);
-					this.SendPropertyChanging();
-					this._UserStatus = value;
-					this.SendPropertyChanged("UserStatus");
-					this.OnUserStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserSurname", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
-		public string UserSurname
-		{
-			get
-			{
-				return this._UserSurname;
-			}
-			set
-			{
-				if ((this._UserSurname != value))
-				{
-					this.OnUserSurnameChanging(value);
-					this.SendPropertyChanging();
-					this._UserSurname = value;
-					this.SendPropertyChanged("UserSurname");
-					this.OnUserSurnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserMiddleName", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
-		public string UserMiddleName
-		{
-			get
-			{
-				return this._UserMiddleName;
-			}
-			set
-			{
-				if ((this._UserMiddleName != value))
-				{
-					this.OnUserMiddleNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserMiddleName = value;
-					this.SendPropertyChanged("UserMiddleName");
-					this.OnUserMiddleNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserBirthDay", DbType="Date NOT NULL")]
-		public System.DateTime UserBirthDay
-		{
-			get
-			{
-				return this._UserBirthDay;
-			}
-			set
-			{
-				if ((this._UserBirthDay != value))
-				{
-					this.OnUserBirthDayChanging(value);
-					this.SendPropertyChanging();
-					this._UserBirthDay = value;
-					this.SendPropertyChanged("UserBirthDay");
-					this.OnUserBirthDayChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rental_Users_DriversLicences", Storage="_DriversLicences", ThisKey="ID_User", OtherKey="ID_User")]
-		public EntitySet<DriversLicences> DriversLicences
-		{
-			get
-			{
-				return this._DriversLicences;
-			}
-			set
-			{
-				this._DriversLicences.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_DriversLicences(DriversLicences entity)
-		{
-			this.SendPropertyChanging();
-			entity.Rental_Users = this;
-		}
-		
-		private void detach_DriversLicences(DriversLicences entity)
-		{
-			this.SendPropertyChanging();
-			entity.Rental_Users = null;
 		}
 	}
 	
@@ -3157,6 +2875,264 @@ namespace CarSharingApplication.SQL.Linq
 					this._ReceiptDate = value;
 				}
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rental_Users")]
+	public partial class Rental_Users : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_User;
+		
+		private string _UserLogin;
+		
+		private string _UserEMail;
+		
+		private string _UserPassword;
+		
+		private string _UserSurname;
+		
+		private string _UserName;
+		
+		private string _UserMiddleName;
+		
+		private System.DateTime _UserBirthDay;
+		
+		private EntitySet<DriversLicences> _DriversLicences;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_UserChanging(int value);
+    partial void OnID_UserChanged();
+    partial void OnUserLoginChanging(string value);
+    partial void OnUserLoginChanged();
+    partial void OnUserEMailChanging(string value);
+    partial void OnUserEMailChanged();
+    partial void OnUserPasswordChanging(string value);
+    partial void OnUserPasswordChanged();
+    partial void OnUserSurnameChanging(string value);
+    partial void OnUserSurnameChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnUserMiddleNameChanging(string value);
+    partial void OnUserMiddleNameChanged();
+    partial void OnUserBirthDayChanging(System.DateTime value);
+    partial void OnUserBirthDayChanged();
+    #endregion
+		
+		public Rental_Users()
+		{
+			this._DriversLicences = new EntitySet<DriversLicences>(new Action<DriversLicences>(this.attach_DriversLicences), new Action<DriversLicences>(this.detach_DriversLicences));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_User
+		{
+			get
+			{
+				return this._ID_User;
+			}
+			set
+			{
+				if ((this._ID_User != value))
+				{
+					this.OnID_UserChanging(value);
+					this.SendPropertyChanging();
+					this._ID_User = value;
+					this.SendPropertyChanged("ID_User");
+					this.OnID_UserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserLogin", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
+		public string UserLogin
+		{
+			get
+			{
+				return this._UserLogin;
+			}
+			set
+			{
+				if ((this._UserLogin != value))
+				{
+					this.OnUserLoginChanging(value);
+					this.SendPropertyChanging();
+					this._UserLogin = value;
+					this.SendPropertyChanged("UserLogin");
+					this.OnUserLoginChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserEMail", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
+		public string UserEMail
+		{
+			get
+			{
+				return this._UserEMail;
+			}
+			set
+			{
+				if ((this._UserEMail != value))
+				{
+					this.OnUserEMailChanging(value);
+					this.SendPropertyChanging();
+					this._UserEMail = value;
+					this.SendPropertyChanged("UserEMail");
+					this.OnUserEMailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserPassword", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
+		public string UserPassword
+		{
+			get
+			{
+				return this._UserPassword;
+			}
+			set
+			{
+				if ((this._UserPassword != value))
+				{
+					this.OnUserPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._UserPassword = value;
+					this.SendPropertyChanged("UserPassword");
+					this.OnUserPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserSurname", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
+		public string UserSurname
+		{
+			get
+			{
+				return this._UserSurname;
+			}
+			set
+			{
+				if ((this._UserSurname != value))
+				{
+					this.OnUserSurnameChanging(value);
+					this.SendPropertyChanging();
+					this._UserSurname = value;
+					this.SendPropertyChanged("UserSurname");
+					this.OnUserSurnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserMiddleName", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
+		public string UserMiddleName
+		{
+			get
+			{
+				return this._UserMiddleName;
+			}
+			set
+			{
+				if ((this._UserMiddleName != value))
+				{
+					this.OnUserMiddleNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserMiddleName = value;
+					this.SendPropertyChanged("UserMiddleName");
+					this.OnUserMiddleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserBirthDay", DbType="Date NOT NULL")]
+		public System.DateTime UserBirthDay
+		{
+			get
+			{
+				return this._UserBirthDay;
+			}
+			set
+			{
+				if ((this._UserBirthDay != value))
+				{
+					this.OnUserBirthDayChanging(value);
+					this.SendPropertyChanging();
+					this._UserBirthDay = value;
+					this.SendPropertyChanged("UserBirthDay");
+					this.OnUserBirthDayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rental_Users_DriversLicences", Storage="_DriversLicences", ThisKey="ID_User", OtherKey="ID_User")]
+		public EntitySet<DriversLicences> DriversLicences
+		{
+			get
+			{
+				return this._DriversLicences;
+			}
+			set
+			{
+				this._DriversLicences.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_DriversLicences(DriversLicences entity)
+		{
+			this.SendPropertyChanging();
+			entity.Rental_Users = this;
+		}
+		
+		private void detach_DriversLicences(DriversLicences entity)
+		{
+			this.SendPropertyChanging();
+			entity.Rental_Users = null;
 		}
 	}
 }

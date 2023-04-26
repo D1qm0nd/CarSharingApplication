@@ -248,6 +248,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Documents\DATA.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -273,7 +274,6 @@
     <None Include="VehicleRentalDataSet.xss">
       <DependentUpon>VehicleRentalDataSet.xsd</DependentUpon>
     </None>
-    <None Include="Documents\Vehicles.xlsx" />
     <None Include="Windows\Images\Marker.psd" />
     <None Include="Windows\Images\Upload.psd" />
     <None Include="Documents\Методич рекомендации по КП МДК 02 02  %281%29.doc" />

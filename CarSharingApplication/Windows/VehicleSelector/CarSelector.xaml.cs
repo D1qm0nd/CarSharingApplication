@@ -340,7 +340,7 @@ namespace CarSharingApplication
         {
             if (selectedVehicle != null)
             {
-                var rentWindow = new VehicleRent(selectedVehicle);
+                var rentWindow = new VehicleRent(User,selectedVehicle);
                 rentWindow.Owner = this;
                 this.Visibility = Visibility.Collapsed;
                 rentWindow.Show();
