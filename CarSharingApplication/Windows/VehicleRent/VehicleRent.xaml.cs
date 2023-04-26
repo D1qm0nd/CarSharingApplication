@@ -20,10 +20,10 @@ namespace CarSharingApplication.Windows.VehicleRent
     /// </summary>
     public partial class VehicleRent : Window
     {
-        public VehicleRent(VehiclesINFO rent_vehicle)
+        public VehicleRent(UsersINFO User, VehiclesINFO Vehicle)
         {
             InitializeComponent();
-            this.Title = $"Аренда {rent_vehicle.Brand} {rent_vehicle.Mark} {rent_vehicle.Class.TrimEnd()} {rent_vehicle.Color} ₽ {rent_vehicle.PricePerHour}";
+            this.Title = $"Аренда {Vehicle.Brand} {Vehicle.Mark} {Vehicle.Class.TrimEnd()} {Vehicle.Color} ₽ {Vehicle.PricePerHour}";
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

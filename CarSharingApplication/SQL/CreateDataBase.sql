@@ -120,6 +120,7 @@ GO
 	)
 	PRINT 'Создал Таблицу VehicleCoordinates'
 
+	
 	CREATE TABLE Rentals
 	(
 		ID_Rental INT IDENTITY(1,1)  NOT NULL,
@@ -128,9 +129,9 @@ GO
 				ID_DriverLicence LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
 				),
 		ID_Vehicle INT NOT NULL,
-		StartDate SMALLDATETIME NOT NULL,
+		StartDate DATE NOT NULL,
 		RentalTime TIME NOT NULL,
-		CountOfHours FLOAT NOT NULL
+		CountOfHours INT NOT NULL
 		PRIMARY KEY (ID_Rental)
 	)
 	PRINT 'Создал Таблицу Rentals'
@@ -473,6 +474,32 @@ GO
 GO
 	PRINT 'Создал Хранимую процедуру AddCategoryToDriverLicence'
 
+GO
+	CREATE PROCEDURE Rent(
+		@DriverLicence CHAR(10),
+		@ID_Vehicle INT,
+		@RentalTime TIME,
+		@CountOfHours INT
+	)
+	AS
+	BEGIN
+		BEGIN TRANSACTION
+			IF ((SELECT [dbo].GetVehicleStatus(@ID_Vehicle)) = 'доступен')
+			BEGIN
+				INSERT Rentals VALUES 
+				(@DriverLicence, @ID_Vehicle, GETDATE(),@RentalTime,@CountOfHours)
+				IF EXISTS(SELECT * FROM Rentals 
+						  WHERE ID_DriverLicence = @DriverLicence 
+							   AND ID_Vehicle = @ID_Vehicle 
+							   AND StartDate = CONVERT(DATE, GETDATE())
+							   AND RentalTime <= @RentalTime 
+							   AND CountOfHours = @CountOfHours)
+					COMMIT
+				ELSE ROLLBACK
+			END ELSE ROLLBACK
+	END
+GO
+	PRINT 'Создал Хранимую процедуру Rent'
 
 GO
 	PRINT '==================================Функции======================================='
@@ -533,21 +560,22 @@ GO
 	CREATE FUNCTION GetVehicleStatus(
 		@Vehicle_ID INT
 	)
-	RETURNS char(8)
+	RETURNS char(11)
 	AS
 	BEGIN
-		IF NOT EXISTS (SELECT *, 
-			DATEADD(HOUR, ABS(DATEDIFF(HOUR,RentalTime,0))+ABS(CountOfHours),Convert(datetime, StartDate, 102)) as rt
-					FROM Rentals 
-					WHERE DATEADD(HOUR, ABS(DATEDIFF(HOUR,RentalTime,0))+ABS(CountOfHours),Convert(datetime, StartDate, 0)) 
-					> GETDATE() 
-					AND ID_Vehicle = @Vehicle_ID
-					AND YEAR(DATEADD(HOUR, ABS(DATEDIFF(HOUR,RentalTime,0))+ABS(CountOfHours),Convert(datetime, StartDate, 0))) 
-					= YEAR(GETDATE()))
-		BEGIN
-			RETURN 'доступен'
-		END
-		RETURN 'занят'
+		DECLARE @ret char(11) = 'отсутствует'
+		IF EXISTS(SELECT * FROM Vehicles WHERE ID_Vehicle = @Vehicle_ID)
+			IF NOT EXISTS (SELECT *, 
+				DATEADD(HOUR, ABS(DATEDIFF(HOUR,RentalTime,0))+ABS(CountOfHours),Convert(datetime, StartDate, 102)) as rt
+						FROM Rentals 
+						WHERE DATEADD(HOUR, ABS(DATEDIFF(HOUR,RentalTime,0))+ABS(CountOfHours),Convert(datetime, StartDate, 0)) 
+						> GETDATE() 
+						AND ID_Vehicle = @Vehicle_ID
+						AND YEAR(DATEADD(HOUR, ABS(DATEDIFF(HOUR,RentalTime,0))+ABS(CountOfHours),Convert(datetime, StartDate, 0))) 
+						= YEAR(GETDATE()))
+				SET @ret = 'доступен'
+			ELSE SET @ret = 'занят'
+		RETURN @ret
 	END
 
 GO
@@ -801,3 +829,6 @@ GO
 		
 		GRANT EXEC ON REG_USER TO DB_USER_USERHANDLER
 
+
+GO
+	EXEC Rent  @DriverLicence = '8989834554', @ID_Vehicle = 3, @RentalTime = CONVERT(TIME,GETDATE()), @CountOfHours = 2
