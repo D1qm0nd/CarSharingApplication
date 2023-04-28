@@ -5,11 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarSharingApplication.Windows.XAMLModels"
              xmlns:models="clr-namespace:CarSharingApplication.Windows.XAMLModels"
-             mc:Ignorable="d" 
-             d:DesignWidth="400">
+             mc:Ignorable="d">
     <StackPanel Width="400">
         <Label FontSize="20" Foreground="BlueViolet" FontFamily="Arial" FontWeight="DemiBold" HorizontalAlignment="Center">Категории</Label>
-        <ScrollViewer VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden" Width="400" Height="340">
+        <ScrollViewer VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden" Width="360" Height="320">
             <StackPanel HorizontalAlignment="Center" x:Name="Categories">
                 <models:CategoryPicker x:Name="CategoryA" Text="A" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
                 <models:CategoryPicker x:Name="CategoryA1" Text="A1" TextMinWidth="50" TextMaxWidth="50"></models:CategoryPicker>
