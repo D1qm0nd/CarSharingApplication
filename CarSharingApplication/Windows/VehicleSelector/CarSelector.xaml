@@ -5,6 +5,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Models="clr-namespace:CarSharingApplication.Windows.XAMLModels"
       xmlns:local="clr-namespace:CarSharingApplication"
       mc:Ignorable="d" 
       Icon="../images/icon.jpeg"
@@ -15,7 +16,7 @@
       Closing="Window_Closing">
 
     <Grid>
-        <StackPanel Margin="10" MaxWidth="1339">
+        <StackPanel Margin="10" Width="1339">
             <Border
                 VerticalAlignment="Top"
                 Margin="0 0 0 0"
@@ -26,7 +27,7 @@
                 </WrapPanel>
             </Border>
 
-            <WrapPanel HorizontalAlignment="Left">
+            <WrapPanel HorizontalAlignment="Left" Height="620">
                 <Border
                     VerticalAlignment="Top"
                     Width="300"
@@ -54,38 +55,7 @@
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
-                <Border
-                    VerticalAlignment="Top"
-                    MinWidth="400"
-                    MaxWidth="400"
-                    MinHeight="600"
-                    Height="400"
-                    CornerRadius="10"
-                    Background="Green"
-                    BorderBrush="DarkGreen"
-                    BorderThickness="3"
-                    Margin="0 10 10 0"
-                    >
-                    <StackPanel x:Name="InfoPanel">
-                        <Border CornerRadius="10" MinHeight="230"  Margin="3,3,3,0">
-                            <Border.Background>
-                                <ImageBrush x:Name="CarPicture" ImageSource="../Images/NullImage2.png"/>
-                            </Border.Background>
-                            <!--<Image x:Name="CarPicture" Source="../Images/mustang.jpg"  />-->
-                        </Border>
-                        <ListView x:Name="VehicleInfoList" 
-                                  Foreground="White"
-                                  FontSize="28"
-                                  Background="Transparent" 
-                                  HorizontalAlignment="Left" 
-                                  FontWeight="Bold" 
-                                  FontFamily="segoi ui"  
-                                  BorderBrush="Transparent" 
-                                  Height="300" Width="400"
-                                  >
-                        </ListView>
-                    </StackPanel>
-                </Border>
+                <Models:VehicleCard x:Name="Card" Margin="0 10 10 0"/>
                 <Grid
                     x:Name="MapGrid"
                     Margin="0 10 0 10"

@@ -34,9 +34,6 @@ namespace CarSharingApplication
     {
         private int condition = 0;
 
-        //private Thickness nPadding = new Thickness(0, 20, 0, 0);
-        //private Thickness nMargin = new Thickness(20, 0, 20, 0);
-
         public Autorization()
         {
             InitializeComponent();
@@ -85,6 +82,13 @@ namespace CarSharingApplication
                         string encLogin = PasswordEncryptor.EncryptString(Login.Text);
                         string encPass = PasswordEncryptor.EncryptString(Password.Password);
 
+                        if (App.GetQueryResult<string>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
+                            $"SELECT UserLogin FROM Rental_Users WHERE UserLogin = '{encLogin}'").Count > 0)
+                        {
+                            MessageBox.Show("Логин занят");
+                            return;
+                        }
+
                         var answ = App.GetScalarResult<int>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
                                         $"SELECT [dbo].CheckExistingUser('{encLogin}','{encPass}')");
 
@@ -93,7 +97,7 @@ namespace CarSharingApplication
                             using (var context = new CarSharingDataBaseClassesDataContext())
                             {
                                 context.Connection.Open();
-                                context.ExecuteCommand($"EXEC REG_USER " +
+                                context.ExecuteCommand( "EXEC REG_USER " +
                                                        $"@UserLogin='{encLogin}', " +
                                                        $"@UserEmail='{Email.Text}', " +
                                                        $"@UserPassword='{encPass}', " +
@@ -114,44 +118,6 @@ namespace CarSharingApplication
                             MessageBox.Show("Проверьте корректность введённых данных");
                         }
                     }
-                    #endregion
-
-                    #region OLD CODE SUPPORT TO 25.04.2023
-                    //using (var db = new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")))
-                    //{
-                    //    db.Connection.Open();
-
-                    //    using (DESCryptoServiceProvider des = new DESCryptoServiceProvider())
-                    //    {
-                    //        string encLogin = PasswordEncryptor.EncryptString(Login.Text);
-                    //        string encPass = PasswordEncryptor.EncryptString(Password.Password);
-                    //        //dec = PasswordEncryptor.DecryptString(enc);
-
-
-                    //        var request = $"SELECT COUNT(*) FROM Rental_Users WHERE UserLogin='{encLogin}' AND UserPassword='{encPass}'";
-
-                    //        var answ = db.ExecuteQuery<int>(request).ToArray();
-
-                    //        if (answ[0] == 0)
-                    //        {
-                    //            db.ExecuteCommand($"EXEC REG_USER " +
-                    //                              $"@UserLogin='{encLogin}', " +
-                    //                              $"@UserEmail='{Email.Text}', " +
-                    //                              $"@UserPassword='{encPass}', " +
-                    //                              $"@UserSurname='{UserSurname.Text}', " +
-                    //                              $"@UserName='{UserName.Text}', " +
-                    //                              $"@UserMiddleName='{UserMiddleName.Text}'," +
-                    //                              $"@UserBirthDayDate='{BDatePicker.Text}'");
-                    //        }
-                    //        else
-                    //        {
-                    //            ClearFields();
-                    //            throw new Exception("Пользователь с таким именем для входа или почтой уже зарегестрирован");
-                    //        }
-                    //    }
-                    //    db.Connection.Close();
-                    //    registered = true;
-                    //}
                     #endregion
                 }
                 catch (SqlException SqlEx)
@@ -207,57 +173,10 @@ namespace CarSharingApplication
                                 }
                                 ClearFields();
                             }
-                        }
+                        } 
+                        else MessageBox.Show("Пользователь не найден");
                     }
                 }
-                #endregion
-
-                #region OLD CODE SUPPORT TO 25.04.2023
-                //using (var db = new CarSharingDataBaseClassesDataContext(ConfigurationManager.ConnectionStrings["USERHANDLERConnection"].ConnectionString))
-                //{
-                //    db.Connection.Open();
-
-                //    using (DESCryptoServiceProvider des = new DESCryptoServiceProvider())
-                //    {
-                //        string encLogin = PasswordEncryptor.EncryptString(Login.Text);
-                //        string encPass = PasswordEncryptor.EncryptString(Password.Password);
-
-
-                //        string command = $"SELECT COUNT(*) FROM Rental_Users WHERE UserLogin='{encLogin}' AND UserPassword='{encPass}'";
-
-                //        var a = db.ExecuteQuery<int>(command).ToList();
-                //        if (a[0] == 1)
-                //        {
-                //            command = $"SELECT * FROM Rental_Users WHERE UserLogin='{encLogin}' AND UserPassword='{encPass}'";
-                //            var r_user = db.ExecuteQuery<Rental_Users>(command).ToList();
-                //            var user = r_user[0];
-                //            if (PasswordEncryptor.DecryptString(user.UserPassword) == Password.Password)
-                //            {
-                //                this.Visibility = Visibility.Hidden;
-                //                if (db.ExecuteQuery<int>($"SELECT COUNT(*) FROM Rental_Admins WHERE ID_User = {user.ID_User}").ToArray()[0] == 1)
-                //                {
-                //                    var wnd = new ChoiceLoginWindow(ref user);
-                //                    wnd.Owner = this;
-                //                    wnd.Show();
-                //                }
-                //                else
-                //                {
-                //                    var CarSelWindow = new CarSelector(ref user);
-                //                    CarSelWindow.Owner = this;
-                //                    CarSelWindow.Show();
-                //                }
-                //            }
-                //            else
-                //            {
-                //                throw new Exception("Данные введены неверно");
-                //            }
-                //        } else 
-                //        {
-                //            throw new Exception("Пользователь не найден");
-                //        }
-                //    }
-                //    db.Connection.Close();
-                //}
                 #endregion
             }
             catch (SqlException sqlex)
@@ -323,15 +242,12 @@ namespace CarSharingApplication
 
         private void Login_TextChanged(object sender, KeyEventArgs e)
         {
-            char[] NotAllowed = {'@', ',', '.', 
-                                 '|', ' ', '\\', 
-                                 '/', '!', '?', 
-                                 '#', '"', '$', 
-                                 '%', '[', ']',
-                                 '{', '}', '-',
-                                 '^', '~', '`', 
-                                 '№', '&', '*', 
-                                 '\'', '(', ')'};
+            char[] NotAllowed = {'@', ',', '.', '|', ' ',
+                                 '\\', '/', '!', '?', '#', 
+                                 '"', '$', '%', '[', ']',
+                                 '{', '}', '-', '^', '~', 
+                                 '`', '№', '&', '*', '\'', 
+                                 '(', ')'};
 
             foreach (char c in NotAllowed) {
                 if (Login.Text.Contains(c))
@@ -346,7 +262,6 @@ namespace CarSharingApplication
                     Login.Clear();
                 }
             }
-            
         }
     }
 }

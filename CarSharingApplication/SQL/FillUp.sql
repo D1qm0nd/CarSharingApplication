@@ -31,8 +31,8 @@ GO
 	('PyQi8acKryj+X/r0IpG/Ng==', 'moxfulder@yahoo.com',						'XermscU5w6YJuUDIaZI0hQ==', 'Кудрявцев',	'Сергей',		'Дмитриевич',		'16.05.2000'),
 	('1DD8/KCSlXYQWWOpkVRDcw==', 'animats@optonline.net',					'y1Z/E4huq7CcLK5WLb7hVA==', 'Александров',  'Семён',		'Андреевич',		'11.04.2002'),
 	('PIbgzNreJZY=',			 'jeteve@me.com',							'q5pI3eYae9XROuF+pylTTg==', 'Хохлов',		'Ярослав',		'Иванович',			'20.11.1978'),
-	('cYRfx32GTbQ=',			 'lamky@icloud.com',						'CIJYXKYn/HgtqomdzsNcTQ==', 'Лебедев',		'Богдан',		'Александрович',	'17.07.1984'),
-	('/niF9okVx9M=',			 'kmself@optonline.net',					'/p9c1YWrESY7AuMRc+4unQ==', 'Абрамов',		'Николай',		'Арсентьевич',		'19.06.1990')
+	('cYRfx32GTbQ=',			 'lamky@icloud.com',						'CIJYXKYn/HgtqomdzsNcTQ==', 'Лебедев',		'Богдан',		'Александрович',	'17.07.1984')--,
+	--('/niF9okVx9M=',			 'kmself@optonline.net',					'/p9c1YWrESY7AuMRc+4unQ==', 'Абрамов',		'Николай',		'Арсентьевич',		'19.06.1990')
 
 GO 
 

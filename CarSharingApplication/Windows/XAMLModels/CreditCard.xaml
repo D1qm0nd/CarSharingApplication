@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="CarSharingApplication.Windows.XAMLModels.CreditCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CarSharingApplication.Windows.XAMLModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             Width="400"
+             Height="240"
+             >
+    <Border CornerRadius="15" BorderBrush="gray" BorderThickness="1">
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFE4E4E4" Offset="0"/>
+                <GradientStop Color="green" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Background="Black" Margin="0 10 0 10"></Grid>
+            <TextBox Grid.Row="1" Grid.ColumnSpan="2" materialDesign:HintAssist.HelperText="Номер карты" Margin="40 0 40 20" Padding="0 0 0 0" VerticalContentAlignment="Bottom" FontSize="28" TextAlignment="Left" Height="40" Width="270"></TextBox>
+            <TextBox Grid.Row="2" Grid.Column="0" materialDesign:HintAssist.HelperText="мм.гг" Width="60" Margin="64 0 0 30" Padding="3 0 3 0" VerticalContentAlignment="Bottom" FontSize="20" TextAlignment="Right" Height="40" HorizontalAlignment="Left"></TextBox>
+            <PasswordBox Grid.Row="2" Grid.Column="1" materialDesign:HintAssist.Hint="CVS" Margin="0 0 75 20" VerticalContentAlignment="Bottom" HorizontalAlignment="Right" FontSize="20" Height="30" Width="45" Padding="3 0 3 0" Background="WhiteSmoke"></PasswordBox>
+        </Grid>
+    </Border>
+</UserControl>

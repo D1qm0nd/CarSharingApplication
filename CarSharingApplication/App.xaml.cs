@@ -19,15 +19,24 @@ namespace CarSharingApplication
             return ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
         }
 
+        public static string path { get 
+            {
+                string _path = Environment.CurrentDirectory;
+                return _path.Remove(_path.Length - 9); 
+            } 
+        }
+
+
+
 #nullable enable
-        /// <summary>
-        /// Получить данные по запросу
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="context"></param>
-        /// <param name="query_command"></param>
-        /// <returns></returns>
-        public static List<T>? GetQueryResult<T>(DataContext context, string query_command)
+    /// <summary>
+    /// Получить данные по запросу
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="context"></param>
+    /// <param name="query_command"></param>
+    /// <returns></returns>
+    public static List<T>? GetQueryResult<T>(DataContext context, string query_command)
         {
             try
             {

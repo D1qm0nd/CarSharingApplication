@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
     </DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -166,8 +167,14 @@
     <Compile Include="Windows\XAMLModels\CategoryPicker.xaml.cs">
       <DependentUpon>CategoryPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\XAMLModels\CreditCard.xaml.cs">
+      <DependentUpon>CreditCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\XAMLModels\UCDriverLicenceCategories.xaml.cs">
       <DependentUpon>UCDriverLicenceCategories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\XAMLModels\VehicleCard.xaml.cs">
+      <DependentUpon>VehicleCard.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -225,7 +232,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\XAMLModels\CreditCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\XAMLModels\UCDriverLicenceCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\XAMLModels\VehicleCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -288,14 +303,14 @@
   <ItemGroup>
     <Content Include="SQL\CreateDataBase.sql" />
     <Content Include="SQL\FillUp.sql" />
-    <Resource Include="Windows\Images\aventador.png" />
-    <Resource Include="Windows\Images\c_class.png" />
-    <Resource Include="Windows\Images\gallrdo.png" />
-    <Resource Include="Windows\Images\Gelentwagen.png" />
-    <Resource Include="Windows\Images\granta.png" />
-    <Resource Include="Windows\Images\kalina.png" />
-    <Resource Include="Windows\Images\priora.png" />
-    <Resource Include="Windows\Images\rio.png" />
+    <Resource Include="Windows\Images\Vehicles\aventador.png" />
+    <Resource Include="Windows\Images\Vehicles\c_class.png" />
+    <Resource Include="Windows\Images\Vehicles\gallardo.png" />
+    <Resource Include="Windows\Images\Vehicles\Gelentwagen.png" />
+    <Resource Include="Windows\Images\Vehicles\granta.png" />
+    <Resource Include="Windows\Images\Vehicles\kalina.png" />
+    <Resource Include="Windows\Images\Vehicles\priora.png" />
+    <Resource Include="Windows\Images\icon.ico" />
     <Resource Include="Windows\Images\Upload.png" />
     <Resource Include="Windows\Images\CarMarker2.png" />
     <Resource Include="Windows\Images\CarMarker.png" />

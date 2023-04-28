@@ -43,7 +43,7 @@ GO
 	CREATE TABLE Rental_Users
 	(
 		ID_User INT IDENTITY(1,1) NOT NULL,
-		UserLogin NVARCHAR(120) NOT NULL,
+		UserLogin NVARCHAR(120) UNIQUE NOT NULL,
 		UserEMail NVARCHAR(120) UNIQUE NOT NULL,
 		UserPassword NVARCHAR(120) NOT NULL,
 		--UserStatus INT NOT NULL,
@@ -697,12 +697,11 @@ RETURNS CHAR(9) -- 'арендует' 'нет'
 AS
 BEGIN
 	DECLARE @ret char(9) = 'нет'
-	if EXISTS(
-		SELECT 
-			ID_DriverLicence 
-		FROM Rentals
-		WHERE Rentals.ID_DriverLicence = @ID_DriverLicence 
-		AND DATEADD(HOUR,Rentals.CountOfHours+DATEPART(HOUR,CONVERT(DATETIME,Rentals.RentalTime)),CONVERT(DATETIME,Rentals.StartDate)) < GETDATE()) SET @ret = 'арендует'
+	if EXISTS( SELECT ID_DriverLicence 
+			   FROM Rentals
+			   WHERE Rentals.ID_DriverLicence = @ID_DriverLicence 
+			   AND DATEADD(HOUR,Rentals.CountOfHours+DATEPART(HOUR,CONVERT(DATETIME,Rentals.RentalTime)),CONVERT(DATETIME,Rentals.StartDate)) < GETDATE()) 
+		SET @ret = 'арендует'
 	RETURN @ret
 END
 

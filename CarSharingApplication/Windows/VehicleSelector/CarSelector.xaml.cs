@@ -46,22 +46,19 @@ namespace CarSharingApplication
         private List<string> vehClasses;
         private List<string> vehBrands;
         private string ConnectionString = App.GetConnectionString("CARHANDLERConnection");
-        private string path = Environment.CurrentDirectory;
         private string ZeroVehiclesByCriteries = "Отсутствуют транспотрные\nсредтва соответствующие\nзаданным критериям";
         private string HaveNotAvaliableVehicles = "В данный момент\nнет свободных авто\nзаходите позже";
-        //private bool isOpen = true;
+        private bool isOpen = true;
 
         public CarSelector(ref UsersINFO user)
         {
             InitializeComponent();
 
-            path = path.Remove(path.Length - 9);
 
             User = user;
             this.Title = $"CarSharing [{User.UserSurname} {User.UserName} {User.UserMiddleName}]";
 
             GetVehiclesData();
-            
         }
 
         /// <summary>
@@ -108,8 +105,6 @@ namespace CarSharingApplication
                 PriceSlider.Value = 0.0;
                 SetVehicleInfo(null, HaveNotAvaliableVehicles);
             }
-
-
         }
 
         /// <summary>
@@ -133,6 +128,8 @@ namespace CarSharingApplication
             gMapControl1.DragButton = MouseButton.Left; // какой кнопкой осуществляется перетаскивание
             gMapControl1.ShowCenter = false; //показывать или скрывать красный крестик в центре
             gMapControl1.ShowTileGridLines = false; //показывать или скрывать тайтлы
+
+          
         }
 
         /// <summary>
@@ -184,7 +181,7 @@ namespace CarSharingApplication
                         marker.Tag = vehicle.ID_Vehicle;
                         marker.Shape = new System.Windows.Controls.Image
                         {
-                            Source = new BitmapImage(new Uri($@"{path}\Windows\Images\CarMarker2.png")),
+                            Source = new BitmapImage(new Uri($@"{App.path}\Windows\Images\CarMarker2.png")),
                             Width = 30,
                             Height = 30,
                             ToolTip = $"{vehicle.Brand} {vehicle.Mark}",
@@ -216,34 +213,7 @@ namespace CarSharingApplication
 #nullable enable
         private void SetVehicleInfo(VehiclesINFO? info, string errorMessage)
         {
-            List<string> infolist = new List<string>();
-            if (info != null)
-            {
-                infolist.Add(info.Brand);
-                infolist.Add(info.Mark);
-                infolist.Add(info.Class);
-                infolist.Add(info.Color);
-                infolist.Add(info.PricePerHour.ToString());
-                VehicleInfoList.ItemsSource = infolist;
-                if (info.CarPicture != null)
-                {
-                    try
-                    {
-                        CarPicture.ImageSource = ImageConvertor.Base64ToBitmapImage(info.CarPicture.ToString().Replace("\"", ""));                        
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-                else CarPicture.ImageSource = new BitmapImage(new Uri($@"{path}\Windows\Images\NullImage2.png"));
-            }
-            else 
-            {
-                CarPicture.ImageSource = new BitmapImage(new Uri(path + @"Windows\Images\NullImage2.png"));
-                infolist.Add(errorMessage);
-                VehicleInfoList.ItemsSource = infolist;
-            } 
+            Card.SetVehicleInfo(info, errorMessage);
         }
 
         /// <summary>
@@ -357,6 +327,7 @@ namespace CarSharingApplication
             persWindow.Owner = this;
             persWindow.Show();
             this.Visibility = Visibility.Collapsed;
+            isOpen = !isOpen;
         }
     }
 }
