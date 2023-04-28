@@ -688,10 +688,39 @@ GO
 GO
 	PRINT 'Создал Функцию TotalVehicleDamage'
 
+GO
+CREATE FUNCTION GetUserStatus
+(
+	@ID_DriverLicence CHAR(10)
+)
+RETURNS CHAR(9) -- 'арендует' 'нет'
+AS
+BEGIN
+	DECLARE @ret char(9) = 'нет'
+	if EXISTS(
+		SELECT 
+			ID_DriverLicence 
+		FROM Rentals
+		WHERE Rentals.ID_DriverLicence = @ID_DriverLicence 
+		AND DATEADD(HOUR,Rentals.CountOfHours+DATEPART(HOUR,CONVERT(DATETIME,Rentals.RentalTime)),CONVERT(DATETIME,Rentals.StartDate)) < GETDATE()) SET @ret = 'арендует'
+	RETURN @ret
+END
+
+GO
+	PRINT 'Создал Функцию GetUserStatus'
+
 
 GO
 	PRINT '==================================Представления======================================='
-	USE VehicleRental
+USE VehicleRental
+GO
+	CREATE VIEW RentalsINFO
+	AS
+	SELECT 
+			ID_DriverLicence,  DATEADD(HOUR,Rentals.CountOfHours+DATEPART(HOUR,CONVERT(DATETIME,Rentals.RentalTime)),CONVERT(DATETIME,Rentals.StartDate)) as EndTime
+		FROM Rentals
+		
+GO
 
 USE VehicleRental
 GO
@@ -739,8 +768,10 @@ GO
 			[dbo].UserRentalCount(Rental_Users.ID_User) as RentalsCount, 
 			[dbo].CountUserAccidents(Rental_Users.ID_User) as AccidentsCount,
 			(SELECT ID_DriverLicence FROM [dbo].GetDriverLicenceByUserID(Rental_Users.ID_User)) as ID_DriverLicence, --??
-			(SELECT ReceiptDate FROM [dbo].GetDriverLicenceByUserID(Rental_Users.ID_User)) as ReceiptDate --??
-		FROM Rental_Users 
+			(SELECT ReceiptDate FROM [dbo].GetDriverLicenceByUserID(Rental_Users.ID_User)) as ReceiptDate, --??,
+			RentalsInfo.EndTime
+		FROM Rental_Users
+		RIGHT OUTER JOIN RentalsINFO ON ID_DriverLicence = RentalsINFO.ID_DriverLicence
 
 GO 
 	PRINT 'Создал представление UsersINFO'
