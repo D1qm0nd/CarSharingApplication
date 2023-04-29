@@ -39,13 +39,12 @@ namespace CarSharingApplication
     /// </summary>
     public partial class CarSelector : Window
     {
-        private UsersINFO User;
-        //private VehiclesINFO vehicleInfo;
-        private List<VehiclesINFO> vehiclesInfoList;
+        private UsersINFO User = null;
+        private List<VehiclesINFO> vehiclesInfoList { get; set; }
         private VehiclesINFO selectedVehicle { get; set; }
-        private List<string> vehClasses;
-        private List<string> vehBrands;
-        private string ConnectionString = App.GetConnectionString("CARHANDLERConnection");
+        private List<string> vehClasses { get; set; }
+        private List<string> vehBrands { get; set; }
+        private string ConnectionString { get { return App.GetConnectionString("CARHANDLERConnection"); } }
         private string ZeroVehiclesByCriteries = "Отсутствуют транспотрные\nсредтва соответствующие\nзаданным критериям";
         private string HaveNotAvaliableVehicles = "В данный момент\nнет свободных авто\nзаходите позже";
         private bool isOpen = true;
@@ -123,11 +122,7 @@ namespace CarSharingApplication
             this.Close();
         }
 
-        /// <summary>
-        /// Установить маркеры на карте
-        /// Возможно только после загрузки карты
-        /// </summary>
-        /// <param name="markers"></param>
+        
 
         /// <summary>
         /// Получить список маркеров из списка информации об авто

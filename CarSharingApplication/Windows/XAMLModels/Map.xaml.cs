@@ -64,6 +64,11 @@ namespace CarSharingApplication.Windows.XAMLModels
             MapController.Position = new PointLatLng((double)obj.Lat!, (double)obj.Lng!);
         }
 
+        /// <summary>
+        /// Установить маркеры на карте
+        /// Возможно только после загрузки карты
+        /// </summary>
+        /// <param name="markers"></param>
         public void SetMarkers(List<GMapMarker> markers)
         {
             if (markers != null)

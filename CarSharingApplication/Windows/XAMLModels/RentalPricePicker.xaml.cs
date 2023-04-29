@@ -21,15 +21,19 @@ namespace CarSharingApplication.Windows.XAMLModels
     public partial class RentalPricePicker : UserControl
     {
         public double PricePerHour { get; set; }
-        private double MathedPrice { get; set; } = 0;
+        public double? _MathedPrice { get; private set; } = 0;
         public RentalPricePicker()
         {
             InitializeComponent();
+            PriceShow.Content = Price;
         }
 
         private void MathPrice(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            PriceShow.Content = (MathedPrice = PricePerHour * HourPicker.Value).ToString();
+            _MathedPrice = PricePerHour * HourPicker.Value;
+            PriceShow.Content = Price;
         }
+
+        public double? Price { get { return _MathedPrice; } }
     }
 }

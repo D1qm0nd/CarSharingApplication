@@ -14,7 +14,7 @@
       ResizeMode="NoResize"
       WindowStartupLocation="CenterScreen"
       Closing="Window_Closing">
-
+    
     <Grid>
         <StackPanel Margin="10" Width="1339">
             <Border
