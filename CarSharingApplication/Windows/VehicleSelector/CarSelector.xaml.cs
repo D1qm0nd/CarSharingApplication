@@ -28,7 +28,7 @@ using System.Data.Linq;
 using System.Diagnostics;
 using CarSharingApplication.Windows.VehicleRent;
 using System.Drawing;
-using static GMap.NET.Entity.OpenStreetMapRouteEntity;
+//using static GMap.NET.Entity.OpenStreetMapRouteEntity;
 using System.Drawing.Imaging;
 using CarSharingApplication.Windows.Moderating.EditWindows.Users;
 
@@ -57,7 +57,6 @@ namespace CarSharingApplication
 
             User = user;
             this.Title = $"CarSharing [{User.UserSurname} {User.UserName} {User.UserMiddleName}]";
-
             GetVehiclesData();
         }
 
@@ -94,7 +93,7 @@ namespace CarSharingApplication
                 if (vehiclesInfoList.Count > 0)
                 {
                     selectedVehicle = vehiclesInfoList.First();
-                    SetMarkers(GetMarkers(vehiclesInfoList));
+                    RentalMap.SetMarkers(GetMarkers(vehiclesInfoList));
                     SetVehicleInfo(selectedVehicle, ZeroVehiclesByCriteries);
                 }
             }
@@ -112,25 +111,6 @@ namespace CarSharingApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void GMapControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            GMaps.Instance.Mode = AccessMode.ServerAndCache; //выбор подгрузки карты – онлайн или из ресурсов
-            gMapControl1.MapProvider = GoogleMapProvider.Instance; //какой провайдер карт используется (в нашем случае гугл) 
-            gMapControl1.MinZoom = 13; //минимальный зум
-            gMapControl1.MaxZoom = 18; //максимальный зум
-            gMapControl1.Zoom = 13; // какой используется зум при открытии
-            if (selectedVehicle != null)
-                MoveCursorToVehicleOnMap(selectedVehicle);
-            else gMapControl1.Position = new PointLatLng(55.752004, 37.617734);
-
-            gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter; // как приближает (просто в центр карты или по положению мыши)
-            gMapControl1.CanDragMap = true; // перетаскивание карты мышью
-            gMapControl1.DragButton = MouseButton.Left; // какой кнопкой осуществляется перетаскивание
-            gMapControl1.ShowCenter = false; //показывать или скрывать красный крестик в центре
-            gMapControl1.ShowTileGridLines = false; //показывать или скрывать тайтлы
-
-          
-        }
 
         /// <summary>
         /// Нажатие кнопки, выхода
@@ -148,19 +128,6 @@ namespace CarSharingApplication
         /// Возможно только после загрузки карты
         /// </summary>
         /// <param name="markers"></param>
-        private void SetMarkers(List<GMapMarker> markers)
-        {
-            if (markers != null)
-            {
-                //Stopwatch stopwatch = Stopwatch.StartNew();
-                gMapControl1.Markers.Clear();
-                //stopwatch.Stop();
-                foreach (GMapMarker marker in markers)
-                {
-                    gMapControl1.Markers.Add(marker);
-                }
-            }
-        }
 
         /// <summary>
         /// Получить список маркеров из списка информации об авто
@@ -174,7 +141,7 @@ namespace CarSharingApplication
                 List<GMapMarker> VehiclesMarkers = new List<GMapMarker>();
                 foreach (var vehicle in vehiclesINFOs)
                 {
-                    gMapControl1.Markers.OrderBy(mark => mark.Tag);
+                    RentalMap.MapController.Markers.OrderBy(mark => mark.Tag);
                     if (vehicle.Lat != null && vehicle.Lng != null)
                     {
                         GMapMarker marker = new GMapMarker(new PointLatLng((double)vehicle.Lat, (double)vehicle.Lng));
@@ -226,12 +193,7 @@ namespace CarSharingApplication
             var marker = (System.Windows.Controls.Image)sender;
             selectedVehicle = (VehiclesINFO)(marker.Tag);
             SetVehicleInfo(selectedVehicle, ZeroVehiclesByCriteries);
-            MoveCursorToVehicleOnMap(selectedVehicle);
-        }
-
-        private void MoveCursorToVehicleOnMap(VehiclesINFO vehicle)
-        {
-            gMapControl1.Position = new PointLatLng((double)vehicle.Lat!, (double)vehicle.Lng!);
+            RentalMap.MoveCursorToVehicleOnMap(selectedVehicle);
         }
 
 
@@ -274,15 +236,15 @@ namespace CarSharingApplication
 
             newvehicleslist = OrderByPricePerHourDesc(newvehicleslist);
 
-            gMapControl1.Markers.Clear();
+            RentalMap.MapController.Markers.Clear();
 
             GC.Collect();
-            SetMarkers(GetMarkers(newvehicleslist));
+            RentalMap.SetMarkers(GetMarkers(newvehicleslist));
             if (newvehicleslist.Count > 0)
             {
                 selectedVehicle = newvehicleslist.First();
                 SetVehicleInfo(selectedVehicle, ZeroVehiclesByCriteries);
-                MoveCursorToVehicleOnMap(selectedVehicle);
+                RentalMap.MoveCursorToVehicleOnMap(selectedVehicle);
             }
             else
             { 

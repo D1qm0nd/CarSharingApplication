@@ -56,25 +56,7 @@
                     </ScrollViewer>
                 </Border>
                 <Models:VehicleCard x:Name="Card" Margin="0 10 10 0"/>
-                <Grid
-                    x:Name="MapGrid"
-                    Margin="0 10 0 10"
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Top" 
-                    MinWidth="600"  MaxWidth="600" 
-                    MinHeight="600" MaxHeight="600"
-                    >
-                    <WindowsPresentation:GMapControl 
-                        x:Name="gMapControl1"
-                        Grid.Column="1"
-                        Panel.ZIndex="10" 
-                        Loaded="GMapControl_Loaded" 
-                        ScaleMode="Dynamic" 
-                        Opacity="1"
-                        BorderBrush="Black"
-                        BorderThickness="1"
-                    />
-                </Grid>
+                <Models:Map x:Name="RentalMap" Margin="0 10 10 0" Width="600" Height="600" InitializeLat="55.755969527097506" InitializeLng="37.61763538248735"/>
             </WrapPanel>
             <WrapPanel>
                 <Grid>

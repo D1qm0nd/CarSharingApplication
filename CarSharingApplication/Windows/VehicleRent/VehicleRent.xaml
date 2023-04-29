@@ -9,13 +9,17 @@
         Icon="../Images/icon.jpeg"
         Title="" Height="660" Width="860"
         Closing="Window_Closing"
+        ResizeMode="NoResize"
         >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="420"/>
             <ColumnDefinition Width="420"/>
         </Grid.ColumnDefinitions>
-        <Models:VehicleCard x:Name="Card" Grid.Column="0"/>
-        <Models:CreditCard x:Name="CreditCard" Grid.Column="1" VerticalAlignment="Top" Margin="0 10 0 10"/>
+        <Models:VehicleCard x:Name="Card" Grid.Column="0" VerticalAlignment="Top" Margin="0 10 0 10"/>
+        <StackPanel Grid.Column="1">
+            <Models:CreditCard x:Name="CreditCard" VerticalAlignment="Top" Margin="0 10 0 10"/>
+            <Models:RentalPriceTaker x:Name="Picker"/>
+        </StackPanel>
     </Grid>
 </Window>

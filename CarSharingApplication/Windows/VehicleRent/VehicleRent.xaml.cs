@@ -27,6 +27,7 @@ namespace CarSharingApplication.Windows.VehicleRent
             InitializeComponent();
             this.Title = $"Аренда {Vehicle.Brand} {Vehicle.Mark} {Vehicle.Class.TrimEnd()} {Vehicle.Color} ₽ {Vehicle.PricePerHour}";
             Card.SetVehicleInfo(Vehicle,"");
+            Picker.PricePerHour = (double)Vehicle.PricePerHour;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

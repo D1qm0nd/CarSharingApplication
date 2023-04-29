@@ -2447,7 +2447,7 @@ namespace CarSharingApplication.SQL.Linq
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VehiclesINFO")]
-	public partial class VehiclesINFO
+	public partial class VehiclesINFO : ACoordinate
 	{
 		
 		private int _ID_Vehicle;
@@ -2466,11 +2466,11 @@ namespace CarSharingApplication.SQL.Linq
 		
 		private System.Data.Linq.Binary _CarPicture;
 		
-		private System.Nullable<double> _Lat;
+		private System.Nullable<double> _Lat { get; set; }
 		
-		private System.Nullable<double> _Lng;
-		
-		private string _AccessStatus;
+		private System.Nullable<double> _Lng { get; set; }
+
+        private string _AccessStatus;
 		
 		private System.Nullable<decimal> _DamageCost;
 		
@@ -2607,7 +2607,7 @@ namespace CarSharingApplication.SQL.Linq
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lat", DbType="Float")]
-		public System.Nullable<double> Lat
+		public override System.Nullable<double> Lat
 		{
 			get
 			{
@@ -2623,7 +2623,7 @@ namespace CarSharingApplication.SQL.Linq
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lng", DbType="Float")]
-		public System.Nullable<double> Lng
+		public override System.Nullable<double> Lng
 		{
 			get
 			{

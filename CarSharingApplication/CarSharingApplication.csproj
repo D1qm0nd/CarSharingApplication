@@ -125,6 +125,7 @@
     </ApplicationDefinition>
     <Compile Include="DBEncryptor.cs" />
     <Compile Include="DriverLicencesCategories.cs" />
+    <Compile Include="ACoordinate.cs" />
     <Compile Include="ImageConvertor.cs" />
     <Compile Include="SQL\Linq\CarSharingDataBaseClasses.designer.cs">
       <AutoGen>True</AutoGen>
@@ -169,6 +170,12 @@
     </Compile>
     <Compile Include="Windows\XAMLModels\CreditCard.xaml.cs">
       <DependentUpon>CreditCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\XAMLModels\Map.xaml.cs">
+      <DependentUpon>Map.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\XAMLModels\RentalPricePicker.xaml.cs">
+      <DependentUpon>RentalPricePicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\XAMLModels\UCDriverLicenceCategories.xaml.cs">
       <DependentUpon>UCDriverLicenceCategories.xaml</DependentUpon>
@@ -233,6 +240,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\XAMLModels\CreditCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\XAMLModels\Map.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\XAMLModels\RentalPricePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
