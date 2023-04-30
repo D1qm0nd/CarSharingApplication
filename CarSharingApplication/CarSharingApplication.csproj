@@ -105,6 +105,7 @@
     <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -177,6 +178,9 @@
     <Compile Include="Windows\XAMLModels\RentalPricePicker.xaml.cs">
       <DependentUpon>RentalPricePicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\XAMLModels\RentButton.xaml.cs">
+      <DependentUpon>RentButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\XAMLModels\UCDriverLicenceCategories.xaml.cs">
       <DependentUpon>UCDriverLicenceCategories.xaml</DependentUpon>
     </Compile>
@@ -248,6 +252,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\XAMLModels\RentalPricePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\XAMLModels\RentButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

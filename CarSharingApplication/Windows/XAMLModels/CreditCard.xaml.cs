@@ -24,5 +24,45 @@ namespace CarSharingApplication.Windows.XAMLModels
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            var tb = sender as TextBox;
+            if (((byte)e.Key) < 34 || ((byte)e.Key) > 43)
+            { 
+                if (tb.Text.Length > 0)
+                {
+                    tb.Text = tb.Text.Remove(tb.Text.Length - 1, 1);
+                }
+            } else
+            if ((tb.Text.Length+1) % 5 == 0 && tb.Text.Length < 19)
+            {
+                tb.Text = tb.Text+' ';
+            }
+            tb.CaretIndex = tb.Text.Length;
+        }
+
+        private void DateTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            var tb = sender as TextBox;
+            if (((byte)e.Key) < 34 || ((byte)e.Key) > 43)
+            {
+                if (tb.Text.Length > 0)
+                {
+                    tb.Text = tb.Text.Remove(tb.Text.Length - 1, 1);
+                }
+            }
+            else
+            if ((tb.Text.Length + 1) % 3 == 0 && tb.Text.Length<5)
+            {
+                tb.Text = tb.Text + '/';
+            }
+            tb.CaretIndex = tb.Text.Length;
+        }
     }
 }

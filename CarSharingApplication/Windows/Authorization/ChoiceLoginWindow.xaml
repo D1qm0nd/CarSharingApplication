@@ -4,17 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarSharingApplication.Windows.Authorization"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Способ входа" Height="80" Width="220"
-        WindowStyle="None"
+        Title="Способ входа" Height="190" Width="300"
+        ResizeMode="NoResize"
         Closing="Window_Closing"
+        Icon="../Images/icon.jpeg"
         >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <Button x:Name="AdminLoginButton" Margin="1 0 1 0" Grid.Row="0" Click="AdminLoginButton_Click">Войти как админ</Button>
-        <Button x:Name="UserLoginButton" Margin="1 0 1 0" Grid.Row="1" Click="UserLoginButton_Click">Войти как пользователь</Button>
+        <TextBlock Grid.Row="0" Margin="10 10 10 10" TextWrapping="Wrap"  TextAlignment="Center" Text="Вы являетесь администратором выберите способ входа"></TextBlock>
+        <Button x:Name="AdminLoginButton" Margin="10 0 10 0" Grid.Row="1" VerticalAlignment="Center" Click="AdminLoginButton_Click" materialDesign:ButtonAssist.CornerRadius="5">Войти как админ</Button>
+        <Button x:Name="UserLoginButton" Margin="10 0 10 0" Grid.Row="2" VerticalAlignment="Center" Click="UserLoginButton_Click" materialDesign:ButtonAssist.CornerRadius="5">Войти как пользователь</Button>
     </Grid>
 </Window>

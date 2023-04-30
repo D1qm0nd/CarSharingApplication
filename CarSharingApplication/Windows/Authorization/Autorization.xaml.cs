@@ -160,8 +160,8 @@ namespace CarSharingApplication
                                     var ChoiceAuthorizationWindow = new ChoiceLoginWindow(ref UserInfo);
                                     ChoiceAuthorizationWindow.Owner = this;
                                     this.Visibility = Visibility.Collapsed;
-                                    ChoiceAuthorizationWindow.Show();
                                     ChoiceAuthorizationWindow.Activate();
+                                    ChoiceAuthorizationWindow.Show();
                                 }
                                 else
                                 {

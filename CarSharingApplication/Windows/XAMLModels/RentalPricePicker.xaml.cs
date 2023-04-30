@@ -20,20 +20,33 @@ namespace CarSharingApplication.Windows.XAMLModels
     /// </summary>
     public partial class RentalPricePicker : UserControl
     {
-        public double PricePerHour { get; set; }
-        public double? _MathedPrice { get; private set; } = 0;
+        
+
         public RentalPricePicker()
         {
             InitializeComponent();
-            PriceShow.Content = Price;
         }
+        public double PricePerHour { get; set; } = 0;
+        public double Price { get { return MathPrice(); } }
 
-        private void MathPrice(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private double MathPrice()
         {
-            _MathedPrice = PricePerHour * HourPicker.Value;
-            PriceShow.Content = Price;
+            return PricePerHour * HourPicker.Value;
         }
 
-        public double? Price { get { return _MathedPrice; } }
+        private string GetFormatPriceLikeStr(double price)
+        {
+            return $"Цена: {Price} ₽";
+        }
+
+        private void HourPicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (PriceShow == null)
+                PriceShow = new Label();
+            if (Hour == null)
+                Hour = new Label();
+            Hour.Content = $"Часы: {HourPicker.Value}";
+            PriceShow.Content = $"Цена: {MathPrice()} ₽";
+        }
     }
 }

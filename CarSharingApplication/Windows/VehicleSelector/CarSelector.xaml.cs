@@ -118,7 +118,6 @@ namespace CarSharingApplication
         /// <param name="e"></param>
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Owner.Visibility = Visibility.Visible;
             this.Close();
         }
 
@@ -204,9 +203,9 @@ namespace CarSharingApplication
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //isOpen = false;
-            GC.Collect();
             this.Owner.Visibility = Visibility.Visible;
             this.Owner.Activate();
+            GC.Collect();
         }
 
         /// <summary>
@@ -270,6 +269,7 @@ namespace CarSharingApplication
                 var rentWindow = new VehicleRent(User,selectedVehicle);
                 rentWindow.Owner = this;
                 this.Visibility = Visibility.Collapsed;
+                rentWindow.Activate();
                 rentWindow.Show();
             }
             else 
@@ -282,6 +282,7 @@ namespace CarSharingApplication
         {
             var persWindow = new PersonalAccount(ref User);
             persWindow.Owner = this;
+            this.AddChild(persWindow);
             persWindow.Show();
             this.Visibility = Visibility.Collapsed;
             isOpen = !isOpen;

@@ -30,21 +30,25 @@ namespace CarSharingApplication.Windows.Authorization
         private void AdminLoginButton_Click(object sender, RoutedEventArgs e)
         {
             var AdmWindow = new AdminWindow(ref User);
-            AdmWindow.Owner = this.Owner;
+            AdmWindow.Owner = this;
+            AdmWindow.Activate();
             AdmWindow.Show();
-            this.Close();
+            this.Visibility = Visibility.Collapsed;
         }
 
         private void UserLoginButton_Click(object sender, RoutedEventArgs e)
         {
             var CarSelWindow = new CarSelector(ref User);
-            CarSelWindow.Owner = this.Owner;
+            CarSelWindow.Owner = this;
+            CarSelWindow.Activate();
             CarSelWindow.Show();
-            this.Close();
+            this.Visibility = Visibility.Collapsed;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            this.Owner.Activate();
+            this.Owner.Visibility = Visibility.Visible;
             GC.Collect();
         }
     }

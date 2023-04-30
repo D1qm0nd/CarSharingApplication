@@ -19,7 +19,8 @@
         <models:VehicleCard x:Name="Card" Grid.Column="0" VerticalAlignment="Top" Margin="0 10 0 10"/>
         <StackPanel Grid.Column="1">
             <models:CreditCard x:Name="CreditCard" VerticalAlignment="Top" Margin="0 10 0 10"/>
-            <models:RentalPricePicker x:Name="Picker"/>
+            <models:RentalPricePicker x:Name="Picker" Margin="0 10 0 10"/>
+            <models:RentButton Margin="0 10 0 10"></models:RentButton>
         </StackPanel>
     </Grid>
 </Window>

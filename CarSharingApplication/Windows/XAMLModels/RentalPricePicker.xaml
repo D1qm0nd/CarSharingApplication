@@ -6,16 +6,16 @@
              xmlns:local="clr-namespace:CarSharingApplication.Windows.XAMLModels"
              mc:Ignorable="d" 
              >
-    <Border Background="Orange" Height="150" Width="400" BorderBrush="OrangeRed" BorderThickness="2" CornerRadius="15">
+    <Border Background="Orange" Height="110" Width="400" BorderBrush="OrangeRed" BorderThickness="2" CornerRadius="15">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
-            <Slider x:Name="HourPicker" Grid.Row="0" Margin="10 10 10 10" Minimum="1" Maximum="24" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="MathPrice" VerticalAlignment="Center"/>
-            <Label x:Name="Hour" Grid.Row="1" Margin="10 10 10 10" Content="{Binding ElementName=HourPicker, Path=Value}"/>
-            <Label x:Name="PriceShow" Grid.Row="2" Margin="10 10 10 10" Content="{Binding Price}"/>
+            <Slider x:Name="HourPicker" Grid.Row="0" Margin="10 10 10 10" Minimum="1" Maximum="24" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="HourPicker_ValueChanged" VerticalAlignment="Center" Value="0"/>
+            <Label x:Name="Hour" Grid.Row="1" Margin="10 0 10 0" VerticalAlignment="Center" Content="1"/>
+            <Label x:Name="PriceShow" Grid.Row="2" Margin="10 0 10 10" VerticalAlignment="Center" Content="{Binding PricePerHour}"/>
 
         </Grid>
     </Border>
