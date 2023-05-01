@@ -21,20 +21,36 @@ namespace CarSharingApplication.Windows.VehicleRent
     /// </summary>
     public partial class VehicleRent : Window
     {
-        bool a = true;
+        private UsersINFO _User;
+        private VehiclesINFO _Vehicle;
         public VehicleRent(UsersINFO User, VehiclesINFO Vehicle)
         {
             InitializeComponent();
+            _User = User;
+            _Vehicle = Vehicle;
             this.Title = $"Аренда {Vehicle.Brand} {Vehicle.Mark} {Vehicle.Class.TrimEnd()} {Vehicle.Color} ₽ {Vehicle.PricePerHour}";
             Card.SetVehicleInfo(Vehicle,"");
             Picker.PricePerHour = (double)Vehicle.PricePerHour;
+            rentbtn.btn.Click += PayAndStart_Click;
+        }
+
+        private void PayAndStart_Click(object sender, RoutedEventArgs e)
+        {
+            if (rentbtn.cbox.IsChecked != true || CreditCard.isEmpty())
+                return;
+            App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
+                $"EXEC Rent @DriverLicence = '{_User.ID_DriverLicence}', @ID_Vehicle = {_Vehicle.ID_Vehicle}, @RentalTime = '{DateTime.Now.ToString("HH:mm")}', @CountOfHours = {Picker.HourPicker.Value}");
+            var TripWND = new TripWindow(_User);
+            TripWND.Owner = this;
+            TripWND.Activate();
+            TripWND.Show();
+            this.Visibility = Visibility.Collapsed;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.Owner.Visibility = Visibility.Visible;
             this.Activate();
-            a = !a;
         }
     }
 }

@@ -63,7 +63,7 @@ namespace CarSharingApplication.SQL.Linq
     #endregion
 		
 		public CarSharingDataBaseClassesDataContext() : 
-				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString, mappingSource)
+				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -2941,7 +2941,7 @@ namespace CarSharingApplication.SQL.Linq
 	public partial class UsersINFO
 	{
 		
-		private System.Nullable<int> _ID_User;
+		private int _ID_User;
 		
 		private string _UserEMail;
 		
@@ -2951,7 +2951,7 @@ namespace CarSharingApplication.SQL.Linq
 		
 		private string _UserMiddleName;
 		
-		private System.Nullable<System.DateTime> _UserBirthDay;
+		private System.DateTime _UserBirthDay;
 		
 		private string _Previlege;
 		
@@ -2963,14 +2963,14 @@ namespace CarSharingApplication.SQL.Linq
 		
 		private System.Nullable<System.DateTime> _ReceiptDate;
 		
-		private System.Nullable<System.DateTime> _EndTime;
+		private string _RentStatus;
 		
 		public UsersINFO()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", DbType="Int")]
-		public System.Nullable<int> ID_User
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int ID_User
 		{
 			get
 			{
@@ -2985,7 +2985,7 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserEMail", DbType="NVarChar(120)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserEMail", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
 		public string UserEMail
 		{
 			get
@@ -3001,7 +3001,7 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserSurname", DbType="NVarChar(120)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserSurname", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
 		public string UserSurname
 		{
 			get
@@ -3017,7 +3017,7 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(120)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
 		public string UserName
 		{
 			get
@@ -3033,7 +3033,7 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserMiddleName", DbType="NVarChar(120)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserMiddleName", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
 		public string UserMiddleName
 		{
 			get
@@ -3049,8 +3049,8 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserBirthDay", DbType="Date")]
-		public System.Nullable<System.DateTime> UserBirthDay
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserBirthDay", DbType="Date NOT NULL")]
+		public System.DateTime UserBirthDay
 		{
 			get
 			{
@@ -3145,18 +3145,18 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> EndTime
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RentStatus", DbType="Char(9)")]
+		public string RentStatus
 		{
 			get
 			{
-				return this._EndTime;
+				return this._RentStatus;
 			}
 			set
 			{
-				if ((this._EndTime != value))
+				if ((this._RentStatus != value))
 				{
-					this._EndTime = value;
+					this._RentStatus = value;
 				}
 			}
 		}
@@ -3166,12 +3166,48 @@ namespace CarSharingApplication.SQL.Linq
 	public partial class RentalsINFO
 	{
 		
+		private int _ID_Rental;
+		
+		private int _ID_Vehicle;
+		
 		private string _ID_DriverLicence;
 		
 		private System.Nullable<System.DateTime> _EndTime;
 		
 		public RentalsINFO()
 		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Rental", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int ID_Rental
+		{
+			get
+			{
+				return this._ID_Rental;
+			}
+			set
+			{
+				if ((this._ID_Rental != value))
+				{
+					this._ID_Rental = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
+		public int ID_Vehicle
+		{
+			get
+			{
+				return this._ID_Vehicle;
+			}
+			set
+			{
+				if ((this._ID_Vehicle != value))
+				{
+					this._ID_Vehicle = value;
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DriverLicence", DbType="Char(10) NOT NULL", CanBeNull=false)]

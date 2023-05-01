@@ -14,13 +14,13 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Button Height="80" Grid.Row="0" Margin="10" VerticalAlignment="Top" VerticalContentAlignment="Center" materialDesign:ButtonAssist.CornerRadius="10" Click="RentClick" Background="Green" BorderBrush="DarkGreen">Оплатить и начать поездку</Button>
+            <Button x:Name="btn" Height="80" Grid.Row="0" Margin="10" VerticalAlignment="Top" VerticalContentAlignment="Center" materialDesign:ButtonAssist.CornerRadius="10" Click="RentClick" Background="Green" BorderBrush="DarkGreen">Оплатить и начать поездку</Button>
             <WrapPanel Grid.Row="1">
-                <CheckBox Margin="20 0 0 0"></CheckBox>
-                <TextBlock  Text="Я принимаю условия пользовательского соглашения" VerticalAlignment="Top" TextAlignment="Justify" TextWrapping="Wrap" IsEnabled="False" Margin="15"></TextBlock>
+                <CheckBox x:Name="cbox" Margin="20 0 0 0"></CheckBox>
+                <TextBlock x:Name="btext" Text="Я принимаю условия пользовательского соглашения" VerticalAlignment="Top" TextAlignment="Justify" TextWrapping="Wrap" IsEnabled="False" Margin="15"></TextBlock>
             </WrapPanel>
             <Label Grid.Row="2" HorizontalAlignment="Left" Margin="20 0 0 0" Height="30" Width="180">
-                <Hyperlink NavigateUri="https://mgkit.ru">Пользователькое соглашение</Hyperlink>
+                <Hyperlink x:Name="lnk" NavigateUri="https://mgkit.ru">Пользователькое соглашение</Hyperlink>
             </Label>
         </Grid>
     </Border>

@@ -64,5 +64,10 @@ namespace CarSharingApplication.Windows.XAMLModels
             }
             tb.CaretIndex = tb.Text.Length;
         }
+
+        public bool isEmpty()
+        {
+            return (CardNumber.Text == "") || (CardDate.Text == "") || (CVS.Password == "");
+        }
     }
 }

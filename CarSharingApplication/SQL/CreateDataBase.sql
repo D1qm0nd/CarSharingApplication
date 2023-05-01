@@ -716,12 +716,31 @@ GO
 	CREATE VIEW RentalsINFO
 	AS
 	SELECT 
-			ID_DriverLicence,  DATEADD(HOUR,Rentals.CountOfHours+DATEPART(HOUR,CONVERT(DATETIME,Rentals.RentalTime)),CONVERT(DATETIME,Rentals.StartDate)) as EndTime
+			ID_Rental, ID_Vehicle, ID_DriverLicence,  DATEADD(HOUR,Rentals.CountOfHours+DATEPART(HOUR,CONVERT(DATETIME,Rentals.RentalTime)),CONVERT(DATETIME,Rentals.StartDate)) as EndTime
 		FROM Rentals
-		
-GO
 
-USE VehicleRental
+GO
+	USE VehicleRental
+GO
+	CREATE FUNCTION TripStatus
+	( 
+		@DriverLicence CHAR(10)
+	)
+	RETURNS CHAR(9)
+	AS
+	BEGIN
+		DECLARE @Ret CHAR(9)
+		IF EXISTS(SELECT TOP (1) *
+			FROM RentalsINFO
+			WHERE RentalsINFO.ID_DriverLicence = @DriverLicence 
+			AND EndTime > GETDATE())
+		SET @Ret = 'в поездке'
+		ELSE
+			SET @Ret = NULL
+		RETURN @Ret
+	END
+GO
+	USE VehicleRental
 GO
 	CREATE VIEW VehiclesINFO
 	AS
@@ -752,7 +771,8 @@ GO
 GO 
 	PRINT 'Создал представление VehiclesINFO'
 
-USE VehicleRental
+GO
+	USE VehicleRental
 GO
 	CREATE VIEW UsersINFO
 	AS
@@ -768,10 +788,8 @@ GO
 			[dbo].CountUserAccidents(Rental_Users.ID_User) as AccidentsCount,
 			(SELECT ID_DriverLicence FROM [dbo].GetDriverLicenceByUserID(Rental_Users.ID_User)) as ID_DriverLicence, --??
 			(SELECT ReceiptDate FROM [dbo].GetDriverLicenceByUserID(Rental_Users.ID_User)) as ReceiptDate, --??,
-			RentalsInfo.EndTime
+			[dbo].TripStatus((SELECT ID_DriverLicence FROM [dbo].GetDriverLicenceByUserID(Rental_Users.ID_User))) as RentStatus 
 		FROM Rental_Users
-		RIGHT OUTER JOIN RentalsINFO ON ID_DriverLicence = RentalsINFO.ID_DriverLicence
-
 GO 
 	PRINT 'Создал представление UsersINFO'
 
@@ -823,7 +841,9 @@ GO
 		GRANT EXEC ON AddDriverLicenceToUser to DB_USER_USERHANDLER
 		GRANT EXEC ON AddCategoryToDriverLicence to DB_USER_USERHANDLER
 		GRANT EXEC ON REG_USER TO DB_USER_USERHANDLER
+		GRANT EXEC ON Rent TO DB_USER_USERHANDLER
 		--GRANT EXEC ON CHECK_USER TO DB_USER_USERHANDLER
+		
 
 		CREATE LOGIN CARHANDLER WITH PASSWORD = 'CARHANDLER'
 		CREATE USER DB_USER_CARHANDLER FOR LOGIN CARHANDLER

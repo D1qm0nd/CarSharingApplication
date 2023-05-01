@@ -26,9 +26,9 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0" Background="Black" Margin="0 10 0 10"></Grid>
-            <TextBox Grid.Row="1" Grid.ColumnSpan="2" materialDesign:HintAssist.HelperText="Номер карты" Margin="40 0 40 20" Padding="0 0 0 0" VerticalContentAlignment="Bottom" FontSize="28" TextAlignment="Left" Height="40" Width="270" KeyDown="TextBox_KeyDown" MaxLength="19" ></TextBox>
-            <TextBox Grid.Row="2" Grid.Column="0" materialDesign:HintAssist.HelperText="мм.гг " Margin="64 0 0 30" Padding="3 0 3 0" VerticalContentAlignment="Bottom" FontSize="20" TextAlignment="Left" Height="40" HorizontalAlignment="Left"  MaxLength="5" Width="70" KeyDown="DateTextBox_KeyDown"></TextBox>
-            <PasswordBox MaxLength="3" Grid.Row="2" Grid.Column="1" materialDesign:HintAssist.Hint="CVS" Margin="0 0 75 20" VerticalContentAlignment="Bottom" HorizontalAlignment="Right" FontSize="20" Height="30" Width="45" Padding="3 0 3 0" Background="WhiteSmoke"></PasswordBox>
+            <TextBox x:Name="CardNumber" Grid.Row="1" Grid.ColumnSpan="2" materialDesign:HintAssist.HelperText="Номер карты" Margin="40 0 40 20" Padding="0 0 0 0" VerticalContentAlignment="Bottom" FontSize="28" TextAlignment="Left" Height="40" Width="270" KeyDown="TextBox_KeyDown" MaxLength="19" ></TextBox>
+            <TextBox x:Name="CardDate" Grid.Row="2" Grid.Column="0" materialDesign:HintAssist.HelperText="мм.гг " Margin="64 0 0 30" Padding="3 0 3 0" VerticalContentAlignment="Bottom" FontSize="20" TextAlignment="Left" Height="40" HorizontalAlignment="Left"  MaxLength="5" Width="70" KeyDown="DateTextBox_KeyDown"></TextBox>
+            <PasswordBox x:Name="CVS" MaxLength="3" Grid.Row="2" Grid.Column="1" materialDesign:HintAssist.Hint="CVS" Margin="0 0 75 20" VerticalContentAlignment="Bottom" HorizontalAlignment="Right" FontSize="20" Height="30" Width="45" Padding="3 0 3 0" Background="WhiteSmoke"></PasswordBox>
         </Grid>
     </Border>
 </UserControl>

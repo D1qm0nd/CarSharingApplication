@@ -20,7 +20,7 @@
         <StackPanel Grid.Column="1">
             <models:CreditCard x:Name="CreditCard" VerticalAlignment="Top" Margin="0 10 0 10"/>
             <models:RentalPricePicker x:Name="Picker" Margin="0 10 0 10"/>
-            <models:RentButton Margin="0 10 0 10"></models:RentButton>
+            <models:RentButton x:Name="rentbtn" Margin="0 10 0 10"></models:RentButton>
         </StackPanel>
     </Grid>
 </Window>

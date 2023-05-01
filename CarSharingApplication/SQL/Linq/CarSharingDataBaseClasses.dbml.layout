@@ -151,16 +151,16 @@
         <elementListCompartment Id="c644122c-501d-47eb-b756-7161dabcc02f" absoluteBounds="0.51500000000000012, 8.71, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="79a8fb63-d79e-4c52-8f9c-8720a43a2b38" absoluteBounds="3, 8.25, 2, 3.1170068359375">
+    <classShape Id="3224075f-10fe-4096-b1b3-96065cdf6324" absoluteBounds="3, 8.25, 2, 3.1170068359375">
       <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/UsersINFO" />
       <nestedChildShapes>
-        <elementListCompartment Id="6c5ebb83-332d-4122-a424-165886a47775" absoluteBounds="3.0149999999999997, 8.71, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="12e0af37-98f5-42d9-8736-07bdf2bd26f1" absoluteBounds="3.015, 8.71, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="99abdc0b-1aef-450b-84ca-5cc791cf5581" absoluteBounds="5.875, 8.25, 2, 1.1939925130208333">
+    <classShape Id="f05b7e43-70e4-4dec-a224-96ccf23e15e2" absoluteBounds="5.375, 8.25, 2, 1.5785953776041666">
       <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/RentalsINFO" />
       <nestedChildShapes>
-        <elementListCompartment Id="9e69bc25-9002-4e09-93dd-7b5d9570fe75" absoluteBounds="5.89, 8.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a3538419-8301-4e49-9abd-a62f0786e945" absoluteBounds="5.39, 8.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
