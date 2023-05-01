@@ -126,7 +126,6 @@
     </ApplicationDefinition>
     <Compile Include="DBEncryptor.cs" />
     <Compile Include="DriverLicencesCategories.cs" />
-    <Compile Include="ACoordinate.cs" />
     <Compile Include="ImageConvertor.cs" />
     <Compile Include="SQL\Linq\CarSharingDataBaseClasses.designer.cs">
       <AutoGen>True</AutoGen>

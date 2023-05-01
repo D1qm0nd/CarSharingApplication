@@ -34,7 +34,7 @@ namespace CarSharingApplication.Windows.XAMLModels
         public double InitializeLat { get; set; } = 0;
         public double InitializeLng { get; set; } = 0;
 #nullable enable
-        public static ACoordinate? SelectedVehicle { get; set; }
+        public static VehiclesINFO? SelectedVehicle { get; set; }
 
         public Map()
         {
@@ -59,7 +59,7 @@ namespace CarSharingApplication.Windows.XAMLModels
             MapController.ShowTileGridLines = false; //показывать или скрывать тайтлы
         }
 
-        public void MoveCursorToVehicleOnMap(ACoordinate obj)
+        public void MoveCursorToVehicleOnMap(VehiclesINFO obj)
         {
             MapController.Position = new PointLatLng((double)obj.Lat!, (double)obj.Lng!);
         }
