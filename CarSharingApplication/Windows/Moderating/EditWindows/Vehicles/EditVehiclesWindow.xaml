@@ -49,7 +49,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="" MinWidth="140" MaxWidth="140">
+                    <DataGridTemplateColumn Header="" MinWidth="150" MaxWidth="150">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <WrapPanel Width="140">

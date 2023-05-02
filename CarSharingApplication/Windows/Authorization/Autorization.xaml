@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:local="clr-namespace:CarSharingApplication"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       MinHeight="520" MinWidth="390"
       Height="520" Width="390"
       Title="Вход"
@@ -54,28 +55,28 @@
                         <RowDefinition MinHeight="60"/>
                     </Grid.RowDefinitions>
                     <Grid x:Name="LoginGrid" Grid.Row="0" Tag="0">
-                        <TextBox x:Name="Login" Margin="20 0 20 0" Padding="0 6 0 5" CharacterCasing="Lower" KeyDown="Login_TextChanged"/>
+                        <TextBox x:Name="Login" Margin="20 0 20 0" Padding="0 6 0 5" CharacterCasing="Lower" KeyDown="Login_TextChanged" materialDesign:HintAssist.Hint="Имя для входа"/>
                     </Grid>
                     <Grid x:Name="EmailGrid" Grid.Row="1" Tag="1">
-                        <TextBox x:Name="Email" Margin="20,0,20,0" Padding="0 6 0 5" CharacterCasing="Lower" Height="28" VerticalAlignment="Bottom"/>
+                        <TextBox x:Name="Email" Margin="20,0,20,0" Padding="0 6 0 5" CharacterCasing="Lower" Height="28" VerticalAlignment="Bottom" materialDesign:HintAssist.Hint="Почта"/>
                     </Grid>
                     <Grid x:Name="PasswordGrid" Grid.Row="2" Tag="2">
-                        <PasswordBox x:Name="Password" Margin="20 0 20 0" Padding="0 6 0 5"></PasswordBox>
+                        <PasswordBox x:Name="Password" Margin="20 0 20 0" Padding="0 6 0 5" materialDesign:HintAssist.Hint="Пароль"></PasswordBox>
                     </Grid>
                     <Grid x:Name="RepeatPasswordGrid" Grid.Row="3" Tag="3">
-                        <PasswordBox x:Name="RepeatPassword" Margin="20 0 20 0" Padding="0 6 0 5"></PasswordBox>
+                        <PasswordBox x:Name="RepeatPassword" Margin="20 0 20 0" Padding="0 6 0 5" materialDesign:HintAssist.Hint="Повторите пароль"></PasswordBox>
                     </Grid>
                     <Grid x:Name="UserSurnameGrid" Grid.Row="4" Tag="4">
-                        <TextBox x:Name="UserSurname" Margin="20 0 20 0" Padding="0 6 0 5"/>
+                        <TextBox x:Name="UserSurname" Margin="20 0 20 0" Padding="0 6 0 5" materialDesign:HintAssist.Hint="Фамилия"/>
                     </Grid>
                     <Grid x:Name="UserNameGrid" Grid.Row="5" Tag="5">
-                        <TextBox x:Name="UserName" Margin="20 0 20 0" Padding="0 6 0 5"/>
+                        <TextBox x:Name="UserName" Margin="20 0 20 0" Padding="0 6 0 5" materialDesign:HintAssist.Hint="Имя"/>
                     </Grid>
                     <Grid x:Name="UserMiddleNameGrid" Grid.Row="6" Tag="6">
-                        <TextBox x:Name="UserMiddleName" Margin="20 0 20 0" Padding="0 6 0 5"/>
+                        <TextBox x:Name="UserMiddleName" Margin="20 0 20 0" Padding="0 6 0 5" materialDesign:HintAssist.Hint="Отчество"/>
                     </Grid>
                     <Grid x:Name="BDatePickerGrid" Grid.Row="7" Tag="7">
-                        <DatePicker x:Name="BDatePicker" Panel.ZIndex="1" Margin="20 0 20 0" Padding="0 6 0 5" SelectedDateFormat="Short"></DatePicker>
+                        <DatePicker x:Name="BDatePicker" Panel.ZIndex="1" Margin="20 0 20 0" Padding="0 6 0 5" SelectedDateFormat="Short" materialDesign:HintAssist.Hint="Дата рождения"></DatePicker>
                     </Grid>
                     <Grid x:Name="inputButtonGrid" Grid.Row="8" Tag="8" Margin="0" >
                         <Button x:Name="inputButton" Margin="20 0 20 0" VerticalAlignment="Center" Background="green" BorderBrush="green"  MinHeight="30" MaxHeight="30"></Button>

@@ -1,4 +1,11 @@
-﻿/*Удаление БД с тем же названием (если есть)*/
+﻿--SELECT conn.session_id, host_name, program_name,
+--    nt_domain, login_name, connect_time, last_request_end_time 
+--FROM sys.dm_exec_sessions AS sess
+--JOIN sys.dm_exec_connections AS conn
+--   ON sess.session_id = conn.session_id;
+
+
+/*Удаление БД с тем же названием (если есть)*/
 GO
 	PRINT '==================================База Данных======================================='
 	USE master
@@ -111,12 +118,12 @@ GO
 
 	CREATE TABLE VehicleCoordinates
 	(
-		ID_Coodinates INT IDENTITY(1,1)  NOT NULL,
+		ID_Coordinates INT IDENTITY(1,1)  NOT NULL,
 		ID_Vehicle INT NOT NULL,
 		Longitude FLOAT NOT NULL,
 		Latitude FLOAT NOT NULL,
 		StayDateTime DATETIME NOT NULL
-		PRIMARY KEY (ID_Coodinates)
+		PRIMARY KEY (ID_Coordinates)
 	)
 	PRINT 'Создал Таблицу VehicleCoordinates'
 

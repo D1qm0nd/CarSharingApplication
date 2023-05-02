@@ -146,14 +146,23 @@
     <Compile Include="Windows\Moderating\AdminWindows.xaml.cs">
       <DependentUpon>AdminWindows.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Moderating\EditWindows\Users\EditCategories.xaml.cs">
+      <DependentUpon>EditCategories.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Moderating\EditWindows\Users\EditDriverLicences.xaml.cs">
       <DependentUpon>EditDriverLicences.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Moderating\EditWindows\Users\PersonalAccount.xaml.cs">
       <DependentUpon>PersonalAccount.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Moderating\EditWindows\Vehicles\EditClasses.xaml.cs">
+      <DependentUpon>EditClasses.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Moderating\EditWindows\Vehicles\EditRegistrationCertificates.xaml.cs">
       <DependentUpon>EditRegistrationCertificates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Moderating\EditWindows\Vehicles\EditVehiclesCoordinates.xaml.cs">
+      <DependentUpon>EditVehiclesCoordinates.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Moderating\EditWindows\Vehicles\EditVehiclesWindow.xaml.cs">
       <DependentUpon>EditVehiclesWindow.xaml</DependentUpon>
@@ -213,6 +222,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Moderating\EditWindows\Users\EditCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Moderating\EditWindows\Users\EditDriverLicences.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -221,7 +234,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Moderating\EditWindows\Vehicles\EditClasses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Moderating\EditWindows\Vehicles\EditRegistrationCertificates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\Vehicles\EditVehiclesCoordinates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CarSharingApplication.SQL.Linq;
 using CarSharingApplication.Windows.Moderating.EditWindows.Vehicles;
+using CarSharingApplication.Windows.Moderating.EditWindows.Users;
+using CarSharingApplication.Windows.Moderating.EditWindows.Rentals;
 
 namespace CarSharingApplication
 {
@@ -47,7 +49,7 @@ namespace CarSharingApplication
 
         private void DriverLicencesCategoriesButton_Click(object sender, RoutedEventArgs e)
         {
-            var EditWindow = new EditUsersWindow();
+            var EditWindow = new EditCategories();
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
@@ -55,7 +57,7 @@ namespace CarSharingApplication
 
         private void VehicleClassesButon_Click(object sender, RoutedEventArgs e)
         {
-            var EditWindow = new EditUsersWindow();
+            var EditWindow = new EditClasses();
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
@@ -79,7 +81,7 @@ namespace CarSharingApplication
 
         private void VehicleCoordinatesButton_Click(object sender, RoutedEventArgs e)
         {
-            var EditWindow = new EditUsersWindow();
+            var EditWindow = new EditVehiclesCoordinates();
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
@@ -87,7 +89,7 @@ namespace CarSharingApplication
 
         private void TrafficAccidentsTypeButton_Click(object sender, RoutedEventArgs e)
         {
-            var EditWindow = new EditUsersWindow();
+            var EditWindow = new EditTrafficAccidentTypes();
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();

@@ -26,9 +26,6 @@ namespace CarSharingApplication
             } 
         }
 
-        //public static bool[] AdmWindowConditions = new bool[14];
-        //public static bool[] UsrWindowConditions;
-
 
 
 #nullable enable
