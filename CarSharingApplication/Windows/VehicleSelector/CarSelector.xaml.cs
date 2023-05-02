@@ -49,8 +49,9 @@ namespace CarSharingApplication
         private string ZeroVehiclesByCriteries = "Отсутствуют транспотрные\nсредтва соответствующие\nзаданным критериям";
         private string HaveNotAvaliableVehicles = "В данный момент\nнет свободных авто\nзаходите позже";
 
-        public CarSelector(ref UsersINFO user, bool showOwner)
+        public CarSelector(ref UsersINFO user, Window owner, bool showOwner)
         {
+            this.Owner = owner;
             _ShowOwner = showOwner;
             InitializeComponent();
             User = user;
@@ -259,8 +260,7 @@ namespace CarSharingApplication
         {
             if (selectedVehicle != null)
             {
-                var rentWindow = new VehicleRent(User,selectedVehicle,true);
-                rentWindow.Owner = this;
+                var rentWindow = new VehicleRent(User,selectedVehicle, this, true);
                 this.Visibility = Visibility.Collapsed;
                 rentWindow.Activate();
                 rentWindow.Show();

@@ -38,22 +38,9 @@ namespace CarSharingApplication
         public Autorization()
         {
             InitializeComponent();
-            SetHints();
             Reg_Button_Click(null, null);
         }
 
-        private void SetHints()
-        {
-            HintAssist.SetHint(Login,"Имя для входа");
-            HintAssist.SetHint(Email, "Почта");
-            HintAssist.SetHint(Password, "Пароль");
-            HintAssist.SetHint(RepeatPassword, "Повторите пароль");
-            HintAssist.SetHint(UserSurname, "Фамилия");
-            HintAssist.SetHint(UserName, "Имя");
-            HintAssist.SetHint(UserMiddleName, "Отчество");
-            HintAssist.SetHint(BDatePicker, "Дата рождения");
-
-        }
         private void MakeRegister(object sender, RoutedEventArgs e)
         {
             bool registered = false;
@@ -153,33 +140,32 @@ namespace CarSharingApplication
                                            $"SELECT [dbo].CheckExistingUser('{encLogin}','{encPass}')");
                         if (answ > 0)
                         {
+                            this.Visibility = Visibility.Collapsed;
                             UsersINFO UserInfo = App.GetScalarResult<UsersINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")), $"SELECT * FROM UsersINFO WHERE ID_User = {answ}");
                             if (UserInfo != null)
                             {
                                 if (UserInfo.Previlege.TrimEnd() == "админ")
                                 {
-                                    var ChoiceAuthorizationWindow = new ChoiceLoginWindow(ref UserInfo);
-                                    ChoiceAuthorizationWindow.Owner = this;
-                                    this.Visibility = Visibility.Collapsed;
+                                    var ChoiceAuthorizationWindow = new ChoiceLoginWindow(ref UserInfo, this);
                                     ChoiceAuthorizationWindow.Activate();
                                     ChoiceAuthorizationWindow.Show();
+
                                 }
                                 else
                                 {
                                     if (UserInfo.RentStatus != "в поездке")
                                     {
-                                        var CarSelWindow = new CarSelector(ref UserInfo, true);
-                                        CarSelWindow.Owner = this;
-                                        this.Visibility = Visibility.Collapsed;
+                                        var CarSelWindow = new CarSelector(ref UserInfo, this, true);
                                         CarSelWindow.Activate();
                                         CarSelWindow.Show();
-                                    } else
+
+                                    }
+                                    else
                                     {
-                                        var TripWND = new TripWindow(UserInfo, true);
-                                        TripWND.Owner = this;
-                                        this.Visibility = Visibility.Collapsed;
+                                        var TripWND = new TripWindow(UserInfo, this, true);
                                         TripWND.Activate();
                                         TripWND.Show();
+
                                     }
                                 }
                                 ClearFields();

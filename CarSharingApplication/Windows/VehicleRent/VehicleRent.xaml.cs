@@ -24,9 +24,10 @@ namespace CarSharingApplication.Windows.VehicleRent
         private UsersINFO _User;
         private VehiclesINFO _Vehicle;
         private bool _ShowOwner;
-        public VehicleRent(UsersINFO User, VehiclesINFO Vehicle, bool showOwner)
+        public VehicleRent(UsersINFO User, VehiclesINFO Vehicle, Window owner, bool showOwner)
         {
             _ShowOwner = showOwner;
+            this.Owner = owner;
             InitializeComponent();
             _User = User;
             _Vehicle = Vehicle;
@@ -42,8 +43,7 @@ namespace CarSharingApplication.Windows.VehicleRent
                 return;
             App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
                 $"EXEC Rent @DriverLicence = '{_User.ID_DriverLicence}', @ID_Vehicle = {_Vehicle.ID_Vehicle}, @RentalTime = '{DateTime.Now.ToString("HH:mm")}', @CountOfHours = {Picker.HourPicker.Value}");
-            var TripWND = new TripWindow(_User,false);
-            TripWND.Owner = this.Owner.Owner;
+            var TripWND = new TripWindow(_User, this.Owner.Owner, false);
             TripWND.Activate();
             TripWND.Show();
             this.Owner.Close();//??

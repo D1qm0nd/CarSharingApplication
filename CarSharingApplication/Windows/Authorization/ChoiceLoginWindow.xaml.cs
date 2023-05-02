@@ -22,8 +22,9 @@ namespace CarSharingApplication.Windows.Authorization
     public partial class ChoiceLoginWindow : Window
     {
         private UsersINFO User;
-        public ChoiceLoginWindow(ref UsersINFO user)
+        public ChoiceLoginWindow(ref UsersINFO user, Window owner)
         {
+            this.Owner = owner;
             User = user;
             InitializeComponent();
         }
@@ -43,16 +44,14 @@ namespace CarSharingApplication.Windows.Authorization
 
             if (User.RentStatus != "в поездке")
             {
-                var CarSelWindow = new CarSelector(ref User, true);
-                CarSelWindow.Owner = this;
+                var CarSelWindow = new CarSelector(ref User, this, true);
                 CarSelWindow.Activate();
                 CarSelWindow.Show();
                 this.Visibility = Visibility.Collapsed;
             }
             else
             {
-                var TripWND = new TripWindow(User, false);
-                TripWND.Owner = this;
+                var TripWND = new TripWindow(User, this, true);
                 this.Visibility = Visibility.Collapsed;
                 TripWND.Activate();
                 TripWND.Show();

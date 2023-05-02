@@ -24,13 +24,16 @@ namespace CarSharingApplication.Windows.VehicleRent
         private UsersINFO _User;
         private VehiclesINFO _Vehicle;
         private RentalsINFO _Rental;
-        public TripWindow(UsersINFO user, bool showOwner)
+        public TripWindow(UsersINFO user, Window owner, bool showOwner)
         {
+            this.Owner = owner;
             _ShowOwner = showOwner;
             InitializeComponent();
             _User = user;
             _Rental = App.GetScalarResult<RentalsINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
-                           $"SELECT TOP(1) * FROM RentalsINFO WHERE ID_DriverLicence = {_User.ID_DriverLicence} AND EndTime > GETDATE() AND RentalStatus='стандартная'");
+                    $"SELECT TOP(1) * FROM RentalsINFO WHERE ID_DriverLicence = {_User.ID_DriverLicence} AND EndTime > GETDATE() AND RentalStatus='стандартная'");
+            if (_Rental == null)
+                this.Close();
             _Vehicle = App.GetScalarResult<VehiclesINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
                     $"SELECT * FROM VehiclesINFO WHERE ID_Vehicle = {_Rental.ID_Vehicle}");
             Card.SetVehicleInfo(_Vehicle,"");
@@ -49,23 +52,28 @@ namespace CarSharingApplication.Windows.VehicleRent
             {
                 this.Owner.Close();
             }
-            //throw new NotImplementedException("Осуществить, VehicleRent - проверку на открытие");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                while
-                (
-                    !App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
-                                        $"UPDATE Rentals SET RentalStatus='досрочная' WHERE ID_Rental = {_Rental.ID_Rental}")
-                ) ;
+                MessageBoxButton button = MessageBoxButton.YesNo;
+
+                var a = MessageBox.Show("", "Вы уверены что хотите завершить поездку раньше срока?", button);
+                if (a == MessageBoxResult.Yes)
+                {
+                    App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
+                        $"UPDATE Rentals SET RentalStatus='досрочная' WHERE ID_Rental = {_Rental.ID_Rental}");
+                }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             finally 
             {
-                this.Close();
+                    this.Close();
             }
         }
     }
