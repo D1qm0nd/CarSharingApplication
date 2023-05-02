@@ -180,11 +180,11 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		public System.Data.Linq.Table<VehiclesINFO> VehiclesINFO
+		public System.Data.Linq.Table<RentalsINFO> RentalsINFO
 		{
 			get
 			{
-				return this.GetTable<VehiclesINFO>();
+				return this.GetTable<RentalsINFO>();
 			}
 		}
 		
@@ -196,11 +196,11 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		public System.Data.Linq.Table<RentalsINFO> RentalsINFO
+		public System.Data.Linq.Table<VehiclesINFO> VehiclesINFO
 		{
 			get
 			{
-				return this.GetTable<RentalsINFO>();
+				return this.GetTable<VehiclesINFO>();
 			}
 		}
 	}
@@ -2712,36 +2712,36 @@ namespace CarSharingApplication.SQL.Linq
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VehiclesINFO")]
-	public partial class VehiclesINFO
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RentalsINFO")]
+	public partial class RentalsINFO
 	{
+		
+		private int _ID_Rental;
 		
 		private int _ID_Vehicle;
 		
-		private string _Brand;
+		private string _ID_DriverLicence;
 		
-		private string _Mark;
+		private System.Nullable<System.DateTime> _EndTime;
 		
-		private string _Color;
-		
-		private string _Class;
-		
-		private string _Vehicle_Category;
-		
-		private decimal _PricePerHour;
-		
-		private System.Data.Linq.Binary _CarPicture;
-		
-		private System.Nullable<double> _Lat;
-		
-		private System.Nullable<double> _Lng;
-		
-		private string _AccessStatus;
-		
-		private System.Nullable<decimal> _DamageCost;
-		
-		public VehiclesINFO()
+		public RentalsINFO()
 		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Rental", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int ID_Rental
+		{
+			get
+			{
+				return this._ID_Rental;
+			}
+			set
+			{
+				if ((this._ID_Rental != value))
+				{
+					this._ID_Rental = value;
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
@@ -2760,178 +2760,34 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Brand", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string Brand
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DriverLicence", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string ID_DriverLicence
 		{
 			get
 			{
-				return this._Brand;
+				return this._ID_DriverLicence;
 			}
 			set
 			{
-				if ((this._Brand != value))
+				if ((this._ID_DriverLicence != value))
 				{
-					this._Brand = value;
+					this._ID_DriverLicence = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mark", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string Mark
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> EndTime
 		{
 			get
 			{
-				return this._Mark;
+				return this._EndTime;
 			}
 			set
 			{
-				if ((this._Mark != value))
+				if ((this._EndTime != value))
 				{
-					this._Mark = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(120) NOT NULL", CanBeNull=false)]
-		public string Color
-		{
-			get
-			{
-				return this._Color;
-			}
-			set
-			{
-				if ((this._Color != value))
-				{
-					this._Color = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Class", DbType="Char(20) NOT NULL", CanBeNull=false)]
-		public string Class
-		{
-			get
-			{
-				return this._Class;
-			}
-			set
-			{
-				if ((this._Class != value))
-				{
-					this._Class = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vehicle_Category", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
-		public string Vehicle_Category
-		{
-			get
-			{
-				return this._Vehicle_Category;
-			}
-			set
-			{
-				if ((this._Vehicle_Category != value))
-				{
-					this._Vehicle_Category = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PricePerHour", DbType="Money NOT NULL")]
-		public decimal PricePerHour
-		{
-			get
-			{
-				return this._PricePerHour;
-			}
-			set
-			{
-				if ((this._PricePerHour != value))
-				{
-					this._PricePerHour = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CarPicture", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary CarPicture
-		{
-			get
-			{
-				return this._CarPicture;
-			}
-			set
-			{
-				if ((this._CarPicture != value))
-				{
-					this._CarPicture = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lat", DbType="Float")]
-		public System.Nullable<double> Lat
-		{
-			get
-			{
-				return this._Lat;
-			}
-			set
-			{
-				if ((this._Lat != value))
-				{
-					this._Lat = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lng", DbType="Float")]
-		public System.Nullable<double> Lng
-		{
-			get
-			{
-				return this._Lng;
-			}
-			set
-			{
-				if ((this._Lng != value))
-				{
-					this._Lng = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccessStatus", DbType="Char(11)")]
-		public string AccessStatus
-		{
-			get
-			{
-				return this._AccessStatus;
-			}
-			set
-			{
-				if ((this._AccessStatus != value))
-				{
-					this._AccessStatus = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DamageCost", DbType="Money")]
-		public System.Nullable<decimal> DamageCost
-		{
-			get
-			{
-				return this._DamageCost;
-			}
-			set
-			{
-				if ((this._DamageCost != value))
-				{
-					this._DamageCost = value;
+					this._EndTime = value;
 				}
 			}
 		}
@@ -3162,36 +3018,36 @@ namespace CarSharingApplication.SQL.Linq
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RentalsINFO")]
-	public partial class RentalsINFO
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VehiclesINFO")]
+	public partial class VehiclesINFO
 	{
-		
-		private int _ID_Rental;
 		
 		private int _ID_Vehicle;
 		
-		private string _ID_DriverLicence;
+		private string _Brand;
 		
-		private System.Nullable<System.DateTime> _EndTime;
+		private string _Mark;
 		
-		public RentalsINFO()
+		private string _Color;
+		
+		private string _Class;
+		
+		private string _Vehicle_Category;
+		
+		private decimal _PricePerHour;
+		
+		private System.Data.Linq.Binary _CarPicture;
+		
+		private System.Nullable<double> _Lat;
+		
+		private System.Nullable<double> _Lng;
+		
+		private string _AccessStatus;
+		
+		private System.Nullable<decimal> _DamageCost;
+		
+		public VehiclesINFO()
 		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Rental", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		public int ID_Rental
-		{
-			get
-			{
-				return this._ID_Rental;
-			}
-			set
-			{
-				if ((this._ID_Rental != value))
-				{
-					this._ID_Rental = value;
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
@@ -3210,34 +3066,178 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DriverLicence", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string ID_DriverLicence
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Brand", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Brand
 		{
 			get
 			{
-				return this._ID_DriverLicence;
+				return this._Brand;
 			}
 			set
 			{
-				if ((this._ID_DriverLicence != value))
+				if ((this._Brand != value))
 				{
-					this._ID_DriverLicence = value;
+					this._Brand = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> EndTime
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mark", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Mark
 		{
 			get
 			{
-				return this._EndTime;
+				return this._Mark;
 			}
 			set
 			{
-				if ((this._EndTime != value))
+				if ((this._Mark != value))
 				{
-					this._EndTime = value;
+					this._Mark = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(120) NOT NULL", CanBeNull=false)]
+		public string Color
+		{
+			get
+			{
+				return this._Color;
+			}
+			set
+			{
+				if ((this._Color != value))
+				{
+					this._Color = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Class", DbType="Char(20) NOT NULL", CanBeNull=false)]
+		public string Class
+		{
+			get
+			{
+				return this._Class;
+			}
+			set
+			{
+				if ((this._Class != value))
+				{
+					this._Class = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vehicle_Category", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
+		public string Vehicle_Category
+		{
+			get
+			{
+				return this._Vehicle_Category;
+			}
+			set
+			{
+				if ((this._Vehicle_Category != value))
+				{
+					this._Vehicle_Category = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PricePerHour", DbType="Money NOT NULL")]
+		public decimal PricePerHour
+		{
+			get
+			{
+				return this._PricePerHour;
+			}
+			set
+			{
+				if ((this._PricePerHour != value))
+				{
+					this._PricePerHour = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CarPicture", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary CarPicture
+		{
+			get
+			{
+				return this._CarPicture;
+			}
+			set
+			{
+				if ((this._CarPicture != value))
+				{
+					this._CarPicture = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lat", DbType="Float")]
+		public System.Nullable<double> Lat
+		{
+			get
+			{
+				return this._Lat;
+			}
+			set
+			{
+				if ((this._Lat != value))
+				{
+					this._Lat = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lng", DbType="Float")]
+		public System.Nullable<double> Lng
+		{
+			get
+			{
+				return this._Lng;
+			}
+			set
+			{
+				if ((this._Lng != value))
+				{
+					this._Lng = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccessStatus", DbType="Char(11)")]
+		public string AccessStatus
+		{
+			get
+			{
+				return this._AccessStatus;
+			}
+			set
+			{
+				if ((this._AccessStatus != value))
+				{
+					this._AccessStatus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DamageCost", DbType="Money")]
+		public System.Nullable<decimal> DamageCost
+		{
+			get
+			{
+				return this._DamageCost;
+			}
+			set
+			{
+				if ((this._DamageCost != value))
+				{
+					this._DamageCost = value;
 				}
 			}
 		}

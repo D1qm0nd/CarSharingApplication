@@ -24,6 +24,7 @@ using System.Security.Cryptography;
 using static System.Net.Mime.MediaTypeNames;
 using CarSharingApplication.SQL.Linq;
 using CarSharingApplication.Windows.Authorization;
+using CarSharingApplication.Windows.VehicleRent;
 
 namespace CarSharingApplication
 {
@@ -165,11 +166,21 @@ namespace CarSharingApplication
                                 }
                                 else
                                 {
-                                    var CarSelWindow = new CarSelector(ref UserInfo);
-                                    CarSelWindow.Owner = this;
-                                    this.Visibility = Visibility.Collapsed;
-                                    CarSelWindow.Activate();
-                                    CarSelWindow.Show();
+                                    if (UserInfo.RentStatus != "в поездке")
+                                    {
+                                        var CarSelWindow = new CarSelector(ref UserInfo, true);
+                                        CarSelWindow.Owner = this;
+                                        this.Visibility = Visibility.Collapsed;
+                                        CarSelWindow.Activate();
+                                        CarSelWindow.Show();
+                                    } else
+                                    {
+                                        var TripWND = new TripWindow(UserInfo, true);
+                                        TripWND.Owner = this;
+                                        this.Visibility = Visibility.Collapsed;
+                                        TripWND.Activate();
+                                        TripWND.Show();
+                                    }
                                 }
                                 ClearFields();
                             }

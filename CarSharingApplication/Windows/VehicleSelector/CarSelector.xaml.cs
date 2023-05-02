@@ -40,6 +40,7 @@ namespace CarSharingApplication
     public partial class CarSelector : Window
     {
         private UsersINFO User = null;
+        private bool _ShowOwner;
         private List<VehiclesINFO> vehiclesInfoList { get; set; }
         private VehiclesINFO selectedVehicle { get; set; }
         private List<string> vehClasses { get; set; }
@@ -47,13 +48,11 @@ namespace CarSharingApplication
         private string ConnectionString { get { return App.GetConnectionString("CARHANDLERConnection"); } }
         private string ZeroVehiclesByCriteries = "Отсутствуют транспотрные\nсредтва соответствующие\nзаданным критериям";
         private string HaveNotAvaliableVehicles = "В данный момент\nнет свободных авто\nзаходите позже";
-        private bool isOpen = true;
 
-        public CarSelector(ref UsersINFO user)
+        public CarSelector(ref UsersINFO user, bool showOwner)
         {
+            _ShowOwner = showOwner;
             InitializeComponent();
-
-
             User = user;
             this.Title = $"CarSharing [{User.UserSurname} {User.UserName} {User.UserMiddleName}]";
             GetVehiclesData();
@@ -200,13 +199,7 @@ namespace CarSharingApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            //isOpen = false;
-            this.Owner.Visibility = Visibility.Visible;
-            this.Owner.Activate();
-            GC.Collect();
-        }
+       
 
         /// <summary>
         /// Найти авто по критериям
@@ -266,7 +259,7 @@ namespace CarSharingApplication
         {
             if (selectedVehicle != null)
             {
-                var rentWindow = new VehicleRent(User,selectedVehicle);
+                var rentWindow = new VehicleRent(User,selectedVehicle,true);
                 rentWindow.Owner = this;
                 this.Visibility = Visibility.Collapsed;
                 rentWindow.Activate();
@@ -285,7 +278,20 @@ namespace CarSharingApplication
             this.AddChild(persWindow);
             persWindow.Show();
             this.Visibility = Visibility.Collapsed;
-            isOpen = !isOpen;
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_ShowOwner == true)
+            { 
+                this.Owner.Visibility = Visibility.Visible;
+                this.Owner.Activate();
+                GC.Collect();
+            }
+            else
+            {
+                this.Owner.Close();
+            }
         }
     }
 }
+

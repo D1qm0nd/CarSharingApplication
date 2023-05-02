@@ -1,4 +1,5 @@
 ﻿using CarSharingApplication.SQL.Linq;
+using CarSharingApplication.Windows.VehicleRent;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,11 +39,25 @@ namespace CarSharingApplication.Windows.Authorization
 
         private void UserLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            var CarSelWindow = new CarSelector(ref User);
-            CarSelWindow.Owner = this;
-            CarSelWindow.Activate();
-            CarSelWindow.Show();
-            this.Visibility = Visibility.Collapsed;
+            
+
+            if (User.RentStatus != "в поездке")
+            {
+                var CarSelWindow = new CarSelector(ref User, true);
+                CarSelWindow.Owner = this;
+                CarSelWindow.Activate();
+                CarSelWindow.Show();
+                this.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                var TripWND = new TripWindow(User, false);
+                TripWND.Owner = this;
+                this.Visibility = Visibility.Collapsed;
+                TripWND.Activate();
+                TripWND.Show();
+            }
+
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

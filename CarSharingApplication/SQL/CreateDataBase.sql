@@ -131,7 +131,8 @@ GO
 		ID_Vehicle INT NOT NULL,
 		StartDate DATE NOT NULL,
 		RentalTime TIME NOT NULL,
-		CountOfHours INT NOT NULL
+		CountOfHours INT NOT NULL,
+		RentalStatus CHAR(12) DEFAULT 'стандартная' NOT NULL
 		PRIMARY KEY (ID_Rental)
 	)
 	PRINT 'Создал Таблицу Rentals'
@@ -486,19 +487,32 @@ GO
 			IF ((SELECT [dbo].GetVehicleStatus(@ID_Vehicle)) = 'доступен')
 			BEGIN
 				INSERT Rentals VALUES 
-				(@DriverLicence, @ID_Vehicle, GETDATE(),@RentalTime,@CountOfHours)
+				(@DriverLicence, @ID_Vehicle, GETDATE(),@RentalTime,@CountOfHours, 'стандартная')
 				IF EXISTS(SELECT * FROM Rentals 
 						  WHERE ID_DriverLicence = @DriverLicence 
 							   AND ID_Vehicle = @ID_Vehicle 
 							   AND StartDate = CONVERT(DATE, GETDATE())
 							   AND RentalTime <= @RentalTime 
-							   AND CountOfHours = @CountOfHours)
+							   AND CountOfHours = @CountOfHours
+							   AND RentalStatus = 'стандартная')
 					COMMIT
 				ELSE ROLLBACK
 			END ELSE ROLLBACK
 	END
 GO
 	PRINT 'Создал Хранимую процедуру Rent'
+
+--GO
+--	CREATE PROCEDURE StopRent(
+--		@ID_Rental INT
+--	)
+--	AS
+--	BEGIN TRANSACTION
+--		IF ((SELECT ))
+--	END
+
+--GO
+--	PRINT 'Создал Хранимую процедуру StopRent'
 
 GO
 	PRINT '==================================Функции======================================='
@@ -571,7 +585,7 @@ GO
 						> GETDATE() 
 						AND ID_Vehicle = @Vehicle_ID
 						AND YEAR(DATEADD(HOUR, ABS(DATEDIFF(HOUR,RentalTime,0))+ABS(CountOfHours),Convert(datetime, StartDate, 0))) 
-						= YEAR(GETDATE()))
+						= YEAR(GETDATE()) and RentalStatus = 'стандартная')
 				SET @ret = 'доступен'
 			ELSE SET @ret = 'занят'
 		RETURN @ret
@@ -716,7 +730,7 @@ GO
 	CREATE VIEW RentalsINFO
 	AS
 	SELECT 
-			ID_Rental, ID_Vehicle, ID_DriverLicence,  DATEADD(HOUR,Rentals.CountOfHours+DATEPART(HOUR,CONVERT(DATETIME,Rentals.RentalTime)),CONVERT(DATETIME,Rentals.StartDate)) as EndTime
+			ID_Rental, ID_Vehicle, ID_DriverLicence, RentalStatus,  DATEADD(HOUR,Rentals.CountOfHours+DATEPART(HOUR,CONVERT(DATETIME,Rentals.RentalTime)),CONVERT(DATETIME,Rentals.StartDate)) as EndTime
 		FROM Rentals
 
 GO
@@ -733,7 +747,7 @@ GO
 		IF EXISTS(SELECT TOP (1) *
 			FROM RentalsINFO
 			WHERE RentalsINFO.ID_DriverLicence = @DriverLicence 
-			AND EndTime > GETDATE())
+			AND EndTime > GETDATE() AND LOWER(RentalStatus) = 'стандартная')
 		SET @Ret = 'в поездке'
 		ELSE
 			SET @Ret = NULL
@@ -842,6 +856,7 @@ GO
 		GRANT EXEC ON AddCategoryToDriverLicence to DB_USER_USERHANDLER
 		GRANT EXEC ON REG_USER TO DB_USER_USERHANDLER
 		GRANT EXEC ON Rent TO DB_USER_USERHANDLER
+		
 		--GRANT EXEC ON CHECK_USER TO DB_USER_USERHANDLER
 		
 
@@ -855,6 +870,8 @@ GO
 		GRANT INSERT, SELECT, UPDATE, DELETE ON VehicleRegistrCertificates TO DB_USER_CARHANDLER
 		GRANT SELECT ON VehiclesINFO TO DB_USER_CARHANDLER
 		GRANT SELECT ON VehiclesWithStatus TO DB_USER_CARHANDLER
+		GRANT SELECT ON RentalsINFO TO DB_USER_CARHANDLER
+		GRANT SELECT, UPDATE ON Rentals TO DB_USER_CARHANDLER
 
 		CREATE LOGIN DLHANDLER WITH PASSWORD = 'DLHANDLER'
 		CREATE USER DB_USER_DLHANDLER FOR LOGIN DLHANDLER

@@ -126,20 +126,12 @@
       <Association Name="Rental_Users_Rental_Admins" Member="Rental_Admins" ThisKey="ID_User" OtherKey="ID_User" Type="Rental_Admins" />
     </Type>
   </Table>
-  <Table Name="dbo.VehiclesINFO" Member="VehiclesINFO">
-    <Type Name="VehiclesINFO">
+  <Table Name="dbo.RentalsINFO" Member="RentalsINFO">
+    <Type Name="RentalsINFO">
+      <Column Name="ID_Rental" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Brand" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Mark" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Color" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
-      <Column Name="Class" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Vehicle_Category" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
-      <Column Name="PricePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="CarPicture" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Lat" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Lng" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="AccessStatus" Type="System.String" DbType="Char(11)" CanBeNull="true" />
-      <Column Name="DamageCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ID_DriverLicence" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.UsersINFO" Member="UsersINFO">
@@ -158,12 +150,20 @@
       <Column Name="RentStatus" Type="System.String" DbType="Char(9)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.RentalsINFO" Member="RentalsINFO">
-    <Type Name="RentalsINFO">
-      <Column Name="ID_Rental" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+  <Table Name="dbo.VehiclesINFO" Member="VehiclesINFO">
+    <Type Name="VehiclesINFO">
       <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ID_DriverLicence" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Brand" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Mark" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Color" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
+      <Column Name="Class" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Vehicle_Category" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="PricePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CarPicture" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Lat" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Lng" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AccessStatus" Type="System.String" DbType="Char(11)" CanBeNull="true" />
+      <Column Name="DamageCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

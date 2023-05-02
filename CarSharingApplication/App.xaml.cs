@@ -26,17 +26,20 @@ namespace CarSharingApplication
             } 
         }
 
+        //public static bool[] AdmWindowConditions = new bool[14];
+        //public static bool[] UsrWindowConditions;
+
 
 
 #nullable enable
-    /// <summary>
-    /// Получить данные по запросу
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="context"></param>
-    /// <param name="query_command"></param>
-    /// <returns></returns>
-    public static List<T>? GetQueryResult<T>(DataContext context, string query_command)
+        /// <summary>
+        /// Получить данные по запросу
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="context"></param>
+        /// <param name="query_command"></param>
+        /// <returns></returns>
+        public static List<T>? GetQueryResult<T>(DataContext context, string query_command)
         {
             try
             {

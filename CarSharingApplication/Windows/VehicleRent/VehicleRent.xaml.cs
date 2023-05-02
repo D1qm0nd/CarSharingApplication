@@ -23,8 +23,10 @@ namespace CarSharingApplication.Windows.VehicleRent
     {
         private UsersINFO _User;
         private VehiclesINFO _Vehicle;
-        public VehicleRent(UsersINFO User, VehiclesINFO Vehicle)
+        private bool _ShowOwner;
+        public VehicleRent(UsersINFO User, VehiclesINFO Vehicle, bool showOwner)
         {
+            _ShowOwner = showOwner;
             InitializeComponent();
             _User = User;
             _Vehicle = Vehicle;
@@ -40,17 +42,26 @@ namespace CarSharingApplication.Windows.VehicleRent
                 return;
             App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
                 $"EXEC Rent @DriverLicence = '{_User.ID_DriverLicence}', @ID_Vehicle = {_Vehicle.ID_Vehicle}, @RentalTime = '{DateTime.Now.ToString("HH:mm")}', @CountOfHours = {Picker.HourPicker.Value}");
-            var TripWND = new TripWindow(_User);
-            TripWND.Owner = this;
+            var TripWND = new TripWindow(_User,false);
+            TripWND.Owner = this.Owner.Owner;
             TripWND.Activate();
             TripWND.Show();
-            this.Visibility = Visibility.Collapsed;
+            this.Owner.Close();//??
+            _ShowOwner=false;
+            this.Close();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            this.Owner.Visibility = Visibility.Visible;
-            this.Activate();
+            if (_ShowOwner == true)
+            {
+                this.Owner.Visibility = Visibility.Visible;
+                this.Activate();
+            }
+            else
+            { 
+                this.Owner.Close();
+            }
         }
     }
 }

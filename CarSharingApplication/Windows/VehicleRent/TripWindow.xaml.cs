@@ -20,19 +20,53 @@ namespace CarSharingApplication.Windows.VehicleRent
     /// </summary>
     public partial class TripWindow : Window
     {
+        private bool _ShowOwner;
         private UsersINFO _User;
         private VehiclesINFO _Vehicle;
-        public TripWindow(UsersINFO user)
+        private RentalsINFO _Rental;
+        public TripWindow(UsersINFO user, bool showOwner)
         {
+            _ShowOwner = showOwner;
             InitializeComponent();
             _User = user;
-            _Vehicle = App.GetScalarResult<VehiclesINFO>(new CarSharingDataBaseClassesDataContext("CARHANDLERConnection"),
-                           $"SELECT TOP(1) * FROM RentalsINFO WHERE ID_DriverLicence = {_User.ID_DriverLicence} AND EndTime > GETDATE()");
+            _Rental = App.GetScalarResult<RentalsINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
+                           $"SELECT TOP(1) * FROM RentalsINFO WHERE ID_DriverLicence = {_User.ID_DriverLicence} AND EndTime > GETDATE() AND RentalStatus='стандартная'");
+            _Vehicle = App.GetScalarResult<VehiclesINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
+                    $"SELECT * FROM VehiclesINFO WHERE ID_Vehicle = {_Rental.ID_Vehicle}");
+            Card.SetVehicleInfo(_Vehicle,"");
+            _ShowOwner = showOwner;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            throw new NotImplementedException("Осуществить, VehicleRent - проверку на открытие");
+            if (_ShowOwner == true)
+            {
+                this.Owner.Show();
+                this.Owner.Visibility = Visibility.Visible;
+                this.Owner.Activate();
+            }
+            else 
+            {
+                this.Owner.Close();
+            }
+            //throw new NotImplementedException("Осуществить, VehicleRent - проверку на открытие");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                while
+                (
+                    !App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
+                                        $"UPDATE Rentals SET RentalStatus='досрочная' WHERE ID_Rental = {_Rental.ID_Rental}")
+                ) ;
+            }
+            catch { }
+            finally 
+            {
+                this.Close();
+            }
         }
     }
 }
