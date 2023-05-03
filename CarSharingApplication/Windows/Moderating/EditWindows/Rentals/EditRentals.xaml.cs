@@ -17,32 +17,24 @@ using System.Windows.Shapes;
 namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
 {
     /// <summary>
-    /// Логика взаимодействия для EditTrafficAccidentTypes.xaml
+    /// Логика взаимодействия для EditRentals.xaml
     /// </summary>
-    public partial class EditTrafficAccidentTypes : Window
+    public partial class EditRentals : Window
     {
         private string ConnectionString = App.GetConnectionString("DBADMINConnection");
         private CarSharingDataBaseClassesDataContext db;
-
-        public EditTrafficAccidentTypes()
+        public EditRentals()
         {
             try
             {
                 InitializeComponent();
                 db = new CarSharingDataBaseClassesDataContext(ConnectionString);
-                dt_grid.ItemsSource = db.TrafficAccidentTypes;
+                dt_grid.ItemsSource = db.Rentals;
             }
             catch (SqlException sqlex)
             {
                 MessageBox.Show(sqlex.Message);
             }
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            db.Connection.Close();
-            db.Dispose();
-            this.Owner.Visibility = Visibility.Visible;
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -54,16 +46,19 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
             catch (SqlException sqlex)
             {
                 MessageBox.Show(sqlex.Message);
-                dt_grid.ItemsSource = db.Rental_Users;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                dt_grid.ItemsSource = db.VehicleRegistrCertificates;
             }
         }
+
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Owner.Visibility = Visibility.Visible;
+        }
     }
 }
+

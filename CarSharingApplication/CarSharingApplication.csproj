@@ -146,6 +146,15 @@
     <Compile Include="Windows\Moderating\AdminWindows.xaml.cs">
       <DependentUpon>AdminWindows.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Moderating\EditWindows\Rentals\EditRentals.xaml.cs">
+      <DependentUpon>EditRentals.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Moderating\EditWindows\Rentals\EditTrafficAccidents.xaml.cs">
+      <DependentUpon>EditTrafficAccidents.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Moderating\EditWindows\Rentals\EditTrafficAccidentTypes.xaml.cs">
+      <DependentUpon>EditTrafficAccidentTypes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Moderating\EditWindows\Users\EditCategories.xaml.cs">
       <DependentUpon>EditCategories.xaml</DependentUpon>
     </Compile>
@@ -219,6 +228,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Moderating\AdminWindows.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\Rentals\EditRentals.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\Rentals\EditTrafficAccidents.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\Rentals\EditTrafficAccidentTypes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

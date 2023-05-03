@@ -17,20 +17,20 @@ using System.Windows.Shapes;
 namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
 {
     /// <summary>
-    /// Логика взаимодействия для EditTrafficAccidentTypes.xaml
+    /// Логика взаимодействия для EditTrafficAccidents.xaml
     /// </summary>
-    public partial class EditTrafficAccidentTypes : Window
+    public partial class EditTrafficAccidents : Window
     {
         private string ConnectionString = App.GetConnectionString("DBADMINConnection");
         private CarSharingDataBaseClassesDataContext db;
 
-        public EditTrafficAccidentTypes()
+        public EditTrafficAccidents()
         {
             try
             {
                 InitializeComponent();
                 db = new CarSharingDataBaseClassesDataContext(ConnectionString);
-                dt_grid.ItemsSource = db.TrafficAccidentTypes;
+                dt_grid.ItemsSource = db.TrafficAccidents;
             }
             catch (SqlException sqlex)
             {

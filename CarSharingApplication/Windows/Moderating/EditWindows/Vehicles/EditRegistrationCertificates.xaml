@@ -77,7 +77,7 @@
             </ScrollViewer>
             <WrapPanel VerticalAlignment="Bottom" Width="1200">
                 <Button VerticalAlignment="Bottom" Click="SubmitButton_Click" Height="30" MinWidth="599" >Подвердить изменения</Button>
-                <Button VerticalAlignment="Bottom" Click="DeleteButton_Click" Height="30" MinWidth="599" Margin="2 0 0 0" Background="red">Удалить</Button>
+            <Button VerticalAlignment="Bottom" Click="DeleteButton_Click" Height="30" MinWidth="599" Margin="2 0 0 0" Background="red" BorderBrush="DarkRed">Удалить</Button>
             </WrapPanel>
         </Grid>
 </Window>

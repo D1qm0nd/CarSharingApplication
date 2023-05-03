@@ -97,7 +97,7 @@ namespace CarSharingApplication
 
         private void TrafficAccidentsButton_Click(object sender, RoutedEventArgs e)
         {
-            var EditWindow = new EditUsersWindow();
+            var EditWindow = new EditTrafficAccidents();
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
@@ -105,7 +105,7 @@ namespace CarSharingApplication
 
         private void RentalsButton_Click(object sender, RoutedEventArgs e)
         {
-            var EditWindow = new EditUsersWindow();
+            var EditWindow = new EditRentals();
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();

@@ -34,38 +34,6 @@
       <Association Name="Rental_Users_Rental_Admins" Member="Rental_Users" ThisKey="ID_User" OtherKey="ID_User" Type="Rental_Users" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Rentals" Member="Rentals">
-    <Type Name="Rentals">
-      <Column Name="ID_Rental" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ID_DriverLicence" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="RentalTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="CountOfHours" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="DriversLicences_Rentals" Member="DriversLicences" ThisKey="ID_DriverLicence" OtherKey="ID_DriverLicence" Type="DriversLicences" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Vehicles_Rentals" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.TrafficAccidents" Member="TrafficAccidents">
-    <Type Name="TrafficAccidents">
-      <Column Name="ID_TrafficAccident" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ID_DriverLicence" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="ID_TrafficAccidentType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Damage" Type="System.String" DbType="NVarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="TrafficAccidentDescription" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Association Name="DriversLicences_TrafficAccidents" Member="DriversLicences" ThisKey="ID_DriverLicence" OtherKey="ID_DriverLicence" Type="DriversLicences" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="TrafficAccidentTypes_TrafficAccidents" Member="TrafficAccidentTypes" ThisKey="ID_TrafficAccidentType" OtherKey="ID_TrafficAccidentType" Type="TrafficAccidentTypes" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Vehicles_TrafficAccidents" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.TrafficAccidentTypes" Member="TrafficAccidentTypes">
-    <Type Name="TrafficAccidentTypes">
-      <Column Name="ID_TrafficAccidentType" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TrafficAccidentTypeName" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
-      <Association Name="TrafficAccidentTypes_TrafficAccidents" Member="TrafficAccidents" ThisKey="ID_TrafficAccidentType" OtherKey="ID_TrafficAccidentType" Type="TrafficAccidents" />
-    </Type>
-  </Table>
   <Table Name="dbo.VehicleCoordinates" Member="VehicleCoordinates">
     <Type Name="VehicleCoordinates">
       <Column Name="ID_Coodinates" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -82,10 +50,10 @@
       <Column Name="PricePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Class" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
       <Column Name="CarPicture" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Vehicles_Rentals" Member="Rentals" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Rentals" />
-      <Association Name="Vehicles_TrafficAccidents" Member="TrafficAccidents" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="TrafficAccidents" />
       <Association Name="Vehicles_VehicleCoordinates" Member="VehicleCoordinates" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="VehicleCoordinates" />
       <Association Name="Vehicles_VehicleRegistrCertificates" Member="VehicleRegistrCertificates" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="VehicleRegistrCertificates" />
+      <Association Name="Vehicles_Rentals" Member="Rentals" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Rentals" />
+      <Association Name="Vehicles_TrafficAccidents" Member="TrafficAccidents" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="TrafficAccidents" />
       <Association Name="Classes_Vehicles" Member="Classes" ThisKey="Class" OtherKey="Class" Type="Classes" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
@@ -164,6 +132,39 @@
       <Column Name="Lng" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="AccessStatus" Type="System.String" DbType="Char(11)" CanBeNull="true" />
       <Column Name="DamageCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rentals" Member="Rentals">
+    <Type Name="Rentals">
+      <Column Name="ID_Rental" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_DriverLicence" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="RentalTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="CountOfHours" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RentalStatus" Type="System.String" DbType="Char(12) NOT NULL" CanBeNull="false" />
+      <Association Name="DriversLicences_Rentals" Member="DriversLicences" ThisKey="ID_DriverLicence" OtherKey="ID_DriverLicence" Type="DriversLicences" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Vehicles_Rentals" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrafficAccidentTypes" Member="TrafficAccidentTypes">
+    <Type Name="TrafficAccidentTypes">
+      <Column Name="ID_TrafficAccidentType" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TrafficAccidentTypeName" Type="System.String" DbType="NVarChar(60) NOT NULL" CanBeNull="false" />
+      <Association Name="TrafficAccidentTypes_TrafficAccidents" Member="TrafficAccidents" ThisKey="ID_TrafficAccidentType" OtherKey="ID_TrafficAccidentType" Type="TrafficAccidents" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrafficAccidents" Member="TrafficAccidents">
+    <Type Name="TrafficAccidents">
+      <Column Name="ID_TrafficAccident" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_DriverLicence" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_TrafficAccidentType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Damage" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="TrafficAccidentDescription" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="DriversLicences_TrafficAccidents" Member="DriversLicences" ThisKey="ID_DriverLicence" OtherKey="ID_DriverLicence" Type="DriversLicences" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="TrafficAccidentTypes_TrafficAccidents" Member="TrafficAccidentTypes" ThisKey="ID_TrafficAccidentType" OtherKey="ID_TrafficAccidentType" Type="TrafficAccidentTypes" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Vehicles_TrafficAccidents" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>
