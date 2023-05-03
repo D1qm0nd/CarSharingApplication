@@ -211,7 +211,8 @@ namespace CarSharingApplication
 
         private void SearchByCriteries(object sender, RoutedEventArgs e)
         {
-            List<VehiclesINFO> newvehicleslist = VehiclesData.GetInstance.vehiclesInfoList.Where(vehicle => Double.Parse(vehicle.PricePerHour.ToString()) <= PriceSlider.Value).ToList();
+            var instance = VehiclesData.GetInstance;
+            List<VehiclesINFO> newvehicleslist = instance.vehiclesInfoList.Where(vehicle => Double.Parse(vehicle.PricePerHour.ToString()) <= PriceSlider.Value).ToList();
 #nullable enable
             if ((string)ListViewVehicleClasses.SelectedValue != "*ВСЕ" && ListViewVehicleClasses.SelectedValue != null)
             {
@@ -231,13 +232,13 @@ namespace CarSharingApplication
             RentalMap.SetMarkers(GetMarkers(newvehicleslist));
             if (newvehicleslist.Count > 0)
             {
-                VehiclesData.GetInstance.selectedVehicle = newvehicleslist.First();
-                SetVehicleInfo(VehiclesData.GetInstance.selectedVehicle, ZeroVehiclesByCriteries);
-                RentalMap.MoveCursorToVehicleOnMap(VehiclesData.GetInstance.selectedVehicle);
+                instance.selectedVehicle = newvehicleslist.First();
+                SetVehicleInfo(instance.selectedVehicle, ZeroVehiclesByCriteries);
+                RentalMap.MoveCursorToVehicleOnMap(instance.selectedVehicle);
             }
             else
             {
-                VehiclesData.GetInstance.selectedVehicle = null;
+                instance.selectedVehicle = null;
                 SetVehicleInfo(null, ZeroVehiclesByCriteries);
             }
         }
@@ -259,9 +260,10 @@ namespace CarSharingApplication
 
         private void RentalButton_Click(object sender, RoutedEventArgs e)
         {
-            if (VehiclesData.GetInstance.selectedVehicle != null)
+            var instance = VehiclesData.GetInstance;
+            if (instance.selectedVehicle != null)
             {
-                var rentWindow = new VehicleRent(User, VehiclesData.GetInstance.selectedVehicle, this, true);
+                var rentWindow = new VehicleRent(User, instance.selectedVehicle, this, true);
                 this.Visibility = Visibility.Collapsed;
                 rentWindow.Activate();
                 rentWindow.Show();
