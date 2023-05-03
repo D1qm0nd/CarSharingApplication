@@ -34,26 +34,16 @@
       <Association Name="Rental_Users_Rental_Admins" Member="Rental_Users" ThisKey="ID_User" OtherKey="ID_User" Type="Rental_Users" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.VehicleCoordinates" Member="VehicleCoordinates">
-    <Type Name="VehicleCoordinates">
-      <Column Name="ID_Coodinates" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Longitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="Latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="StayDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="Vehicles_VehicleCoordinates" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Vehicles" Member="Vehicles">
     <Type Name="Vehicles">
       <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PricePerHour" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Class" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
       <Column Name="CarPicture" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Vehicles_VehicleCoordinates" Member="VehicleCoordinates" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="VehicleCoordinates" />
       <Association Name="Vehicles_VehicleRegistrCertificates" Member="VehicleRegistrCertificates" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="VehicleRegistrCertificates" />
       <Association Name="Vehicles_Rentals" Member="Rentals" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Rentals" />
       <Association Name="Vehicles_TrafficAccidents" Member="TrafficAccidents" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="TrafficAccidents" />
+      <Association Name="Vehicles_VehicleCoordinates" Member="VehicleCoordinates" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="VehicleCoordinates" />
       <Association Name="Classes_Vehicles" Member="Classes" ThisKey="Class" OtherKey="Class" Type="Classes" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
@@ -165,6 +155,16 @@
       <Association Name="DriversLicences_TrafficAccidents" Member="DriversLicences" ThisKey="ID_DriverLicence" OtherKey="ID_DriverLicence" Type="DriversLicences" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="TrafficAccidentTypes_TrafficAccidents" Member="TrafficAccidentTypes" ThisKey="ID_TrafficAccidentType" OtherKey="ID_TrafficAccidentType" Type="TrafficAccidentTypes" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Vehicles_TrafficAccidents" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VehicleCoordinates" Member="VehicleCoordinates">
+    <Type Name="VehicleCoordinates">
+      <Column Name="ID_Coordinates" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Longitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="StayDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Vehicles_VehicleCoordinates" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>

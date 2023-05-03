@@ -7,7 +7,6 @@
              mc:Ignorable="d" 
              MinWidth="{Binding}"
              MinHeight="{Binding}"
-             
              >
     <Grid Width="{Binding}" Height="{Binding}">
         
