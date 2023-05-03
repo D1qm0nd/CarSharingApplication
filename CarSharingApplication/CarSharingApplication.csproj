@@ -247,6 +247,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\Accidents\EditTrafficAccidentTypes.xaml">
+>>>>>>>>> Temporary merge branch 2
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\Accidents\EditTrafficAccidentTypes.xaml">
+>>>>>>>>> Temporary merge branch 2
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\Accidents\EditTrafficAccidentTypes.xaml">
+>>>>>>>>> Temporary merge branch 2
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\Accidents\EditTrafficAccidentTypes.xaml">
+>>>>>>>>> Temporary merge branch 2
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Moderating\EditWindows\Users\EditCategories.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
