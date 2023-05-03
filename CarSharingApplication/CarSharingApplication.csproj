@@ -186,6 +186,7 @@
       <DependentUpon>VehicleRent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\VehicleSelector\CarSelector.xaml.cs" />
+    <Compile Include="Windows\VehicleSelector\VehiclesData.cs" />
     <Compile Include="Windows\XAMLModels\CategoryPicker.xaml.cs">
       <DependentUpon>CategoryPicker.xaml</DependentUpon>
     </Compile>
@@ -200,6 +201,9 @@
     </Compile>
     <Compile Include="Windows\XAMLModels\RentButton.xaml.cs">
       <DependentUpon>RentButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\XAMLModels\RentTimer.xaml.cs">
+      <DependentUpon>RentTimer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\XAMLModels\UCDriverLicenceCategories.xaml.cs">
       <DependentUpon>UCDriverLicenceCategories.xaml</DependentUpon>
@@ -304,6 +308,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\XAMLModels\RentButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\XAMLModels\RentTimer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

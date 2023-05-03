@@ -31,6 +31,7 @@ using System.Drawing;
 //using static GMap.NET.Entity.OpenStreetMapRouteEntity;
 using System.Drawing.Imaging;
 using CarSharingApplication.Windows.Moderating.EditWindows.Users;
+using CarSharingApplication.Windows.VehicleSelector;
 
 namespace CarSharingApplication
 {
@@ -41,10 +42,7 @@ namespace CarSharingApplication
     {
         private UsersINFO User = null;
         private bool _ShowOwner;
-        private List<VehiclesINFO> vehiclesInfoList { get; set; }
-        private VehiclesINFO selectedVehicle { get; set; }
-        private List<string> vehClasses { get; set; }
-        private List<string> vehBrands { get; set; }
+            
         private string ConnectionString { get { return App.GetConnectionString("CARHANDLERConnection"); } }
         private string ZeroVehiclesByCriteries = "Отсутствуют транспотрные\nсредтва соответствующие\nзаданным критериям";
         private string HaveNotAvaliableVehicles = "В данный момент\nнет свободных авто\nзаходите позже";
@@ -56,44 +54,47 @@ namespace CarSharingApplication
             InitializeComponent();
             User = user;
             this.Title = $"CarSharing [{User.UserSurname} {User.UserName} {User.UserMiddleName}]";
-            GetVehiclesData();
+            GetVehiclesData(VehiclesData.GetInstance);
+        }
+
+        public void SetInfo(VehiclesData vehData)
+        {
+            vehData.selectedVehicle = vehData.vehiclesInfoList.First();
+            RentalMap.SetMarkers(GetMarkers(vehData.vehiclesInfoList));
+            SetVehicleInfo(vehData.selectedVehicle, ZeroVehiclesByCriteries);
         }
 
         /// <summary>
         /// Получение/обновление данных о авто
         /// </summary>
-        private void GetVehiclesData()
+        private void GetVehiclesData(VehiclesData vehData)
         {
-            vehClasses = App.GetQueryResult<string>(
-                new CarSharingDataBaseClassesDataContext(ConnectionString),
-                "SELECT TRIM(LOWER(Class)) FROM Classes");
-            vehClasses.Add("*ВСЕ");
+            vehData.vehClasses = App.GetQueryResult<string>(
+            new CarSharingDataBaseClassesDataContext(ConnectionString),
+            "SELECT TRIM(LOWER(Class)) FROM Classes");
+            vehData.vehClasses.Add("*ВСЕ");
+            ListViewVehicleClasses.ItemsSource = vehData.vehClasses.OrderBy(str => str);
 
-            vehBrands = App.GetQueryResult<string>(
-                new CarSharingDataBaseClassesDataContext(ConnectionString),
-                "SELECT DISTINCT TRIM(LOWER(Brand)) FROM VehicleRegistrCertificates");
-            vehBrands.Add("*ВСЕ");
+            vehData.vehBrands = App.GetQueryResult<string>(
+            new CarSharingDataBaseClassesDataContext(ConnectionString),
+            "SELECT DISTINCT TRIM(LOWER(Brand)) FROM VehicleRegistrCertificates");
+            vehData.vehBrands.Add("*ВСЕ");
+            ListViewVehicleBrands.ItemsSource = vehData.vehBrands.OrderBy(str => str);
 
-            vehiclesInfoList = App.GetQueryResult<VehiclesINFO>(
-                new CarSharingDataBaseClassesDataContext(ConnectionString),
-                "SELECT * FROM VehiclesWithStatus ('доступен')");
-
-            vehiclesInfoList = OrderByPricePerHourDesc(vehiclesInfoList);
-
-            ListViewVehicleClasses.ItemsSource = vehClasses.OrderBy(str => str);
-            ListViewVehicleBrands.ItemsSource = vehBrands.OrderBy(str => str);
+            vehData.vehiclesInfoList = App.GetQueryResult<VehiclesINFO>(
+            new CarSharingDataBaseClassesDataContext(ConnectionString),
+            "SELECT * FROM VehiclesWithStatus ('доступен')");
+            vehData.vehiclesInfoList = OrderByPricePerHourDesc(vehData.vehiclesInfoList);
 
             try
             {
-                PriceSlider.Minimum = Double.Parse((vehiclesInfoList.Min(veh => veh.PricePerHour)).ToString());
-                PriceSlider.Maximum = Double.Parse((vehiclesInfoList.Max(veh => veh.PricePerHour)).ToString());
+                PriceSlider.Minimum = Double.Parse((vehData.vehiclesInfoList.Min(veh => veh.PricePerHour)).ToString());
+                PriceSlider.Maximum = Double.Parse((vehData.vehiclesInfoList.Max(veh => veh.PricePerHour)).ToString());
                 PriceSlider.Value = PriceSlider.Maximum;
 
-                if (vehiclesInfoList.Count > 0)
+                if (vehData.vehiclesInfoList.Count > 0)
                 {
-                    selectedVehicle = vehiclesInfoList.First();
-                    RentalMap.SetMarkers(GetMarkers(vehiclesInfoList));
-                    SetVehicleInfo(selectedVehicle, ZeroVehiclesByCriteries);
+                    SetInfo(vehData);
                 }
             }
             catch
@@ -185,9 +186,9 @@ namespace CarSharingApplication
         private void MarkerClick(object sender, MouseEventArgs args)
         {
             var marker = (System.Windows.Controls.Image)sender;
-            selectedVehicle = (VehiclesINFO)(marker.Tag);
-            SetVehicleInfo(selectedVehicle, ZeroVehiclesByCriteries);
-            RentalMap.MoveCursorToVehicleOnMap(selectedVehicle);
+            VehiclesData.GetInstance.selectedVehicle = (VehiclesINFO)(marker.Tag);
+            SetVehicleInfo(VehiclesData.GetInstance.selectedVehicle, ZeroVehiclesByCriteries);
+            RentalMap.MoveCursorToVehicleOnMap(VehiclesData.GetInstance.selectedVehicle);
         }
 
 
@@ -210,7 +211,7 @@ namespace CarSharingApplication
 
         private void SearchByCriteries(object sender, RoutedEventArgs e)
         {
-            List<VehiclesINFO> newvehicleslist = vehiclesInfoList.Where(vehicle => Double.Parse(vehicle.PricePerHour.ToString()) <= PriceSlider.Value).ToList();
+            List<VehiclesINFO> newvehicleslist = VehiclesData.GetInstance.vehiclesInfoList.Where(vehicle => Double.Parse(vehicle.PricePerHour.ToString()) <= PriceSlider.Value).ToList();
 #nullable enable
             if ((string)ListViewVehicleClasses.SelectedValue != "*ВСЕ" && ListViewVehicleClasses.SelectedValue != null)
             {
@@ -230,13 +231,13 @@ namespace CarSharingApplication
             RentalMap.SetMarkers(GetMarkers(newvehicleslist));
             if (newvehicleslist.Count > 0)
             {
-                selectedVehicle = newvehicleslist.First();
-                SetVehicleInfo(selectedVehicle, ZeroVehiclesByCriteries);
-                RentalMap.MoveCursorToVehicleOnMap(selectedVehicle);
+                VehiclesData.GetInstance.selectedVehicle = newvehicleslist.First();
+                SetVehicleInfo(VehiclesData.GetInstance.selectedVehicle, ZeroVehiclesByCriteries);
+                RentalMap.MoveCursorToVehicleOnMap(VehiclesData.GetInstance.selectedVehicle);
             }
             else
-            { 
-                selectedVehicle = null;
+            {
+                VehiclesData.GetInstance.selectedVehicle = null;
                 SetVehicleInfo(null, ZeroVehiclesByCriteries);
             }
         }
@@ -258,9 +259,9 @@ namespace CarSharingApplication
 
         private void RentalButton_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedVehicle != null)
+            if (VehiclesData.GetInstance.selectedVehicle != null)
             {
-                var rentWindow = new VehicleRent(User,selectedVehicle, this, true);
+                var rentWindow = new VehicleRent(User, VehiclesData.GetInstance.selectedVehicle, this, true);
                 this.Visibility = Visibility.Collapsed;
                 rentWindow.Activate();
                 rentWindow.Show();
