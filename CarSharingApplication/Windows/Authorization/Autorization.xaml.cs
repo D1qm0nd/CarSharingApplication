@@ -25,6 +25,11 @@ using static System.Net.Mime.MediaTypeNames;
 using CarSharingApplication.SQL.Linq;
 using CarSharingApplication.Windows.Authorization;
 using CarSharingApplication.Windows.VehicleRent;
+using CarSharingApplication.LogLibrary;
+using System.Text.Json;
+using System.Text.Unicode;
+using System.Text.Encodings.Web;
+using System.Text.Json.Serialization.Metadata;
 
 namespace CarSharingApplication
 {
@@ -34,9 +39,14 @@ namespace CarSharingApplication
     public partial class Autorization : Window
     {
         private int condition = 0;
-
         public Autorization()
         {
+            App._Logger.options = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                //WriteIndented = true
+            };
+            App._Logger.LogPath = Environment.CurrentDirectory + @"\logs.json";
             InitializeComponent();
             Reg_Button_Click(null, null);
         }
@@ -110,7 +120,7 @@ namespace CarSharingApplication
                 }
                 catch (SqlException SqlEx)
                 {
-                    MessageBox.Show($"SQL ERROR {SqlEx.ErrorCode.ToString()}");
+                    App._Logger.Log(new LogMessage(null, this.Title, SqlEx.Message, SqlEx.ErrorCode.ToString(), 1));
                 }
                 finally
                 {
@@ -171,14 +181,14 @@ namespace CarSharingApplication
                                 ClearFields();
                             }
                         } 
-                        else MessageBox.Show("Пользователь не найден");
+                        else App._Logger.Log(new LogMessage(null,this.Title,"Пользователь не найден","ошибка авторизации",1));
                     }
                 }
                 #endregion
             }
-            catch (SqlException sqlex)
+            catch (SqlException SqlEx)
             {
-                MessageBox.Show(sqlex.Message);
+                App._Logger.Log(new LogMessage(null,this.Title, SqlEx.Message, SqlEx.ErrorCode.ToString(), 1));
             }
         }
 
@@ -211,6 +221,7 @@ namespace CarSharingApplication
                 inputButton.Click += MakeRegister;
                 inputButton.Content = "Зарегистрироваться";
             }
+            App._Logger.Log(new LogMessage(null, this.Title, "Нажатие кнопки переход к регистрации",null,null));
         }
 
         private void Login_Button_Click(object sender, RoutedEventArgs e)
@@ -223,6 +234,7 @@ namespace CarSharingApplication
                 inputButton.Click += MakeLogIn;
                 inputButton.Content = "Войти";
             }
+            App._Logger.Log(new LogMessage(null, this.Title, "Нажатие кнопки переход к авторизации", null, null));
         }
 
         private void ClearFields()
@@ -257,6 +269,7 @@ namespace CarSharingApplication
                     }
                     MessageBox.Show($"Вы ввели символ '{c}' из перечня недопустимых:\n{notallowedinstr}", "Ввод недопусимого значения");
                     Login.Clear();
+                    App._Logger.Log(new LogMessage(null, this.Title, "Пользователь ввёл недопустимые символы", "Ошибка ввода", 0));
                 }
             }
         }

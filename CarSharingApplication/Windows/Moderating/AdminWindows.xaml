@@ -52,7 +52,7 @@
                 <Button x:Name="DriverLicencesCategoriesButton" Margin="1" Grid.Column="0" Grid.Row="2" Click="DriverLicencesCategoriesButton_Click">Категории Водителького Удостоверения</Button>
                 <Button x:Name="VehicleClassesButon" Margin="1" Grid.Column="0" Grid.Row="3" Click="VehicleClassesButon_Click">Классы Транспортных Средств</Button>
                 <Button x:Name="VehiclesButton" Margin="1" Grid.Column="0" Grid.Row="4" Click="VehiclesButton_Click">Транспортные средства</Button>
-                <Button x:Name="VehiclesPassportsButton" Margin="1" Grid.Column="1" Grid.Row="0" Click="VehiclesPassportsButton_Click">Паспорта Транспортных Средств</Button>
+                <Button x:Name="VehiclesPassportsButton" Margin="1" Grid.Column="1" Grid.Row="0" Click="VehiclesPassportsButton_Click">Свидетельства регистрации ТС</Button>
                 <Button x:Name="VehicleCoordinatesButton" Margin="1" Grid.Column="1" Grid.Row="1" Click="VehicleCoordinatesButton_Click">Координаты Транспортных Средств</Button>
                 <Button x:Name="TrafficAccidentsTypeButton" Margin="1" Grid.Column="1" Grid.Row="2" Click="TrafficAccidentsTypeButton_Click">Типы Аварийных случаев</Button>
                 <Button x:Name="TrafficAccidentsButton" Margin="1" Grid.Column="1" Grid.Row="3" Click="TrafficAccidentsButton_Click">Аварийные случаи</Button>

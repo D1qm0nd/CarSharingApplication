@@ -4,8 +4,11 @@ using System.Configuration;
 using System.Data;
 using System.Data.Linq;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
+using CarSharingApplication.LogLibrary;
+using LoggerLib;
 
 namespace CarSharingApplication
 {
@@ -19,14 +22,14 @@ namespace CarSharingApplication
             return ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
         }
 
-        public static string path { get 
+        public static string path { get
             {
                 string _path = Environment.CurrentDirectory;
-                return _path.Remove(_path.Length - 9); 
-            } 
+                return _path.Remove(_path.Length - 9);
+            }
         }
 
-
+        public static Logger _Logger { get; } = Logger.Instance();
 
 #nullable enable
         /// <summary>

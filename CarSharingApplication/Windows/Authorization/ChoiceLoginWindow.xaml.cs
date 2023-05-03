@@ -1,4 +1,5 @@
-﻿using CarSharingApplication.SQL.Linq;
+﻿using CarSharingApplication.LogLibrary;
+using CarSharingApplication.SQL.Linq;
 using CarSharingApplication.Windows.VehicleRent;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace CarSharingApplication.Windows.Authorization
             this.Owner = owner;
             User = user;
             InitializeComponent();
+            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Вошёл в окно выбора входа", null, null));
         }
 
         private void AdminLoginButton_Click(object sender, RoutedEventArgs e)
@@ -36,6 +38,7 @@ namespace CarSharingApplication.Windows.Authorization
             AdmWindow.Activate();
             AdmWindow.Show();
             this.Visibility = Visibility.Collapsed;
+            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Нажал кнопку войти как администратор", null, null));
         }
 
         private void UserLoginButton_Click(object sender, RoutedEventArgs e)
@@ -48,6 +51,8 @@ namespace CarSharingApplication.Windows.Authorization
                 CarSelWindow.Activate();
                 CarSelWindow.Show();
                 this.Visibility = Visibility.Collapsed;
+                App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Нажал кнопку войти как пользователь", null, null));
+
             }
             else
             {
@@ -55,6 +60,7 @@ namespace CarSharingApplication.Windows.Authorization
                 this.Visibility = Visibility.Collapsed;
                 TripWND.Activate();
                 TripWND.Show();
+                App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Пользователя перекинуло на окно поездки", null, null));
             }
 
         }
@@ -64,6 +70,7 @@ namespace CarSharingApplication.Windows.Authorization
             this.Owner.Activate();
             this.Owner.Visibility = Visibility.Visible;
             GC.Collect();
+            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Окно закрылось", null, null));
         }
     }
 }

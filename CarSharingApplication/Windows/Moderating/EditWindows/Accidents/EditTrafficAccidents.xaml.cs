@@ -1,4 +1,5 @@
-﻿using CarSharingApplication.SQL.Linq;
+﻿using CarSharingApplication.LogLibrary;
+using CarSharingApplication.SQL.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -23,9 +24,12 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
     {
         private string ConnectionString = App.GetConnectionString("DBADMINConnection");
         private CarSharingDataBaseClassesDataContext db;
+        private UsersINFO _User;
 
-        public EditTrafficAccidents()
+        public EditTrafficAccidents(UsersINFO user)
         {
+            _User = user;
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Просматривает Аварийные случаи", null, null));
             try
             {
                 InitializeComponent();
@@ -43,6 +47,8 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
             db.Connection.Close();
             db.Dispose();
             this.Owner.Visibility = Visibility.Visible;
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Перестал просматривать Аварийные случаи", null, null));
+
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -50,15 +56,19 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
             try
             {
                 db.SubmitChanges();
+                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Вснёс изменения в таблицу Аварийные случаи", null, null));
             }
             catch (SqlException sqlex)
             {
                 MessageBox.Show(sqlex.Message);
                 dt_grid.ItemsSource = db.Rental_Users;
+                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Не удалось вснёсти изменения в таблицу Аварийные случаи", "Ошибка связанная с запросом к БД", null));
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Не удалось вснёсти изменения в таблицу Аварийные случаи", "Ошибка связанная с программой", null));
             }
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

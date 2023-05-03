@@ -23,9 +23,11 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
     {
         private string ConnectionString = App.GetConnectionString("DBADMINConnection");
         private CarSharingDataBaseClassesDataContext db;
+        private UsersINFO _User;
 
-        public EditTrafficAccidentTypes()
+        public EditTrafficAccidentTypes(UsersINFO user)
         {
+            _User = user;
             try
             {
                 InitializeComponent();

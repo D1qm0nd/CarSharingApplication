@@ -38,6 +38,7 @@ namespace CarSharingApplication.Windows.VehicleRent
                     $"SELECT * FROM VehiclesINFO WHERE ID_Vehicle = {_Rental.ID_Vehicle}");
                 Card.SetVehicleInfo(_Vehicle, "Ошибка загрузки данных");
                 _ShowOwner = showOwner;
+                var a = rt.AsyncStartTimer();
             }
             else this.Close();
             

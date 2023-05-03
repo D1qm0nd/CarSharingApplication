@@ -26,10 +26,11 @@ namespace CarSharingApplication
     public partial class EditVehiclesWindow : Window
     {
         private string ConnectionString = App.GetConnectionString("DBADMINConnection");
-
         private CarSharingDataBaseClassesDataContext db;
-        public EditVehiclesWindow()
+        private UsersINFO _User;
+        public EditVehiclesWindow(UsersINFO user)
         {
+            _User = user;
             try
             {
                 InitializeComponent();

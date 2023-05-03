@@ -23,10 +23,12 @@ namespace CarSharingApplication
     public partial class EditUsersWindow : Window
     {
         private string ConnectionString = App.GetConnectionString("DBADMINConnection");
-        
         private CarSharingDataBaseClassesDataContext db;
-        public EditUsersWindow()
+        private UsersINFO _User;
+
+        public EditUsersWindow(UsersINFO user)
         {
+            _User = user;
             try 
             { 
                 InitializeComponent();
