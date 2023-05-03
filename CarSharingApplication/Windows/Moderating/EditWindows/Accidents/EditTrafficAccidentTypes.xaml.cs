@@ -23,41 +23,47 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
     {
         private string ConnectionString = App.GetConnectionString("DBADMINConnection");
         private CarSharingDataBaseClassesDataContext db;
+
         public EditTrafficAccidentTypes()
-        { 
+        {
             try
             {
                 InitializeComponent();
-        db = new CarSharingDataBaseClassesDataContext(ConnectionString);
-        dt_grid.ItemsSource = db.TrafficAccidentTypes;
+                db = new CarSharingDataBaseClassesDataContext(ConnectionString);
+                dt_grid.ItemsSource = db.TrafficAccidentTypes;
             }
             catch (SqlException sqlex)
             {
                 MessageBox.Show(sqlex.Message);
             }
         }
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-{
-    db.Connection.Close();
-    db.Dispose();
-    this.Owner.Visibility = Visibility.Visible;
-}
 
-private void SubmitButton_Click(object sender, RoutedEventArgs e)
-{
-    try
-    {
-        db.SubmitChanges();
-    }
-    catch (SqlException sqlex)
-    {
-        MessageBox.Show(sqlex.Message);
-        dt_grid.ItemsSource = db.Rental_Users;
-    }
-    catch (Exception ex)
-    {
-        MessageBox.Show(ex.Message);
-    }
-}
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            db.Connection.Close();
+            db.Dispose();
+            this.Owner.Visibility = Visibility.Visible;
+        }
+
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (SqlException sqlex)
+            {
+                MessageBox.Show(sqlex.Message);
+                dt_grid.ItemsSource = db.Rental_Users;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

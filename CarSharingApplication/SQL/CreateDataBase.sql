@@ -147,7 +147,7 @@ GO
 	CREATE TABLE TrafficAccidentTypes
 	(
 		ID_TrafficAccidentType INT IDENTITY(1,1) NOT NULL,
-		TrafficAccidentTypeName NVARCHAR(60)
+		TrafficAccidentTypeName NVARCHAR(60) NOT NULL
 		PRIMARY KEY (ID_TrafficAccidentType)
 	)
 	PRINT 'Создал Таблицу TrafficAccidentTypes'
