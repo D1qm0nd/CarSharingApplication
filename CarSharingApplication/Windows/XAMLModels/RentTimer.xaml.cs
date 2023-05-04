@@ -25,30 +25,18 @@ namespace CarSharingApplication.Windows.XAMLModels
     /// </summary>
     public partial class RentTimer : UserControl
     {
-        public DateTime EndTime { get; set; }
-
         public RentTimer()
         {
             InitializeComponent();
         }
 
-        private void StartTimer(DateTime endTime)
+        public void SetTime(DateTime? endTime)
         {
-            //Stopwatch timer = new Stopwatch();
-            //timer.Start();
-            //for (int i = 0; i < 100000; i++)
-            //{
-            //}
-            //timer.Stop();
-            //while (true) { 
-            //    TimeLabel.Content = DateTime.UtcNow.ToString(@"dd/MM/yyyy hh:mm:ss tt"); //timer.Elapsed;
-            //    Thread.Sleep(1000);
-            //}
-        }
-
-        public async Task AsyncStartTimer()
-        {
-            await Task.Run(() => this.Dispatcher.BeginInvoke(() => StartTimer(EndTime)));
+            if (endTime != null)
+            {
+                TimeLabel.Text = $"Аренда закончиться {endTime}";
+            }
+            else TimeLabel.Text = "";
         }
     }
 }

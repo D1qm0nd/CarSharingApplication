@@ -10,6 +10,6 @@
              >
     <!--<Grid Height="{Binding}" Width="{Binding}" Background="orange">-->
     <Grid Height="90" Width="400" Background="orange">
-        <Label x:Name="TimeLabel" Width="{Binding}" Height="{Binding}" FontSize="28"/>
+        <TextBlock x:Name="TimeLabel" Width="{Binding}" Height="{Binding}" FontSize="28" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
     </Grid>
 </UserControl>

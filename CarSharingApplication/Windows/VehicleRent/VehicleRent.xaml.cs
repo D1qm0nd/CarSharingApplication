@@ -41,6 +41,10 @@ namespace CarSharingApplication.Windows.VehicleRent
         {
             if (rentbtn.cbox.IsChecked != true || CreditCard.isEmpty())
                 return;
+            if (!(App.GetQueryResult<string> (new CarSharingDataBaseClassesDataContext(App.GetConnectionString("DLHANDLERConnection")), 
+                     $"SELECT * FROM [dbo].GetDriverLicenceCategories ({_User.ID_DriverLicence})")
+                .Contains(_Vehicle.Vehicle_Category.Trim().ToLower())))
+                return;
             App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
                 $"EXEC Rent @DriverLicence = '{_User.ID_DriverLicence}', @ID_Vehicle = {_Vehicle.ID_Vehicle}, @RentalTime = '{DateTime.Now.ToString("HH:mm")}', @CountOfHours = {Picker.HourPicker.Value}");
             var TripWND = new TripWindow(_User, this.Owner.Owner, false);

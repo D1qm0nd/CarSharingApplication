@@ -168,14 +168,13 @@ namespace CarSharingApplication
                                         var CarSelWindow = new CarSelector(ref UserInfo, this, true);
                                         CarSelWindow.Activate();
                                         CarSelWindow.Show();
-
                                     }
                                     else
                                     {
                                         var TripWND = new TripWindow(UserInfo, this, true);
                                         TripWND.Activate();
                                         TripWND.Show();
-
+                                        this.Visibility = Visibility.Collapsed;
                                     }
                                 }
                                 ClearFields();

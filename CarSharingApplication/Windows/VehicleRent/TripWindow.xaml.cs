@@ -34,11 +34,10 @@ namespace CarSharingApplication.Windows.VehicleRent
                     $"SELECT TOP(1) * FROM RentalsINFO WHERE ID_DriverLicence = {_User.ID_DriverLicence} AND EndTime > GETDATE() AND RentalStatus='стандартная'");
             if (_Rental != null)
             {
+                rt.SetTime(_Rental.EndTime);
                 _Vehicle = App.GetScalarResult<VehiclesINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
                     $"SELECT * FROM VehiclesINFO WHERE ID_Vehicle = {_Rental.ID_Vehicle}");
                 Card.SetVehicleInfo(_Vehicle, "Ошибка загрузки данных");
-                _ShowOwner = showOwner;
-                var a = rt.AsyncStartTimer();
             }
             else this.Close();
             

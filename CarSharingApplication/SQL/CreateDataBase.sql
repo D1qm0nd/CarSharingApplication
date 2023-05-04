@@ -421,20 +421,6 @@ GO
 GO
 	PRINT 'Создал Хранимую процедуру REG_USER'
 
-
-
---GO
---	CREATE PROCEDURE CHECK_USER
---	@UserLogin NVARCHAR(MAX),
---	@UserPassword NVARCHAR(MAX)
---	AS
---	BEGIN
---		RETURN 
---			(SELECT COUNT(*) 
---				FROM Rental_Users 
---			WHERE UserLogin = @UserLogin AND UserPassword = @UserPassword)
---	END
-
 GO
 	CREATE FUNCTION GetDriverLicenceByUserID(
 		@User_ID INT
@@ -456,10 +442,15 @@ GO
 		@ReceiptDate SMALLDATETIME
 	)
 	AS
-	BEGIN 
+	BEGIN TRANSACTION
 		INSERT DriversLicences VALUES
 		(@DriverLicence, @ReceiptDate, @User_ID)
-	END 
+		IF NOT EXISTS(SELECT * FROM DriverLicence 
+					  WHERE ID_DriverLicence = @DriverLicence 
+					  AND ID_User = @User_ID 
+					  AND ReceiptDate = @ReceiptDate)
+			ROLLBACK
+	COMMIT 
 
 GO
 	PRINT 'Создал Хранимую процедуру AddDriverLicenceToUser'
@@ -473,10 +464,16 @@ GO
 		@EndDate SMALLDATETIME
 	)
 	AS
-	BEGIN
+	BEGIN TRANSACTION
 		INSERT Categories VALUES
 		(@DriverLicence_ID, @Category, @ReceiptDate, @EndDate)
-	END
+		IF NOT EXISTS(SELECT * FROM Categories 
+					  WHERE ID_DriverLicence = @DriverLicence_ID 
+					  AND Category = @Category 
+					  AND ReceiptDate = @ReceiptDate 
+					  AND EndDate = @EndDate)
+			ROLLBACK
+	COMMIT
 
 GO
 	PRINT 'Создал Хранимую процедуру AddCategoryToDriverLicence'
@@ -509,21 +506,8 @@ GO
 GO
 	PRINT 'Создал Хранимую процедуру Rent'
 
---GO
---	CREATE PROCEDURE StopRent(
---		@ID_Rental INT
---	)
---	AS
---	BEGIN TRANSACTION
---		IF ((SELECT ))
---	END
-
---GO
---	PRINT 'Создал Хранимую процедуру StopRent'
-
 GO
 	PRINT '==================================Функции======================================='
-
 
 GO 
 	CREATE FUNCTION CheckExistingUser
@@ -553,12 +537,10 @@ GO
 		ELSE IF (EXISTS (SELECT * FROM Rental_Users WHERE ID_User = @ID_User)) 
 			SET @answ = 'пользователь'
 		ELSE SET @answ = 'пользователь отсутствует'
-
 		RETURN @answ
 	END
 GO
 	PRINT 'Создал Функции DBStatus'
-
 
 GO
 	CREATE FUNCTION GetCoordinatesFunc(
@@ -729,6 +711,18 @@ END
 GO
 	PRINT 'Создал Функцию GetUserStatus'
 
+GO 
+	CREATE FUNCTION GetDriverLicenceCategories
+	(
+		@ID_DriverLicence CHAR(10)
+	)
+	RETURNS TABLE
+	AS
+		RETURN (SELECT TRIM(LOWER(Category)) as Category
+		FROM Categories 
+		WHERE 
+		ID_DriverLicence = @ID_DriverLicence
+		AND EndDate > GETDATE())
 
 GO
 	PRINT '==================================Представления======================================='
@@ -883,6 +877,7 @@ GO
 		CREATE LOGIN DLHANDLER WITH PASSWORD = 'DLHANDLER'
 		CREATE USER DB_USER_DLHANDLER FOR LOGIN DLHANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON DriversLicences TO DB_USER_DLHANDLER
+		GRANT SELECT ON GetDriverLicenceCategories TO DB_USER_DLHANDLER
 
 		CREATE LOGIN DATABASEADMIN WITH PASSWORD = 'MODERATEDATABASE'
 		CREATE USER DB_ADMIN_HANDLER FOR LOGIN DATABASEADMIN

@@ -38,17 +38,17 @@ GO
 
 	USE VehicleRental
 	INSERT DriversLicences VALUES
-	('7878443544', '2013-03-12' ,2),
+	('7878443544', '2012-03-12' ,2),
 	('8989834554', '2016-04-12' ,1),
 	('5463454355', '2017-09-12' ,2),
 	('5434523453', '2018-05-12' ,1)
 
 GO 
-	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='B', @ReceiptDate = '2013-09-12', @EndDate = '2023-09-12'
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='B', @ReceiptDate = '2012-09-12', @EndDate = '2022-09-12'
 GO	
 	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='B', @ReceiptDate = '2016-04-12', @EndDate = '2026-04-12'
 GO	
-	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='A', @ReceiptDate = '2017-08-12', @EndDate = '2027-08-12'
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='B', @ReceiptDate = '2017-08-12', @EndDate = '2027-08-12'
 GO	
 	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='B', @ReceiptDate = '2018-05-12', @EndDate = '2028-05-12'
 
