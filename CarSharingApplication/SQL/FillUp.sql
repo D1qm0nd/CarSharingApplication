@@ -48,7 +48,7 @@ GO
 GO	
 	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='B', @ReceiptDate = '2016-04-12', @EndDate = '2026-04-12'
 GO	
-	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='B', @ReceiptDate = '2017-08-12', @EndDate = '2027-08-12'
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='A', @ReceiptDate = '2017-08-12', @EndDate = '2027-08-12'
 GO	
 	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='B', @ReceiptDate = '2018-05-12', @EndDate = '2028-05-12'
 
