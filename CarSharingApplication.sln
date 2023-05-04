@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSharingApplication", "CarSharingApplication\CarSharingApplication.csproj", "{5A00D0EC-B2AD-4B0E-AD21-A7377FC524C8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{06386A3B-B56A-434A-BCE7-24DAE202907F} = {06386A3B-B56A-434A-BCE7-24DAE202907F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "..\Logger\Logger\Logger.csproj", "{06386A3B-B56A-434A-BCE7-24DAE202907F}"
 EndProject
