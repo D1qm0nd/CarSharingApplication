@@ -120,7 +120,7 @@ namespace CarSharingApplication
                 }
                 catch (SqlException SqlEx)
                 {
-                    App._Logger.Log(new LogMessage(null, this.Title, SqlEx.Message, SqlEx.ErrorCode.ToString(), 1));
+                    App._Logger.Log(new LogMessage(null, this.Title, SqlEx.Message, SqlEx.ErrorCode.ToString(), LogType.DataBaseError));
                 }
                 finally
                 {
@@ -154,6 +154,7 @@ namespace CarSharingApplication
                             UsersINFO UserInfo = App.GetScalarResult<UsersINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")), $"SELECT * FROM UsersINFO WHERE ID_User = {answ}");
                             if (UserInfo != null)
                             {
+                                App._Logger.Log(new LogMessage((ulong)UserInfo.ID_User, this.Title, "Вошёл в систему", null, null));
                                 if (UserInfo.Previlege.TrimEnd() == "админ")
                                 {
                                     var ChoiceAuthorizationWindow = new ChoiceLoginWindow(ref UserInfo, this);
@@ -180,14 +181,14 @@ namespace CarSharingApplication
                                 ClearFields();
                             }
                         } 
-                        else App._Logger.Log(new LogMessage(null,this.Title,"Пользователь не найден","ошибка авторизации",1));
+                        else App._Logger.Log(new LogMessage(null,this.Title,"Пользователь не найден","ошибка авторизации",LogType.UserMistake));
                     }
                 }
                 #endregion
             }
             catch (SqlException SqlEx)
             {
-                App._Logger.Log(new LogMessage(null,this.Title, SqlEx.Message, SqlEx.ErrorCode.ToString(), 1));
+                App._Logger.Log(new LogMessage(null,this.Title, SqlEx.Message, SqlEx.ErrorCode.ToString(), LogType.DataBaseError));
             }
         }
 
@@ -220,7 +221,6 @@ namespace CarSharingApplication
                 inputButton.Click += MakeRegister;
                 inputButton.Content = "Зарегистрироваться";
             }
-            App._Logger.Log(new LogMessage(null, this.Title, "Нажатие кнопки переход к регистрации",null,null));
         }
 
         private void Login_Button_Click(object sender, RoutedEventArgs e)
@@ -233,7 +233,6 @@ namespace CarSharingApplication
                 inputButton.Click += MakeLogIn;
                 inputButton.Content = "Войти";
             }
-            App._Logger.Log(new LogMessage(null, this.Title, "Нажатие кнопки переход к авторизации", null, null));
         }
 
         private void ClearFields()
@@ -268,7 +267,6 @@ namespace CarSharingApplication
                     }
                     MessageBox.Show($"Вы ввели символ '{c}' из перечня недопустимых:\n{notallowedinstr}", "Ввод недопусимого значения");
                     Login.Clear();
-                    App._Logger.Log(new LogMessage(null, this.Title, "Пользователь ввёл недопустимые символы", "Ошибка ввода", 0));
                 }
             }
         }

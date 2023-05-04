@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CarSharingApplication.LogLibrary;
 
 namespace CarSharingApplication.Windows.VehicleRent
 {
@@ -24,14 +25,14 @@ namespace CarSharingApplication.Windows.VehicleRent
         private UsersINFO _User;
         private VehiclesINFO _Vehicle;
         private bool _ShowOwner;
-        public VehicleRent(UsersINFO User, VehiclesINFO Vehicle, Window owner, bool showOwner)
+        public VehicleRent(UsersINFO user, VehiclesINFO Vehicle, Window owner, bool showOwner)
         {
             _ShowOwner = showOwner;
             this.Owner = owner;
             InitializeComponent();
-            _User = User;
+            _User = user;
             _Vehicle = Vehicle;
-            this.Title = $"Аренда {Vehicle.Brand} {Vehicle.Mark} {Vehicle.Class.TrimEnd()} {Vehicle.Color} ₽ {Vehicle.PricePerHour}";
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
             Card.SetVehicleInfo(Vehicle,"");
             Picker.PricePerHour = (double)Vehicle.PricePerHour;
             rentbtn.btn.Click += PayAndStart_Click;
@@ -41,12 +42,19 @@ namespace CarSharingApplication.Windows.VehicleRent
         {
             if (rentbtn.cbox.IsChecked != true || CreditCard.isEmpty())
                 return;
-            if (!(App.GetQueryResult<string> (new CarSharingDataBaseClassesDataContext(App.GetConnectionString("DLHANDLERConnection")), 
-                     $"SELECT * FROM [dbo].GetDriverLicenceCategories ({_User.ID_DriverLicence})")
-                .Contains(_Vehicle.Vehicle_Category.Trim().ToLower())))
+            if (_User.ID_DriverLicence == null) 
+            {
+                MessageBox.Show("Вы не ввели данные о вод.удостоверении\nP.S. Это делается в личном кабинете");
+                this.Close();
+                return;
+            }
+            if (!App.GetQueryResult<string>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("DLHANDLERConnection")),
+                     $"SELECT * FROM [dbo].GetDriverLicenceCategories ({_User.ID_DriverLicence})").Contains(_Vehicle.Vehicle_Category.Trim().ToLower()))
                 return;
             App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
                 $"EXEC Rent @DriverLicence = '{_User.ID_DriverLicence}', @ID_Vehicle = {_Vehicle.ID_Vehicle}, @RentalTime = '{DateTime.Now.ToString("HH:mm")}', @CountOfHours = {Picker.HourPicker.Value}");
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Арендовал ТС: {_Vehicle.ID_Vehicle}", null, LogType.UserAction));
+
             var TripWND = new TripWindow(_User, this.Owner.Owner, false);
             TripWND.Activate();
             TripWND.Show();
@@ -57,6 +65,7 @@ namespace CarSharingApplication.Windows.VehicleRent
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Перестал просматривать {this.Title}", null, LogType.UserAction));
             if (_ShowOwner == true)
             {
                 this.Owner.Visibility = Visibility.Visible;

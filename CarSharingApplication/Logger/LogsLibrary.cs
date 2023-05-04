@@ -7,19 +7,29 @@ using System.Threading.Tasks;
 
 namespace CarSharingApplication.LogLibrary
 {
+    [Flags]
+    public enum LogType
+    {
+        UserAction = 0,
+        UserMistake = 1,
+        ProgramError = 2,
+        DataBaseError = 3,
+    }
 
 #nullable enable
     [Serializable]
     public class LogMessage
     {
         public DateTime Date = DateTime.UtcNow;
+
+        public string MachineName { get; } = Environment.MachineName;
         public ulong? ID_User { get; set; }
         public string? WindowName { get; set; }
         public string? Description { get; set; }
         public string? error { get; set; }
-        public int? Level { get; set; }
+        public LogType? Level { get; set; }
 
-        public LogMessage(ulong? id_user, string? windowName, string? description, string? err, int? level ) 
+        public LogMessage(ulong? id_user, string? windowName, string? description, string? err, LogType? level ) 
         {
             ID_User = id_user;
             WindowName = windowName;

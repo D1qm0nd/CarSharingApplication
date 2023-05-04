@@ -41,7 +41,7 @@ namespace CarSharingApplication
     /// </summary>
     public partial class CarSelector : Window
     {
-        private UsersINFO User = null;
+        private UsersINFO _User = null;
         private bool _ShowOwner;
             
         private string ConnectionString { get { return App.GetConnectionString("CARHANDLERConnection"); } }
@@ -52,9 +52,8 @@ namespace CarSharingApplication
         {
             this.Owner = owner;
             _ShowOwner = showOwner;
-            User = user;
-            this.Title = $"Окно выбора ТС";
-            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Зашёл как пользователь в окно выбора ТС", null, null));
+            _User = user;
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
             InitializeComponent();
             GetVehiclesData(VehiclesData.GetInstance);
         }
@@ -262,11 +261,10 @@ namespace CarSharingApplication
 
         private void RentalButton_Click(object sender, RoutedEventArgs e)
         {
-            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Пользователь нажал кнопку аренды ТС", null, null));
             var instance = VehiclesData.GetInstance;
             if (instance.selectedVehicle != null)
             {
-                var rentWindow = new VehicleRent(User, instance.selectedVehicle, this, true);
+                var rentWindow = new VehicleRent(_User, instance.selectedVehicle, this, true);
                 this.Visibility = Visibility.Collapsed;
                 rentWindow.Activate();
                 rentWindow.Show();
@@ -274,20 +272,20 @@ namespace CarSharingApplication
             else 
             {
                 MessageBox.Show("Вы не выбрали авто");
-                App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Пользователь не выбрал ТС", "Ошибка нажатия кнопки аренды ТС", 0));
+                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Пользователь не выбрал ТС", "Ошибка нажатия кнопки аренды ТС", 0));
             }
         }
 
         private void PersonalAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            var persWindow = new PersonalAccount(ref User);
+            var persWindow = new PersonalAccount(ref _User);
             persWindow.Owner = this;
             persWindow.Show();
             this.Visibility = Visibility.Collapsed;
-            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Пользователь нажал кнопку личный кабинет", null, null));
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Перестал просматривать {this.Title}", null, LogType.UserAction));
             if (_ShowOwner == true)
             { 
                 this.Owner.Visibility = Visibility.Visible;

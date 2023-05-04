@@ -9,6 +9,7 @@
         Width="650" MinWidth="650" MaxWidth="650"
         Icon="../images/icon.jpeg"
         Closing="Window_Closing"
+        Title="Окно администратора"
         >
     <Grid>
         <Grid.RowDefinitions>

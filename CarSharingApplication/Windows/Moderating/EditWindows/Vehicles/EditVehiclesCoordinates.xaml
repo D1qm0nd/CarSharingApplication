@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Height="450" Width="850"
         Closing="Window_Closing"
+        Title="Координаты ТС"
     >
     <Grid>
         <ScrollViewer MaxHeight="400" VerticalAlignment="Top">
@@ -27,7 +28,7 @@
                             <DataTemplate>
                                 <WrapPanel>
                                     <CheckBox x:Name="DelVerify" Content="" Height="30" Width="35"></CheckBox>
-                                    <Button Background="red" BorderBrush="DarkRed" Command="Delete">Удалить</Button>
+                                    <Button Background="red" BorderBrush="DarkRed" Command="Delete" Click="DeleteButton_Click">Удалить</Button>
                                 </WrapPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

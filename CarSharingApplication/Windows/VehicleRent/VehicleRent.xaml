@@ -7,9 +7,10 @@
         xmlns:models="clr-namespace:CarSharingApplication.Windows.XAMLModels"
         mc:Ignorable="d"
         Icon="../Images/icon.jpeg"
-        Title="" Height="660" Width="860"
+        Height="660" Width="860"
         Closing="Window_Closing"
         ResizeMode="NoResize"
+        Title="Аренда ТС"
         >
     <Grid>
         <Grid.ColumnDefinitions>

@@ -7,10 +7,10 @@
         xmlns:models="clr-namespace:CarSharingApplication.Windows.XAMLModels"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="TripWindow" 
         ResizeMode="NoResize"
         Height="900" Width="430"
-        Closing="Window_Closing">
+        Closing="Window_Closing"
+        Title="Окно поездки">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="620"/>

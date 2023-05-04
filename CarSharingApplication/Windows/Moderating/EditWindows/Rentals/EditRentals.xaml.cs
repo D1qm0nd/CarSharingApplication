@@ -1,4 +1,5 @@
-﻿using CarSharingApplication.SQL.Linq;
+﻿using CarSharingApplication.LogLibrary;
+using CarSharingApplication.SQL.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -28,6 +29,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
         public EditRentals(UsersINFO user)
         {
             _User = user;
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
             try
             {
                 InitializeComponent();
@@ -37,6 +39,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
             catch (SqlException sqlex)
             {
                 MessageBox.Show(sqlex.Message);
+                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Не удалось вснёсти изменения в таблицу {this.Title}", sqlex.Message, LogType.DataBaseError));
             }
         }
 
@@ -50,6 +53,12 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
             {
                 MessageBox.Show(sqlex.Message);
                 dt_grid.ItemsSource = db.VehicleRegistrCertificates;
+                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Не удалось внести изменения в таблицу {this.Title}", sqlex.Message, LogType.DataBaseError | LogType.UserMistake));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Не удалось внести изменения в таблицу {this.Title}", ex.Message, LogType.ProgramError));
             }
         }
 
@@ -61,6 +70,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.Owner.Visibility = Visibility.Visible;
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Перестал просматривать", null, LogType.UserAction));
         }
     }
 }

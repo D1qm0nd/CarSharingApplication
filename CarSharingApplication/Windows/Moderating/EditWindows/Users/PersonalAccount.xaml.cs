@@ -23,15 +23,15 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
     public partial class PersonalAccount : Window
     {
         private string connectionString = App.GetConnectionString("USERHANDLERConnection");
-        private UsersINFO User;
+        private UsersINFO _User;
         public PersonalAccount(ref UsersINFO UserInfo)
         {
             InitializeComponent();
-            User = UserInfo;
+            _User = UserInfo;
             SetHints();
-            uDriverLicence.Text = User.ID_DriverLicence;
-            uLicenceDatePic.Text = User.ReceiptDate.ToString();
-            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Пользователь зашёл личный кабинет", null, null));
+            uDriverLicence.Text = _User.ID_DriverLicence;
+            uLicenceDatePic.Text = _User.ReceiptDate.ToString();
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
 
             // позволить изменять юзера только по (его собственному айди)
         }
@@ -45,49 +45,49 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.Owner.Visibility = Visibility.Visible;
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Перестал просматривать {this.Title}", null, LogType.UserAction));
         }
 
 
 
         private void CommitUpdatesButton_Click(object sender, RoutedEventArgs e)
         {
-            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Пользователь нажал на кнопку подтвердить", null, null));
             try {
-                if (uDriverLicence.Text != "" && uLicenceDatePic.Text != "")
+                if (uDriverLicence.Text == "" && uLicenceDatePic.Text == "") 
+                    return;
+                #region NEW CODE SUPPORT FROM 25.04.2023
                 {
-                    #region NEW CODE SUPPORT FROM 25.04.2023
+                    if (uDriverLicence.Text != _User.ID_DriverLicence && DateTime.Parse(uLicenceDatePic.Text) != _User.ReceiptDate)
                     {
-                        if (uDriverLicence.Text != User.ID_DriverLicence && DateTime.Parse(uLicenceDatePic.Text) != User.ReceiptDate)
+                         App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
+                            $"AddDriverLicenceToUser @User_ID = {_User.ID_User}, @DriverLicence = '{uDriverLicence.Text}', @ReceiptDate = '{uLicenceDatePic.Text}'");
+                        _User.ID_DriverLicence = uDriverLicence.Text;
+                        _User.ReceiptDate = DateTime.Parse(uLicenceDatePic.Text);
+                        var categories = uLicenceCategories.GetGategories();
+                        foreach (DriverLicencesCategories category in categories)
                         {
-                            App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
-                                $"AddDriverLicenceToUser @User_ID = {User.ID_User}, @DriverLicence = '{uDriverLicence.Text}', @ReceiptDate = '{uLicenceDatePic.Text}'");
-                            User.ID_DriverLicence = uDriverLicence.Text;
-                            User.ReceiptDate = DateTime.Parse(uLicenceDatePic.Text);
-                            var categories = uLicenceCategories.GetGategories();
-                            foreach (DriverLicencesCategories category in categories)
+                            if (category.ReceiptDate != "" && category.EndDate != "")
                             {
-                                if (category.ReceiptDate != "" && category.EndDate != "")
-                                {
-                                    if (!App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
-                                        $"EXEC AddCategoryToDriverLicence @DriverLicence_ID='{uDriverLicence.Text}', @Category='{category.Name}', @ReceiptDate = '{category.ReceiptDate}', @EndDate = '{category.EndDate}'"))
-                                    {
-                                        MessageBox.Show($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
-                                        throw new Exception("Ошибка добавления категории водительского удостоверения");
-                                    }
-                                } else 
+                                if (!App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
+                                    $"EXEC AddCategoryToDriverLicence @DriverLicence_ID='{uDriverLicence.Text}', @Category='{category.Name}', @ReceiptDate = '{category.ReceiptDate}', @EndDate = '{category.EndDate}'"))
                                 {
                                     MessageBox.Show($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
                                     throw new Exception("Ошибка добавления категории водительского удостоверения");
                                 }
+                                else App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Добавил категорию {category} к правам {_User.ID_DriverLicence}", null, LogType.UserAction)); 
+                            } else 
+                            {
+                                MessageBox.Show($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
+                                throw new Exception("Ошибка добавления категории водительского удостоверения");
                             }
                         }
                     }
-                    #endregion
                 }
+                #endregion
             }
             catch (Exception ex)
             {
-                App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Пользовалетю не удалось добавить категорию", ex.Message, null));
+                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Пользовалетю не удалось добавить категорию", ex.Message, LogType.UserMistake | LogType.DataBaseError));
             } 
         }
     }

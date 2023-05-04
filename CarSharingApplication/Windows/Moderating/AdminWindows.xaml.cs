@@ -31,8 +31,7 @@ namespace CarSharingApplication
         {
             _User = user;
             InitializeComponent();
-            this.Title = $"Окно администратора";
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Зашёл в окно администрирования", null, null));
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
         }
 
         private void UsersButton_Click(object sender, RoutedEventArgs e)
@@ -41,7 +40,6 @@ namespace CarSharingApplication
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Нажал кнопку Пользователи", null, null));
         }
 
         private void DriverLicencesButton_Click(object sender, RoutedEventArgs e)
@@ -50,7 +48,6 @@ namespace CarSharingApplication
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Нажал кнопку Водительские удостоверения", null, null));
 
         }
 
@@ -60,7 +57,6 @@ namespace CarSharingApplication
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Нажал кнопку Категории водительких удостоверений", null, null));
 
         }
 
@@ -70,7 +66,6 @@ namespace CarSharingApplication
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Нажал кнопку Классы ТС", null, null));
 
         }
 
@@ -80,7 +75,6 @@ namespace CarSharingApplication
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Нажал кнопку Транспортные средства", null, null));
 
         }
 
@@ -90,7 +84,6 @@ namespace CarSharingApplication
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Нажал кнопку Свидетельства регистрации ТС", null, null));
 
         }
 
@@ -100,7 +93,6 @@ namespace CarSharingApplication
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Нажал кнопку Координаты ТС", null, null));
 
         }
 
@@ -110,7 +102,6 @@ namespace CarSharingApplication
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Нажал кнопку Типы Аварийных случаев", null, null));
 
         }
 
@@ -120,7 +111,6 @@ namespace CarSharingApplication
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Нажал кнопку Типы Аварийныу случаи", null, null));
 
         }
 
@@ -130,7 +120,6 @@ namespace CarSharingApplication
             EditWindow.Owner = this;
             this.Visibility = Visibility.Hidden;
             EditWindow.Show();
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Нажал кнопку Аренды ТС", null, null));
 
         }
 
@@ -144,8 +133,7 @@ namespace CarSharingApplication
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.Owner.Visibility = Visibility.Visible;
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Покинул окно администрирования", null, null));
-
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Перестал просматривать {this.Title}", null, LogType.UserAction));
         }
     }
 }

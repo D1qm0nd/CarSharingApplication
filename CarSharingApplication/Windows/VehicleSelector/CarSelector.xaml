@@ -13,7 +13,8 @@
       Width="1359" 
       ResizeMode="NoResize"
       WindowStartupLocation="CenterScreen"
-      Closing="Window_Closing">
+      Closing="Window_Closing"
+      Title="Окно выбора ТС">
     
     <Grid>
         <StackPanel Margin="10" Width="1339">

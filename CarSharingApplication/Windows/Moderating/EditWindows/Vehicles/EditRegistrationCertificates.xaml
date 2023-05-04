@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Height="500" Width="1200"
         Closing="Window_Closing"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Title="Свидетельства о регистрации ТС"
+        >
     
         <Window.Resources>
             <Style 

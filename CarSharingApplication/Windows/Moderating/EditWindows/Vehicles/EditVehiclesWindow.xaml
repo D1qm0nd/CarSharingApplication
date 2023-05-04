@@ -9,6 +9,7 @@
         Closing="Window_Closing"
         ResizeMode="NoResize"
         AllowDrop="False"
+        Title="Транспортные средства"
     >
 
     <Window.Resources>

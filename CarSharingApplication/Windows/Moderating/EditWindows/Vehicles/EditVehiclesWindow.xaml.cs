@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.Data.Linq;
+using CarSharingApplication.LogLibrary;
 
 namespace CarSharingApplication
 {
@@ -31,6 +32,7 @@ namespace CarSharingApplication
         public EditVehiclesWindow(UsersINFO user)
         {
             _User = user;
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
             try
             {
                 InitializeComponent();
@@ -40,6 +42,7 @@ namespace CarSharingApplication
             catch (SqlException sqlex)
             {
                 MessageBox.Show(sqlex.Message);
+                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Не удалось загрузить данные таблицы таблицу {this.Title}", sqlex.Message, LogType.DataBaseError));
             }
         }
 
@@ -47,6 +50,7 @@ namespace CarSharingApplication
         {
             db.Connection.Close();
             this.Owner.Visibility = Visibility.Visible;
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Перестал просматривать {this.Title}", null, LogType.UserAction));
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -54,30 +58,20 @@ namespace CarSharingApplication
             try
             {
                 db.SubmitChanges();
+                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Внёс изменения в таблицу {this.Title}", null, LogType.UserAction));
             }
             catch (SqlException sqlex)
             {
                 MessageBox.Show(sqlex.Message);
                 dt_grid.ItemsSource = db.Vehicles;
+                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Не удалось внести изменения в таблицу {this.Title}", sqlex.Message, LogType.DataBaseError | LogType.UserMistake));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Не удалось внести изменения в таблицу {this.Title}", ex.Message, LogType.ProgramError));
             }
         }
-
-        //private void DragTb_Drop(object sender, DragEventArgs e)
-        //{
-        //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
-        //    {
-        //        string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-        //        try 
-        //        { 
-        //            var base64 = ImageConvertor.ImageToBase64(System.Drawing.Image.FromFile(files[0]), ImageFormat.Png);
-        //            var image = ImageConvertor.Base64ToBitmapImage(base64);
-        //        }
-        //        catch
-        //        {
-        //            ((StackPanel)sender).Background = System.Windows.Media.Brushes.Aqua;
-        //        }
-        //    }
-        //}
 
         private void UploadPicture(object sender, RoutedEventArgs e)
         {
@@ -91,9 +85,9 @@ namespace CarSharingApplication
                     ((Vehicles)dt_grid.Items[dt_grid.SelectedIndex]).CarPicture = ImageConvertor.ImageToBytes(System.Drawing.Image.FromFile(dialog.FileName),ImageFormat.Png);
                 if (dialog.FileName.Contains(".jpeg"))
                     ((Vehicles)dt_grid.Items[dt_grid.SelectedIndex]).CarPicture = ImageConvertor.ImageToBytes(System.Drawing.Image.FromFile(dialog.FileName), ImageFormat.Jpeg);
-                //var a = ImageConvertor.GetFileBytes(dialog.FileName);
             };
             dialog.ShowDialog();
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Добавил изображение к авто", null, LogType.UserAction));
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e) 

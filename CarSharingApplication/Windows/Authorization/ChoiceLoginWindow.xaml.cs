@@ -28,7 +28,7 @@ namespace CarSharingApplication.Windows.Authorization
             this.Owner = owner;
             User = user;
             InitializeComponent();
-            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Вошёл в окно выбора входа", null, null));
+            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Выбирал под какой ролью зайти в систему", null, null));
         }
 
         private void AdminLoginButton_Click(object sender, RoutedEventArgs e)
@@ -38,39 +38,39 @@ namespace CarSharingApplication.Windows.Authorization
             AdmWindow.Activate();
             AdmWindow.Show();
             this.Visibility = Visibility.Collapsed;
-            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Нажал кнопку войти как администратор", null, null));
         }
 
         private void UserLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            
-
             if (User.RentStatus != "в поездке")
             {
                 var CarSelWindow = new CarSelector(ref User, this, true);
                 CarSelWindow.Activate();
                 CarSelWindow.Show();
                 this.Visibility = Visibility.Collapsed;
-                App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Нажал кнопку войти как пользователь", null, null));
-
             }
             else
             {
                 var TripWND = new TripWindow(User, this, true);
                 this.Visibility = Visibility.Collapsed;
                 TripWND.Activate();
-                TripWND.Show();
-                App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Пользователя перекинуло на окно поездки", null, null));
+                try
+                {
+                    TripWND.Show();
+                }
+                catch 
+                { 
+                }
             }
 
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Вышел из окна", null, LogType.UserAction));
             this.Owner.Activate();
             this.Owner.Visibility = Visibility.Visible;
             GC.Collect();
-            App._Logger.Log(new LogMessage((ulong)User.ID_User, this.Title, "Окно закрылось", null, null));
         }
     }
 }
