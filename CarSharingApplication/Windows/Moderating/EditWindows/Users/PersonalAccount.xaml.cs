@@ -57,21 +57,28 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
                     return;
                 #region NEW CODE SUPPORT FROM 25.04.2023
                 {
-                    if (uDriverLicence.Text != _User.ID_DriverLicence && DateTime.Parse(uLicenceDatePic.Text) != _User.ReceiptDate)
-                    {
-                         App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
-                            $"AddDriverLicenceToUser @User_ID = {_User.ID_User}, @DriverLicence = '{uDriverLicence.Text}', @ReceiptDate = '{uLicenceDatePic.Text}'");
-                        _User.ID_DriverLicence = uDriverLicence.Text;
-                        _User.ReceiptDate = DateTime.Parse(uLicenceDatePic.Text);
+                        if (App.GetQueryResult<string>(new CarSharingDataBaseClassesDataContext("DLHANDLER"),
+                                $"SELECT ID_DriverLicence FROM DriversLicences WHERE ID_DriverLicence = '{uDriverLicence.Text}'")
+                            == null) 
+                        { 
+                            App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
+                                $"AddDriverLicenceToUser @User_ID = {_User.ID_User}, @DriverLicence = '{uDriverLicence.Text}', @ReceiptDate = '{uLicenceDatePic.Text}'");
+                            _User.ID_DriverLicence = uDriverLicence.Text;
+                            _User.ReceiptDate = DateTime.Parse(uLicenceDatePic.Text);
+                        }
                         var categories = uLicenceCategories.GetGategories();
                         foreach (DriverLicencesCategories category in categories)
                         {
                             if (category.ReceiptDate != "" && category.EndDate != "")
                             {
+                                if (DateTime.Parse(category.EndDate) < DateTime.UtcNow || DateTime.Parse(category.ReceiptDate) > DateTime.UtcNow)
+                                {
+                                    MessageBox.Show($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
+                                    return;
+                                }
                                 if (!App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
                                     $"EXEC AddCategoryToDriverLicence @DriverLicence_ID='{uDriverLicence.Text}', @Category='{category.Name}', @ReceiptDate = '{category.ReceiptDate}', @EndDate = '{category.EndDate}'"))
                                 {
-                                    MessageBox.Show($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
                                     throw new Exception("Ошибка добавления категории водительского удостоверения");
                                 }
                                 else App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Добавил категорию {category} к правам {_User.ID_DriverLicence}", null, LogType.UserAction)); 
@@ -82,7 +89,6 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
                             }
                         }
                     }
-                }
                 #endregion
             }
             catch (Exception ex)

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CarSharingApplication.Windows.Moderating.EditWindows.Users"
         xmlns:models="clr-namespace:CarSharingApplication.Windows.XAMLModels"
         mc:Ignorable="d"
-        Title="Личный кабинет" Height="580" Width="800"
+        Title="Личный кабинет" Height="580" Width="415"
         ResizeMode="NoResize"
         Closing="Window_Closing"
         >
