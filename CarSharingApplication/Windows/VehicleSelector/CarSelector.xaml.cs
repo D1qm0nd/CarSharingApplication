@@ -72,13 +72,13 @@ namespace CarSharingApplication
         {
             vehData.vehClasses = App.GetQueryResult<string>(
             new CarSharingDataBaseClassesDataContext(ConnectionString),
-            "SELECT TRIM(LOWER(Class)) FROM Classes");
+            "SELECT DISTINCT TRIM(LOWER(Class)) FROM VehiclesINFO");
             vehData.vehClasses.Add("*ВСЕ");
             ListViewVehicleClasses.ItemsSource = vehData.vehClasses.OrderBy(str => str);
 
             vehData.vehBrands = App.GetQueryResult<string>(
             new CarSharingDataBaseClassesDataContext(ConnectionString),
-            "SELECT DISTINCT TRIM(LOWER(Brand)) FROM VehicleRegistrCertificates");
+            "SELECT DISTINCT TRIM(LOWER(Brand)) FROM VehiclesINFO");
             vehData.vehBrands.Add("*ВСЕ");
             ListViewVehicleBrands.ItemsSource = vehData.vehBrands.OrderBy(str => str);
 
@@ -86,6 +86,12 @@ namespace CarSharingApplication
             new CarSharingDataBaseClassesDataContext(ConnectionString),
             "SELECT * FROM VehiclesWithStatus ('доступен')");
             vehData.vehiclesInfoList = OrderByPricePerHourDesc(vehData.vehiclesInfoList);
+
+            vehData.vehCategories = App.GetQueryResult<string>(
+            new CarSharingDataBaseClassesDataContext(ConnectionString),
+            "SELECT DISTINCT TRIM(Vehicle_Category) FROM VehiclesINFO");
+            vehData.vehCategories.Add("*ВСЕ");
+            ListViewVehicleCategories.ItemsSource = vehData.vehCategories.OrderBy(str => str);
 
             try
             {
@@ -223,6 +229,11 @@ namespace CarSharingApplication
             if ((string)ListViewVehicleBrands.SelectedValue != "*ВСЕ" && ListViewVehicleBrands.SelectedValue != null)
             {
                 newvehicleslist = newvehicleslist.Where(vehicle => vehicle.Brand.ToLower().TrimEnd() == (string)ListViewVehicleBrands.SelectedValue).ToList();
+            }
+#nullable enable
+            if ((string)ListViewVehicleCategories.SelectedValue != "*ВСЕ" && ListViewVehicleCategories.SelectedValue != null)
+            {
+                newvehicleslist = newvehicleslist.Where(vehicle => vehicle.Vehicle_Category.TrimEnd() == (string)ListViewVehicleCategories.SelectedValue).ToList();
             }
 
             newvehicleslist = OrderByPricePerHourDesc(newvehicleslist);

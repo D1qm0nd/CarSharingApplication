@@ -176,6 +176,9 @@
     <Compile Include="Windows\Moderating\AdminWindows.xaml.cs">
       <DependentUpon>AdminWindows.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Moderating\EditWindows\Accidents\AddAccident.xaml.cs">
+      <DependentUpon>AddAccident.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Moderating\EditWindows\Accidents\EditTrafficAccidentTypes.xaml.cs">
       <DependentUpon>EditTrafficAccidentTypes.xaml</DependentUpon>
     </Compile>
@@ -262,6 +265,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Moderating\AdminWindows.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Moderating\EditWindows\Accidents\AddAccident.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

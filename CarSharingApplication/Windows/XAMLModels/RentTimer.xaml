@@ -5,11 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarSharingApplication.Windows.XAMLModels"
              mc:Ignorable="d" 
-             MinHeight="{Binding}"
-             MinWidth="{Binding}"
              >
     <!--<Grid Height="{Binding}" Width="{Binding}" Background="orange">-->
-    <Grid Height="90" Width="400" Background="orange">
-        <TextBlock x:Name="TimeLabel" Width="{Binding}" Height="{Binding}" FontSize="28" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
+    <Grid>
+        <TextBlock x:Name="TimeLabel" Width="{Binding}" Height="{Binding}" FontSize="28" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" IsEnabled="False"/>
     </Grid>
 </UserControl>

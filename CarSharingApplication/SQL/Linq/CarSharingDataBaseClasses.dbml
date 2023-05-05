@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="VehicleRental" Class="CarSharingDataBaseClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-RN9AI5Q;Initial Catalog=VehicleRental;Integrated Security=True" SettingsObjectName="CarSharingApplication.Properties.Settings" SettingsPropertyName="VehicleRentalConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(Local);Initial Catalog=VehicleRental;Integrated Security=True" SettingsObjectName="CarSharingApplication.Properties.Settings" SettingsPropertyName="VehicleRentalConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Categories" Member="Categories">
     <Type Name="Categories">
       <Column Name="ID_Category" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -42,8 +42,8 @@
       <Column Name="CarPicture" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Vehicles_VehicleRegistrCertificates" Member="VehicleRegistrCertificates" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="VehicleRegistrCertificates" />
       <Association Name="Vehicles_Rentals" Member="Rentals" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Rentals" />
-      <Association Name="Vehicles_TrafficAccidents" Member="TrafficAccidents" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="TrafficAccidents" />
       <Association Name="Vehicles_VehicleCoordinates" Member="VehicleCoordinates" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="VehicleCoordinates" />
+      <Association Name="Vehicles_TrafficAccidents" Member="TrafficAccidents" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="TrafficAccidents" />
       <Association Name="Classes_Vehicles" Member="Classes" ThisKey="Class" OtherKey="Class" Type="Classes" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
@@ -137,6 +137,24 @@
       <Association Name="Vehicles_Rentals" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.VehicleCoordinates" Member="VehicleCoordinates">
+    <Type Name="VehicleCoordinates">
+      <Column Name="ID_Coordinates" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Longitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="StayDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Vehicles_VehicleCoordinates" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DriversLicencesCategoriesINFO" Member="DriversLicencesCategoriesINFO">
+    <Type Name="DriversLicencesCategoriesINFO">
+      <Column Name="ID_DriverLicence" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
+      <Column Name="ReceiptDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.TrafficAccidentTypes" Member="TrafficAccidentTypes">
     <Type Name="TrafficAccidentTypes">
       <Column Name="ID_TrafficAccidentType" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -155,16 +173,6 @@
       <Association Name="DriversLicences_TrafficAccidents" Member="DriversLicences" ThisKey="ID_DriverLicence" OtherKey="ID_DriverLicence" Type="DriversLicences" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="TrafficAccidentTypes_TrafficAccidents" Member="TrafficAccidentTypes" ThisKey="ID_TrafficAccidentType" OtherKey="ID_TrafficAccidentType" Type="TrafficAccidentTypes" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Vehicles_TrafficAccidents" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.VehicleCoordinates" Member="VehicleCoordinates">
-    <Type Name="VehicleCoordinates">
-      <Column Name="ID_Coordinates" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ID_Vehicle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Longitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="Latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="StayDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="Vehicles_VehicleCoordinates" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>

@@ -47,6 +47,9 @@
                             <Expander Header="Марка ТС" Width="280" Foreground="White" FontSize="36" Background="Transparent" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="segoi ui">
                                 <ListView x:Name="ListViewVehicleBrands" Padding="0" Foreground="White" FontSize="15" FontWeight="DemiBold" Margin="40 0" HorizontalAlignment="Left"/>
                             </Expander>
+                            <Expander Header="Категория" Width="280" Foreground="White" FontSize="36" Background="Transparent" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="segoi ui">
+                                <ListView x:Name="ListViewVehicleCategories" Padding="0" Foreground="White" FontSize="15" FontWeight="DemiBold" Margin="40 0" HorizontalAlignment="Left"/>
+                            </Expander>
                             <Expander Header="Ценовая категория" Width="280" Foreground="White" FontSize="36" Background="Transparent" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="segoi ui">
                                 <ListView x:Name="ListPrice" Padding="0" Foreground="White" FontSize="15" FontWeight="DemiBold" Margin="40 0" HorizontalAlignment="Left">
                                     <Slider x:Name="PriceSlider" Width="180"></Slider>
@@ -56,7 +59,7 @@
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
-                <Models:VehicleCard x:Name="Card" Margin="0 10 10 0"/>
+                <Models:VehicleCard x:Name="Card" Margin="0 10 10 0" Height="600"/>
                 <Models:Map x:Name="RentalMap" Margin="0 10 10 0" Width="600" Height="600" InitializeLat="55.755969527097506" InitializeLng="37.61763538248735"/>
             </WrapPanel>
             <WrapPanel>

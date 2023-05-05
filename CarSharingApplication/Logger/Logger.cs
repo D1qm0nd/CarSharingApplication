@@ -36,7 +36,7 @@ namespace LoggerLib
         {
             if (!File.Exists(LogPath))
             {
-                File.Create(LogPath);
+                File.Create(LogPath).Close();
             }
             using (StreamWriter streamWriter = new StreamWriter(LogPath, true))
             {

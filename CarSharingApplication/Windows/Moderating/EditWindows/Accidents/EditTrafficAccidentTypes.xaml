@@ -19,8 +19,8 @@
                 x:Name="dt_grid"
                 AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID_TrafficAccidentType, StringFormat=d}" Header="Код" MinWidth="200" MaxWidth="300" CanUserSort="True" SortDirection="Descending"/>
-                    <DataGridTextColumn Binding="{Binding TrafficAccidentTypeName, StringFormat=d}" Header="Название типа проешествия" MinWidth="200" MaxWidth="300" CanUserSort="True" SortDirection="Descending"/>
+                    <DataGridTextColumn Binding="{Binding ID_TrafficAccidentType}" Header="Код" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding TrafficAccidentTypeName, StringFormat=d}" Header="Название типа аварии" MinWidth="200" MaxWidth="700" CanUserSort="True" SortDirection="Descending"/>
                     <DataGridTemplateColumn Visibility="Visible">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

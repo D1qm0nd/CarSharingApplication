@@ -38,5 +38,20 @@ namespace CarSharingApplication.Windows.XAMLModels
             }
             return categories;
         }
+
+        public void SetCategories(List<DriversLicencesCategoriesINFO> categories)
+        {
+            foreach (CategoryPicker categorypicker in Categories.Children) 
+            {
+                foreach(var info in categories) 
+                {
+                    if (categorypicker.Text.ToLower() == info.Category.ToLower())
+                    {
+                        categorypicker.Activate();
+                        categorypicker.SetDates(info.ReceiptDate.ToString(), info.EndDate.ToString());
+                    }
+                }
+            }
+        }
     }
 }

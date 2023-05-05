@@ -39,9 +39,10 @@ namespace CarSharingApplication.Windows.XAMLModels
             {
                 infolist.Add(info.Brand);
                 infolist.Add(info.Mark);
-                infolist.Add(info.Class);
-                infolist.Add(info.Color);
-                infolist.Add(info.PricePerHour.ToString()+ " ₽");
+                infolist.Add($"Класс: {info.Class}");
+                infolist.Add($"Цвет: {info.Color}");
+                infolist.Add($"Цена: {info.PricePerHour.ToString()} ₽/час");
+                infolist.Add($"Категория: {info.Vehicle_Category}");
                 VehicleInfoList.ItemsSource = infolist;
                 if (info.CarPicture != null)
                 {

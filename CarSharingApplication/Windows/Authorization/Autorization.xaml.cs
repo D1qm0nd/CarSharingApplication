@@ -70,6 +70,8 @@ namespace CarSharingApplication
                 MessageBox.Show("Вы не ввели отчество");
             else if (BDatePicker.Text == "")
                 MessageBox.Show("Вы не ввели дату рождения");
+            else if (DateTime.Parse(BDatePicker.Text) >= DateTime.UtcNow.AddYears(-18) && DateTime.Parse(BDatePicker.Text) < DateTime.UtcNow.AddYears(-100)) 
+                MessageBox.Show("Некоректная дата рождения");
             else
             {
                 try
@@ -172,7 +174,7 @@ namespace CarSharingApplication
                                     }
                                     else
                                     {
-                                        var TripWND = new TripWindow(UserInfo, this, true);
+                                        var TripWND = new TripWindow(ref UserInfo, this, true);
                                         TripWND.Activate();
                                         TripWND.Show();
                                         this.Visibility = Visibility.Collapsed;

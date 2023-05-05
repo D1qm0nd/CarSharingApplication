@@ -51,15 +51,15 @@ namespace CarSharingApplication.SQL.Linq
     partial void InsertRentals(Rentals instance);
     partial void UpdateRentals(Rentals instance);
     partial void DeleteRentals(Rentals instance);
+    partial void InsertVehicleCoordinates(VehicleCoordinates instance);
+    partial void UpdateVehicleCoordinates(VehicleCoordinates instance);
+    partial void DeleteVehicleCoordinates(VehicleCoordinates instance);
     partial void InsertTrafficAccidentTypes(TrafficAccidentTypes instance);
     partial void UpdateTrafficAccidentTypes(TrafficAccidentTypes instance);
     partial void DeleteTrafficAccidentTypes(TrafficAccidentTypes instance);
     partial void InsertTrafficAccidents(TrafficAccidents instance);
     partial void UpdateTrafficAccidents(TrafficAccidents instance);
     partial void DeleteTrafficAccidents(TrafficAccidents instance);
-    partial void InsertVehicleCoordinates(VehicleCoordinates instance);
-    partial void UpdateVehicleCoordinates(VehicleCoordinates instance);
-    partial void DeleteVehicleCoordinates(VehicleCoordinates instance);
     #endregion
 		
 		public CarSharingDataBaseClassesDataContext() : 
@@ -180,6 +180,22 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
+		public System.Data.Linq.Table<VehicleCoordinates> VehicleCoordinates
+		{
+			get
+			{
+				return this.GetTable<VehicleCoordinates>();
+			}
+		}
+		
+		public System.Data.Linq.Table<DriversLicencesCategoriesINFO> DriversLicencesCategoriesINFO
+		{
+			get
+			{
+				return this.GetTable<DriversLicencesCategoriesINFO>();
+			}
+		}
+		
 		public System.Data.Linq.Table<TrafficAccidentTypes> TrafficAccidentTypes
 		{
 			get
@@ -193,14 +209,6 @@ namespace CarSharingApplication.SQL.Linq
 			get
 			{
 				return this.GetTable<TrafficAccidents>();
-			}
-		}
-		
-		public System.Data.Linq.Table<VehicleCoordinates> VehicleCoordinates
-		{
-			get
-			{
-				return this.GetTable<VehicleCoordinates>();
 			}
 		}
 	}
@@ -792,9 +800,9 @@ namespace CarSharingApplication.SQL.Linq
 		
 		private EntitySet<Rentals> _Rentals;
 		
-		private EntitySet<TrafficAccidents> _TrafficAccidents;
-		
 		private EntitySet<VehicleCoordinates> _VehicleCoordinates;
+		
+		private EntitySet<TrafficAccidents> _TrafficAccidents;
 		
 		private EntityRef<Classes> _Classes;
 		
@@ -816,8 +824,8 @@ namespace CarSharingApplication.SQL.Linq
 		{
 			this._VehicleRegistrCertificates = new EntitySet<VehicleRegistrCertificates>(new Action<VehicleRegistrCertificates>(this.attach_VehicleRegistrCertificates), new Action<VehicleRegistrCertificates>(this.detach_VehicleRegistrCertificates));
 			this._Rentals = new EntitySet<Rentals>(new Action<Rentals>(this.attach_Rentals), new Action<Rentals>(this.detach_Rentals));
-			this._TrafficAccidents = new EntitySet<TrafficAccidents>(new Action<TrafficAccidents>(this.attach_TrafficAccidents), new Action<TrafficAccidents>(this.detach_TrafficAccidents));
 			this._VehicleCoordinates = new EntitySet<VehicleCoordinates>(new Action<VehicleCoordinates>(this.attach_VehicleCoordinates), new Action<VehicleCoordinates>(this.detach_VehicleCoordinates));
+			this._TrafficAccidents = new EntitySet<TrafficAccidents>(new Action<TrafficAccidents>(this.attach_TrafficAccidents), new Action<TrafficAccidents>(this.detach_TrafficAccidents));
 			this._Classes = default(EntityRef<Classes>);
 			OnCreated();
 		}
@@ -932,19 +940,6 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_TrafficAccidents", Storage="_TrafficAccidents", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
-		public EntitySet<TrafficAccidents> TrafficAccidents
-		{
-			get
-			{
-				return this._TrafficAccidents;
-			}
-			set
-			{
-				this._TrafficAccidents.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_VehicleCoordinates", Storage="_VehicleCoordinates", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
 		public EntitySet<VehicleCoordinates> VehicleCoordinates
 		{
@@ -955,6 +950,19 @@ namespace CarSharingApplication.SQL.Linq
 			set
 			{
 				this._VehicleCoordinates.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_TrafficAccidents", Storage="_TrafficAccidents", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
+		public EntitySet<TrafficAccidents> TrafficAccidents
+		{
+			get
+			{
+				return this._TrafficAccidents;
+			}
+			set
+			{
+				this._TrafficAccidents.Assign(value);
 			}
 		}
 		
@@ -1036,18 +1044,6 @@ namespace CarSharingApplication.SQL.Linq
 			entity.Vehicles = null;
 		}
 		
-		private void attach_TrafficAccidents(TrafficAccidents entity)
-		{
-			this.SendPropertyChanging();
-			entity.Vehicles = this;
-		}
-		
-		private void detach_TrafficAccidents(TrafficAccidents entity)
-		{
-			this.SendPropertyChanging();
-			entity.Vehicles = null;
-		}
-		
 		private void attach_VehicleCoordinates(VehicleCoordinates entity)
 		{
 			this.SendPropertyChanging();
@@ -1055,6 +1051,18 @@ namespace CarSharingApplication.SQL.Linq
 		}
 		
 		private void detach_VehicleCoordinates(VehicleCoordinates entity)
+		{
+			this.SendPropertyChanging();
+			entity.Vehicles = null;
+		}
+		
+		private void attach_TrafficAccidents(TrafficAccidents entity)
+		{
+			this.SendPropertyChanging();
+			entity.Vehicles = this;
+		}
+		
+		private void detach_TrafficAccidents(TrafficAccidents entity)
 		{
 			this.SendPropertyChanging();
 			entity.Vehicles = null;
@@ -2649,6 +2657,286 @@ namespace CarSharingApplication.SQL.Linq
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VehicleCoordinates")]
+	public partial class VehicleCoordinates : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Coordinates;
+		
+		private int _ID_Vehicle;
+		
+		private double _Longitude;
+		
+		private double _Latitude;
+		
+		private System.DateTime _StayDateTime;
+		
+		private EntityRef<Vehicles> _Vehicles;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_CoordinatesChanging(int value);
+    partial void OnID_CoordinatesChanged();
+    partial void OnID_VehicleChanging(int value);
+    partial void OnID_VehicleChanged();
+    partial void OnLongitudeChanging(double value);
+    partial void OnLongitudeChanged();
+    partial void OnLatitudeChanging(double value);
+    partial void OnLatitudeChanged();
+    partial void OnStayDateTimeChanging(System.DateTime value);
+    partial void OnStayDateTimeChanged();
+    #endregion
+		
+		public VehicleCoordinates()
+		{
+			this._Vehicles = default(EntityRef<Vehicles>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Coordinates", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_Coordinates
+		{
+			get
+			{
+				return this._ID_Coordinates;
+			}
+			set
+			{
+				if ((this._ID_Coordinates != value))
+				{
+					this.OnID_CoordinatesChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Coordinates = value;
+					this.SendPropertyChanged("ID_Coordinates");
+					this.OnID_CoordinatesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
+		public int ID_Vehicle
+		{
+			get
+			{
+				return this._ID_Vehicle;
+			}
+			set
+			{
+				if ((this._ID_Vehicle != value))
+				{
+					if (this._Vehicles.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_VehicleChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Vehicle = value;
+					this.SendPropertyChanged("ID_Vehicle");
+					this.OnID_VehicleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Longitude", DbType="Float NOT NULL")]
+		public double Longitude
+		{
+			get
+			{
+				return this._Longitude;
+			}
+			set
+			{
+				if ((this._Longitude != value))
+				{
+					this.OnLongitudeChanging(value);
+					this.SendPropertyChanging();
+					this._Longitude = value;
+					this.SendPropertyChanged("Longitude");
+					this.OnLongitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Latitude", DbType="Float NOT NULL")]
+		public double Latitude
+		{
+			get
+			{
+				return this._Latitude;
+			}
+			set
+			{
+				if ((this._Latitude != value))
+				{
+					this.OnLatitudeChanging(value);
+					this.SendPropertyChanging();
+					this._Latitude = value;
+					this.SendPropertyChanged("Latitude");
+					this.OnLatitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StayDateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime StayDateTime
+		{
+			get
+			{
+				return this._StayDateTime;
+			}
+			set
+			{
+				if ((this._StayDateTime != value))
+				{
+					this.OnStayDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._StayDateTime = value;
+					this.SendPropertyChanged("StayDateTime");
+					this.OnStayDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_VehicleCoordinates", Storage="_Vehicles", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Vehicles Vehicles
+		{
+			get
+			{
+				return this._Vehicles.Entity;
+			}
+			set
+			{
+				Vehicles previousValue = this._Vehicles.Entity;
+				if (((previousValue != value) 
+							|| (this._Vehicles.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Vehicles.Entity = null;
+						previousValue.VehicleCoordinates.Remove(this);
+					}
+					this._Vehicles.Entity = value;
+					if ((value != null))
+					{
+						value.VehicleCoordinates.Add(this);
+						this._ID_Vehicle = value.ID_Vehicle;
+					}
+					else
+					{
+						this._ID_Vehicle = default(int);
+					}
+					this.SendPropertyChanged("Vehicles");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DriversLicencesCategoriesINFO")]
+	public partial class DriversLicencesCategoriesINFO
+	{
+		
+		private string _ID_DriverLicence;
+		
+		private string _Category;
+		
+		private System.DateTime _ReceiptDate;
+		
+		private System.DateTime _EndDate;
+		
+		public DriversLicencesCategoriesINFO()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DriverLicence", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string ID_DriverLicence
+		{
+			get
+			{
+				return this._ID_DriverLicence;
+			}
+			set
+			{
+				if ((this._ID_DriverLicence != value))
+				{
+					this._ID_DriverLicence = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Category", DbType="Char(3) NOT NULL", CanBeNull=false)]
+		public string Category
+		{
+			get
+			{
+				return this._Category;
+			}
+			set
+			{
+				if ((this._Category != value))
+				{
+					this._Category = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiptDate", DbType="SmallDateTime NOT NULL")]
+		public System.DateTime ReceiptDate
+		{
+			get
+			{
+				return this._ReceiptDate;
+			}
+			set
+			{
+				if ((this._ReceiptDate != value))
+				{
+					this._ReceiptDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="SmallDateTime NOT NULL")]
+		public System.DateTime EndDate
+		{
+			get
+			{
+				return this._EndDate;
+			}
+			set
+			{
+				if ((this._EndDate != value))
+				{
+					this._EndDate = value;
+				}
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TrafficAccidentTypes")]
 	public partial class TrafficAccidentTypes : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3036,205 +3324,6 @@ namespace CarSharingApplication.SQL.Linq
 					if ((value != null))
 					{
 						value.TrafficAccidents.Add(this);
-						this._ID_Vehicle = value.ID_Vehicle;
-					}
-					else
-					{
-						this._ID_Vehicle = default(int);
-					}
-					this.SendPropertyChanged("Vehicles");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VehicleCoordinates")]
-	public partial class VehicleCoordinates : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_Coordinates;
-		
-		private int _ID_Vehicle;
-		
-		private double _Longitude;
-		
-		private double _Latitude;
-		
-		private System.DateTime _StayDateTime;
-		
-		private EntityRef<Vehicles> _Vehicles;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_CoordinatesChanging(int value);
-    partial void OnID_CoordinatesChanged();
-    partial void OnID_VehicleChanging(int value);
-    partial void OnID_VehicleChanged();
-    partial void OnLongitudeChanging(double value);
-    partial void OnLongitudeChanged();
-    partial void OnLatitudeChanging(double value);
-    partial void OnLatitudeChanged();
-    partial void OnStayDateTimeChanging(System.DateTime value);
-    partial void OnStayDateTimeChanged();
-    #endregion
-		
-		public VehicleCoordinates()
-		{
-			this._Vehicles = default(EntityRef<Vehicles>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Coordinates", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_Coordinates
-		{
-			get
-			{
-				return this._ID_Coordinates;
-			}
-			set
-			{
-				if ((this._ID_Coordinates != value))
-				{
-					this.OnID_CoordinatesChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Coordinates = value;
-					this.SendPropertyChanged("ID_Coordinates");
-					this.OnID_CoordinatesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
-		public int ID_Vehicle
-		{
-			get
-			{
-				return this._ID_Vehicle;
-			}
-			set
-			{
-				if ((this._ID_Vehicle != value))
-				{
-					if (this._Vehicles.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_VehicleChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Vehicle = value;
-					this.SendPropertyChanged("ID_Vehicle");
-					this.OnID_VehicleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Longitude", DbType="Float NOT NULL")]
-		public double Longitude
-		{
-			get
-			{
-				return this._Longitude;
-			}
-			set
-			{
-				if ((this._Longitude != value))
-				{
-					this.OnLongitudeChanging(value);
-					this.SendPropertyChanging();
-					this._Longitude = value;
-					this.SendPropertyChanged("Longitude");
-					this.OnLongitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Latitude", DbType="Float NOT NULL")]
-		public double Latitude
-		{
-			get
-			{
-				return this._Latitude;
-			}
-			set
-			{
-				if ((this._Latitude != value))
-				{
-					this.OnLatitudeChanging(value);
-					this.SendPropertyChanging();
-					this._Latitude = value;
-					this.SendPropertyChanged("Latitude");
-					this.OnLatitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StayDateTime", DbType="DateTime NOT NULL")]
-		public System.DateTime StayDateTime
-		{
-			get
-			{
-				return this._StayDateTime;
-			}
-			set
-			{
-				if ((this._StayDateTime != value))
-				{
-					this.OnStayDateTimeChanging(value);
-					this.SendPropertyChanging();
-					this._StayDateTime = value;
-					this.SendPropertyChanged("StayDateTime");
-					this.OnStayDateTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_VehicleCoordinates", Storage="_Vehicles", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Vehicles Vehicles
-		{
-			get
-			{
-				return this._Vehicles.Entity;
-			}
-			set
-			{
-				Vehicles previousValue = this._Vehicles.Entity;
-				if (((previousValue != value) 
-							|| (this._Vehicles.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Vehicles.Entity = null;
-						previousValue.VehicleCoordinates.Remove(this);
-					}
-					this._Vehicles.Entity = value;
-					if ((value != null))
-					{
-						value.VehicleCoordinates.Add(this);
 						this._ID_Vehicle = value.ID_Vehicle;
 					}
 					else

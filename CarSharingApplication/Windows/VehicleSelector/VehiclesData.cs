@@ -16,6 +16,7 @@ namespace CarSharingApplication.Windows.VehicleSelector
         public VehiclesINFO selectedVehicle { get; set; }
         public List<string> vehClasses { get; set; }
         public List<string> vehBrands { get; set; }
+        public List<string> vehCategories { get; set; }
 
         private static VehiclesData _Instance;
 

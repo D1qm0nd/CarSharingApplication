@@ -49,16 +49,19 @@ namespace CarSharingApplication.Windows.VehicleRent
                 return;
             }
             List<string> a = App.GetQueryResult<string>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("DLHANDLERConnection")),
-                     $"SELECT * FROM [dbo].GetDriverLicenceCategories ('{_User.ID_DriverLicence}')");
+                     $"SELECT Category FROM [dbo].GetDriverLicenceCategories ('{_User.ID_DriverLicence}')");
             if (a == null)
                 return;
             if (!(a.Contains(_Vehicle.Vehicle_Category.Trim().ToLower())))
+            {
+                MessageBox.Show("У вас отсутсвтует нужная категория в водительском удостоверении");
                 return;
+            }
             App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
                 $"EXEC Rent @DriverLicence = '{_User.ID_DriverLicence}', @ID_Vehicle = {_Vehicle.ID_Vehicle}, @RentalTime = '{DateTime.Now.ToString("HH:mm")}', @CountOfHours = {Picker.HourPicker.Value}");
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Арендовал ТС: {_Vehicle.ID_Vehicle}", null, LogType.UserAction));
 
-            var TripWND = new TripWindow(_User, this.Owner.Owner, false);
+            var TripWND = new TripWindow(ref _User, this.Owner.Owner, false);
             TripWND.Activate();
             TripWND.Show();
             this.Owner.Close();//??

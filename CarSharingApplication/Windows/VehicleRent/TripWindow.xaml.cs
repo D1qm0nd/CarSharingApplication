@@ -1,5 +1,6 @@
 ﻿using CarSharingApplication.LogLibrary;
 using CarSharingApplication.SQL.Linq;
+using CarSharingApplication.Windows.Moderating.EditWindows.Accidents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,18 +26,17 @@ namespace CarSharingApplication.Windows.VehicleRent
         private UsersINFO _User;
         private VehiclesINFO _Vehicle;
         private RentalsINFO _Rental;
-        public TripWindow(UsersINFO user, Window owner, bool showOwner)
+        public TripWindow(ref UsersINFO user, Window owner, bool showOwner)
         {
             this.Owner = owner;
             _ShowOwner = showOwner;
             _User = user;
             InitializeComponent();
-            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, "Просматривает окно поездки", null, LogType.UserAction));
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
             _Rental = App.GetScalarResult<RentalsINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
                     $"SELECT TOP(1) * FROM RentalsINFO WHERE ID_DriverLicence = {_User.ID_DriverLicence} AND EndTime > GETDATE() AND RentalStatus='стандартная'");
             if (_Rental == null)
                 this.Close();
-
             rt.SetTime(_Rental.EndTime);
             _Vehicle = App.GetScalarResult<VehiclesINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
                 $"SELECT * FROM VehiclesINFO WHERE ID_Vehicle = {_Rental.ID_Vehicle}");
@@ -58,13 +58,11 @@ namespace CarSharingApplication.Windows.VehicleRent
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void FinishTripClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                MessageBoxButton button = MessageBoxButton.YesNo;
-
-                var a = MessageBox.Show("", "Вы уверены что хотите завершить поездку раньше срока?", button);
+                var a = MessageBox.Show("Вы уверены что хотите завершить поездку раньше срока?", "Закончить поездку", MessageBoxButton.YesNo);
                 if (a == MessageBoxResult.Yes)
                 {
                     if(App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
@@ -81,6 +79,14 @@ namespace CarSharingApplication.Windows.VehicleRent
             {
                 this.Close();
             }
+        }
+
+        private void AccidentClick(object sender, RoutedEventArgs e)
+        {
+            var accidentWND = new AddAccident(ref _User, ref _Rental, this, true);
+            accidentWND.Activate();
+            accidentWND.Show();
+            this.Visibility = Visibility.Collapsed;
         }
     }
 }

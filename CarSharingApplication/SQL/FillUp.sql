@@ -135,7 +135,9 @@ GO
 
 GO
 	USE VehicleRental
-	INSERT TrafficAccidentTypes VALUES ('ДТП')
+	INSERT TrafficAccidentTypes VALUES 
+	('ДТП'),
+	('Неисправность тс, не связанная с пользователем')
 
 GO 
 	USE VehicleRental

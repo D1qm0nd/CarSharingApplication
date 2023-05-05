@@ -26,15 +26,28 @@ namespace CarSharingApplication.Windows.XAMLModels
 
         public bool Activated { get; private set; } = false;
 
+
         public CategoryPicker()
         {
             InitializeComponent();
             this.DataContext = this;
+            CategoryButton.IsChecked = false;
         }
 
         private void CategoryButton_Checked(object sender, RoutedEventArgs e)
         {
-            Activated = true;
+            Activated = (bool)CategoryButton.IsChecked;
+        }
+
+        public void Activate() 
+        {
+            CategoryButton.IsChecked = true;
+        }
+
+        public void SetDates(string receipt, string end)
+        {
+            CategoryReceiptDate.Text = receipt;
+            CategoryEndDate.Text = end;
         }
 
         public DriverLicencesCategories GetCategoryInfo()

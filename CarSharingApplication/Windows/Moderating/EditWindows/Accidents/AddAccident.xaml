@@ -1,0 +1,26 @@
+﻿<Window x:Class="CarSharingApplication.Windows.Moderating.EditWindows.Accidents.AddAccident"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:CarSharingApplication.Windows.Moderating.EditWindows.Accidents"
+        mc:Ignorable="d"
+        Title="AddAccident" Height="600" Width="450"
+        Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <StackPanel>
+                <Expander Header="Тип аварии" MinHeight="100" MaxHeight="200" IsExpanded="True">
+                    <ListView x:Name="AccidentTypes" Padding="0" Foreground="Black" Background="Red" FontSize="15" FontWeight="DemiBold" Margin="40 0" HorizontalAlignment="Left">
+                    </ListView>
+                </Expander>
+                <TextBox MaxLines="20" MaxWidth="430" Margin="10 0 10 0" MaxLength="1000" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Описание аварии"></TextBox>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

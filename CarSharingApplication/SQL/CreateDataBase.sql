@@ -711,18 +711,7 @@ END
 GO
 	PRINT 'Создал Функцию GetUserStatus'
 
-GO 
-	CREATE FUNCTION GetDriverLicenceCategories
-	(
-		@ID_DriverLicence CHAR(10)
-	)
-	RETURNS TABLE
-	AS
-		RETURN (SELECT TRIM(LOWER(Category)) as Category
-		FROM Categories 
-		WHERE 
-		ID_DriverLicence = @ID_DriverLicence
-		AND EndDate > GETDATE())
+
 
 GO
 	PRINT '==================================Представления======================================='
@@ -809,6 +798,15 @@ GO
 	PRINT 'Создал представление UsersINFO'
 
 GO
+	CREATE VIEW DriversLicencesCategoriesINFO
+	AS
+		SELECT ID_DriverLicence,Category, ReceiptDate, EndDate 
+		FROM Categories
+		WHERE Categories.EndDate >= GETDATE()
+GO 
+	PRINT 'Создал представление DriversLicencesCategoriesINFO'
+
+GO
 	PRINT '==================================Функции 2====================================='
 GO
 	CREATE FUNCTION VehiclesWithStatus 
@@ -822,6 +820,26 @@ GO
 		WHERE LOWER(AccessStatus) = LOWER(@Status))
 GO
 	PRINT 'Создал Функцию VehiclesWithStatus'
+
+GO 
+	CREATE FUNCTION GetDriverLicenceCategories
+	(
+		@ID_DriverLicence CHAR(10)
+	)
+	RETURNS TABLE
+	AS
+		RETURN 
+		(SELECT 
+			TRIM(LOWER(Category)) as Category,
+			ReceiptDate,
+			EndDate
+		FROM 
+		DriversLicencesCategoriesINFO
+		WHERE 
+		ID_DriverLicence = @ID_DriverLicence)
+
+GO
+	PRINT 'Создал Функцию GetDriverLicenceCategories'
 
 
 GO
@@ -873,6 +891,8 @@ GO
 		GRANT SELECT ON VehiclesWithStatus TO DB_USER_CARHANDLER
 		GRANT SELECT ON RentalsINFO TO DB_USER_CARHANDLER
 		GRANT SELECT, UPDATE ON Rentals TO DB_USER_CARHANDLER
+		GRANT INSERT, SELECT ON TrafficAccidents TO DB_USER_CARHANDLER
+		GRANT INSERT, SELECT ON TrafficAccidentTypes TO DB_USER_CARHANDLER
 
 
 		CREATE LOGIN DLHANDLER WITH PASSWORD = 'DLHANDLER'

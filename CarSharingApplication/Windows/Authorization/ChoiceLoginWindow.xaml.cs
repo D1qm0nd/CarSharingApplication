@@ -51,7 +51,7 @@ namespace CarSharingApplication.Windows.Authorization
             }
             else
             {
-                var TripWND = new TripWindow(User, this, true);
+                var TripWND = new TripWindow(ref User, this, true);
                 this.Visibility = Visibility.Collapsed;
                 TripWND.Activate();
                 try
