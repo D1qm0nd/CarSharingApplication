@@ -56,6 +56,14 @@ namespace CarSharingApplication
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
             InitializeComponent();
             GetVehiclesData(VehiclesData.GetInstance);
+            //Task.Run(() =>
+            //{
+            //    while (true)
+            //    {
+            //        GetVehiclesData(VehiclesData.GetInstance);
+            //        Thread.Sleep(10000);
+            //    }
+            //}).ConfigureAwait(true);
         }
 
         public void SetInfo(VehiclesData vehData)

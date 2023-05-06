@@ -32,11 +32,15 @@ namespace CarSharingApplication.Windows.XAMLModels
 
         public void SetTime(DateTime? endTime)
         {
-            if (endTime != null)
-            {
-                TimeLabel.Text = $"Аренда закончиться {endTime}";
-            }
-            else TimeLabel.Text = "";
+            if (endTime == null) return;
+            //Task.Factory.StartNew(() =>
+            //{
+            //    while (true)
+            //    {
+                    TimeLabel.Text = $"Аренда закончиться через {endTime - DateTime.Now}";//
+            //        Thread.Sleep(1000);
+            //    }
+            //}).ConfigureAwait(true);
         }
     }
 }
