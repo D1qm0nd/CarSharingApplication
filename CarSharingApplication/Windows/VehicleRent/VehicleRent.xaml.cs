@@ -75,7 +75,7 @@ namespace CarSharingApplication.Windows.VehicleRent
             if (_ShowOwner == true)
             {
                 this.Owner.Visibility = Visibility.Visible;
-                this.Activate();
+                this.Owner.Activate();
             }
             else
             { 

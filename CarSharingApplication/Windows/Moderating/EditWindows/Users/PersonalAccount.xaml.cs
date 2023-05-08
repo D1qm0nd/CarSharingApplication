@@ -92,6 +92,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
                             MessageBox.Show($"Что-то пошло не так, проверьте введённые поля связанных с категорией {category.Name}");
                             return;
                         }
+
                         if (!App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
                             $"EXEC AddCategoryToDriverLicence " +
                             $"@DriverLicence_ID='{uDriverLicence.Text}', " +

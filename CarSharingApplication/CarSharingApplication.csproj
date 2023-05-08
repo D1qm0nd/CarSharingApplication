@@ -155,6 +155,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Attributes\OnlyDigitalsAttribute.cs" />
     <Compile Include="DBEncryptor.cs" />
     <Compile Include="DriverLicencesCategories.cs" />
     <Compile Include="ImageConvertor.cs" />
@@ -166,6 +167,7 @@
       <DependentUpon>CarSharingDataBaseClasses.dbml</DependentUpon>
     </Compile>
     <Compile Include="Validation\AuthorizationValidation.cs" />
+    <Compile Include="Validation\CustomValidator.cs" />
     <Compile Include="Validation\TextBoxValidation.cs" />
     <Compile Include="VehicleRentalDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

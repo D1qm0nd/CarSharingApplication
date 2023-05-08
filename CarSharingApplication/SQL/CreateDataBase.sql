@@ -724,10 +724,14 @@ GO
 			ID_Vehicle, 
 			ID_DriverLicence, 
 			RentalStatus,
-			CONVERT(DATETIME,CAST(
-				CONCAT(CONVERT(CHAR(10),Rentals.StartDate),' ',
-					DATEADD(HOUR,Rentals.CountOfHours,CONVERT(TIME,Rentals.RentalTime))) 
-						AS datetime2(7))) as EndTime
+			DATEADD(SECOND,DATEPART(SECOND,Rentals.RentalTime),
+				DATEADD(MINUTE,DATEPART(MINUTE,Rentals.RentalTime),
+					DATEADD(HOUR,Rentals.CountOfHours+DATEPART(HOUR,Rentals.RentalTime),
+						CONVERT(DATETIME,StartDate)))) as EndTime
+			--CONVERT(DATETIME,CAST(
+			--	CONCAT(CONVERT(CHAR(10),Rentals.StartDate),' ',
+			--		DATEADD(HOUR,Rentals.CountOfHours,CONVERT(TIME,Rentals.RentalTime))) 
+			--			AS datetime2(7))) as EndTime
 		FROM Rentals
 
 GO

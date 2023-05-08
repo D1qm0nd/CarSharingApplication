@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarSharingApplication.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,14 +13,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CarSharingApplication.Validation;
 
 namespace CarSharingApplication.Windows.XAMLModels
 {
     /// <summary>
     /// Логика взаимодействия для CreditCard.xaml
     /// </summary>
+    [OnlyDigitals]
     public partial class CreditCard : UserControl
     {
+        private string _CardNum = "1000";
+        public string CardNum 
+        { 
+            get { return _CardNum; }
+            set { _CardNum = value; } 
+        }
+
         public CreditCard()
         {
             InitializeComponent();
@@ -27,7 +37,7 @@ namespace CarSharingApplication.Windows.XAMLModels
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
         }
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
@@ -45,6 +55,7 @@ namespace CarSharingApplication.Windows.XAMLModels
                 tb.Text = tb.Text+' ';
             }
             tb.CaretIndex = tb.Text.Length;
+            if (tb.Text.Length == 19) CardNum = tb.Text;
         }
 
         private void DateTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -65,9 +76,15 @@ namespace CarSharingApplication.Windows.XAMLModels
             tb.CaretIndex = tb.Text.Length;
         }
 
+        //public bool Validate()
+        //{
+        //    return CustomValidator.isValidate(CardNum) && CustomValidator.isValidate(CardDate.Text) && CustomValidator.isValidate(CVS.Password);
+        //}
+
         public bool isEmpty()
         {
-            return (CardNumber.Text == "") || (CardDate.Text == "") || (CVS.Password == "");
+
+            return ((CardNumber.Text == "") || (CardDate.Text == "") || (CVS.Password == "")); // && Validate();
         }
     }
 }
