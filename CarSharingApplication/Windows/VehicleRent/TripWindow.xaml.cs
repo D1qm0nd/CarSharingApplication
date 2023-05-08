@@ -87,6 +87,7 @@ namespace CarSharingApplication.Windows.VehicleRent
             accidentWND.Activate();
             accidentWND.Show();
             this.Visibility = Visibility.Collapsed;
+            (sender as Button).IsEnabled = false;
         }
     }
 }

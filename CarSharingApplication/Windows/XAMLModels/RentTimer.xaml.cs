@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Policy;
@@ -33,14 +34,7 @@ namespace CarSharingApplication.Windows.XAMLModels
         public void SetTime(DateTime? endTime)
         {
             if (endTime == null) return;
-            //Task.Factory.StartNew(() =>
-            //{
-            //    while (true)
-            //    {
-                    TimeLabel.Text = $"Аренда закончиться через {endTime - DateTime.Now}";//
-            //        Thread.Sleep(1000);
-            //    }
-            //}).ConfigureAwait(true);
+                TimeLabel.Text = String.Format("Аренда закончиться {0:dd.MM.yyyy в HH:mm}",endTime);//
         }
     }
 }

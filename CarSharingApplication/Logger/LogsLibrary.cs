@@ -20,8 +20,7 @@ namespace CarSharingApplication.LogLibrary
     [Serializable]
     public class LogMessage
     {
-        public DateTime Date = DateTime.UtcNow;
-
+        public string Date { get { return String.Format("{0:dd.MM.yyyy-HH:mm:ss}",DateTime.UtcNow); } }
         public string MachineName { get; } = Environment.MachineName;
         public ulong? ID_User { get; set; }
         public string? WindowName { get; set; }

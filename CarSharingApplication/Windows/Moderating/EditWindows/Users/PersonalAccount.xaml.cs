@@ -82,14 +82,14 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
                     {
                         if (category.ReceiptDate == "" && category.EndDate == "")
                         {
-                            MessageBox.Show($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
+                            MessageBox.Show($"Что-то пошло не так, проверьте введённые поля связанных с категорией {category.Name}");
                             return;
                         }
                         if (LicenceCategories.Contains(category.Name.Trim().ToLower()))
                             continue;
-                        if (DateTime.Parse(category.EndDate) < DateTime.UtcNow || DateTime.Parse(category.ReceiptDate) > DateTime.UtcNow)
+                        if (DateTime.Parse(category.ReceiptDate) > DateTime.UtcNow || DateTime.Parse(category.EndDate) < DateTime.UtcNow)
                         {
-                            MessageBox.Show($"Что-то пошло не так, проверьте введённые полей связанных с категорией {category.Name}");
+                            MessageBox.Show($"Что-то пошло не так, проверьте введённые поля связанных с категорией {category.Name}");
                             return;
                         }
                         if (!App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),

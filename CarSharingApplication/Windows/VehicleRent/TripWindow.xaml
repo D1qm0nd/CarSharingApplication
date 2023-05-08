@@ -10,7 +10,9 @@
         ResizeMode="NoResize"
         Height="790" Width="430"
         Closing="Window_Closing"
-        Title="Окно поездки">
+        Title="Окно поездки"
+        Icon="..\Images\icon.jpeg"
+        >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
