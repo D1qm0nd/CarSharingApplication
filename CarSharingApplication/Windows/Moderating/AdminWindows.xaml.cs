@@ -9,6 +9,7 @@ using CarSharingApplication.Windows.Moderating.EditWindows.Rentals;
 using CarSharingApplication.LogLibrary;
 using CarSharingApplication.Windows.Moderating.ViewWindows;
 using System.Windows.Forms;
+using CarSharingApplication.ViewWindows;
 
 namespace CarSharingApplication
 {
@@ -139,6 +140,14 @@ namespace CarSharingApplication
         {
             this.Owner.Visibility = Visibility.Visible;
             this.Close();
+        }
+
+        private void DriversLicencesCategoriesINFO_Click(object sender, RoutedEventArgs e)
+        {
+            var View = new ViewDriversLicencesCategories(_User);
+            View.Owner = this;
+            this.Visibility = Visibility.Hidden;
+            View.Show();
         }
     }
 }

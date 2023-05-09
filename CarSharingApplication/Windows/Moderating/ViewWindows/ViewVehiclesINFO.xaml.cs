@@ -37,7 +37,7 @@ namespace CarSharingApplication
             {
                 InitializeComponent();
                 db = new CarSharingDataBaseClassesDataContext(ConnectionString);
-                dt_grid.ItemsSource = db.Vehicles;
+                dt_grid.ItemsSource = db.VehiclesINFO;
             }
             catch (SqlException sqlex)
             {
