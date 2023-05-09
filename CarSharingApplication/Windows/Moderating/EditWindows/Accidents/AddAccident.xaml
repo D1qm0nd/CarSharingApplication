@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CarSharingApplication.Windows.Moderating.EditWindows.Accidents" xmlns:validation="clr-namespace:CarSharingApplication.Validation"
+        xmlns:validationtext="clr-namespace:CarSharingApplication.Validation"
         mc:Ignorable="d"
         Title="Окно описания аварии" 
         Height="600" Width="450"
@@ -12,6 +13,10 @@
         Icon="..\..\..\Images\icon.jpeg"
         ResizeMode="NoResize"
         >
+    <Window.DataContext>
+        <validationtext:TextBoxValidation/>
+    </Window.DataContext>
+        
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="511"/>
@@ -23,7 +28,7 @@
                     <ListView x:Name="AccidentTypes" Padding="0" Foreground="Black" Background="Red" FontSize="15" FontWeight="DemiBold" Margin="40 0" HorizontalAlignment="Left">
                     </ListView>
                 </Expander>
-                <TextBox Text="{Binding Path= text}" x:Name="DescriptionText" MaxHeight="300" MaxLines="20" MaxWidth="430" Margin="10 0 10 0" MaxLength="1000" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Описание аварии">
+                <TextBox Text="{Binding Path=text_, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="DescriptionText" MaxHeight="300" MaxLines="20" MaxWidth="430" Margin="10 0 10 0" MaxLength="1000" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Описание аварии">
                     <!--<TextBox.Text>
                         <Binding Path="text" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                             <Binding.ValidationRules>

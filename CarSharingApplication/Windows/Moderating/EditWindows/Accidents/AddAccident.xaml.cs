@@ -84,8 +84,6 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Accidents
                 MessageBox.Show("добавьте описание аварии");
                 return;
             }
-            ValidationContext validationContext = new ValidationContext(this);
-            var errors = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
 
             char[] NotAllowed = {'|', '\\', '/',
                                  '-', '`', '\''};

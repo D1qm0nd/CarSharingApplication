@@ -1,5 +1,4 @@
-﻿using CarSharingApplication.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +19,9 @@ namespace CarSharingApplication.Windows.XAMLModels
     /// <summary>
     /// Логика взаимодействия для CreditCard.xaml
     /// </summary>
-    [OnlyDigitals]
     public partial class CreditCard : UserControl
     {
-        private string _CardNum = "1000";
+        private string _CardNum = "";
         public string CardNum 
         { 
             get { return _CardNum; }
@@ -35,41 +33,29 @@ namespace CarSharingApplication.Windows.XAMLModels
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             var tb = sender as TextBox;
-            if (((byte)e.Key) < 34 || ((byte)e.Key) > 43)
-            { 
-                if (tb.Text.Length > 0)
-                {
-                    tb.Text = tb.Text.Remove(tb.Text.Length - 1, 1);
-                }
-            } else
-            if ((tb.Text.Length+1) % 5 == 0 && tb.Text.Length < 19)
+            if ((tb.Text.Length + 1) % 5 == 0 && tb.Text.Length < 19)
             {
-                tb.Text = tb.Text+' ';
+                tb.Text = tb.Text + ' ';
             }
             tb.CaretIndex = tb.Text.Length;
+
+            if (((tb.Text.Length != 5) || (tb.Text.Length != 10) || (tb.Text.Length != 15)) && (tb.Text.Length > 0))
+            {
+                if (tb.Text?[tb.Text.Length - 1].ToString() == "0")
+                    tb.Text = tb.Text.Remove(tb.Text.Length - 1, 1);
+            }
+
             if (tb.Text.Length == 19) CardNum = tb.Text;
         }
 
         private void DateTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             var tb = sender as TextBox;
-            if (((byte)e.Key) < 34 || ((byte)e.Key) > 43)
-            {
-                if (tb.Text.Length > 0)
-                {
-                    tb.Text = tb.Text.Remove(tb.Text.Length - 1, 1);
-                }
-            }
-            else
-            if ((tb.Text.Length + 1) % 3 == 0 && tb.Text.Length<5)
+            if ((tb.Text.Length + 1) % 3 == 0 && tb.Text.Length < 5)
             {
                 tb.Text = tb.Text + '/';
             }
@@ -85,6 +71,12 @@ namespace CarSharingApplication.Windows.XAMLModels
         {
 
             return ((CardNumber.Text == "") || (CardDate.Text == "") || (CVS.Password == "")); // && Validate();
+        }
+
+        private void CardNumber_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
         }
     }
 }

@@ -1,33 +1,40 @@
-﻿using CarSharingApplication.Windows.XAMLModels;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CarSharingApplication.Validation
 {
-    public class TextBoxValidation : ValidationRule
-    {
-        public TextBoxValidation() { }
-        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
-        {
-            char[] NotAllowed = {'|', '\\', '/', 
-                                 '$', '%', '-', 
-                                 '`', '\''};
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
 
-            foreach (char c in NotAllowed)
-            {
-                if ((value as string).Contains(c))
-                {
-                    return new ValidationResult(false, "Недопустимый символ");
-                }
+    public class TextBoxValidation : DataPropertyChanged
+    {
+        private string _text;
+        public string text_ 
+        {
+            get => _text;
+            set 
+            { 
+                _text = value; 
+                OnPropertyChanged(nameof(text_));
             }
-            return new ValidationResult(true,null);
+        }
+
+        public TextBoxValidation() 
+        { 
+            PropertyChanged += Validate;
+            text_ = "";
+        }
+
+        public void Validate(object sender, PropertyChangedEventArgs e)
+        {
+            char[] Text = new char[] { '-', '`', '\'', 
+                                       ';', '+', '=', 
+                                       '_', '^', '|' };
+
+            foreach (char c in Text.AsParallel())
+            {
+                if (text_.Contains(c)) text_ = text_.Trim(c);
+            }
         }
     }
 }

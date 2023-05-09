@@ -251,26 +251,7 @@ namespace CarSharingApplication
 
         private void Login_TextChanged(object sender, KeyEventArgs e)
         {
-            char[] NotAllowed = {'@', ',', '.', '|', ' ',
-                                 '\\', '/', '!', '?', '#', 
-                                 '"', '$', '%', '[', ']',
-                                 '{', '}', '-', '^', '~', 
-                                 '`', '№', '&', '*', '\'', 
-                                 '(', ')'};
 
-            foreach (char c in NotAllowed) {
-                if (Login.Text.Contains(c))
-                {
-                    string notallowedinstr = "";
-                    foreach (char c2 in NotAllowed)
-                    {
-                        if (c2 != NotAllowed[NotAllowed.Length - 1]) notallowedinstr += $"'{c2}', ";
-                        else notallowedinstr += $"'{c2}'";
-                    }
-                    MessageBox.Show($"Вы ввели символ '{c}' из перечня недопустимых:\n{notallowedinstr}", "Ввод недопусимого значения");
-                    Login.Clear();
-                }
-            }
         }
     }
 }
