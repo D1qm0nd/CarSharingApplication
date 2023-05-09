@@ -872,9 +872,6 @@ GO
 
 --UPDATE Rental_Users SET isAdmin=1 WHERE UserLogin='rental_admin'
 
-USE VehicleRental
-	SELECT * FROM Rental_Users
-
 GO
 	PRINT '==================================Встроенные пользователи (приложние)======================================='
 	USE VehicleRental

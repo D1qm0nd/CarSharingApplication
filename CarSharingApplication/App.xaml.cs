@@ -24,10 +24,10 @@ namespace CarSharingApplication
 
         public static string path { get
             {
-                string _path = @"D:\C#\CarSharingApplication\CarSharingApplication";
-                return _path;
-                //string _path = Environment.CurrentDirectory;
-                //return _path.Remove(_path.Length - 9);
+                //string _path = @"D:\C#\CarSharingApplication\CarSharingApplication";
+                //return _path;
+                string _path = Environment.CurrentDirectory;
+                return _path.Remove(_path.Length - 9);
 
             }
         }

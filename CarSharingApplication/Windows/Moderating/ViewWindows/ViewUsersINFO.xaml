@@ -8,6 +8,7 @@
         Height="450" Width="850"
         Closing="Window_Closing"
         ResizeMode="NoResize"
+        Title="Окно информации о пользователях"
     >
     <Grid>
         <ScrollViewer MaxHeight="430" MaxWidth="850" VerticalAlignment="Top" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">

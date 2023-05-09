@@ -130,7 +130,7 @@ namespace CarSharingApplication
 
         private void VehiclesINFO_Click(object sender, RoutedEventArgs e)
         {
-            var View = new ViewRentals_INFO(_User);
+            var View = new ViewVehiclesINFO(_User);
             View.Owner = this;
             this.Visibility = Visibility.Hidden;
             View.Show();
