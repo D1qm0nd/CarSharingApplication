@@ -3,12 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CarSharingApplication"
         mc:Ignorable="d"
-        Height="280" MinHeight="280" MaxHeight="280"
-        Width="650" MinWidth="650" MaxWidth="650"
+        Height="280"
+        Width="850" 
         Icon="../images/icon.jpeg"
         Closing="Window_Closing"
+        ResizeMode="NoResize"
         Title="Окно администратора"
         >
     <Grid>
@@ -30,13 +32,14 @@
             x:Name="buttonsBorder"
             Grid.Row="1"
             Margin="2"
-            CornerRadius="10"
+            CornerRadius="4"
             Background="white"
             BorderBrush="LightGray"
             BorderThickness="1"
             >
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
@@ -58,7 +61,12 @@
                 <Button x:Name="TrafficAccidentsTypeButton" Margin="1" Grid.Column="1" Grid.Row="2" Click="TrafficAccidentsTypeButton_Click">Типы Аварийных случаев</Button>
                 <Button x:Name="TrafficAccidentsButton" Margin="1" Grid.Column="1" Grid.Row="3" Click="TrafficAccidentsButton_Click">Аварийные случаи</Button>
                 <Button x:Name="RentalsButton"  Margin="1" Grid.Column="1" Grid.Row="4" Click="RentalsButton_Click">Аренда</Button>
-                <Button x:Name="BackButton"  VerticalAlignment="Bottom" Margin="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Background="Red" Click="ButtonBACK_Click">Выход</Button>
+                <Button x:Name="BackButton" VerticalAlignment="Bottom" Margin="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Background="Red" Click="ButtonBACK_Click">Выход</Button>
+                <Button x:Name="UsersINFO"  Margin="1" Grid.Column="2" Grid.Row="0" Click="UsersINFO_Click"  Background="Green" BorderBrush="DarkGreen">Информация о пользователях</Button>
+                <Button x:Name="DriversLicencesCategoriesINFO"  Margin="1" Grid.Column="2" Grid.Row="1" Click="RentalsINFO_Click"  Background="Green" BorderBrush="DarkGreen" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Информация о категориях вод.удост</Button>
+                <Button x:Name="RentalsINFO"  Margin="1" Grid.Column="2" Grid.Row="2" Click="RentalsINFO_Click" Background="Green" BorderBrush="DarkGreen">Информация о арендах</Button>
+                <Button x:Name="VehiclesINFO"  Margin="1" Grid.Column="2" Grid.Row="3" Click="VehiclesINFO_Click" Background="Green" BorderBrush="DarkGreen">Информация о ТС</Button>
+                <Label x:Name="TotalPrice" Content="" Grid.Column="2" Grid.Row="4" Grid.RowSpan="2" Background="orange" Margin="1" BorderBrush="DarkOrange" BorderThickness="3" Foreground="White" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
             </Grid>
         </Border>
     </Grid>

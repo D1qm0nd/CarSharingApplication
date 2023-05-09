@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CarSharingApplication"
         mc:Ignorable="d"
         Height="500" Width="800"
@@ -12,14 +13,7 @@
         Title="Транспортные средства"
     >
 
-    <Window.Resources>
-        <Style 
-            x:Key="RowImageUploadButton"
-            TargetType="{x:Type Button}"       
-        >
-            <Setter Property="Background" Value="Red"/>
-        </Style>
-    </Window.Resources>
+    
 
     <Grid>
         <ScrollViewer MaxHeight="400" MaxWidth="770" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
@@ -40,7 +34,7 @@
                     <DataGridTextColumn Binding="{Binding ID_Vehicle}" Header="Код" MinWidth="100" MaxWidth="300" CanUserSort="True" SortDirection="Descending"/>
                     <DataGridTextColumn Binding="{Binding Class}" Header="Класс" MinWidth="100" MaxWidth="300"/>
                     <DataGridTextColumn Binding="{Binding PricePerHour}" Header="Цена ₽/Час" MinWidth="100" MaxWidth="300"/>
-                    <DataGridTextColumn x:Name="carpict" Binding="{Binding CarPicture}" MaxWidth="100" Header="carpicture" Visibility="Collapsed"/>
+                    <DataGridTextColumn x:Name="carpict" Binding="{Binding CarPicture}" MaxWidth="100" Header="Картинка" Visibility="Collapsed"/>
                     <DataGridTemplateColumn Header="Изображение" MinWidth="100" MaxWidth="300">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -74,7 +68,7 @@
             </DataGrid>
         </ScrollViewer>
         <WrapPanel VerticalAlignment="Bottom" Width="800">
-            <Button VerticalAlignment="Bottom" Click="SubmitButton_Click" Height="30" MinWidth="399" >Подвердить изменения</Button>
+            <Button VerticalAlignment="Bottom" Click="SubmitButton_Click" Height="30" MinWidth="399">Подвердить изменения</Button>
             <Button VerticalAlignment="Bottom" Click="DeleteButton_Click" Height="30" MinWidth="399" Margin="2 0 0 0" Background="red">Удалить</Button>
         </WrapPanel>
     </Grid>

@@ -35,12 +35,18 @@ namespace CarSharingApplication.Windows.VehicleRent
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
             _Rental = App.GetScalarResult<RentalsINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
                     $"SELECT TOP(1) * FROM RentalsINFO WHERE ID_DriverLicence = {_User.ID_DriverLicence} AND EndTime > GETDATE() AND RentalStatus='стандартная'");
-            if (_Rental == null)
+            if (_Rental != null)
+            {
+                rt.SetTime(_Rental.EndTime);
+                _Vehicle = App.GetScalarResult<VehiclesINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
+                    $"SELECT * FROM VehiclesINFO WHERE ID_Vehicle = {_Rental.ID_Vehicle}");
+                Card.SetVehicleInfo(_Vehicle, "Ошибка загрузки данных");
+            }
+            else
+            {
                 this.Close();
-            rt.SetTime(_Rental.EndTime);
-            _Vehicle = App.GetScalarResult<VehiclesINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
-                $"SELECT * FROM VehiclesINFO WHERE ID_Vehicle = {_Rental.ID_Vehicle}");
-            Card.SetVehicleInfo(_Vehicle, "Ошибка загрузки данных");
+            }
+            
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -68,16 +74,13 @@ namespace CarSharingApplication.Windows.VehicleRent
                     if(App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
                         $"UPDATE Rentals SET RentalStatus='досрочная' WHERE ID_Rental = {_Rental.ID_Rental}"))
                         App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Досрочно окончил аренду ТС {_Rental.ID_Vehicle}", null, LogType.UserAction));
+                    this.Close();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Не смог отменить поездку", ex.Message, LogType.ProgramError));
-            }
-            finally 
-            {
-                this.Close();
             }
         }
 

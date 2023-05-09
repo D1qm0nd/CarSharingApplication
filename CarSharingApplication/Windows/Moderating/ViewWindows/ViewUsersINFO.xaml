@@ -1,0 +1,40 @@
+﻿<Window x:Class="CarSharingApplication.ViewUsersINFO"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarSharingApplication"
+        mc:Ignorable="d"
+        Height="450" Width="850"
+        Closing="Window_Closing"
+        ResizeMode="NoResize"
+    >
+    <Grid>
+        <ScrollViewer MaxHeight="430" MaxWidth="850" VerticalAlignment="Top" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <DataGrid 
+                ItemsSource="{Binding}"
+                AlternatingRowBackground="White"
+                SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                x:Name="dt_grid"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                AutoGenerateColumns="False"
+                >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding ID_User}" Header="Код" MinWidth="50" MaxWidth="300" CanUserSort="True" SortDirection="Descending"/>
+                    <DataGridTextColumn Binding="{Binding UserEMail}" Header="Почтовый ящик" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding UserSurname}" Header="Фамилия" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding UserName}" Header="Имя" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding UserMiddleName}" Header="Отчество" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding UserBirthDay, StringFormat=dd.MM.yyyy}" Header="Дата рождения" Width="50"/>
+                    <DataGridTextColumn Binding="{Binding Previlege}" Header="Привелегия" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding RentalsCount}" Header="Кол-во аренд" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding AccidentsCount}" Header="Кол-во аварий" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding ID_DriverLicence}" Header="Вод. удостоверение" MinWidth="100" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding ReceiptDate, StringFormat=dd.MM.yyyy}" Header="Дата получения" MinWidth="150" MaxWidth="150"/>
+                    <DataGridTextColumn Binding="{Binding RentStatus}" Header="Статус" MinWidth="100" MaxWidth="300"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+    </Grid>
+</Window>

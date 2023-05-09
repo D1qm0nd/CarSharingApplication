@@ -219,6 +219,18 @@
     <Compile Include="Windows\Moderating\EditWindows\Users\EditUsersWindow.xaml.cs">
       <DependentUpon>EditUsersWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Moderating\ViewWindows\ViewVehiclesINFO.xaml.cs">
+      <DependentUpon>ViewVehiclesINFO.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Moderating\ViewWindows\ViewDriversLicencesCategories.xaml.cs">
+      <DependentUpon>ViewDriversLicencesCategories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Moderating\ViewWindows\ViewRentals_INFO.xaml.cs">
+      <DependentUpon>ViewRentals_INFO.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Moderating\ViewWindows\ViewUsersINFO.xaml.cs">
+      <DependentUpon>ViewUsersINFO.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\VehicleRent\TripWindow.xaml.cs">
       <DependentUpon>TripWindow.xaml</DependentUpon>
     </Compile>
@@ -323,6 +335,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Moderating\ViewWindows\ViewVehiclesINFO.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Moderating\ViewWindows\ViewDriversLicencesCategories.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Moderating\ViewWindows\ViewRentals_INFO.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Moderating\ViewWindows\ViewUsersINFO.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\VehicleRent\TripWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -400,7 +428,7 @@
     <None Include="SQL\Linq\CarSharingDataBaseClasses.dbml.layout">
       <DependentUpon>CarSharingDataBaseClasses.dbml</DependentUpon>
     </None>
-    <None Include="SQL\LogicalModelCarsharingBD.erd" />
+    <None Include="SQL\LM.erd" />
     <None Include="VehicleRentalDataSet.xsc">
       <DependentUpon>VehicleRentalDataSet.xsd</DependentUpon>
     </None>

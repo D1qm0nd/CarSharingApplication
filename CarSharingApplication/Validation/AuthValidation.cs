@@ -97,35 +97,42 @@ namespace CarSharingApplication.Validation
 
         public void Validate(object sender, PropertyChangedEventArgs e)
         {
-            switch (e?.PropertyName)
+            try
             {
-                case "login_":
-                    foreach (char c in Login.AsParallel())
-                        if (login_.Contains(c)) 
-                            login_ = login_.Trim(c);
-                    break;
-                case "email_":
-                    foreach (char c in Email.AsParallel())
-                        if (email_.Contains(c)) 
-                            email_ = email_.Trim(c);
-                    break;
-                case "surname_":
-                    foreach (char c in Name.AsParallel())
-                        if (middlename_.Contains(c)) 
-                            middlename_ = middlename_.Trim(c);
-                    break;
-                case "username_":
-                    foreach (char c in Name.AsParallel())
-                        if (username_.Contains(c)) 
-                            username_ = username_.Trim(c);
-                    break;
-                case "middlename_":
-                    foreach (char c in Name.AsParallel())
-                        if (middlename_.Contains(c)) 
-                            middlename_ = middlename_.Trim(c);
-                    break;
-                default: 
-                    break;
+                switch (e?.PropertyName)
+                {
+                    case "login_":
+                        foreach (char c in Login.AsParallel())
+                            if (login_.Contains(c))
+                                login_ = login_.Trim(c);
+                        break;
+                    case "email_":
+                        foreach (char c in Email.AsParallel())
+                            if (email_.Contains(c))
+                                email_ = email_.Trim(c);
+                        break;
+                    case "surname_":
+                        foreach (char c in Name.AsParallel())
+                            if (middlename_.Contains(c))
+                                middlename_ = middlename_.Trim(c);
+                        break;
+                    case "username_":
+                        foreach (char c in Name.AsParallel())
+                            if (username_.Contains(c))
+                                username_ = username_.Trim(c);
+                        break;
+                    case "middlename_":
+                        foreach (char c in Name.AsParallel())
+                            if (middlename_.Contains(c))
+                                middlename_ = middlename_.Trim(c);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch
+            {
+                
             }
         }
     }

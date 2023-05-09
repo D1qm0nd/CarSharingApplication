@@ -34,7 +34,7 @@ namespace CarSharingApplication.Windows.XAMLModels
         public void SetTime(DateTime? endTime)
         {
             if (endTime == null) return;
-                TimeLabel.Text = String.Format("Аренда закончиться {0:dd.MM.yyyy в HH:mm}",endTime);//
+                TimeLabel.Text = String.Format("Аренда закончиться {0:dd.MM.yyyy в HH:mm:ss}",endTime);
         }
     }
 }

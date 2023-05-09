@@ -139,6 +139,7 @@ GO
 		StartDate DATE NOT NULL,
 		RentalTime TIME NOT NULL,
 		CountOfHours INT NOT NULL,
+		TotalPrice MONEY NOT NULL,
 		RentalStatus CHAR(12) DEFAULT 'стандартная' NOT NULL
 		PRIMARY KEY (ID_Rental)
 	)
@@ -483,7 +484,8 @@ GO
 		@DriverLicence CHAR(10),
 		@ID_Vehicle INT,
 		@RentalTime TIME,
-		@CountOfHours INT
+		@CountOfHours INT,
+		@TotalPrice MONEY
 	)
 	AS
 	BEGIN
@@ -491,13 +493,14 @@ GO
 			IF ((SELECT [dbo].GetVehicleStatus(@ID_Vehicle)) = 'доступен')
 			BEGIN
 				INSERT Rentals VALUES 
-				(@DriverLicence, @ID_Vehicle, GETDATE(),@RentalTime,@CountOfHours, 'стандартная')
+				(@DriverLicence, @ID_Vehicle, GETDATE(), @RentalTime, @CountOfHours, @TotalPrice, 'стандартная')
 				IF EXISTS(SELECT * FROM Rentals 
 						  WHERE ID_DriverLicence = @DriverLicence 
 							   AND ID_Vehicle = @ID_Vehicle 
 							   AND StartDate = CONVERT(DATE, GETDATE())
 							   AND RentalTime <= @RentalTime 
 							   AND CountOfHours = @CountOfHours
+							   AND TotalPrice = @TotalPrice
 							   AND RentalStatus = 'стандартная')
 					COMMIT
 				ELSE ROLLBACK
@@ -724,6 +727,7 @@ GO
 			ID_Vehicle, 
 			ID_DriverLicence, 
 			RentalStatus,
+			TotalPrice,
 			DATEADD(SECOND,DATEPART(SECOND,Rentals.RentalTime),
 				DATEADD(MINUTE,DATEPART(MINUTE,Rentals.RentalTime),
 					DATEADD(HOUR,Rentals.CountOfHours+DATEPART(HOUR,Rentals.RentalTime),
@@ -926,6 +930,11 @@ GO
 		GRANT INSERT, SELECT, UPDATE, DELETE ON Rentals TO DB_ADMIN_HANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON TrafficAccidents TO DB_ADMIN_HANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON TrafficAccidentTypes TO DB_ADMIN_HANDLER
+		GRANT SELECT ON UsersINFO TO DB_ADMIN_HANDLER
+		GRANT SELECT ON RentalsINFO TO DB_ADMIN_HANDLER
+		GRANT SELECT ON DriversLicencesCategoriesINFO TO DB_ADMIN_HANDLER
+
+
 		
 		GRANT EXEC ON REG_USER TO DB_USER_USERHANDLER
 

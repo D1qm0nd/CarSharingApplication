@@ -48,9 +48,6 @@ namespace CarSharingApplication.SQL.Linq
     partial void InsertRental_Users(Rental_Users instance);
     partial void UpdateRental_Users(Rental_Users instance);
     partial void DeleteRental_Users(Rental_Users instance);
-    partial void InsertRentals(Rentals instance);
-    partial void UpdateRentals(Rentals instance);
-    partial void DeleteRentals(Rentals instance);
     partial void InsertVehicleCoordinates(VehicleCoordinates instance);
     partial void UpdateVehicleCoordinates(VehicleCoordinates instance);
     partial void DeleteVehicleCoordinates(VehicleCoordinates instance);
@@ -60,10 +57,13 @@ namespace CarSharingApplication.SQL.Linq
     partial void InsertTrafficAccidents(TrafficAccidents instance);
     partial void UpdateTrafficAccidents(TrafficAccidents instance);
     partial void DeleteTrafficAccidents(TrafficAccidents instance);
+    partial void InsertRentals(Rentals instance);
+    partial void UpdateRentals(Rentals instance);
+    partial void DeleteRentals(Rentals instance);
     #endregion
 		
 		public CarSharingDataBaseClassesDataContext() : 
-				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString1, mappingSource)
+				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -148,14 +148,6 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		public System.Data.Linq.Table<RentalsINFO> RentalsINFO
-		{
-			get
-			{
-				return this.GetTable<RentalsINFO>();
-			}
-		}
-		
 		public System.Data.Linq.Table<UsersINFO> UsersINFO
 		{
 			get
@@ -169,14 +161,6 @@ namespace CarSharingApplication.SQL.Linq
 			get
 			{
 				return this.GetTable<VehiclesINFO>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Rentals> Rentals
-		{
-			get
-			{
-				return this.GetTable<Rentals>();
 			}
 		}
 		
@@ -209,6 +193,22 @@ namespace CarSharingApplication.SQL.Linq
 			get
 			{
 				return this.GetTable<TrafficAccidents>();
+			}
+		}
+		
+		public System.Data.Linq.Table<RentalsINFO> RentalsINFO
+		{
+			get
+			{
+				return this.GetTable<RentalsINFO>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Rentals> Rentals
+		{
+			get
+			{
+				return this.GetTable<Rentals>();
 			}
 		}
 	}
@@ -516,9 +516,9 @@ namespace CarSharingApplication.SQL.Linq
 		
 		private EntitySet<Categories> _Categories;
 		
-		private EntitySet<Rentals> _Rentals;
-		
 		private EntitySet<TrafficAccidents> _TrafficAccidents;
+		
+		private EntitySet<Rentals> _Rentals;
 		
 		private EntityRef<Rental_Users> _Rental_Users;
 		
@@ -537,8 +537,8 @@ namespace CarSharingApplication.SQL.Linq
 		public DriversLicences()
 		{
 			this._Categories = new EntitySet<Categories>(new Action<Categories>(this.attach_Categories), new Action<Categories>(this.detach_Categories));
-			this._Rentals = new EntitySet<Rentals>(new Action<Rentals>(this.attach_Rentals), new Action<Rentals>(this.detach_Rentals));
 			this._TrafficAccidents = new EntitySet<TrafficAccidents>(new Action<TrafficAccidents>(this.attach_TrafficAccidents), new Action<TrafficAccidents>(this.detach_TrafficAccidents));
+			this._Rentals = new EntitySet<Rentals>(new Action<Rentals>(this.attach_Rentals), new Action<Rentals>(this.detach_Rentals));
 			this._Rental_Users = default(EntityRef<Rental_Users>);
 			OnCreated();
 		}
@@ -620,19 +620,6 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_Rentals", Storage="_Rentals", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence")]
-		public EntitySet<Rentals> Rentals
-		{
-			get
-			{
-				return this._Rentals;
-			}
-			set
-			{
-				this._Rentals.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_TrafficAccidents", Storage="_TrafficAccidents", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence")]
 		public EntitySet<TrafficAccidents> TrafficAccidents
 		{
@@ -643,6 +630,19 @@ namespace CarSharingApplication.SQL.Linq
 			set
 			{
 				this._TrafficAccidents.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_Rentals", Storage="_Rentals", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence")]
+		public EntitySet<Rentals> Rentals
+		{
+			get
+			{
+				return this._Rentals;
+			}
+			set
+			{
+				this._Rentals.Assign(value);
 			}
 		}
 		
@@ -712,18 +712,6 @@ namespace CarSharingApplication.SQL.Linq
 			entity.DriversLicences = null;
 		}
 		
-		private void attach_Rentals(Rentals entity)
-		{
-			this.SendPropertyChanging();
-			entity.DriversLicences = this;
-		}
-		
-		private void detach_Rentals(Rentals entity)
-		{
-			this.SendPropertyChanging();
-			entity.DriversLicences = null;
-		}
-		
 		private void attach_TrafficAccidents(TrafficAccidents entity)
 		{
 			this.SendPropertyChanging();
@@ -731,6 +719,18 @@ namespace CarSharingApplication.SQL.Linq
 		}
 		
 		private void detach_TrafficAccidents(TrafficAccidents entity)
+		{
+			this.SendPropertyChanging();
+			entity.DriversLicences = null;
+		}
+		
+		private void attach_Rentals(Rentals entity)
+		{
+			this.SendPropertyChanging();
+			entity.DriversLicences = this;
+		}
+		
+		private void detach_Rentals(Rentals entity)
 		{
 			this.SendPropertyChanging();
 			entity.DriversLicences = null;
@@ -798,11 +798,11 @@ namespace CarSharingApplication.SQL.Linq
 		
 		private EntitySet<VehicleRegistrCertificates> _VehicleRegistrCertificates;
 		
-		private EntitySet<Rentals> _Rentals;
-		
 		private EntitySet<VehicleCoordinates> _VehicleCoordinates;
 		
 		private EntitySet<TrafficAccidents> _TrafficAccidents;
+		
+		private EntitySet<Rentals> _Rentals;
 		
 		private EntityRef<Classes> _Classes;
 		
@@ -823,9 +823,9 @@ namespace CarSharingApplication.SQL.Linq
 		public Vehicles()
 		{
 			this._VehicleRegistrCertificates = new EntitySet<VehicleRegistrCertificates>(new Action<VehicleRegistrCertificates>(this.attach_VehicleRegistrCertificates), new Action<VehicleRegistrCertificates>(this.detach_VehicleRegistrCertificates));
-			this._Rentals = new EntitySet<Rentals>(new Action<Rentals>(this.attach_Rentals), new Action<Rentals>(this.detach_Rentals));
 			this._VehicleCoordinates = new EntitySet<VehicleCoordinates>(new Action<VehicleCoordinates>(this.attach_VehicleCoordinates), new Action<VehicleCoordinates>(this.detach_VehicleCoordinates));
 			this._TrafficAccidents = new EntitySet<TrafficAccidents>(new Action<TrafficAccidents>(this.attach_TrafficAccidents), new Action<TrafficAccidents>(this.detach_TrafficAccidents));
+			this._Rentals = new EntitySet<Rentals>(new Action<Rentals>(this.attach_Rentals), new Action<Rentals>(this.detach_Rentals));
 			this._Classes = default(EntityRef<Classes>);
 			OnCreated();
 		}
@@ -927,19 +927,6 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_Rentals", Storage="_Rentals", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
-		public EntitySet<Rentals> Rentals
-		{
-			get
-			{
-				return this._Rentals;
-			}
-			set
-			{
-				this._Rentals.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_VehicleCoordinates", Storage="_VehicleCoordinates", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
 		public EntitySet<VehicleCoordinates> VehicleCoordinates
 		{
@@ -963,6 +950,19 @@ namespace CarSharingApplication.SQL.Linq
 			set
 			{
 				this._TrafficAccidents.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_Rentals", Storage="_Rentals", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
+		public EntitySet<Rentals> Rentals
+		{
+			get
+			{
+				return this._Rentals;
+			}
+			set
+			{
+				this._Rentals.Assign(value);
 			}
 		}
 		
@@ -1032,18 +1032,6 @@ namespace CarSharingApplication.SQL.Linq
 			entity.Vehicles = null;
 		}
 		
-		private void attach_Rentals(Rentals entity)
-		{
-			this.SendPropertyChanging();
-			entity.Vehicles = this;
-		}
-		
-		private void detach_Rentals(Rentals entity)
-		{
-			this.SendPropertyChanging();
-			entity.Vehicles = null;
-		}
-		
 		private void attach_VehicleCoordinates(VehicleCoordinates entity)
 		{
 			this.SendPropertyChanging();
@@ -1063,6 +1051,18 @@ namespace CarSharingApplication.SQL.Linq
 		}
 		
 		private void detach_TrafficAccidents(TrafficAccidents entity)
+		{
+			this.SendPropertyChanging();
+			entity.Vehicles = null;
+		}
+		
+		private void attach_Rentals(Rentals entity)
+		{
+			this.SendPropertyChanging();
+			entity.Vehicles = this;
+		}
+		
+		private void detach_Rentals(Rentals entity)
 		{
 			this.SendPropertyChanging();
 			entity.Vehicles = null;
@@ -1838,87 +1838,6 @@ namespace CarSharingApplication.SQL.Linq
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RentalsINFO")]
-	public partial class RentalsINFO
-	{
-		
-		private int _ID_Rental;
-		
-		private int _ID_Vehicle;
-		
-		private string _ID_DriverLicence;
-		
-		private System.Nullable<System.DateTime> _EndTime;
-		
-		public RentalsINFO()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Rental", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		public int ID_Rental
-		{
-			get
-			{
-				return this._ID_Rental;
-			}
-			set
-			{
-				if ((this._ID_Rental != value))
-				{
-					this._ID_Rental = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
-		public int ID_Vehicle
-		{
-			get
-			{
-				return this._ID_Vehicle;
-			}
-			set
-			{
-				if ((this._ID_Vehicle != value))
-				{
-					this._ID_Vehicle = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DriverLicence", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string ID_DriverLicence
-		{
-			get
-			{
-				return this._ID_DriverLicence;
-			}
-			set
-			{
-				if ((this._ID_DriverLicence != value))
-				{
-					this._ID_DriverLicence = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> EndTime
-		{
-			get
-			{
-				return this._EndTime;
-			}
-			set
-			{
-				if ((this._EndTime != value))
-				{
-					this._EndTime = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UsersINFO")]
 	public partial class UsersINFO
 	{
@@ -2365,294 +2284,6 @@ namespace CarSharingApplication.SQL.Linq
 				{
 					this._DamageCost = value;
 				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rentals")]
-	public partial class Rentals : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_Rental;
-		
-		private string _ID_DriverLicence;
-		
-		private int _ID_Vehicle;
-		
-		private System.DateTime _StartDate;
-		
-		private System.TimeSpan _RentalTime;
-		
-		private int _CountOfHours;
-		
-		private string _RentalStatus;
-		
-		private EntityRef<DriversLicences> _DriversLicences;
-		
-		private EntityRef<Vehicles> _Vehicles;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_RentalChanging(int value);
-    partial void OnID_RentalChanged();
-    partial void OnID_DriverLicenceChanging(string value);
-    partial void OnID_DriverLicenceChanged();
-    partial void OnID_VehicleChanging(int value);
-    partial void OnID_VehicleChanged();
-    partial void OnStartDateChanging(System.DateTime value);
-    partial void OnStartDateChanged();
-    partial void OnRentalTimeChanging(System.TimeSpan value);
-    partial void OnRentalTimeChanged();
-    partial void OnCountOfHoursChanging(int value);
-    partial void OnCountOfHoursChanged();
-    partial void OnRentalStatusChanging(string value);
-    partial void OnRentalStatusChanged();
-    #endregion
-		
-		public Rentals()
-		{
-			this._DriversLicences = default(EntityRef<DriversLicences>);
-			this._Vehicles = default(EntityRef<Vehicles>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Rental", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_Rental
-		{
-			get
-			{
-				return this._ID_Rental;
-			}
-			set
-			{
-				if ((this._ID_Rental != value))
-				{
-					this.OnID_RentalChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Rental = value;
-					this.SendPropertyChanged("ID_Rental");
-					this.OnID_RentalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DriverLicence", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string ID_DriverLicence
-		{
-			get
-			{
-				return this._ID_DriverLicence;
-			}
-			set
-			{
-				if ((this._ID_DriverLicence != value))
-				{
-					if (this._DriversLicences.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_DriverLicenceChanging(value);
-					this.SendPropertyChanging();
-					this._ID_DriverLicence = value;
-					this.SendPropertyChanged("ID_DriverLicence");
-					this.OnID_DriverLicenceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
-		public int ID_Vehicle
-		{
-			get
-			{
-				return this._ID_Vehicle;
-			}
-			set
-			{
-				if ((this._ID_Vehicle != value))
-				{
-					if (this._Vehicles.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_VehicleChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Vehicle = value;
-					this.SendPropertyChanged("ID_Vehicle");
-					this.OnID_VehicleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="Date NOT NULL")]
-		public System.DateTime StartDate
-		{
-			get
-			{
-				return this._StartDate;
-			}
-			set
-			{
-				if ((this._StartDate != value))
-				{
-					this.OnStartDateChanging(value);
-					this.SendPropertyChanging();
-					this._StartDate = value;
-					this.SendPropertyChanged("StartDate");
-					this.OnStartDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RentalTime", DbType="Time NOT NULL")]
-		public System.TimeSpan RentalTime
-		{
-			get
-			{
-				return this._RentalTime;
-			}
-			set
-			{
-				if ((this._RentalTime != value))
-				{
-					this.OnRentalTimeChanging(value);
-					this.SendPropertyChanging();
-					this._RentalTime = value;
-					this.SendPropertyChanged("RentalTime");
-					this.OnRentalTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CountOfHours", DbType="Int NOT NULL")]
-		public int CountOfHours
-		{
-			get
-			{
-				return this._CountOfHours;
-			}
-			set
-			{
-				if ((this._CountOfHours != value))
-				{
-					this.OnCountOfHoursChanging(value);
-					this.SendPropertyChanging();
-					this._CountOfHours = value;
-					this.SendPropertyChanged("CountOfHours");
-					this.OnCountOfHoursChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RentalStatus", DbType="Char(12) NOT NULL", CanBeNull=false)]
-		public string RentalStatus
-		{
-			get
-			{
-				return this._RentalStatus;
-			}
-			set
-			{
-				if ((this._RentalStatus != value))
-				{
-					this.OnRentalStatusChanging(value);
-					this.SendPropertyChanging();
-					this._RentalStatus = value;
-					this.SendPropertyChanged("RentalStatus");
-					this.OnRentalStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_Rentals", Storage="_DriversLicences", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public DriversLicences DriversLicences
-		{
-			get
-			{
-				return this._DriversLicences.Entity;
-			}
-			set
-			{
-				DriversLicences previousValue = this._DriversLicences.Entity;
-				if (((previousValue != value) 
-							|| (this._DriversLicences.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DriversLicences.Entity = null;
-						previousValue.Rentals.Remove(this);
-					}
-					this._DriversLicences.Entity = value;
-					if ((value != null))
-					{
-						value.Rentals.Add(this);
-						this._ID_DriverLicence = value.ID_DriverLicence;
-					}
-					else
-					{
-						this._ID_DriverLicence = default(string);
-					}
-					this.SendPropertyChanged("DriversLicences");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_Rentals", Storage="_Vehicles", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Vehicles Vehicles
-		{
-			get
-			{
-				return this._Vehicles.Entity;
-			}
-			set
-			{
-				Vehicles previousValue = this._Vehicles.Entity;
-				if (((previousValue != value) 
-							|| (this._Vehicles.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Vehicles.Entity = null;
-						previousValue.Rentals.Remove(this);
-					}
-					this._Vehicles.Entity = value;
-					if ((value != null))
-					{
-						value.Rentals.Add(this);
-						this._ID_Vehicle = value.ID_Vehicle;
-					}
-					else
-					{
-						this._ID_Vehicle = default(int);
-					}
-					this.SendPropertyChanged("Vehicles");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -3324,6 +2955,435 @@ namespace CarSharingApplication.SQL.Linq
 					if ((value != null))
 					{
 						value.TrafficAccidents.Add(this);
+						this._ID_Vehicle = value.ID_Vehicle;
+					}
+					else
+					{
+						this._ID_Vehicle = default(int);
+					}
+					this.SendPropertyChanged("Vehicles");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RentalsINFO")]
+	public partial class RentalsINFO
+	{
+		
+		private int _ID_Rental;
+		
+		private int _ID_Vehicle;
+		
+		private string _ID_DriverLicence;
+		
+		private string _RentalStatus;
+		
+		private decimal _TotalPrice;
+		
+		private System.Nullable<System.DateTime> _EndTime;
+		
+		public RentalsINFO()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Rental", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int ID_Rental
+		{
+			get
+			{
+				return this._ID_Rental;
+			}
+			set
+			{
+				if ((this._ID_Rental != value))
+				{
+					this._ID_Rental = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
+		public int ID_Vehicle
+		{
+			get
+			{
+				return this._ID_Vehicle;
+			}
+			set
+			{
+				if ((this._ID_Vehicle != value))
+				{
+					this._ID_Vehicle = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DriverLicence", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string ID_DriverLicence
+		{
+			get
+			{
+				return this._ID_DriverLicence;
+			}
+			set
+			{
+				if ((this._ID_DriverLicence != value))
+				{
+					this._ID_DriverLicence = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RentalStatus", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string RentalStatus
+		{
+			get
+			{
+				return this._RentalStatus;
+			}
+			set
+			{
+				if ((this._RentalStatus != value))
+				{
+					this._RentalStatus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Money NOT NULL")]
+		public decimal TotalPrice
+		{
+			get
+			{
+				return this._TotalPrice;
+			}
+			set
+			{
+				if ((this._TotalPrice != value))
+				{
+					this._TotalPrice = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> EndTime
+		{
+			get
+			{
+				return this._EndTime;
+			}
+			set
+			{
+				if ((this._EndTime != value))
+				{
+					this._EndTime = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rentals")]
+	public partial class Rentals : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Rental;
+		
+		private string _ID_DriverLicence;
+		
+		private int _ID_Vehicle;
+		
+		private System.DateTime _StartDate;
+		
+		private System.TimeSpan _RentalTime;
+		
+		private int _CountOfHours;
+		
+		private decimal _TotalPrice;
+		
+		private string _RentalStatus;
+		
+		private EntityRef<DriversLicences> _DriversLicences;
+		
+		private EntityRef<Vehicles> _Vehicles;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_RentalChanging(int value);
+    partial void OnID_RentalChanged();
+    partial void OnID_DriverLicenceChanging(string value);
+    partial void OnID_DriverLicenceChanged();
+    partial void OnID_VehicleChanging(int value);
+    partial void OnID_VehicleChanged();
+    partial void OnStartDateChanging(System.DateTime value);
+    partial void OnStartDateChanged();
+    partial void OnRentalTimeChanging(System.TimeSpan value);
+    partial void OnRentalTimeChanged();
+    partial void OnCountOfHoursChanging(int value);
+    partial void OnCountOfHoursChanged();
+    partial void OnTotalPriceChanging(decimal value);
+    partial void OnTotalPriceChanged();
+    partial void OnRentalStatusChanging(string value);
+    partial void OnRentalStatusChanged();
+    #endregion
+		
+		public Rentals()
+		{
+			this._DriversLicences = default(EntityRef<DriversLicences>);
+			this._Vehicles = default(EntityRef<Vehicles>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Rental", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_Rental
+		{
+			get
+			{
+				return this._ID_Rental;
+			}
+			set
+			{
+				if ((this._ID_Rental != value))
+				{
+					this.OnID_RentalChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Rental = value;
+					this.SendPropertyChanged("ID_Rental");
+					this.OnID_RentalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DriverLicence", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string ID_DriverLicence
+		{
+			get
+			{
+				return this._ID_DriverLicence;
+			}
+			set
+			{
+				if ((this._ID_DriverLicence != value))
+				{
+					if (this._DriversLicences.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_DriverLicenceChanging(value);
+					this.SendPropertyChanging();
+					this._ID_DriverLicence = value;
+					this.SendPropertyChanged("ID_DriverLicence");
+					this.OnID_DriverLicenceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
+		public int ID_Vehicle
+		{
+			get
+			{
+				return this._ID_Vehicle;
+			}
+			set
+			{
+				if ((this._ID_Vehicle != value))
+				{
+					if (this._Vehicles.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_VehicleChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Vehicle = value;
+					this.SendPropertyChanged("ID_Vehicle");
+					this.OnID_VehicleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="Date NOT NULL")]
+		public System.DateTime StartDate
+		{
+			get
+			{
+				return this._StartDate;
+			}
+			set
+			{
+				if ((this._StartDate != value))
+				{
+					this.OnStartDateChanging(value);
+					this.SendPropertyChanging();
+					this._StartDate = value;
+					this.SendPropertyChanged("StartDate");
+					this.OnStartDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RentalTime", DbType="Time NOT NULL")]
+		public System.TimeSpan RentalTime
+		{
+			get
+			{
+				return this._RentalTime;
+			}
+			set
+			{
+				if ((this._RentalTime != value))
+				{
+					this.OnRentalTimeChanging(value);
+					this.SendPropertyChanging();
+					this._RentalTime = value;
+					this.SendPropertyChanged("RentalTime");
+					this.OnRentalTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CountOfHours", DbType="Int NOT NULL")]
+		public int CountOfHours
+		{
+			get
+			{
+				return this._CountOfHours;
+			}
+			set
+			{
+				if ((this._CountOfHours != value))
+				{
+					this.OnCountOfHoursChanging(value);
+					this.SendPropertyChanging();
+					this._CountOfHours = value;
+					this.SendPropertyChanged("CountOfHours");
+					this.OnCountOfHoursChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Money NOT NULL")]
+		public decimal TotalPrice
+		{
+			get
+			{
+				return this._TotalPrice;
+			}
+			set
+			{
+				if ((this._TotalPrice != value))
+				{
+					this.OnTotalPriceChanging(value);
+					this.SendPropertyChanging();
+					this._TotalPrice = value;
+					this.SendPropertyChanged("TotalPrice");
+					this.OnTotalPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RentalStatus", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string RentalStatus
+		{
+			get
+			{
+				return this._RentalStatus;
+			}
+			set
+			{
+				if ((this._RentalStatus != value))
+				{
+					this.OnRentalStatusChanging(value);
+					this.SendPropertyChanging();
+					this._RentalStatus = value;
+					this.SendPropertyChanged("RentalStatus");
+					this.OnRentalStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_Rentals", Storage="_DriversLicences", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public DriversLicences DriversLicences
+		{
+			get
+			{
+				return this._DriversLicences.Entity;
+			}
+			set
+			{
+				DriversLicences previousValue = this._DriversLicences.Entity;
+				if (((previousValue != value) 
+							|| (this._DriversLicences.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DriversLicences.Entity = null;
+						previousValue.Rentals.Remove(this);
+					}
+					this._DriversLicences.Entity = value;
+					if ((value != null))
+					{
+						value.Rentals.Add(this);
+						this._ID_DriverLicence = value.ID_DriverLicence;
+					}
+					else
+					{
+						this._ID_DriverLicence = default(string);
+					}
+					this.SendPropertyChanged("DriversLicences");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_Rentals", Storage="_Vehicles", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Vehicles Vehicles
+		{
+			get
+			{
+				return this._Vehicles.Entity;
+			}
+			set
+			{
+				Vehicles previousValue = this._Vehicles.Entity;
+				if (((previousValue != value) 
+							|| (this._Vehicles.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Vehicles.Entity = null;
+						previousValue.Rentals.Remove(this);
+					}
+					this._Vehicles.Entity = value;
+					if ((value != null))
+					{
+						value.Rentals.Add(this);
 						this._ID_Vehicle = value.ID_Vehicle;
 					}
 					else
