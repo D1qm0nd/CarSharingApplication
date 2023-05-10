@@ -36,11 +36,21 @@ namespace CarSharingApplication.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-RN9AI5Q;Initial Catalog=VehicleRental;Integrated Security=Tru" +
-            "e")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(Local);Initial Catalog=VehicleRental;Integrated Security=True")]
         public string VehicleRentalConnectionString1 {
             get {
                 return ((string)(this["VehicleRentalConnectionString1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-RN9AI5Q;Initial Catalog=VehicleRental;Integrated Security=Tru" +
+            "e")]
+        public string VehicleRentalConnectionString2 {
+            get {
+                return ((string)(this["VehicleRentalConnectionString2"]));
             }
         }
     }

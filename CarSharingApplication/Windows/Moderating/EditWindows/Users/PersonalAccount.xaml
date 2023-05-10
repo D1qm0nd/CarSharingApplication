@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarSharingApplication.Windows.Moderating.EditWindows.Users"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:models="clr-namespace:CarSharingApplication.Windows.XAMLModels"
         mc:Ignorable="d"
         Title="Личный кабинет" Height="580" Width="415"
@@ -30,8 +31,8 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="400"/>
                     </Grid.RowDefinitions>
-                    <TextBox Margin="20 0 20 0" x:Name="uDriverLicence" Padding="0 0 0 0" Height="40" Grid.Row="0"></TextBox>
-                    <DatePicker Margin="20 0 20 0" x:Name="uLicenceDatePic" Padding="0 0 0 0" Height="40" Grid.Row="1" SelectedDateFormat="Short"></DatePicker>
+                    <TextBox Margin="20 0 20 0" x:Name="uDriverLicence" Padding="0 0 0 0" Height="40" Grid.Row="0" materialDesign:HintAssist.Hint="Водительское удостоверение"></TextBox>
+                    <DatePicker Margin="20 0 20 0" x:Name="uLicenceDatePic" Padding="0 0 0 0" Height="40" Grid.Row="1" SelectedDateFormat="Short" materialDesign:HintAssist.Hint="Дата получения удостоверения"></DatePicker>
                     <models:UCDriverLicencesCategories x:Name="uLicenceCategories" Grid.Row="2" Margin="0 10 20 0"></models:UCDriverLicencesCategories>
                 </Grid>
                 <Button x:Name="CommitUpdatesButton" Margin="20 10 20 15" VerticalAlignment="Bottom" Click="CommitUpdatesButton_Click">Подвердить изменения</Button>

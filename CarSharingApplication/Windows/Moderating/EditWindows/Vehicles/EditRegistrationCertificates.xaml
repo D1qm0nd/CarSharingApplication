@@ -53,7 +53,6 @@
                     <DataGridTextColumn Binding="{Binding EcologicalClass}" Header="Экологический класс" MinWidth="200" MaxWidth="200"/>
                     <DataGridTextColumn Binding="{Binding PermissibleMaximumWeightKg}" Header="Макс. вес КГ" MinWidth="100" MaxWidth="300"/>
                     <DataGridTextColumn Binding="{Binding WeightWithoutLoadKg}" Header="Не загруженный вес КГ" MinWidth="100" MaxWidth="300"/>
-                    <DataGridTextColumn x:Name="b" Binding="{Binding DateOfRecord, StringFormat=dd.MM.yyyy}" Header="Дата записи" MinWidth="100" MaxWidth="300"/>
                     <DataGridTemplateColumn Header="" MinWidth="140" MaxWidth="140">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

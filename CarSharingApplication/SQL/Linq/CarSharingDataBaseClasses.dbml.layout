@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17.75, 11.875" name="CarSharingDataBaseClasses">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17.5, 11.875" name="CarSharingDataBaseClasses">
   <DataContextMoniker Name="/CarSharingDataBaseClassesDataContext" />
   <nestedChildShapes>
     <classShape Id="a450ac15-08fa-420d-ae2b-e33fa188aa7e" absoluteBounds="2.125, 3.625, 2, 1.7708968098958331">
@@ -44,19 +44,6 @@
       <nodes>
         <classShapeMoniker Id="07945163-b5ab-4c32-8490-86999f255bc2" />
         <classShapeMoniker Id="d6e5e4a7-8c53-4bcb-b4af-cabfdf23edb1" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="54cef759-3b39-4b0f-b2d7-ec6af815ccf7" absoluteBounds="15.5, 3.375, 2, 4.2708154296875">
-      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/VehicleRegistrCertificates" />
-      <nestedChildShapes>
-        <elementListCompartment Id="0e3c64e8-83d6-4ba6-b255-5b49321a1469" absoluteBounds="15.515, 3.835, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(14.15625 : 2.32859537760417); (14.15625 : 3.84375); (15.5 : 3.84375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/Vehicles/Vehicles_VehicleRegistrCertificates" />
-      <nodes>
-        <classShapeMoniker Id="d6e5e4a7-8c53-4bcb-b4af-cabfdf23edb1" />
-        <classShapeMoniker Id="54cef759-3b39-4b0f-b2d7-ec6af815ccf7" />
       </nodes>
     </associationConnector>
     <classShape Id="3d9b5e97-085f-45b7-a8ee-2780472d26d1" absoluteBounds="5.375, 1, 2, 2.3478011067708335">
@@ -155,18 +142,31 @@
         <elementListCompartment Id="55ef987d-0d24-4ac0-93db-836de25e27f7" absoluteBounds="11.89, 7.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6 : 5.2612939453125); (6 : 8.17714680989583); (11.875 : 8.17714680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6 : 5.2612939453125); (6 : 8.17714680989583); (11.875 : 8.17714680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/DriversLicences/DriversLicences_Rentals" />
       <nodes>
         <classShapeMoniker Id="dbf95deb-6c70-43ec-97ab-e48ce12c93ce" />
         <classShapeMoniker Id="2da30589-61d5-453c-83e5-f0bff39dc678" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(13.567381578125 : 2.32859537760417); (13.567381578125 : 6.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(13.567381578125 : 2.32859537760417); (13.567381578125 : 6.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/Vehicles/Vehicles_Rentals" />
       <nodes>
         <classShapeMoniker Id="d6e5e4a7-8c53-4bcb-b4af-cabfdf23edb1" />
         <classShapeMoniker Id="2da30589-61d5-453c-83e5-f0bff39dc678" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="0a34edea-5dc6-46d1-b125-5dac22f74f41" absoluteBounds="15.25, 4.25, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/VehicleRegistrCertificates" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d65bc6e2-ee7d-41e8-af2e-cd0a90421139" absoluteBounds="15.265, 4.71, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(14.21875 : 2.32859537760417); (14.21875 : 6.60659912109375); (15.25 : 6.60659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/Vehicles/Vehicles_VehicleRegistrCertificates" />
+      <nodes>
+        <classShapeMoniker Id="d6e5e4a7-8c53-4bcb-b4af-cabfdf23edb1" />
+        <classShapeMoniker Id="0a34edea-5dc6-46d1-b125-5dac22f74f41" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

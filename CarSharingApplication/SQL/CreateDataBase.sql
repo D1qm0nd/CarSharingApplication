@@ -53,12 +53,10 @@ GO
 		UserLogin NVARCHAR(120) UNIQUE NOT NULL,
 		UserEMail NVARCHAR(120) UNIQUE NOT NULL,
 		UserPassword NVARCHAR(120) NOT NULL,
-		--UserStatus INT NOT NULL,
 		UserSurname NVARCHAR(120) NOT NULL,
 		UserName NVARCHAR(120) NOT NULL,
 		UserMiddleName NVARCHAR(120) NOT NULL,
 		UserBirthDay DATE NOT NULL,
-		--isAdmin BIT DEFAULT 0 NOT NULL
 		PRIMARY KEY (ID_User)
 	)
 	PRINT 'Создал Таблицу Rental_Users'
@@ -79,7 +77,7 @@ GO
 			CHECK (
 				ID_DriverLicence LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
 				),
-		ReceiptDate SMALLDATETIME NOT NULL,
+		ReceiptDate DATE NOT NULL,
 		ID_User INT NOT NULL
 	)
 	PRINT 'Создал Таблицу DriversLicences'
@@ -92,8 +90,8 @@ GO
 				ID_DriverLicence LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
 				),
 		Category CHAR(3) NOT NULL,
-		ReceiptDate SMALLDATETIME NOT NULL,
-		EndDate SMALLDATETIME NOT NULL
+		ReceiptDate DATETIME NOT NULL,
+		EndDate DATETIME NOT NULL
 		PRIMARY KEY (ID_Category)
 	)
 	PRINT 'Создал Таблицу Categories'
@@ -168,55 +166,6 @@ GO
 	)
 	PRINT 'Создал Таблицу TrafficAccidents'
 
-	--CREATE TABLE VehiclesPassports
-	--(
-	--	ID_Vehicle INT NOT NULL,
-	--	ID_VehiclePassport CHAR(10) NOT NULL CHECK(ID_VehiclePassport LIKE '[0-9][0-9][А-Я][А-Я][0-9][0-9][0-9][0-9][0-9][0-9]'),
-	--	VIN CHAR(14) PRIMARY KEY NOT NULL,
-	--	Vehicle_Brand NVARCHAR(100) NOT NULL,
-	--	Vehicle_Category CHAR(6) NOT NULL 
-	--		CHECK (
-	--			Vehicle_Category = 'A' 
-	--			OR Vehicle_Category = 'B' 
-	--			OR Vehicle_Category = 'C' 
-	--			OR Vehicle_Category = 'D' 
-	--			OR Vehicle_Category = 'прицеп'
-	--			),
-	--	YearOfManufacture INT NOT NULL
-	--		CHECK (
-	--			YearOfManufacture >= 1970 
-	--			AND YearOfManufacture <= 2100
-	--			),
-	--	ModelAndEngineNumber CHAR(30) NOT NULL,
-	--	Chassis CHAR(100) NOT NULL,
-	--	BodyNo CHAR(100) NOT NULL,
-	--	BodyColor CHAR(50) NOT NULL,
-	--	Horsepower_kW FLOAT NOT NULL,
-	--	EngineDisplacementCmCubic INTEGER NOT NULL,
-	--	EngineType CHAR(50) NOT NULL,
-	--	PermissibleMaximumWeightKg INTEGER NOT NULL,
-	--	WeightWithoutLoadKg INTEGER NOT NULL,
-	--	ManufacturerOrganizationOrCountry CHAR(100) NOT NULL,
-	--	VehicleTypeApproval CHAR(123) NOT NULL
-	--		CHECK (
-	--			  VehicleTypeApproval LIKE '% % %'
-	--		),
-	--	ExportCountryOfVehicle CHAR(100) NOT NULL,
-	--	Series_TD_Number_TPO_Number CHAR(60) NOT NULL
-	--		CHECK (
-	--			   Series_TD_Number_TPO_Number 
-	--			   LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/[0-9][0-9][0-9][0-9][0-9][0-9]/[0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
-	--			  ),
-	--	CustomsRestrictions NVARCHAR(256) DEFAULT NULL,
-	--	VehicleOwner CHAR(120) NOT NULL,
-	--	VehicleOwnerAddress CHAR(256) NOT NULL,
-	--	OrganizationIssuedPassport CHAR(256) NOT NULL,
-	--	OrganizationAddress CHAR(256) NOT NULL,
-	--	DateOfThePassport DATE NOT NULL
-	--)
-	--PRINT 'Создал Таблицу VehiclesPassports'
-
-
 GO
 	USE VehicleRental
 
@@ -248,17 +197,8 @@ GO
 		Color VARCHAR(120) NOT NULL,
 		EngineHP_kW FLOAT NOT NULL,
 		EcologicalClass CHAR(100) NOT NULL,
-		--VehiclePassportSeries CHAR(4) NOT NULL 
-		--	CHECK (
-		--		   VehiclePassportSeries LIKE '[0-9][0-9][А-Я][А-Я]'
-		--		  ),
-		--VehiclePassportNum CHAR(6) NOT NULL 
-		--	CHECK (
-		--		   VehiclePassportNum LIKE '[0-9][0-9][0-9][0-9][0-9][0-9]'
-		--		  ),
 		PermissibleMaximumWeightKg INTEGER NOT NULL,
 		WeightWithoutLoadKg INTEGER NOT NULL,
-		DateOfRecord DATE NOT NULL,
 		PRIMARY KEY (CertificateSeries, CertificateNumber)
 	)
 
@@ -350,16 +290,6 @@ GO
 		ON UPDATE CASCADE
 	PRINT 'Создал Ключ FK_TrafficAccidents_DriversLincences'
 	
---GO 
---	USE VehicleRental
-
---	ALTER TABLE VehiclesPassports
---	ADD CONSTRAINT FK_Passports_Vehicles_Vehicles 
---		FOREIGN KEY (ID_Vehicle) REFERENCES Vehicles (ID_Vehicle)
---		ON DELETE CASCADE
---		ON UPDATE CASCADE
---	PRINT 'Создал Ключ FK_VehiclesPassports_Vehicles'
-
 GO
 	USE VehicleRental
 
@@ -385,15 +315,6 @@ GO
 	PRINT '==================================Роли======================================='
 	USE VehicleRental
 
-	--REVOKE CREATE ON SCHEMA FROM public
-	--REVOKE ALL ON VehicleRental FROM public
-	--PRINT 'Пробую дропнуть роль Rental_Customer'
-	--DROP ROLE Rental_Customer
-
-
-	--CREATE ROLE Rental_Customer
-	--PRINT 'Создал роль Rental_Customer'
-
 /*Хранимые процедуры*/
 
 GO
@@ -408,15 +329,31 @@ GO
 		@UserMiddleName NVARCHAR(MAX),
 		@UserBirthDayDate NVARCHAR(10)
 	AS
-	BEGIN TRANSACTION
-		DECLARE @SqlCommand NVARCHAR(MAX) = 
-		'USE VehicleRental '+
-		'INSERT INTO Rental_Users '+
-		'(UserLogin, UserEMail, UserPassword, UserSurname, UserName, UserMiddleName, UserBirthDay) VALUES ('+
-			''''+@UserLogin+''', '''+@UserEmail+''', '''+@UserPassword+''', '+''''+@UserSurname+''', '''+@UserName+''', '''+@UserMiddleName+''', '''+@UserBirthDayDate+''')'
+	BEGIN TRY
+		BEGIN TRANSACTION Registration
+			DECLARE @SqlCommand NVARCHAR(MAX) = 
+			'USE VehicleRental '+
+			'INSERT INTO Rental_Users '+
+			'(UserLogin, UserEMail, UserPassword, UserSurname, UserName, UserMiddleName, UserBirthDay) VALUES ('+
+				''''+@UserLogin+''', '''+@UserEmail+''', '''+@UserPassword+''', '+''''+@UserSurname+''', '''+@UserName+''', '''+@UserMiddleName+''', '''+@UserBirthDayDate+''')'
 		
 			EXEC (@SqlCommand)
-	COMMIT TRANSACTION
+			--IF NOT EXISTS(SELECT * 
+			--			  FROM Rental_Users 
+			--			  WHERE 
+			--				UserLogin = @UserLogin AND 
+			--				UserEMail = @UserEmail AND 
+			--				UserPassword = @UserPassword AND 
+			--				UserSurname = @UserSurname AND
+			--				UserName =  @UserName AND
+			--				UserMiddleName = @UserMiddleName AND
+			--				UserBirthDay = @UserBirthDayDate)
+			--	ROLLBACK TRANSACTION Registration
+		COMMIT TRANSACTION Registration
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION Registration
+	END CATCH
 
 
 GO
@@ -440,18 +377,23 @@ GO
 	(
 		@User_ID INT,
 		@DriverLicence CHAR(10),
-		@ReceiptDate SMALLDATETIME
+		@ReceiptDate DATE
 	)
 	AS
-	BEGIN TRANSACTION
-		INSERT DriversLicences VALUES
-		(@DriverLicence, @ReceiptDate, @User_ID)
-		IF NOT EXISTS(SELECT * FROM DriverLicence 
-					  WHERE ID_DriverLicence = @DriverLicence 
-					  AND ID_User = @User_ID 
-					  AND ReceiptDate = @ReceiptDate)
-			ROLLBACK
-	COMMIT 
+	BEGIN TRY
+		BEGIN TRANSACTION AddDriverLicence
+			INSERT DriversLicences VALUES
+			(@DriverLicence, @ReceiptDate, @User_ID)
+			--IF NOT EXISTS(SELECT * FROM DriverLicence 
+			--			  WHERE ID_DriverLicence = @DriverLicence 
+			--			  AND ID_User = @User_ID 
+			--			  AND ReceiptDate = @ReceiptDate)
+			--	ROLLBACK TRANSACTION AddDriverLicence
+		COMMIT TRANSACTION AddDriverLicence
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION AddDriverLicence
+	END CATCH
 
 GO
 	PRINT 'Создал Хранимую процедуру AddDriverLicenceToUser'
@@ -461,21 +403,25 @@ GO
 	(
 		@DriverLicence_ID CHAR(10),
 		@Category CHAR(3),
-		@ReceiptDate SMALLDATETIME,
-		@EndDate SMALLDATETIME
+		@ReceiptDate DATETIME,
+		@EndDate DATETIME
 	)
 	AS
-	BEGIN TRANSACTION
-		INSERT Categories VALUES
-		(@DriverLicence_ID, @Category, @ReceiptDate, @EndDate)
-		IF NOT EXISTS(SELECT * FROM Categories 
-					  WHERE ID_DriverLicence = @DriverLicence_ID 
-					  AND Category = @Category 
-					  AND ReceiptDate = @ReceiptDate 
-					  AND EndDate = @EndDate)
-			ROLLBACK
-	COMMIT
-
+	BEGIN TRY
+		BEGIN TRANSACTION AddCategory
+			INSERT Categories VALUES
+			(@DriverLicence_ID, @Category, @ReceiptDate, @EndDate)
+			--IF NOT EXISTS(SELECT * FROM Categories 
+			--			  WHERE ID_DriverLicence = @DriverLicence_ID 
+			--			  AND Category = @Category 
+			--			  AND ReceiptDate = @ReceiptDate 
+			--			  AND EndDate = @EndDate)
+			--	ROLLBACK TRANSACTION AddCategory
+		COMMIT TRANSACTION AddCategory
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION AddCategory
+	END CATCH
 GO
 	PRINT 'Создал Хранимую процедуру AddCategoryToDriverLicence'
 
@@ -488,24 +434,27 @@ GO
 		@TotalPrice MONEY
 	)
 	AS
-	BEGIN
-		BEGIN TRANSACTION
-			IF ((SELECT [dbo].GetVehicleStatus(@ID_Vehicle)) = 'доступен')
-			BEGIN
-				INSERT Rentals VALUES 
+	BEGIN TRY
+		BEGIN TRANSACTION RentVehicle
+			IF NOT ((SELECT [dbo].GetVehicleStatus(@ID_Vehicle)) = 'доступен')
+				ROLLBACK TRANSACTION RentVehicle
+			INSERT Rentals VALUES 
 				(@DriverLicence, @ID_Vehicle, GETDATE(), @RentalTime, @CountOfHours, @TotalPrice, 'стандартная')
-				IF EXISTS(SELECT * FROM Rentals 
-						  WHERE ID_DriverLicence = @DriverLicence 
-							   AND ID_Vehicle = @ID_Vehicle 
-							   AND StartDate = CONVERT(DATE, GETDATE())
-							   AND RentalTime <= @RentalTime 
-							   AND CountOfHours = @CountOfHours
-							   AND TotalPrice = @TotalPrice
-							   AND RentalStatus = 'стандартная')
-					COMMIT
-				ELSE ROLLBACK
-			END ELSE ROLLBACK
-	END
+			--IF NOT EXISTS(SELECT * FROM Rentals 
+			--			  WHERE ID_DriverLicence = @DriverLicence 
+			--				   AND ID_Vehicle = @ID_Vehicle 
+			--				   AND StartDate = CONVERT(DATE, GETDATE())
+			--				   AND RentalTime <= @RentalTime 
+			--				   AND CountOfHours = @CountOfHours
+			--				   AND TotalPrice = @TotalPrice
+			--				   AND RentalStatus = 'стандартная')
+			--	ROLLBACK TRANSACTION RentVehicle
+		COMMIT TRANSACTION RentVehicle
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION RentVehicle
+	END CATCH
+
 GO
 	PRINT 'Создал Хранимую процедуру Rent'
 
@@ -859,18 +808,6 @@ GO
 
 GO
 	PRINT '==================================Пользователи======================================='
-	--USE VehicleRental
---GO
---	EXEC REG_USER 
---		@UserLogin='rental_admin', 
---		@UserEmail='maksim_razukhin@inbox.ru', 
---		@UserPassword='rental_admin', 
---		@UserSurname='Admin', 
---		@UserName='Admin', 
---		@UserMiddleName='Admin',
---		@UserBirthDayDate='12.01.2005'
-
---UPDATE Rental_Users SET isAdmin=1 WHERE UserLogin='rental_admin'
 
 GO
 	PRINT '==================================Встроенные пользователи (приложние)======================================='
@@ -917,7 +854,6 @@ GO
 
 		GRANT INSERT, SELECT, UPDATE, DELETE ON Vehicles TO DB_ADMIN_HANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON VehicleCoordinates TO DB_ADMIN_HANDLER
-		--GRANT INSERT, SELECT, UPDATE, DELETE ON VehiclesPassports TO DB_ADMIN_HANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON VehicleRegistrCertificates TO DB_ADMIN_HANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON Categories TO DB_ADMIN_HANDLER
 		GRANT INSERT, SELECT, UPDATE, DELETE ON Classes TO DB_ADMIN_HANDLER

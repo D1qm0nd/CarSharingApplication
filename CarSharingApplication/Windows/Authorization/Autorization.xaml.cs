@@ -56,7 +56,7 @@ namespace CarSharingApplication
             bool registered = false;
             if (Login.Text.Length < 5)
                 MessageBox.Show("Слишком мало символов в имени входа");
-            else if (Email.Text.Length < 10 || !Email.Text.Contains("@") || !Email.Text.Contains("."))
+            else if ((Email.Text.Length < 10) || (Email.Text.Count((c) => c == '@') != 1) || (Email.Text.Count((c) => c == '.') != 1) || (Email.Text.Contains("@.")) || (Email.Text.Contains(".@")))
                 MessageBox.Show("Почта не является корректной");
             else if (Password.Password.Length < 8)
                 MessageBox.Show("Слишком короткий пароль");
@@ -70,7 +70,7 @@ namespace CarSharingApplication
                 MessageBox.Show("Вы не ввели отчество");
             else if (BDatePicker.Text == "")
                 MessageBox.Show("Вы не ввели дату рождения");
-            else if (DateTime.Parse(BDatePicker.Text) >= DateTime.UtcNow.AddYears(-18) && DateTime.Parse(BDatePicker.Text) < DateTime.UtcNow.AddYears(-100)) 
+            else if (DateTime.Parse(BDatePicker.Text) >= DateTime.UtcNow.AddYears(-18) || DateTime.Parse(BDatePicker.Text) < DateTime.UtcNow.AddYears(-100) || DateTime.Parse(BDatePicker.Text) >= DateTime.UtcNow) 
                 MessageBox.Show("Некоректная дата рождения");
             else
             {
