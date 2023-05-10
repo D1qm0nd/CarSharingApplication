@@ -29,7 +29,6 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
         {
             InitializeComponent();
             _User = UserInfo;
-            SetHints();
             uDriverLicence.Text = _User.ID_DriverLicence;
             uLicenceDatePic.Text = _User.ReceiptDate.ToString();
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
@@ -37,12 +36,6 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
                 $"SELECT * FROM [dbo].GetDriverLicenceCategories('{uDriverLicence.Text}')");
             if (hascategories.Count > 0)
                 uLicenceCategories.SetCategories(hascategories);
-        }
-
-        public void SetHints() //Переложить это на WPF
-        {
-            HintAssist.SetHint(uDriverLicence, "Водительское удостоверение");
-            HintAssist.SetHint(uLicenceDatePic, "Дата получения удостоверения");
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -67,7 +60,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
                 {
                     var LicenceCategories = App.GetQueryResult<string>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("DLHANDLERConnection")),
                             $"SELECT * FROM [dbo].GetDriverLicenceCategories ('{uDriverLicence.Text}')");
-                    if (LicenceCategories == null) 
+                    if (LicenceCategories.Count == 0) 
                     { 
                         App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
                             $"AddDriverLicenceToUser " +
