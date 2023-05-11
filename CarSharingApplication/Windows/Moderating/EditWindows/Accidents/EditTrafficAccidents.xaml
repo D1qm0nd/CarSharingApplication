@@ -9,6 +9,7 @@
         Closing="Window_Closing"
         ResizeMode="NoResize"
         Title="Аварийные случаи"
+        Icon="../../../Images/icon.jpeg"
         >
 
     <Window.Resources>

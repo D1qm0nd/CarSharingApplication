@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Height="450" Width="850"
         Closing="Window_Closing"
+        ResizeMode="NoResize"
         Title="Классы ТС"
+        Icon="../../../Images/icon.jpeg"
     >
     <Grid>
         <ScrollViewer MaxHeight="400" VerticalAlignment="Top">

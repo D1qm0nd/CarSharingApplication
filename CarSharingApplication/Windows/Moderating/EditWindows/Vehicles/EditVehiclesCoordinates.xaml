@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:CarSharingApplication"
         mc:Ignorable="d"
         Height="450" Width="850"
+        ResizeMode="NoResize"
         Closing="Window_Closing"
         Title="Координаты ТС"
+        Icon="../../../Images/icon.jpeg"
     >
     <Grid>
         <ScrollViewer MaxHeight="400" VerticalAlignment="Top">

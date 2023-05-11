@@ -1,19 +1,11 @@
-﻿--SELECT conn.session_id, host_name, program_name,
---    nt_domain, login_name, connect_time, last_request_end_time 
---FROM sys.dm_exec_sessions AS sess
---JOIN sys.dm_exec_connections AS conn
---   ON sess.session_id = conn.session_id;
-
-
-/*Удаление БД с тем же названием (если есть)*/
-GO
+﻿GO
 	PRINT '==================================База Данных======================================='
 	USE master
-		--IF EXISTS(SELECT * FROM SYSOBJECTS WHERE lower(NAME) = LOWER('VehicleRental') AND TYPE = 'u')
-		--BEGIN
+		IF EXISTS(SELECT * FROM SYSOBJECTS WHERE lower(NAME) = LOWER('VehicleRental') AND TYPE = 'u')
+		BEGIN
 			DROP DATABASE VehicleRental
 			PRINT 'Дропнул БД'
-		--END ELSE PRINT 'Error: Не удалось дропнуть БД'
+		END ELSE PRINT 'Error: Не удалось дропнуть БД'
 GO
 	IF EXISTS (SELECT * FROM master.INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = 'PROCEDURE' AND ROUTINE_NAME = 'CreateDataBase')
 	BEGIN
@@ -338,17 +330,6 @@ GO
 				''''+@UserLogin+''', '''+@UserEmail+''', '''+@UserPassword+''', '+''''+@UserSurname+''', '''+@UserName+''', '''+@UserMiddleName+''', '''+@UserBirthDayDate+''')'
 		
 			EXEC (@SqlCommand)
-			--IF NOT EXISTS(SELECT * 
-			--			  FROM Rental_Users 
-			--			  WHERE 
-			--				UserLogin = @UserLogin AND 
-			--				UserEMail = @UserEmail AND 
-			--				UserPassword = @UserPassword AND 
-			--				UserSurname = @UserSurname AND
-			--				UserName =  @UserName AND
-			--				UserMiddleName = @UserMiddleName AND
-			--				UserBirthDay = @UserBirthDayDate)
-			--	ROLLBACK TRANSACTION Registration
 		COMMIT TRANSACTION Registration
 	END TRY
 	BEGIN CATCH
@@ -384,11 +365,6 @@ GO
 		BEGIN TRANSACTION AddDriverLicence
 			INSERT DriversLicences VALUES
 			(@DriverLicence, @ReceiptDate, @User_ID)
-			--IF NOT EXISTS(SELECT * FROM DriverLicence 
-			--			  WHERE ID_DriverLicence = @DriverLicence 
-			--			  AND ID_User = @User_ID 
-			--			  AND ReceiptDate = @ReceiptDate)
-			--	ROLLBACK TRANSACTION AddDriverLicence
 		COMMIT TRANSACTION AddDriverLicence
 	END TRY
 	BEGIN CATCH
@@ -411,12 +387,6 @@ GO
 		BEGIN TRANSACTION AddCategory
 			INSERT Categories VALUES
 			(@DriverLicence_ID, @Category, @ReceiptDate, @EndDate)
-			--IF NOT EXISTS(SELECT * FROM Categories 
-			--			  WHERE ID_DriverLicence = @DriverLicence_ID 
-			--			  AND Category = @Category 
-			--			  AND ReceiptDate = @ReceiptDate 
-			--			  AND EndDate = @EndDate)
-			--	ROLLBACK TRANSACTION AddCategory
 		COMMIT TRANSACTION AddCategory
 	END TRY
 	BEGIN CATCH
@@ -440,15 +410,6 @@ GO
 				ROLLBACK TRANSACTION RentVehicle
 			INSERT Rentals VALUES 
 				(@DriverLicence, @ID_Vehicle, GETDATE(), @RentalTime, @CountOfHours, @TotalPrice, 'стандартная')
-			--IF NOT EXISTS(SELECT * FROM Rentals 
-			--			  WHERE ID_DriverLicence = @DriverLicence 
-			--				   AND ID_Vehicle = @ID_Vehicle 
-			--				   AND StartDate = CONVERT(DATE, GETDATE())
-			--				   AND RentalTime <= @RentalTime 
-			--				   AND CountOfHours = @CountOfHours
-			--				   AND TotalPrice = @TotalPrice
-			--				   AND RentalStatus = 'стандартная')
-			--	ROLLBACK TRANSACTION RentVehicle
 		COMMIT TRANSACTION RentVehicle
 	END TRY
 	BEGIN CATCH
@@ -681,10 +642,6 @@ GO
 				DATEADD(MINUTE,DATEPART(MINUTE,Rentals.RentalTime),
 					DATEADD(HOUR,Rentals.CountOfHours+DATEPART(HOUR,Rentals.RentalTime),
 						CONVERT(DATETIME,StartDate)))) as EndTime
-			--CONVERT(DATETIME,CAST(
-			--	CONCAT(CONVERT(CHAR(10),Rentals.StartDate),' ',
-			--		DATEADD(HOUR,Rentals.CountOfHours,CONVERT(TIME,Rentals.RentalTime))) 
-			--			AS datetime2(7))) as EndTime
 		FROM Rentals
 
 GO
@@ -870,5 +827,3 @@ GO
 
 		
 		GRANT EXEC ON REG_USER TO DB_USER_USERHANDLER
-
-

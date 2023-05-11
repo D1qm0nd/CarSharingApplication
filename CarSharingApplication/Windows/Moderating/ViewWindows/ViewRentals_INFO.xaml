@@ -9,6 +9,8 @@
         Closing="Window_Closing"
         ResizeMode="NoResize"
         Title="Окно информации о арендах"
+        Icon="../../Images/icon.jpeg"
+        
         >
 
     <Window.Resources>

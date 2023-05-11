@@ -27,6 +27,12 @@ namespace CarSharingApplication.Windows.VehicleRent
             rentbtn.btn.Click += PayAndStart_Click;
         }
 
+        /// <summary>
+        /// Нажатие кнопки: 
+        /// Оплатить и начать поездку
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PayAndStart_Click(object sender, RoutedEventArgs e)
         {
             if (rentbtn.cbox.IsChecked != true || CreditCard.isEmpty())
@@ -63,7 +69,11 @@ namespace CarSharingApplication.Windows.VehicleRent
                 this.Close();
             }
         }
-
+        /// <summary>
+        /// Закрытие окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Перестал просматривать {this.Title}", null, LogType.UserAction));

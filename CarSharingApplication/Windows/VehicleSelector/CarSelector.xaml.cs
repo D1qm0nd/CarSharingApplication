@@ -1,6 +1,5 @@
 ﻿using CarSharingApplication.LogLibrary;
 using CarSharingApplication.SQL.Linq;
-//using static GMap.NET.Entity.OpenStreetMapRouteEntity;
 using CarSharingApplication.Windows.Moderating.EditWindows.Users;
 using CarSharingApplication.Windows.VehicleRent;
 using CarSharingApplication.Windows.VehicleSelector;
@@ -36,14 +35,6 @@ namespace CarSharingApplication
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
             InitializeComponent();
             GetVehiclesData(VehiclesData.GetInstance);
-            //Task.Run(() =>
-            //{
-            //    while (true)
-            //    {
-            //        GetVehiclesData(VehiclesData.GetInstance);
-            //        Thread.Sleep(10000);
-            //    }
-            //}).ConfigureAwait(true);
         }
 
         public void SetInfo(VehiclesData vehData)
@@ -56,6 +47,7 @@ namespace CarSharingApplication
         /// <summary>
         /// Получение/обновление данных о авто
         /// </summary>
+        /// <param name="vehData"></param>
         private void GetVehiclesData(VehiclesData vehData)
         {
             vehData.vehClasses = App.GetQueryResult<string>(
@@ -117,8 +109,6 @@ namespace CarSharingApplication
             this.Close();
         }
 
-        
-
         /// <summary>
         /// Получить список маркеров из списка информации об авто
         /// </summary>
@@ -167,6 +157,7 @@ namespace CarSharingApplication
         /// Вывести информацию о авто
         /// </summary>
         /// <param name="info"></param>
+        /// <param name="errorMessage"></param>
 #nullable enable
         private void SetVehicleInfo(VehiclesINFO? info, string errorMessage)
         {
@@ -174,7 +165,7 @@ namespace CarSharingApplication
         }
 
         /// <summary>
-        /// Наведение на маркер авто
+        /// Нажатие на маркер авто
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
@@ -186,16 +177,6 @@ namespace CarSharingApplication
             RentalMap.MoveCursorToVehicleOnMap(VehiclesData.GetInstance.selectedVehicle);
         }
 
-
-
-    
-
-
-        /// <summary>
-        /// Событие закрытия окна
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
        
 
         /// <summary>
@@ -203,7 +184,6 @@ namespace CarSharingApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         private void SearchByCriteries(object sender, RoutedEventArgs e)
         {
             var instance = VehiclesData.GetInstance;
@@ -243,21 +223,21 @@ namespace CarSharingApplication
             }
         }
 
+        /// <summary>
+        /// Сортировать авто по цене
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns>List<VehiclesINFO</returns>
         public List<VehiclesINFO> OrderByPricePerHourDesc(List<VehiclesINFO> list) => (from vehicle
             in list
             orderby vehicle.PricePerHour descending
             select vehicle).ToList();
 
         /// <summary>
-        /// https://stackoverflow.com/questions/18827081/c-sharp-base64-string-to-jpeg-image
-        /// BitmapImage
-        /// BeginInit();
-        /// source* = (filestream) fr;
-        /// EndInit();
-        /// </summary>
+        /// Нажатие кнопки арендовать
+        /// </summary>     
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         private void RentalButton_Click(object sender, RoutedEventArgs e)
         {
             var instance = VehiclesData.GetInstance;
@@ -275,6 +255,11 @@ namespace CarSharingApplication
             }
         }
 
+        /// <summary>
+        /// Нажатие кнопки Личный аккаунт
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PersonalAccountButton_Click(object sender, RoutedEventArgs e)
         {
             var persWindow = new PersonalAccount(ref _User);
@@ -282,6 +267,12 @@ namespace CarSharingApplication
             persWindow.Show();
             this.Visibility = Visibility.Collapsed;
         }
+
+        /// <summary>
+        /// Закрытия окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Перестал просматривать {this.Title}", null, LogType.UserAction));
@@ -298,4 +289,3 @@ namespace CarSharingApplication
         }
     }
 }
-

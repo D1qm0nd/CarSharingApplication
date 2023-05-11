@@ -11,6 +11,7 @@
         ResizeMode="NoResize"
         AllowDrop="False"
         Title="Транспортные средства"
+        Icon="../../../Images/icon.jpeg"
     >
 
     

@@ -145,7 +145,4 @@ GO
 
 GO 
 	USE VehicleRental
-	INSERT Rental_Admins VALUES
-	(1)
-	
-
+	INSERT Rental_Admins VALUES (1)

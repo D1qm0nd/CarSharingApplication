@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Height="450" Width="850"
         Closing="Window_Closing"
+        ResizeMode="NoResize"
         Title="Типы аварийных случаев"
+        Icon="../../../Images/icon.jpeg"
     >
 
     <Grid>

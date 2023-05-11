@@ -9,6 +9,8 @@
         Closing="Window_Closing"
         ResizeMode="NoResize"
         Title="Свидетельства о регистрации ТС"
+        Icon="../../../Images/icon.jpeg"
+        
         >
     
         <Window.Resources>

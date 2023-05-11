@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Height="500" Width="1100"
         Closing="Window_Closing"
-        ResizeMode="NoResize">
+        Icon="../../../Images/icon.jpeg"
+        ResizeMode="NoResize"
+        Title="Аренды">
 
     <Window.Resources>
         <Style 
