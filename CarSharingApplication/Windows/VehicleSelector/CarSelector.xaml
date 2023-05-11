@@ -27,7 +27,6 @@
                     <Button x:Name="PersonalAccountButton" Background="Orange" BorderBrush="Orange" Click="PersonalAccountButton_Click"> Личный кабинет</Button>
                 </WrapPanel>
             </Border>
-
             <WrapPanel HorizontalAlignment="Left" Height="620">
                 <Border
                     VerticalAlignment="Top"
@@ -70,7 +69,7 @@
                         <ColumnDefinition MinWidth="610"/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Height="70" FontSize="16" Click="SearchByCriteries" materialDesign:ButtonAssist.CornerRadius="10" VerticalAlignment="Top">Поиск По Критериям</Button>
-                    <Button Grid.Column="1" Margin="10 0 0 0" Height="70" FontSize="16" materialDesign:ButtonAssist.CornerRadius="10" VerticalAlignment="Top">Поиск Ближайшего Транспортного Средства</Button>
+                    <Button x:Name="NextVehicle" Grid.Column="1" Margin="10 0 0 0" Height="70" FontSize="16" materialDesign:ButtonAssist.CornerRadius="10" VerticalAlignment="Top" Click="NextVehicleButton_Click">Следующее авто</Button>
                     <Button Grid.Column="2" Margin="11 0 0 0" Width="598" Height="70" materialDesign:ButtonAssist.CornerRadius="10" VerticalAlignment="Top" Background="Orange" BorderBrush="OrangeRed" BorderThickness="2" Padding="0 0 0 10" FontSize="28" Click="RentalButton_Click">Арендовать</Button>
                         <!--<Button Margin="10 0 0 0" Height="100" FontSize="16" Width="300" Click="PreviousVehicleButtonClick">
                             <materialDesign:PackIcon Kind="ArrowLeftBoldOutline" Width="216" Height="66" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -79,7 +78,6 @@
                             <materialDesign:PackIcon Kind="ArrowRightBoldOutline" Width="216" Height="66" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Button>-->
                 </Grid>
-
             </WrapPanel>
         </StackPanel>
     </Grid>

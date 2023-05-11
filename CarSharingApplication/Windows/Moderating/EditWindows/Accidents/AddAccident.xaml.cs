@@ -15,22 +15,6 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Accidents
         private RentalsINFO _Rental;
         private UsersINFO _User;
 
-        //private string _Text;
-        //public string text 
-        //{
-        //    get { return _Text; }
-        //    set { 
-        //        _Text = value;
-        //        OnPropertyChanged(nameof(text));
-        //    }
-        //}
-
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //protected void OnPropertyChanged([CallerMemberName] string name = null)
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        //}
-
         public AddAccident(ref UsersINFO user, ref RentalsINFO rental, Window owner, bool showOwner)
         {
             _User = user;
@@ -52,7 +36,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Accidents
             }
             else
             {
-                this.Owner.Close();
+                this.Owner?.Close();
             }
         }
 

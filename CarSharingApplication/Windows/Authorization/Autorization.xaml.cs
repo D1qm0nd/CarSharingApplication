@@ -25,7 +25,6 @@ namespace CarSharingApplication
             App._Logger.options = new JsonSerializerOptions
             {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
-                //WriteIndented = true
             };
             App._Logger.LogPath = Environment.CurrentDirectory + @"\logs.json";
             InitializeComponent();

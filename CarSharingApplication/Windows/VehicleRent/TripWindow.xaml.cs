@@ -18,6 +18,7 @@ namespace CarSharingApplication.Windows.VehicleRent
         public TripWindow(ref UsersINFO user, Window owner, bool showOwner)
         {
             this.Owner = owner;
+            this.Owner.Visibility = Visibility.Collapsed;
             _ShowOwner = showOwner;
             _User = user;
             InitializeComponent();
@@ -40,16 +41,16 @@ namespace CarSharingApplication.Windows.VehicleRent
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Перестал просматривать {this.Title}", null, LogType.UserAction));
             if (_ShowOwner == true)
             {
                 this.Owner.Show();
                 this.Owner.Visibility = Visibility.Visible;
                 this.Owner.Activate();
-                App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Перестал просматривать {this.Title}", null, LogType.UserAction));
             }
             else 
             {
-                this.Owner.Close();
+                this.Owner?.Close();
             }
         }
 

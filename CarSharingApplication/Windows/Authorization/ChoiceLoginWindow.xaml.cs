@@ -42,6 +42,7 @@ namespace CarSharingApplication.Windows.Authorization
 
         private void UserLoginButton_Click(object sender, RoutedEventArgs e)
         {
+            User = App.GetScalarResult<UsersINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")), $"SELECT * FROM UsersINFO WHERE ID_User = {User.ID_User}");
             if (User.RentStatus != "в поездке")
             {
                 var CarSelWindow = new CarSelector(ref User, this, true);
@@ -51,15 +52,16 @@ namespace CarSharingApplication.Windows.Authorization
             }
             else
             {
-                var TripWND = new TripWindow(ref User, this, true);
-                this.Visibility = Visibility.Collapsed;
-                TripWND.Activate();
                 try
                 {
+                    this.Visibility = Visibility.Collapsed;
+                    var TripWND = new TripWindow(ref User, this, true);
+                    TripWND.Activate();
                     TripWND.Show();
                 }
                 catch 
-                { 
+                {
+                    this.Visibility = Visibility.Visible;
                 }
             }
 

@@ -4,8 +4,8 @@ GO
 	USE VehicleRental
 
 	INSERT Rental_Users VALUES
-	('eqYY5T3L49ZRJbW/V9rosA==', 'rental_admin@rental_admin.rental_admin',	'eqYY5T3L49ZRJbW/V9rosA==', 'AdminSurname', 'AdminName',	'AdminMiddlename',	'2023-04-01'),
-	('/dnKYZHqiXNRZX3gcUdwwg==', 'rental_user@rental_user.rental_user',		'/dnKYZHqiXNRZX3gcUdwwg==', 'rental_user',  'rental_user',  'rental_user',		'2023-04-06'),
+	('eqYY5T3L49ZRJbW/V9rosA==', 'rental_admin@rental_admin.rental_admin',	'eqYY5T3L49ZRJbW/V9rosA==', 'Админ',		'База',			'Даннович',			'0001-01-01'),
+	('/dnKYZHqiXNRZX3gcUdwwg==', 'rental_user@rental_user.rental_user',		'/dnKYZHqiXNRZX3gcUdwwg==', 'Клиент',		'Аренды',		'Автомобилей',		'0002-02-02'),
 	('jp6uPv45moXS5qVs0UkNwA==', 'chaki@me.com',							'/gzw+eMOrPavQsQwRWU5dw==', 'Журавлев',		'Георгий',		'Никитич',			'27.06.1976'),
 	('OUE1lvANhEI=',			 'drolsky@verizon.net',						'yWOdkJjT2OhE+GyLsNBQhg==', 'Данилов',		'Фёдор',		'Даниилович',		'28.03.1995'),
 	('/niF9okVx9M=',			 'sekiya@icloud.com',						'5rhTvoSsG/GgqucpRZnPtQ==', 'Абрамов',		'Лука',			'Андреевич',		'20.04.2004'),
@@ -32,7 +32,6 @@ GO
 	('1DD8/KCSlXYQWWOpkVRDcw==', 'animats@optonline.net',					'y1Z/E4huq7CcLK5WLb7hVA==', 'Александров',  'Семён',		'Андреевич',		'11.04.2002'),
 	('PIbgzNreJZY=',			 'jeteve@me.com',							'q5pI3eYae9XROuF+pylTTg==', 'Хохлов',		'Ярослав',		'Иванович',			'20.11.1978'),
 	('cYRfx32GTbQ=',			 'lamky@icloud.com',						'CIJYXKYn/HgtqomdzsNcTQ==', 'Лебедев',		'Богдан',		'Александрович',	'17.07.1984')--,
-	--('/niF9okVx9M=',			 'kmself@optonline.net',					'/p9c1YWrESY7AuMRc+4unQ==', 'Абрамов',		'Николай',		'Арсентьевич',		'19.06.1990')
 
 GO 
 

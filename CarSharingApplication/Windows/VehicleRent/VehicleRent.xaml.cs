@@ -43,11 +43,11 @@ namespace CarSharingApplication.Windows.VehicleRent
                 this.Close();
                 return;
             }
-            List<string> a = App.GetQueryResult<string>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("DLHANDLERConnection")),
+            List<string> categories = App.GetQueryResult<string>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("DLHANDLERConnection")),
                      $"SELECT Category FROM [dbo].GetDriverLicenceCategories ('{_User.ID_DriverLicence}')");
-            if (a == null)
+            if (categories == null)
                 return;
-            if (!(a.Contains(_Vehicle.Vehicle_Category.Trim().ToLower())))
+            if (!(categories.Contains(_Vehicle.Vehicle_Category.Trim().ToLower())))
             {
                 MessageBox.Show("У вас отсутсвтует нужная категория в водительском удостоверении");
                 return;
@@ -61,12 +61,20 @@ namespace CarSharingApplication.Windows.VehicleRent
                 $"@TotalPrice = {(double.Parse(_Vehicle.PricePerHour.ToString()) * Picker.HourPicker.Value).ToString().Replace(',', '.')}"))
             {
                 App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Арендовал ТС: {_Vehicle.ID_Vehicle}", null, LogType.UserAction));
-
-                var TripWND = new TripWindow(ref _User, this.Owner.Owner, false);
-                TripWND.Activate();
-                TripWND.Show();
-                _ShowOwner = false;
-                this.Close();
+                try
+                {
+                    _ShowOwner = false;
+                    var TripWND = new TripWindow(ref _User, this.Owner.Owner, true);
+                    TripWND.Activate();
+                    TripWND.Show();
+                }
+                catch
+                {
+                    _ShowOwner = true;
+                }
+                {
+                    this.Visibility = Visibility.Collapsed;
+                }
             }
         }
         /// <summary>
@@ -84,7 +92,7 @@ namespace CarSharingApplication.Windows.VehicleRent
             }
             else
             { 
-                this.Owner.Close();
+                this.Owner?.Close();
             }
         }
     }

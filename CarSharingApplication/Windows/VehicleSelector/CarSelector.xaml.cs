@@ -35,6 +35,30 @@ namespace CarSharingApplication
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
             InitializeComponent();
             GetVehiclesData(VehiclesData.GetInstance);
+
+            try
+            {
+                var instance = VehiclesData.GetInstance;
+                PriceSlider.Minimum = Double.Parse((instance.vehiclesInfoList.Min(veh => veh.PricePerHour)).ToString());
+                PriceSlider.Maximum = Double.Parse((instance.vehiclesInfoList.Max(veh => veh.PricePerHour)).ToString());
+                PriceSlider.Value = PriceSlider.Maximum;
+                if (instance.vehiclesInfoList.Count > 0)
+                {
+                    SetInfo(instance);
+                }
+            }
+            catch
+            {
+                PriceSlider.Minimum = 0.0;
+                PriceSlider.Maximum = 0.0;
+                PriceSlider.Value = 0.0;
+                SetVehicleInfo(null, HaveNotAvaliableVehicles);
+            }
+        }
+
+        public void OwnerShow(bool value)
+        {
+            _ShowOwner = value;
         }
 
         public void SetInfo(VehiclesData vehData)
@@ -72,25 +96,6 @@ namespace CarSharingApplication
             "SELECT DISTINCT TRIM(Vehicle_Category) FROM VehiclesINFO");
             vehData.vehCategories.Add("*ВСЕ");
             ListViewVehicleCategories.ItemsSource = vehData.vehCategories.OrderBy(str => str);
-
-            try
-            {
-                PriceSlider.Minimum = Double.Parse((vehData.vehiclesInfoList.Min(veh => veh.PricePerHour)).ToString());
-                PriceSlider.Maximum = Double.Parse((vehData.vehiclesInfoList.Max(veh => veh.PricePerHour)).ToString());
-                PriceSlider.Value = PriceSlider.Maximum;
-
-                if (vehData.vehiclesInfoList.Count > 0)
-                {
-                    SetInfo(vehData);
-                }
-            }
-            catch
-            {
-                PriceSlider.Minimum = 0.0;
-                PriceSlider.Maximum = 0.0;
-                PriceSlider.Value = 0.0;
-                SetVehicleInfo(null, HaveNotAvaliableVehicles);
-            }
         }
 
         /// <summary>
@@ -187,6 +192,7 @@ namespace CarSharingApplication
         private void SearchByCriteries(object sender, RoutedEventArgs e)
         {
             var instance = VehiclesData.GetInstance;
+            GetVehiclesData(instance);
             List<VehiclesINFO> newvehicleslist = instance.vehiclesInfoList.Where(vehicle => Double.Parse(vehicle.PricePerHour.ToString()) <= PriceSlider.Value).ToList();
 #nullable enable
             if ((string)ListViewVehicleClasses.SelectedValue != "*ВСЕ" && ListViewVehicleClasses.SelectedValue != null)
@@ -205,6 +211,7 @@ namespace CarSharingApplication
             }
 
             newvehicleslist = OrderByPricePerHourDesc(newvehicleslist);
+            instance.vehiclesInfoList = newvehicleslist;
 
             RentalMap.MapController.Markers.Clear();
 
@@ -286,6 +293,27 @@ namespace CarSharingApplication
             {
                 this.Owner.Close();
             }
+        }
+
+        /// <summary>
+        /// Показать информацию о следующем авто
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NextVehicleButton_Click(object sender, RoutedEventArgs e)
+        {
+            var instance = VehiclesData.GetInstance;
+            var index = instance.vehiclesInfoList.IndexOf(instance.selectedVehicle);
+            if ((index + 1 > 0) && (index < instance.vehiclesInfoList.Count-1))
+            {
+                instance.selectedVehicle = instance.vehiclesInfoList[index + 1];
+            }
+            else 
+            {
+                instance.selectedVehicle = instance.vehiclesInfoList[0];
+            }
+            SetVehicleInfo(instance.selectedVehicle, ZeroVehiclesByCriteries);
+            RentalMap.MoveCursorToVehicleOnMap(instance.selectedVehicle);
         }
     }
 }
