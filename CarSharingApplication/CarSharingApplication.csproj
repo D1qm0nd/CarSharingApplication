@@ -416,6 +416,7 @@
     </EmbeddedResource>
     <None Include="Documents\DATA.xlsx" />
     <None Include="Documents\Описание таблиц.xlsx" />
+    <None Include="Documents\Пояснительная записка Разухин М.Н.docx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -444,7 +445,6 @@
     <None Include="Windows\Images\Marker.psd" />
     <None Include="Windows\Images\Upload.psd" />
     <None Include="Documents\Методич рекомендации по КП МДК 02 02  %281%29.doc" />
-    <None Include="Documents\Пояснительная записка.docx" />
     <None Include="Documents\Разработка информационной системы для проката.docx" />
     <None Include="Documents\ТЗ_Разухин ПКС-303.docx" />
   </ItemGroup>
