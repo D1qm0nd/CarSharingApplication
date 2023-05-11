@@ -1,15 +1,6 @@
-﻿using GMap.NET.ObjectModel;
-using Newtonsoft.Json.Bson;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
-using System.Data.Entity.ModelConfiguration.Configuration;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace CarSharingApplication
 {

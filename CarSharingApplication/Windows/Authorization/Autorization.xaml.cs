@@ -1,35 +1,16 @@
-﻿using GMap.NET.MapProviders;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Data.SqlClient;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Shell;
-using System.Configuration;
-using System.Data.Entity.Infrastructure.Design;
-using System.Data.Entity;
-using System.Xml.Serialization;
-using System.Security.Cryptography;
-using static System.Net.Mime.MediaTypeNames;
+﻿using CarSharingApplication.LogLibrary;
 using CarSharingApplication.SQL.Linq;
 using CarSharingApplication.Windows.Authorization;
 using CarSharingApplication.Windows.VehicleRent;
-using CarSharingApplication.LogLibrary;
+using System;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using System.Text.Encodings.Web;
-using System.Text.Json.Serialization.Metadata;
+using System.Windows;
+using System.Windows.Input;
 
 namespace CarSharingApplication
 {
@@ -94,19 +75,16 @@ namespace CarSharingApplication
 
                         if (answ == -1)
                         {
-                            using (var context = new CarSharingDataBaseClassesDataContext())
-                            {
-                                context.Connection.Open();
-                                context.ExecuteCommand( "EXEC REG_USER " +
-                                                       $"@UserLogin='{encLogin}', " +
-                                                       $"@UserEmail='{Email.Text}', " +
-                                                       $"@UserPassword='{encPass}', " +
-                                                       $"@UserSurname='{UserSurname.Text}', " +
-                                                       $"@UserName='{UserName.Text}', " +
-                                                       $"@UserMiddleName='{UserMiddleName.Text}'," +
-                                                       $"@UserBirthDayDate='{BDatePicker.Text}'");
-                                context.Connection.Close();
-                            }
+
+                            if (App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
+                                "EXEC REG_USER " +
+                                $"@UserLogin='{encLogin}', " +
+                                $"@UserEmail='{Email.Text}', " +
+                                $"@UserPassword='{encPass}', " +
+                                $"@UserSurname='{UserSurname.Text}', " +
+                                $"@UserName='{UserName.Text}', " +
+                                $"@UserMiddleName='{UserMiddleName.Text}'," +
+                                $"@UserBirthDayDate='{BDatePicker.Text}'"))
                             registered = true;
                         }
                         else if (answ > 0)

@@ -1,15 +1,11 @@
-﻿using Microsoft.Xaml.Behaviors.Core;
-using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using CarSharingApplication.LogLibrary;
 using CarSharingApplication.SQL.Linq;
-using CarSharingApplication.Windows.Moderating.EditWindows.Vehicles;
-using CarSharingApplication.Windows.Moderating.EditWindows.Users;
-using CarSharingApplication.Windows.Moderating.EditWindows.Rentals;
-using CarSharingApplication.LogLibrary;
-using CarSharingApplication.Windows.Moderating.ViewWindows;
-using System.Windows.Forms;
 using CarSharingApplication.ViewWindows;
+using CarSharingApplication.Windows.Moderating.EditWindows.Rentals;
+using CarSharingApplication.Windows.Moderating.EditWindows.Users;
+using CarSharingApplication.Windows.Moderating.EditWindows.Vehicles;
+using CarSharingApplication.Windows.Moderating.ViewWindows;
+using System.Windows;
 
 namespace CarSharingApplication
 {
