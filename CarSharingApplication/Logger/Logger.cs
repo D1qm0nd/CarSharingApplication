@@ -8,6 +8,8 @@ using System.Runtime.CompilerServices;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
+using CarSharingApplication.SQL.Linq;
+using CarSharingApplication;
 
 namespace LoggerLib
 {
@@ -19,8 +21,8 @@ namespace LoggerLib
         public JsonSerializerOptions options { get; set; } = JsonSerializerOptions.Default;
 
 #nullable enable
-    private static Logger? _Instance = null;
-    public string? LogPath { get; set; } = null;
+        private static Logger? _Instance = null;
+        public string? LogPath { get; set; } = null;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public static Logger Instance()
@@ -32,19 +34,30 @@ namespace LoggerLib
             else return _Instance;
         }
 
-        public virtual bool Log<T>(T logObj)
+        //public bool Log<T>(T logObj)
+        //{
+        //    if (!File.Exists(LogPath))
+        //    {
+        //        File.Create(LogPath).Close();
+        //    }
+        //    using (StreamWriter streamWriter = new StreamWriter(LogPath, true))
+        //    {
+        //        streamWriter.WriteLine(JsonSerializer.Serialize(logObj, options));
+        //        streamWriter.Close();
+        //    }
+        //    return true;
+        //}
+
+        public bool Log<T>(T logObj)
         {
-            if (!File.Exists(LogPath))
-            {
-                File.Create(LogPath).Close();
-            }
-            using (StreamWriter streamWriter = new StreamWriter(LogPath, true))
-            {
-                streamWriter.WriteLine(JsonSerializer.Serialize(logObj, options));
-                streamWriter.Close();
-            }
-            return true;
+            var log = JsonSerializer.Serialize(logObj, options);
+            return 
+                App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(this.LogPath), 
+                $"INSERT INTO Vehicle_Rental_logs (LogString) VALUES ('{log}')");
         }
+
+
+
         private Logger()
         {
 

@@ -49,7 +49,7 @@ namespace CarSharingApplication.Windows.XAMLModels
             }
             else
             {
-                CarPicture.ImageSource = new BitmapImage(new Uri(App.path + @"Windows\Images\NullImage2.png"));
+                CarPicture.ImageSource = new BitmapImage(new Uri(App.path + @"\Windows\Images\NullImage2.png"));
                 infolist.Add(errorMessage);
                 VehicleInfoList.ItemsSource = infolist;
             }

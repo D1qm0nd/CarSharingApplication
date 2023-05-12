@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="VehicleRental" Class="CarSharingDataBaseClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-RN9AI5Q;Initial Catalog=VehicleRental;Integrated Security=True" SettingsObjectName="CarSharingApplication.Properties.Settings" SettingsPropertyName="VehicleRentalConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LOCALHOST;Initial Catalog=VehicleRental;Integrated Security=True" SettingsObjectName="CarSharingApplication.Properties.Settings" SettingsPropertyName="VehicleRentalConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Categories" Member="Categories">
     <Type Name="Categories">
       <Column Name="ID_Category" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -175,6 +175,12 @@
       <Column Name="PermissibleMaximumWeightKg" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="WeightWithoutLoadKg" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Vehicles_VehicleRegistrCertificates" Member="Vehicles" ThisKey="ID_Vehicle" OtherKey="ID_Vehicle" Type="Vehicles" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Vehicle_Rental_logs" Member="Vehicle_Rental_logs">
+    <Type Name="Vehicle_Rental_logs">
+      <Column Name="ID_Log" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LogString" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

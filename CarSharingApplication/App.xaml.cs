@@ -79,6 +79,8 @@ namespace CarSharingApplication
             }
         }
 
+
+
         public static bool ExecuteNonQuery(DataContext context, string command)
         {
             try

@@ -162,12 +162,18 @@
         <elementListCompartment Id="d65bc6e2-ee7d-41e8-af2e-cd0a90421139" absoluteBounds="15.265, 4.71, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(14.21875 : 2.32859537760417); (14.21875 : 6.60659912109375); (15.25 : 6.60659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(14.21875 : 2.32859537760417); (14.21875 : 6.60659912109375); (15.25 : 6.60659912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/Vehicles/Vehicles_VehicleRegistrCertificates" />
       <nodes>
         <classShapeMoniker Id="d6e5e4a7-8c53-4bcb-b4af-cabfdf23edb1" />
         <classShapeMoniker Id="0a34edea-5dc6-46d1-b125-5dac22f74f41" />
       </nodes>
     </associationConnector>
+    <classShape Id="f4cd223d-f029-40a3-9fd8-0de627c7f256" absoluteBounds="7.75, 9.25, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/Vehicle_Rental_logs" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4c85a419-083a-4b0a-8dc2-d88aa28e4364" absoluteBounds="7.7650000000000006, 9.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
