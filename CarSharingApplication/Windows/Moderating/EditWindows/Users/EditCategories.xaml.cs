@@ -21,7 +21,8 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
             try
             {
                 InitializeComponent();
-                db = new CarSharingDataBaseClassesDataContext(ConnectionString);
+                App.AppDataBase.OpenConnection(ConnectionString);
+                db = App.AppDataBase.Context;
                 dt_grid.ItemsSource = db.Categories;
             }
             catch (SqlException sqlex)
@@ -32,8 +33,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            db.Connection.Close();
-            db.Dispose();
+            App.AppDataBase.CloseConnection();
             this.Owner.Visibility = Visibility.Visible;
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Перестал просматривать {this.Title}", null, LogType.UserAction));
         }

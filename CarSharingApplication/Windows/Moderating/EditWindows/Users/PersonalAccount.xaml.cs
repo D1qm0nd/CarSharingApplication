@@ -11,7 +11,9 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
     /// </summary>
     public partial class PersonalAccount : Window
     {
-        private string connectionString = App.GetConnectionString("USERHANDLERConnection");
+        private string USERHANDLERconnectionString { get; set; } = App.GetConnectionString("USERHANDLERConnection");
+        private string DLHANDLERconnectionString { get; set; } = App.GetConnectionString("DLHANDLERConnection");
+
         private UsersINFO _User;
         public PersonalAccount(ref UsersINFO UserInfo)
         {
@@ -20,8 +22,10 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
             uDriverLicence.Text = _User.ID_DriverLicence;
             uLicenceDatePic.Text = _User.ReceiptDate.ToString();
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
-            var hascategories = App.GetQueryResult<DriversLicencesCategoriesINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("DLHANDLERConnection")),
+            App.AppDataBase.OpenConnection(DLHANDLERconnectionString);
+            var hascategories = App.AppDataBase.GetQueryResult<DriversLicencesCategoriesINFO>(
                 $"SELECT * FROM [dbo].GetDriverLicenceCategories('{uDriverLicence.Text}')");
+            App.AppDataBase.CloseConnection();
             if (hascategories.Count > 0)
                 uLicenceCategories.SetCategories(hascategories);
         }
@@ -46,11 +50,14 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
                     return;
                 #region NEW CODE SUPPORT FROM 25.04.2023
                 {
-                    var LicenceCategories = App.GetQueryResult<string>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("DLHANDLERConnection")),
+                    App.AppDataBase.OpenConnection(DLHANDLERconnectionString);
+                    var LicenceCategories = App.AppDataBase.GetQueryResult<string>(
                             $"SELECT * FROM [dbo].GetDriverLicenceCategories ('{uDriverLicence.Text}')");
+                    App.AppDataBase.CloseConnection();
+                    App.AppDataBase.OpenConnection(USERHANDLERconnectionString); 
                     if (LicenceCategories.Count == 0) 
                     { 
-                        App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
+                        App.AppDataBase.ExecuteNonQuery(
                             $"AddDriverLicenceToUser " +
                             $"@User_ID = {_User.ID_User}, " +
                             $"@DriverLicence = '{uDriverLicence.Text}', " +
@@ -74,7 +81,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
                             return;
                         }
 
-                        if (!App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(connectionString),
+                        if (!App.AppDataBase.ExecuteNonQuery(
                             $"EXEC AddCategoryToDriverLicence " +
                             $"@DriverLicence_ID='{uDriverLicence.Text}', " +
                             $"@Category='{category.Name}', " +
@@ -85,7 +92,8 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
                             return;
                         }
                         else 
-                            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Добавил категорию {category} к правам {_User.ID_DriverLicence}", null, LogType.UserAction)); 
+                            App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Добавил категорию {category} к правам {_User.ID_DriverLicence}", null, LogType.UserAction));
+                        App.AppDataBase.CloseConnection();
                     } 
                 }
                 #endregion

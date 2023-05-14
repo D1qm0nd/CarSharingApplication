@@ -1,4 +1,5 @@
-﻿using LoggerLib;
+﻿using CarSharingApplication.SQL.Linq;
+using LoggerLib;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,86 +19,17 @@ namespace CarSharingApplication
             return ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
         }
 
+        public static DataBase<CarSharingDataBaseClassesDataContext> AppDataBase { get => DataBase<CarSharingDataBaseClassesDataContext>.Instance; }
+
+        public static CarSharingDataBaseClassesDataContext ContextCreateFunc(string ConnectionString) => new CarSharingDataBaseClassesDataContext(ConnectionString);
+
         public static string path { get
             {
                 string _path = App.GetConnectionString("AppPath");
-                    //@"C:\Users\Max\source\repos\D1qm0nd\CarSharingApplication\CarSharingApplication";
                 return _path;
-                //string _path = Environment.CurrentDirectory;
-                //return _path.Remove(_path.Length - 9);
-
             }
         }
 
-        public static Logger _Logger { get; } = Logger.Instance();
-
-#nullable enable
-        /// <summary>
-        /// Получить данные по запросу
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="context"></param>
-        /// <param name="query_command"></param>
-        /// <returns></returns>
-        public static List<T>? GetQueryResult<T>(DataContext context, string query_command)
-        {
-            try
-            {
-                List<T> list;
-                context.Connection.Open();
-                using (context)
-                {
-                    list = context.ExecuteQuery<T>(query_command).ToList();
-                    context.Connection.Close();
-                }
-                return list;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
-        }
-#nullable enable
-        public static T? GetScalarResult<T>(DataContext context, string query_command)
-        {
-            try
-            {
-                List<T> list;
-                context.Connection.Open();
-                using (context)
-                {
-                    list = context.ExecuteQuery<T>(query_command).ToList();
-                    context.Connection.Close();
-                }
-                return list[0];
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return default;
-            }
-        }
-
-
-
-        public static bool ExecuteNonQuery(DataContext context, string command)
-        {
-            try
-            {
-                using (context) 
-                {
-                    context.ExecuteCommand(command);
-                }
-                return true;
-            }
-            catch (Exception ex)
-            { 
-                MessageBox.Show(ex.Message);
-                return false;
-            }
-        }
-
-
+        public static Logger _Logger { get => Logger.Instance(); }
     }
 }

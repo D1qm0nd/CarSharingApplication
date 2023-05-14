@@ -95,8 +95,8 @@ GO
 				ID_DriverLicence LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
 				),
 		Category CHAR(3) NOT NULL,
-		ReceiptDate DATETIME NOT NULL,
-		EndDate DATETIME NOT NULL
+		ReceiptDate DATE NOT NULL,
+		EndDate DATE NOT NULL
 		PRIMARY KEY (ID_Category)
 	)
 	PRINT 'Создал Таблицу Categories'
@@ -399,8 +399,8 @@ GO
 	(
 		@DriverLicence_ID CHAR(10),
 		@Category CHAR(3),
-		@ReceiptDate DATETIME,
-		@EndDate DATETIME
+		@ReceiptDate DATE,
+		@EndDate DATE
 	)
 	AS
 	BEGIN TRY

@@ -36,9 +36,9 @@ namespace CarSharingApplication.Windows.XAMLModels
         {
             GMaps.Instance.Mode = AccessMode.ServerAndCache; //выбор подгрузки карты – онлайн или из ресурсов
             MapController.MapProvider = GoogleMapProvider.Instance; //какой провайдер карт используется (в нашем случае гугл) 
-            MapController.MinZoom = 13; //минимальный зум
+            MapController.MinZoom = 12; //минимальный зум
             MapController.MaxZoom = 18; //максимальный зум
-            MapController.Zoom = 13; // какой используется зум при открытии
+            MapController.Zoom = MapController.MinZoom; // какой используется зум при открытии
             if (SelectedVehicle != null)
                 MoveCursorToVehicleOnMap(SelectedVehicle);
             else MapController.Position = new PointLatLng(InitializeLat,InitializeLng);

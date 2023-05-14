@@ -30,9 +30,6 @@ namespace CarSharingApplication.SQL.Linq
 		
     #region Определения метода расширяемости
     partial void OnCreated();
-    partial void InsertCategories(Categories instance);
-    partial void UpdateCategories(Categories instance);
-    partial void DeleteCategories(Categories instance);
     partial void InsertClasses(Classes instance);
     partial void UpdateClasses(Classes instance);
     partial void DeleteClasses(Classes instance);
@@ -63,10 +60,13 @@ namespace CarSharingApplication.SQL.Linq
     partial void InsertVehicle_Rental_logs(Vehicle_Rental_logs instance);
     partial void UpdateVehicle_Rental_logs(Vehicle_Rental_logs instance);
     partial void DeleteVehicle_Rental_logs(Vehicle_Rental_logs instance);
+    partial void InsertCategories(Categories instance);
+    partial void UpdateCategories(Categories instance);
+    partial void DeleteCategories(Categories instance);
     #endregion
 		
 		public CarSharingDataBaseClassesDataContext() : 
-				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString, mappingSource)
+				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -93,14 +93,6 @@ namespace CarSharingApplication.SQL.Linq
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Categories> Categories
-		{
-			get
-			{
-				return this.GetTable<Categories>();
-			}
 		}
 		
 		public System.Data.Linq.Table<Classes> Classes
@@ -222,203 +214,12 @@ namespace CarSharingApplication.SQL.Linq
 				return this.GetTable<Vehicle_Rental_logs>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Categories")]
-	public partial class Categories : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_Category;
-		
-		private string _ID_DriverLicence;
-		
-		private string _Category;
-		
-		private System.DateTime _ReceiptDate;
-		
-		private System.DateTime _EndDate;
-		
-		private EntityRef<DriversLicences> _DriversLicences;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_CategoryChanging(int value);
-    partial void OnID_CategoryChanged();
-    partial void OnID_DriverLicenceChanging(string value);
-    partial void OnID_DriverLicenceChanged();
-    partial void OnCategoryChanging(string value);
-    partial void OnCategoryChanged();
-    partial void OnReceiptDateChanging(System.DateTime value);
-    partial void OnReceiptDateChanged();
-    partial void OnEndDateChanging(System.DateTime value);
-    partial void OnEndDateChanged();
-    #endregion
-		
-		public Categories()
-		{
-			this._DriversLicences = default(EntityRef<DriversLicences>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Category", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_Category
+		public System.Data.Linq.Table<Categories> Categories
 		{
 			get
 			{
-				return this._ID_Category;
-			}
-			set
-			{
-				if ((this._ID_Category != value))
-				{
-					this.OnID_CategoryChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Category = value;
-					this.SendPropertyChanged("ID_Category");
-					this.OnID_CategoryChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DriverLicence", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string ID_DriverLicence
-		{
-			get
-			{
-				return this._ID_DriverLicence;
-			}
-			set
-			{
-				if ((this._ID_DriverLicence != value))
-				{
-					if (this._DriversLicences.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_DriverLicenceChanging(value);
-					this.SendPropertyChanging();
-					this._ID_DriverLicence = value;
-					this.SendPropertyChanged("ID_DriverLicence");
-					this.OnID_DriverLicenceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Category", DbType="Char(3) NOT NULL", CanBeNull=false)]
-		public string Category
-		{
-			get
-			{
-				return this._Category;
-			}
-			set
-			{
-				if ((this._Category != value))
-				{
-					this.OnCategoryChanging(value);
-					this.SendPropertyChanging();
-					this._Category = value;
-					this.SendPropertyChanged("Category");
-					this.OnCategoryChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiptDate", DbType="Date NOT NULL")]
-		public System.DateTime ReceiptDate
-		{
-			get
-			{
-				return this._ReceiptDate;
-			}
-			set
-			{
-				if ((this._ReceiptDate != value))
-				{
-					this.OnReceiptDateChanging(value);
-					this.SendPropertyChanging();
-					this._ReceiptDate = value;
-					this.SendPropertyChanged("ReceiptDate");
-					this.OnReceiptDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="Date NOT NULL")]
-		public System.DateTime EndDate
-		{
-			get
-			{
-				return this._EndDate;
-			}
-			set
-			{
-				if ((this._EndDate != value))
-				{
-					this.OnEndDateChanging(value);
-					this.SendPropertyChanging();
-					this._EndDate = value;
-					this.SendPropertyChanged("EndDate");
-					this.OnEndDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_Categories", Storage="_DriversLicences", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public DriversLicences DriversLicences
-		{
-			get
-			{
-				return this._DriversLicences.Entity;
-			}
-			set
-			{
-				DriversLicences previousValue = this._DriversLicences.Entity;
-				if (((previousValue != value) 
-							|| (this._DriversLicences.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DriversLicences.Entity = null;
-						previousValue.Categories.Remove(this);
-					}
-					this._DriversLicences.Entity = value;
-					if ((value != null))
-					{
-						value.Categories.Add(this);
-						this._ID_DriverLicence = value.ID_DriverLicence;
-					}
-					else
-					{
-						this._ID_DriverLicence = default(string);
-					}
-					this.SendPropertyChanged("DriversLicences");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this.GetTable<Categories>();
 			}
 		}
 	}
@@ -525,11 +326,11 @@ namespace CarSharingApplication.SQL.Linq
 		
 		private int _ID_User;
 		
-		private EntitySet<Categories> _Categories;
-		
 		private EntitySet<TrafficAccidents> _TrafficAccidents;
 		
 		private EntitySet<Rentals> _Rentals;
+		
+		private EntitySet<Categories> _Categories;
 		
 		private EntityRef<Rental_Users> _Rental_Users;
 		
@@ -547,9 +348,9 @@ namespace CarSharingApplication.SQL.Linq
 		
 		public DriversLicences()
 		{
-			this._Categories = new EntitySet<Categories>(new Action<Categories>(this.attach_Categories), new Action<Categories>(this.detach_Categories));
 			this._TrafficAccidents = new EntitySet<TrafficAccidents>(new Action<TrafficAccidents>(this.attach_TrafficAccidents), new Action<TrafficAccidents>(this.detach_TrafficAccidents));
 			this._Rentals = new EntitySet<Rentals>(new Action<Rentals>(this.attach_Rentals), new Action<Rentals>(this.detach_Rentals));
+			this._Categories = new EntitySet<Categories>(new Action<Categories>(this.attach_Categories), new Action<Categories>(this.detach_Categories));
 			this._Rental_Users = default(EntityRef<Rental_Users>);
 			OnCreated();
 		}
@@ -618,19 +419,6 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_Categories", Storage="_Categories", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence")]
-		public EntitySet<Categories> Categories
-		{
-			get
-			{
-				return this._Categories;
-			}
-			set
-			{
-				this._Categories.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_TrafficAccidents", Storage="_TrafficAccidents", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence")]
 		public EntitySet<TrafficAccidents> TrafficAccidents
 		{
@@ -654,6 +442,19 @@ namespace CarSharingApplication.SQL.Linq
 			set
 			{
 				this._Rentals.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_Categories", Storage="_Categories", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence")]
+		public EntitySet<Categories> Categories
+		{
+			get
+			{
+				return this._Categories;
+			}
+			set
+			{
+				this._Categories.Assign(value);
 			}
 		}
 		
@@ -711,18 +512,6 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		private void attach_Categories(Categories entity)
-		{
-			this.SendPropertyChanging();
-			entity.DriversLicences = this;
-		}
-		
-		private void detach_Categories(Categories entity)
-		{
-			this.SendPropertyChanging();
-			entity.DriversLicences = null;
-		}
-		
 		private void attach_TrafficAccidents(TrafficAccidents entity)
 		{
 			this.SendPropertyChanging();
@@ -742,6 +531,18 @@ namespace CarSharingApplication.SQL.Linq
 		}
 		
 		private void detach_Rentals(Rentals entity)
+		{
+			this.SendPropertyChanging();
+			entity.DriversLicences = null;
+		}
+		
+		private void attach_Categories(Categories entity)
+		{
+			this.SendPropertyChanging();
+			entity.DriversLicences = this;
+		}
+		
+		private void detach_Categories(Categories entity)
 		{
 			this.SendPropertyChanging();
 			entity.DriversLicences = null;
@@ -3464,6 +3265,205 @@ namespace CarSharingApplication.SQL.Linq
 					this._LogString = value;
 					this.SendPropertyChanged("LogString");
 					this.OnLogStringChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Categories")]
+	public partial class Categories : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Category;
+		
+		private string _ID_DriverLicence;
+		
+		private string _Category;
+		
+		private System.DateTime _ReceiptDate;
+		
+		private System.DateTime _EndDate;
+		
+		private EntityRef<DriversLicences> _DriversLicences;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_CategoryChanging(int value);
+    partial void OnID_CategoryChanged();
+    partial void OnID_DriverLicenceChanging(string value);
+    partial void OnID_DriverLicenceChanged();
+    partial void OnCategoryChanging(string value);
+    partial void OnCategoryChanged();
+    partial void OnReceiptDateChanging(System.DateTime value);
+    partial void OnReceiptDateChanged();
+    partial void OnEndDateChanging(System.DateTime value);
+    partial void OnEndDateChanged();
+    #endregion
+		
+		public Categories()
+		{
+			this._DriversLicences = default(EntityRef<DriversLicences>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Category", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_Category
+		{
+			get
+			{
+				return this._ID_Category;
+			}
+			set
+			{
+				if ((this._ID_Category != value))
+				{
+					this.OnID_CategoryChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Category = value;
+					this.SendPropertyChanged("ID_Category");
+					this.OnID_CategoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DriverLicence", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string ID_DriverLicence
+		{
+			get
+			{
+				return this._ID_DriverLicence;
+			}
+			set
+			{
+				if ((this._ID_DriverLicence != value))
+				{
+					if (this._DriversLicences.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_DriverLicenceChanging(value);
+					this.SendPropertyChanging();
+					this._ID_DriverLicence = value;
+					this.SendPropertyChanged("ID_DriverLicence");
+					this.OnID_DriverLicenceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Category", DbType="Char(3) NOT NULL", CanBeNull=false)]
+		public string Category
+		{
+			get
+			{
+				return this._Category;
+			}
+			set
+			{
+				if ((this._Category != value))
+				{
+					this.OnCategoryChanging(value);
+					this.SendPropertyChanging();
+					this._Category = value;
+					this.SendPropertyChanged("Category");
+					this.OnCategoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiptDate", DbType="Date NOT NULL")]
+		public System.DateTime ReceiptDate
+		{
+			get
+			{
+				return this._ReceiptDate;
+			}
+			set
+			{
+				if ((this._ReceiptDate != value))
+				{
+					this.OnReceiptDateChanging(value);
+					this.SendPropertyChanging();
+					this._ReceiptDate = value;
+					this.SendPropertyChanged("ReceiptDate");
+					this.OnReceiptDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="Date NOT NULL")]
+		public System.DateTime EndDate
+		{
+			get
+			{
+				return this._EndDate;
+			}
+			set
+			{
+				if ((this._EndDate != value))
+				{
+					this.OnEndDateChanging(value);
+					this.SendPropertyChanging();
+					this._EndDate = value;
+					this.SendPropertyChanged("EndDate");
+					this.OnEndDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_Categories", Storage="_DriversLicences", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public DriversLicences DriversLicences
+		{
+			get
+			{
+				return this._DriversLicences.Entity;
+			}
+			set
+			{
+				DriversLicences previousValue = this._DriversLicences.Entity;
+				if (((previousValue != value) 
+							|| (this._DriversLicences.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DriversLicences.Entity = null;
+						previousValue.Categories.Remove(this);
+					}
+					this._DriversLicences.Entity = value;
+					if ((value != null))
+					{
+						value.Categories.Add(this);
+						this._ID_DriverLicence = value.ID_DriverLicence;
+					}
+					else
+					{
+						this._ID_DriverLicence = default(string);
+					}
+					this.SendPropertyChanged("DriversLicences");
 				}
 			}
 		}

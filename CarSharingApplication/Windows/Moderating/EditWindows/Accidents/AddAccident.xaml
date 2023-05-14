@@ -25,7 +25,7 @@
         <ScrollViewer Grid.Row="0">
             <StackPanel>
                 <Expander Header="Тип аварии" MinHeight="100" MaxHeight="200" IsExpanded="True">
-                    <ListView x:Name="AccidentTypes" Padding="0" Foreground="Black" Background="Red" FontSize="15" FontWeight="DemiBold" Margin="40 0" HorizontalAlignment="Left">
+                    <ListView SelectionMode="Multiple" x:Name="AccidentTypes" Width="450" Padding="0" Foreground="Black" Background="Red" FontSize="15" FontWeight="DemiBold" Margin="40 0" HorizontalAlignment="Left">
                     </ListView>
                 </Expander>
                 <TextBox Text="{Binding Path=text_, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="DescriptionText" MaxHeight="300" MaxLines="20" MaxWidth="430" Margin="10 0 10 0" MaxLength="1000" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Описание аварии">

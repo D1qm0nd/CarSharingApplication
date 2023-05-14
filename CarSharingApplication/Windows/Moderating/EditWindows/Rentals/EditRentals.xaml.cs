@@ -22,7 +22,8 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
             try
             {
                 InitializeComponent();
-                db = new CarSharingDataBaseClassesDataContext(ConnectionString);
+                App.AppDataBase.OpenConnection(ConnectionString);
+                db = App.AppDataBase.Context;
                 dt_grid.ItemsSource = db.Rentals;
             }
             catch (SqlException sqlex)
@@ -36,6 +37,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Rentals
         {
             try
             {
+                App.AppDataBase.CloseConnection();
                 db.SubmitChanges();
             }
             catch (SqlException sqlex)
