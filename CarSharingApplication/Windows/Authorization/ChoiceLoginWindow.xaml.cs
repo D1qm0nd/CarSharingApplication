@@ -3,6 +3,7 @@ using CarSharingApplication.SQL.Linq;
 using CarSharingApplication.Windows.VehicleRent;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace CarSharingApplication.Windows.Authorization
     /// </summary>
     public partial class ChoiceLoginWindow : Window
     {
+        private string connectionString { get; set; } = App.GetConnectionString("USERHANDLERConnection");
         private UsersINFO User;
         public ChoiceLoginWindow(ref UsersINFO user, Window owner)
         {
@@ -42,7 +44,10 @@ namespace CarSharingApplication.Windows.Authorization
 
         private void UserLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            User = App.GetScalarResult<UsersINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")), $"SELECT * FROM UsersINFO WHERE ID_User = {User.ID_User}");
+            //new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection"))
+            App.AppDataBase.OpenConnection(connectionString);
+            User = App.AppDataBase.GetScalarResult<UsersINFO>($"SELECT * FROM UsersINFO WHERE ID_User = {User.ID_User}");
+            App.AppDataBase.CloseConnection();
             if (User.RentStatus != "в поездке")
             {
                 var CarSelWindow = new CarSelector(ref User, this, true);

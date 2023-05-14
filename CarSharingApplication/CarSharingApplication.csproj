@@ -155,6 +155,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataBase.cs" />
     <Compile Include="DBEncryptor.cs" />
     <Compile Include="DriverLicencesCategories.cs" />
     <Compile Include="ImageConvertor.cs" />

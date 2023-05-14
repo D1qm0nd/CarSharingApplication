@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="VehicleRental" Class="CarSharingDataBaseClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=LOCALHOST;Initial Catalog=VehicleRental;Integrated Security=True" SettingsObjectName="CarSharingApplication.Properties.Settings" SettingsPropertyName="VehicleRentalConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Categories" Member="Categories">
-    <Type Name="Categories">
-      <Column Name="ID_Category" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ID_DriverLicence" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Category" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
-      <Column Name="ReceiptDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Association Name="DriversLicences_Categories" Member="DriversLicences" ThisKey="ID_DriverLicence" OtherKey="ID_DriverLicence" Type="DriversLicences" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-RN9AI5Q;Initial Catalog=VehicleRental;Integrated Security=True" SettingsObjectName="CarSharingApplication.Properties.Settings" SettingsPropertyName="VehicleRentalConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Classes" Member="Classes">
     <Type Name="Classes">
       <Column Name="Class" Type="System.String" DbType="Char(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -21,9 +11,9 @@
       <Column Name="ID_DriverLicence" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ReceiptDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="ID_User" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="DriversLicences_Categories" Member="Categories" ThisKey="ID_DriverLicence" OtherKey="ID_DriverLicence" Type="Categories" />
       <Association Name="DriversLicences_TrafficAccidents" Member="TrafficAccidents" ThisKey="ID_DriverLicence" OtherKey="ID_DriverLicence" Type="TrafficAccidents" />
       <Association Name="DriversLicences_Rentals" Member="Rentals" ThisKey="ID_DriverLicence" OtherKey="ID_DriverLicence" Type="Rentals" />
+      <Association Name="DriversLicences_Categories" Member="Categories" ThisKey="ID_DriverLicence" OtherKey="ID_DriverLicence" Type="Categories" />
       <Association Name="Rental_Users_DriversLicences" Member="Rental_Users" ThisKey="ID_User" OtherKey="ID_User" Type="Rental_Users" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
@@ -181,6 +171,16 @@
     <Type Name="Vehicle_Rental_logs">
       <Column Name="ID_Log" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="LogString" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Categories" Member="Categories">
+    <Type Name="Categories">
+      <Column Name="ID_Category" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_DriverLicence" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
+      <Column Name="ReceiptDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="DriversLicences_Categories" Member="DriversLicences" ThisKey="ID_DriverLicence" OtherKey="ID_DriverLicence" Type="DriversLicences" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>

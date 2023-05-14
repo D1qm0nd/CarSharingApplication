@@ -20,6 +20,7 @@ namespace CarSharingApplication
     public partial class Autorization : Window
     {
         private int condition = 0;
+        private string connectionString { get; set; } = App.GetConnectionString("USERHANDLERConnection");
         public Autorization()
         {
             App._Logger.options = new JsonSerializerOptions
@@ -28,6 +29,7 @@ namespace CarSharingApplication
             };
             //App._Logger.LogPath = Environment.CurrentDirectory + @"\logs.json";
             App._Logger.LogPath = App.GetConnectionString("LoggerConnection");
+            App.AppDataBase.createfunc += App.ContextCreateFunc;
             InitializeComponent();
             Reg_Button_Click(null, null);
         }
@@ -63,20 +65,19 @@ namespace CarSharingApplication
                         string encLogin = PasswordEncryptor.EncryptString(Login.Text);
                         string encPass = PasswordEncryptor.EncryptString(Password.Password);
 
-                        if (App.GetQueryResult<string>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
-                            $"SELECT UserLogin FROM Rental_Users WHERE UserLogin = '{encLogin}'").Count > 0)
+                        App.AppDataBase.OpenConnection(connectionString);
+                        if (App.AppDataBase.GetQueryResult<string>($"SELECT UserLogin FROM Rental_Users WHERE UserLogin = '{encLogin}'").Count > 0)
                         {
                             MessageBox.Show("Логин занят");
                             return;
                         }
 
-                        var answ = App.GetScalarResult<int>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
-                                        $"SELECT [dbo].CheckExistingUser('{encLogin}','{encPass}')");
+                        var answ = App.AppDataBase.GetScalarResult<int>($"SELECT [dbo].CheckExistingUser('{encLogin}','{encPass}')");
 
                         if (answ == -1)
                         {
 
-                            if (App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
+                            if (App.AppDataBase.ExecuteNonQuery(
                                 "EXEC REG_USER " +
                                 $"@UserLogin='{encLogin}', " +
                                 $"@UserEmail='{Email.Text}', " +
@@ -85,6 +86,7 @@ namespace CarSharingApplication
                                 $"@UserName='{UserName.Text}', " +
                                 $"@UserMiddleName='{UserMiddleName.Text}'," +
                                 $"@UserBirthDayDate='{BDatePicker.Text}'"))
+                            
                             registered = true;
                         }
                         else if (answ > 0)
@@ -106,6 +108,7 @@ namespace CarSharingApplication
                 {
                     if (registered)
                         Login_Button_Click(null, null);
+                    App.AppDataBase.CloseConnection();
                 }
             }
         }
@@ -126,12 +129,14 @@ namespace CarSharingApplication
                         string encLogin = PasswordEncryptor.EncryptString(Login.Text);
                         string encPass = PasswordEncryptor.EncryptString(Password.Password);
 
-                        var answ = App.GetScalarResult<int>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
+                        //new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection"))
+                        App.AppDataBase.OpenConnection(connectionString);
+                        var answ = App.AppDataBase.GetScalarResult<int>(
                                            $"SELECT [dbo].CheckExistingUser('{encLogin}','{encPass}')");
                         if (answ > 0)
                         {
                             this.Visibility = Visibility.Collapsed;
-                            UsersINFO UserInfo = App.GetScalarResult<UsersINFO>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")), $"SELECT * FROM UsersINFO WHERE ID_User = {answ}");
+                            UsersINFO UserInfo = App.AppDataBase.GetScalarResult<UsersINFO>($"SELECT * FROM UsersINFO WHERE ID_User = {answ}");
                             if (UserInfo != null)
                             {
                                 App._Logger.Log(new LogMessage((ulong)UserInfo.ID_User, this.Title, "Вошёл в систему", null, null));
@@ -161,7 +166,9 @@ namespace CarSharingApplication
                                 ClearFields();
                             }
                         } 
-                        else App._Logger.Log(new LogMessage(null,this.Title,"Пользователь не найден","ошибка авторизации",LogType.UserMistake));
+                        else 
+                            App._Logger.Log(new LogMessage(null,this.Title,"Пользователь не найден","ошибка авторизации",LogType.UserMistake));
+                        App.AppDataBase.CloseConnection();
                     }
                 }
                 #endregion

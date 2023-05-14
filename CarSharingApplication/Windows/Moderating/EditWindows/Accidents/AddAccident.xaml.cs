@@ -11,6 +11,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Accidents
     /// </summary>
     public partial class AddAccident : Window
     {
+        private string connectionString { get; set; } = App.GetConnectionString("CARHANDLERConnection");
         private bool _ShowOwner = true;
         private RentalsINFO _Rental;
         private UsersINFO _User;
@@ -22,7 +23,10 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Accidents
             _ShowOwner = showOwner;
             this.Owner = owner;
             InitializeComponent();
-            var _types = App.GetQueryResult<string>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")), "SELECT TrafficAccidentTypeName FROM TrafficAccidentTypes");
+            App.AppDataBase.OpenConnection(connectionString);
+            var _types = App.AppDataBase.GetQueryResult<string>("SELECT TrafficAccidentTypeName FROM TrafficAccidentTypes");
+            App.AppDataBase.CloseConnection();
+
             AccidentTypes.ItemsSource = _types; 
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -64,15 +68,21 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Accidents
                     return;
                 }
             }
-
-            App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("CARHANDLERConnection")),
-                "INSERT TrafficAccidents VALUES" +
-                $"({_Rental.ID_Vehicle}, " +
-                $"'{_Rental.ID_DriverLicence}', " +
-                $"{App.GetScalarResult<int>(new CarSharingDataBaseClassesDataContext (App.GetConnectionString("CARHANDLERConnection")),
-                    $"SELECT ID_TrafficAccidentType FROM TrafficAccidentTypes WHERE TrafficAccidentTypeName = '{AccidentTypes.SelectedValue}'")}, " +
-                $"0, " +
-                $"'{DescriptionText.Text}')");
+            App.AppDataBase.OpenConnection(connectionString);
+            foreach (var item in AccidentTypes.SelectedItems)
+                App.AppDataBase.ExecuteNonQuery(
+                    "BEGIN TRANSACTION " +
+                    "INSERT TrafficAccidents VALUES" +
+                    $"({_Rental.ID_Vehicle}, " +
+                    $"'{_Rental.ID_DriverLicence}', " +
+                    $"{App.AppDataBase.GetScalarResult<int>(
+                        "SELECT ID_TrafficAccidentType " +
+                        "FROM TrafficAccidentTypes " +
+                        $"WHERE TrafficAccidentTypeName = '{item}'")}, " +
+                    $"0, " +
+                    $"'{DescriptionText.Text}')" +
+                    "COMMIT TRANSACTION");
+            App.AppDataBase.CloseConnection();
             MessageBox.Show("Данные отправлены.");
             this.Close();
         }

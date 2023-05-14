@@ -74,25 +74,23 @@ namespace CarSharingApplication
         /// <param name="vehData"></param>
         private void GetVehiclesData(VehiclesData vehData)
         {
-            vehData.vehClasses = App.GetQueryResult<string>(
-            new CarSharingDataBaseClassesDataContext(ConnectionString),
-            "SELECT DISTINCT TRIM(LOWER(Class)) FROM VehiclesINFO");
+            App.AppDataBase.OpenConnection(ConnectionString);
+            vehData.vehClasses = App.AppDataBase.GetQueryResult<string>(
+            "SELECT DISTINCT TRIM(UPPER(Class)) FROM VehiclesINFO");
             vehData.vehClasses.Add("*ВСЕ");
             ListViewVehicleClasses.ItemsSource = vehData.vehClasses.OrderBy(str => str);
 
-            vehData.vehBrands = App.GetQueryResult<string>(
-            new CarSharingDataBaseClassesDataContext(ConnectionString),
-            "SELECT DISTINCT TRIM(LOWER(Brand)) FROM VehiclesINFO");
+            vehData.vehBrands = App.AppDataBase.GetQueryResult<string>(
+            "SELECT DISTINCT TRIM(UPPER(Brand)) FROM VehiclesINFO");
+
             vehData.vehBrands.Add("*ВСЕ");
             ListViewVehicleBrands.ItemsSource = vehData.vehBrands.OrderBy(str => str);
 
-            vehData.vehiclesInfoList = App.GetQueryResult<VehiclesINFO>(
-            new CarSharingDataBaseClassesDataContext(ConnectionString),
+            vehData.vehiclesInfoList = App.AppDataBase.GetQueryResult<VehiclesINFO>(
             "SELECT * FROM VehiclesWithStatus ('доступен')");
             vehData.vehiclesInfoList = OrderByPricePerHourDesc(vehData.vehiclesInfoList);
 
-            vehData.vehCategories = App.GetQueryResult<string>(
-            new CarSharingDataBaseClassesDataContext(ConnectionString),
+            vehData.vehCategories = App.AppDataBase.GetQueryResult<string>(
             "SELECT DISTINCT TRIM(Vehicle_Category) FROM VehiclesINFO");
             vehData.vehCategories.Add("*ВСЕ");
             ListViewVehicleCategories.ItemsSource = vehData.vehCategories.OrderBy(str => str);
@@ -197,12 +195,12 @@ namespace CarSharingApplication
 #nullable enable
             if ((string)ListViewVehicleClasses.SelectedValue != "*ВСЕ" && ListViewVehicleClasses.SelectedValue != null)
             {
-                newvehicleslist = newvehicleslist.Where(vehicle => vehicle.Class.ToLower().TrimEnd() == (string)ListViewVehicleClasses.SelectedValue).ToList();
+                newvehicleslist = newvehicleslist.Where(vehicle => vehicle.Class.ToUpper().TrimEnd() == (string)ListViewVehicleClasses.SelectedValue).ToList();
             }
 #nullable enable
             if ((string)ListViewVehicleBrands.SelectedValue != "*ВСЕ" && ListViewVehicleBrands.SelectedValue != null)
             {
-                newvehicleslist = newvehicleslist.Where(vehicle => vehicle.Brand.ToLower().TrimEnd() == (string)ListViewVehicleBrands.SelectedValue).ToList();
+                newvehicleslist = newvehicleslist.Where(vehicle => vehicle.Brand.ToUpper().TrimEnd() == (string)ListViewVehicleBrands.SelectedValue).ToList();
             }
 #nullable enable
             if ((string)ListViewVehicleCategories.SelectedValue != "*ВСЕ" && ListViewVehicleCategories.SelectedValue != null)
@@ -304,16 +302,19 @@ namespace CarSharingApplication
         {
             var instance = VehiclesData.GetInstance;
             var index = instance.vehiclesInfoList.IndexOf(instance.selectedVehicle);
-            if ((index + 1 > 0) && (index < instance.vehiclesInfoList.Count-1))
-            {
-                instance.selectedVehicle = instance.vehiclesInfoList[index + 1];
+            if (instance.vehiclesInfoList.Count > 0)
+            { 
+                if ((index < instance.vehiclesInfoList.Count-1))
+                {
+                    instance.selectedVehicle = instance.vehiclesInfoList[index + 1];
+                }
+                else 
+                {
+                    instance.selectedVehicle = instance.vehiclesInfoList[0];
+                }
+                SetVehicleInfo(instance.selectedVehicle, ZeroVehiclesByCriteries);
+                RentalMap.MoveCursorToVehicleOnMap(instance.selectedVehicle);
             }
-            else 
-            {
-                instance.selectedVehicle = instance.vehiclesInfoList[0];
-            }
-            SetVehicleInfo(instance.selectedVehicle, ZeroVehiclesByCriteries);
-            RentalMap.MoveCursorToVehicleOnMap(instance.selectedVehicle);
         }
     }
 }

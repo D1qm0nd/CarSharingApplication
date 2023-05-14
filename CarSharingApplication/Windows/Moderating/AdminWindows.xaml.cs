@@ -15,11 +15,14 @@ namespace CarSharingApplication
     public partial class AdminWindow : Window
     {
         private UsersINFO _User;
+        private string conncetionString { get; set; } = App.GetConnectionString("DBADMINConnection");
         public AdminWindow(ref UsersINFO user)
         {
             _User = user;
             InitializeComponent();
-            TotalPrice.Content = $"{App.GetScalarResult<decimal>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("DBADMINConnection")),"SELECT SUM(TotalPrice) FROM RentalsINFO")} ₽";
+            App.AppDataBase.OpenConnection(conncetionString);
+            TotalPrice.Content = $"{App.AppDataBase.GetScalarResult<decimal>("SELECT SUM(TotalPrice) FROM RentalsINFO")} ₽";
+            App.AppDataBase.CloseConnection();
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
         }
 

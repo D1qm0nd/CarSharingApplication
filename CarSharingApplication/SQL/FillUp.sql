@@ -37,49 +37,592 @@ GO
 
 	USE VehicleRental
 	INSERT DriversLicences VALUES
-	('7878443544', '2012-03-12' ,2),
-	('8989834554', '2016-04-12' ,1),
-	('5463454355', '2017-09-12' ,2),
-	('5434523453', '2018-05-12' ,1)
+	('7878443544', '2012-03-12' ,1),
+	('8989834554', '2016-04-12' ,2),
+	('5463454355', '2017-09-12' ,3),
+	('5434523453', '2018-05-12' ,4),
+	('3317733078', '2022-04-08', 5),
+	('0238573913', '2022-11-04', 6),
+	('4348856822', '2021-03-17', 7),
+	('5808466282', '2019-08-13', 8),
+	('2004572607', '2019-11-03', 9),
+	('5984045667', '2021-09-06', 10),
+	('5492232307', '2017-11-27', 11),
+	('6803262584', '2019-07-22', 12),
+	('7901264374', '2017-09-22', 13),
+	('2367355897', '2022-05-23', 14),
+	('4531785002', '2023-06-03', 15),
+	('3917476879', '2019-12-07', 16),
+	('5646226654', '2019-09-19', 17),
+	('8949489429', '2023-07-16', 18),
+	('0803883483', '2020-05-27', 19),
+	('0400226437', '2021-04-26', 20),
+	('1185992697', '2017-01-07', 21),
+	('0935049134', '2020-11-02', 22),
+	('1465177079', '2021-06-20', 23),
+	('0005587950', '2020-06-25', 24),
+	('4790923517', '2023-09-09', 25),
+	('1295210502', '2021-11-07', 26),
+	('5030944030', '2020-06-01', 27),
+	('9072590828', '2017-09-06', 28)
 
-GO 
-	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='B', @ReceiptDate = '2012-09-12', @EndDate = '2022-09-12'
-GO	
-	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='B', @ReceiptDate = '2016-04-12', @EndDate = '2026-04-12'
-GO	
-	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='A', @ReceiptDate = '2017-08-12', @EndDate = '2027-08-12'
-GO	
-	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='B', @ReceiptDate = '2018-05-12', @EndDate = '2028-05-12'
-
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='A', @ReceiptDate = '2018-02-02', @EndDate = '2029-10-30'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='B', @ReceiptDate = '2017-01-16', @EndDate = '2022-09-22'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='BE', @ReceiptDate = '2019-06-22', @EndDate = '2022-12-08'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='B1', @ReceiptDate = '2019-01-22', @EndDate = '2022-09-18'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='CE', @ReceiptDate = '2019-11-27', @EndDate = '2031-03-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='C1', @ReceiptDate = '2017-08-02', @EndDate = '2028-02-26'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='D1', @ReceiptDate = '2019-09-24', @EndDate = '2021-06-24'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='M', @ReceiptDate = '2017-11-28', @EndDate = '2031-10-04'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='Tm', @ReceiptDate = '2019-10-04', @EndDate = '2029-09-20'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='Tb', @ReceiptDate = '2018-05-09', @EndDate = '2026-08-18'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='A', @ReceiptDate = '2018-06-13', @EndDate = '2027-11-30'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='A1', @ReceiptDate = '2018-08-15', @EndDate = '2023-11-12'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='B', @ReceiptDate = '2019-12-14', @EndDate = '2026-04-15'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='B1', @ReceiptDate = '2018-06-11', @EndDate = '2025-04-06'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='C1E', @ReceiptDate = '2018-03-15', @EndDate = '2022-08-10'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='Tb', @ReceiptDate = '2018-03-27', @EndDate = '2022-06-07'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='B', @ReceiptDate = '2018-08-29', @EndDate = '2032-07-18'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='BE', @ReceiptDate = '2018-03-27', @EndDate = '2026-09-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='B1', @ReceiptDate = '2018-06-02', @EndDate = '2033-06-12'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='C', @ReceiptDate = '2018-04-15', @EndDate = '2029-02-25'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='DE', @ReceiptDate = '2017-12-20', @EndDate = '2020-11-24'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='D1', @ReceiptDate = '2018-12-15', @EndDate = '2020-06-15'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='M', @ReceiptDate = '2018-05-10', @EndDate = '2029-10-21'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='Tb', @ReceiptDate = '2017-06-09', @EndDate = '2030-08-28'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='A', @ReceiptDate = '2019-11-17', @EndDate = '2028-05-03'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='B', @ReceiptDate = '2019-03-25', @EndDate = '2030-03-06'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='BE', @ReceiptDate = '2018-12-12', @EndDate = '2025-04-08'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='B1', @ReceiptDate = '2017-09-09', @EndDate = '2023-09-12'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='C1', @ReceiptDate = '2019-05-25', @EndDate = '2022-03-13'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='D', @ReceiptDate = '2018-04-17', @EndDate = '2032-04-14'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='DE', @ReceiptDate = '2017-09-23', @EndDate = '2032-02-22'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='M', @ReceiptDate = '2018-04-11', @EndDate = '2024-05-06'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='Tm', @ReceiptDate = '2017-08-06', @EndDate = '2029-07-09'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7878443544', @Category='Tb', @ReceiptDate = '2018-06-09', @EndDate = '2024-10-20'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='A', @ReceiptDate = '2019-03-05', @EndDate = '2020-10-29'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='B', @ReceiptDate = '2019-08-10', @EndDate = '2024-11-23'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='BE', @ReceiptDate = '2019-11-30', @EndDate = '2024-12-22'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='C', @ReceiptDate = '2019-08-21', @EndDate = '2021-02-08'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='CE', @ReceiptDate = '2017-02-08', @EndDate = '2020-08-29'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='C1', @ReceiptDate = '2017-07-28', @EndDate = '2032-10-07'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='D', @ReceiptDate = '2017-03-27', @EndDate = '2021-03-16'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='D1E', @ReceiptDate = '2019-08-18', @EndDate = '2028-04-08'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='M', @ReceiptDate = '2018-12-11', @EndDate = '2021-12-15'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='Tm', @ReceiptDate = '2019-04-21', @EndDate = '2027-10-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8989834554', @Category='Tb', @ReceiptDate = '2017-08-12', @EndDate = '2026-09-11'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='B', @ReceiptDate = '2019-01-04', @EndDate = '2031-02-21'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='BE', @ReceiptDate = '2019-10-13', @EndDate = '2028-09-26'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='B1', @ReceiptDate = '2017-01-06', @EndDate = '2027-10-23'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='C1', @ReceiptDate = '2017-08-01', @EndDate = '2023-12-08'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='DE', @ReceiptDate = '2018-08-28', @EndDate = '2025-04-14'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='M', @ReceiptDate = '2017-03-25', @EndDate = '2023-02-01'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5463454355', @Category='Tm', @ReceiptDate = '2017-04-06', @EndDate = '2026-05-12'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='B', @ReceiptDate = '2019-05-24', @EndDate = '2020-11-18'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='BE', @ReceiptDate = '2018-11-28', @EndDate = '2023-06-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='C', @ReceiptDate = '2019-10-06', @EndDate = '2022-10-13'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='C1', @ReceiptDate = '2019-06-18', @EndDate = '2030-06-26'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='D', @ReceiptDate = '2017-12-12', @EndDate = '2028-01-14'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='D1', @ReceiptDate = '2018-06-27', @EndDate = '2033-12-26'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='D1E', @ReceiptDate = '2018-06-14', @EndDate = '2022-09-29'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='M', @ReceiptDate = '2018-10-26', @EndDate = '2023-06-19'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='Tm', @ReceiptDate = '2017-06-06', @EndDate = '2030-07-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='Tb', @ReceiptDate = '2017-08-18', @EndDate = '2028-06-20'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3317733078', @Category='A', @ReceiptDate = '2017-11-02', @EndDate = '2028-12-30'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3317733078', @Category='A1', @ReceiptDate = '2018-04-25', @EndDate = '2024-03-04'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3317733078', @Category='B', @ReceiptDate = '2019-07-10', @EndDate = '2033-06-20'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3317733078', @Category='CE', @ReceiptDate = '2017-03-23', @EndDate = '2022-03-05'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3317733078', @Category='C1E', @ReceiptDate = '2019-02-16', @EndDate = '2026-09-14'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3317733078', @Category='DE', @ReceiptDate = '2018-12-17', @EndDate = '2026-01-07'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3317733078', @Category='D1', @ReceiptDate = '2019-10-30', @EndDate = '2024-02-07'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3317733078', @Category='D1E', @ReceiptDate = '2018-12-12', @EndDate = '2022-11-09'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0238573913', @Category='B', @ReceiptDate = '2019-08-03', @EndDate = '2023-02-20'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0238573913', @Category='BE', @ReceiptDate = '2017-09-17', @EndDate = '2026-08-10'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0238573913', @Category='B1', @ReceiptDate = '2018-08-21', @EndDate = '2030-11-09'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0238573913', @Category='C1', @ReceiptDate = '2017-09-28', @EndDate = '2032-04-05'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0238573913', @Category='DE', @ReceiptDate = '2018-04-20', @EndDate = '2032-10-12'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0238573913', @Category='D1', @ReceiptDate = '2017-11-26', @EndDate = '2031-07-28'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0238573913', @Category='D1E', @ReceiptDate = '2019-10-25', @EndDate = '2028-11-03'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0238573913', @Category='M', @ReceiptDate = '2017-02-23', @EndDate = '2024-04-17'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0238573913', @Category='Tm', @ReceiptDate = '2017-11-29', @EndDate = '2023-02-23'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0238573913', @Category='Tb', @ReceiptDate = '2018-06-19', @EndDate = '2021-12-29'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4348856822', @Category='A1', @ReceiptDate = '2017-11-03', @EndDate = '2028-03-26'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4348856822', @Category='B', @ReceiptDate = '2017-12-05', @EndDate = '2021-08-03'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4348856822', @Category='BE', @ReceiptDate = '2018-06-30', @EndDate = '2023-10-25'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4348856822', @Category='B1', @ReceiptDate = '2017-09-07', @EndDate = '2024-01-24'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4348856822', @Category='C', @ReceiptDate = '2018-06-16', @EndDate = '2032-03-20'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4348856822', @Category='CE', @ReceiptDate = '2018-06-01', @EndDate = '2033-10-25'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4348856822', @Category='C1', @ReceiptDate = '2017-11-07', @EndDate = '2030-06-29'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4348856822', @Category='Tm', @ReceiptDate = '2018-07-10', @EndDate = '2033-10-05'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4348856822', @Category='Tb', @ReceiptDate = '2017-01-29', @EndDate = '2024-01-24'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5808466282', @Category='A', @ReceiptDate = '2019-10-07', @EndDate = '2031-05-01'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5808466282', @Category='B', @ReceiptDate = '2017-08-27', @EndDate = '2028-03-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5808466282', @Category='BE', @ReceiptDate = '2018-03-21', @EndDate = '2032-05-25'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5808466282', @Category='C', @ReceiptDate = '2019-04-15', @EndDate = '2028-07-01'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5808466282', @Category='CE', @ReceiptDate = '2019-01-20', @EndDate = '2030-06-09'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5808466282', @Category='D1', @ReceiptDate = '2017-02-13', @EndDate = '2022-12-06'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5808466282', @Category='D1E', @ReceiptDate = '2017-01-27', @EndDate = '2024-07-24'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5808466282', @Category='Tb', @ReceiptDate = '2018-10-30', @EndDate = '2030-10-15'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2004572607', @Category='A', @ReceiptDate = '2019-11-20', @EndDate = '2030-05-04'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2004572607', @Category='B', @ReceiptDate = '2019-03-11', @EndDate = '2029-06-07'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2004572607', @Category='B1', @ReceiptDate = '2017-04-30', @EndDate = '2026-06-21'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2004572607', @Category='C', @ReceiptDate = '2017-06-05', @EndDate = '2022-04-24'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2004572607', @Category='CE', @ReceiptDate = '2019-11-04', @EndDate = '2033-07-29'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2004572607', @Category='C1', @ReceiptDate = '2018-08-28', @EndDate = '2026-08-05'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2004572607', @Category='C1E', @ReceiptDate = '2018-01-27', @EndDate = '2031-08-25'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2004572607', @Category='DE', @ReceiptDate = '2018-02-17', @EndDate = '2020-09-06'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2004572607', @Category='D1', @ReceiptDate = '2019-04-18', @EndDate = '2020-04-09'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2004572607', @Category='M', @ReceiptDate = '2017-03-20', @EndDate = '2032-09-23'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5984045667', @Category='B', @ReceiptDate = '2017-06-22', @EndDate = '2028-10-17'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5984045667', @Category='BE', @ReceiptDate = '2019-10-27', @EndDate = '2033-06-20'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5984045667', @Category='B1', @ReceiptDate = '2018-02-08', @EndDate = '2027-04-22'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5984045667', @Category='C', @ReceiptDate = '2018-01-20', @EndDate = '2028-03-29'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5984045667', @Category='CE', @ReceiptDate = '2017-05-19', @EndDate = '2028-07-15'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5984045667', @Category='Tm', @ReceiptDate = '2017-01-25', @EndDate = '2023-11-03'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5492232307', @Category='A', @ReceiptDate = '2018-12-11', @EndDate = '2023-07-18'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5492232307', @Category='A1', @ReceiptDate = '2019-10-08', @EndDate = '2027-02-06'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5492232307', @Category='B', @ReceiptDate = '2017-03-02', @EndDate = '2023-04-21'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5492232307', @Category='CE', @ReceiptDate = '2019-02-23', @EndDate = '2024-11-16'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5492232307', @Category='C1', @ReceiptDate = '2017-02-20', @EndDate = '2030-04-02'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5492232307', @Category='DE', @ReceiptDate = '2017-02-17', @EndDate = '2023-05-25'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5492232307', @Category='D1', @ReceiptDate = '2018-05-14', @EndDate = '2028-01-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5492232307', @Category='D1E', @ReceiptDate = '2019-10-03', @EndDate = '2030-07-09'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5492232307', @Category='Tm', @ReceiptDate = '2017-06-05', @EndDate = '2026-07-09'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5492232307', @Category='Tb', @ReceiptDate = '2019-09-06', @EndDate = '2025-04-28'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='6803262584', @Category='A', @ReceiptDate = '2019-07-30', @EndDate = '2033-07-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='6803262584', @Category='B', @ReceiptDate = '2018-04-24', @EndDate = '2031-09-02'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='6803262584', @Category='C', @ReceiptDate = '2018-04-17', @EndDate = '2026-08-02'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='6803262584', @Category='C1', @ReceiptDate = '2019-08-02', @EndDate = '2027-07-11'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='6803262584', @Category='C1E', @ReceiptDate = '2017-11-18', @EndDate = '2025-09-08'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='6803262584', @Category='DE', @ReceiptDate = '2017-08-25', @EndDate = '2026-04-14'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='6803262584', @Category='M', @ReceiptDate = '2018-05-26', @EndDate = '2027-04-21'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='6803262584', @Category='Tb', @ReceiptDate = '2019-04-29', @EndDate = '2024-08-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7901264374', @Category='A', @ReceiptDate = '2017-10-09', @EndDate = '2022-04-29'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7901264374', @Category='A1', @ReceiptDate = '2019-05-19', @EndDate = '2025-07-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7901264374', @Category='B', @ReceiptDate = '2017-07-20', @EndDate = '2020-10-26'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7901264374', @Category='C', @ReceiptDate = '2019-07-27', @EndDate = '2027-08-23'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7901264374', @Category='CE', @ReceiptDate = '2017-09-15', @EndDate = '2029-10-20'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7901264374', @Category='C1', @ReceiptDate = '2017-05-19', @EndDate = '2029-11-17'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7901264374', @Category='DE', @ReceiptDate = '2019-09-05', @EndDate = '2031-11-29'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7901264374', @Category='D1', @ReceiptDate = '2017-11-20', @EndDate = '2029-10-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='7901264374', @Category='D1E', @ReceiptDate = '2018-05-06', @EndDate = '2031-05-14'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2367355897', @Category='A1', @ReceiptDate = '2018-10-20', @EndDate = '2030-08-01'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2367355897', @Category='B', @ReceiptDate = '2018-10-03', @EndDate = '2021-04-12'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2367355897', @Category='C', @ReceiptDate = '2018-03-13', @EndDate = '2024-06-10'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2367355897', @Category='CE', @ReceiptDate = '2019-09-27', @EndDate = '2025-07-01'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2367355897', @Category='C1', @ReceiptDate = '2019-01-18', @EndDate = '2022-07-22'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2367355897', @Category='D', @ReceiptDate = '2019-12-11', @EndDate = '2020-01-05'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2367355897', @Category='D1', @ReceiptDate = '2018-06-23', @EndDate = '2022-10-14'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2367355897', @Category='Tm', @ReceiptDate = '2017-09-21', @EndDate = '2032-12-06'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='2367355897', @Category='Tb', @ReceiptDate = '2019-06-01', @EndDate = '2027-02-22'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4531785002', @Category='A1', @ReceiptDate = '2018-08-23', @EndDate = '2026-06-18'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4531785002', @Category='B', @ReceiptDate = '2019-03-10', @EndDate = '2020-12-13'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4531785002', @Category='DE', @ReceiptDate = '2019-02-08', @EndDate = '2022-05-06'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4531785002', @Category='D1', @ReceiptDate = '2018-12-16', @EndDate = '2025-06-07'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4531785002', @Category='D1E', @ReceiptDate = '2018-01-11', @EndDate = '2032-12-28'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4531785002', @Category='M', @ReceiptDate = '2017-06-20', @EndDate = '2023-08-30'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4531785002', @Category='Tm', @ReceiptDate = '2019-08-24', @EndDate = '2030-01-22'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3917476879', @Category='A', @ReceiptDate = '2017-02-03', @EndDate = '2030-02-01'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3917476879', @Category='B', @ReceiptDate = '2019-01-04', @EndDate = '2033-02-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3917476879', @Category='BE', @ReceiptDate = '2018-06-14', @EndDate = '2028-04-11'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3917476879', @Category='C1E', @ReceiptDate = '2019-09-11', @EndDate = '2022-06-01'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3917476879', @Category='D1E', @ReceiptDate = '2019-04-13', @EndDate = '2026-01-30'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3917476879', @Category='M', @ReceiptDate = '2018-11-10', @EndDate = '2024-11-17'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='3917476879', @Category='Tb', @ReceiptDate = '2017-11-24', @EndDate = '2024-03-28'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5646226654', @Category='B', @ReceiptDate = '2017-10-28', @EndDate = '2022-02-20'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5646226654', @Category='B1', @ReceiptDate = '2018-02-02', @EndDate = '2024-02-07'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5646226654', @Category='C', @ReceiptDate = '2019-07-28', @EndDate = '2026-08-13'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5646226654', @Category='CE', @ReceiptDate = '2019-09-04', @EndDate = '2033-10-04'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5646226654', @Category='C1', @ReceiptDate = '2017-08-15', @EndDate = '2024-11-16'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5646226654', @Category='C1E', @ReceiptDate = '2018-08-19', @EndDate = '2024-03-01'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5646226654', @Category='D1', @ReceiptDate = '2018-02-23', @EndDate = '2025-09-14'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8949489429', @Category='B', @ReceiptDate = '2018-12-05', @EndDate = '2027-11-28'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8949489429', @Category='BE', @ReceiptDate = '2018-09-12', @EndDate = '2026-01-12'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8949489429', @Category='B1', @ReceiptDate = '2017-12-03', @EndDate = '2020-01-15'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8949489429', @Category='D', @ReceiptDate = '2017-09-02', @EndDate = '2026-01-17'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8949489429', @Category='DE', @ReceiptDate = '2017-04-02', @EndDate = '2027-06-02'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8949489429', @Category='D1', @ReceiptDate = '2018-11-02', @EndDate = '2033-05-17'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8949489429', @Category='D1E', @ReceiptDate = '2017-10-04', @EndDate = '2031-05-29'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='8949489429', @Category='M', @ReceiptDate = '2019-05-16', @EndDate = '2020-03-17'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0803883483', @Category='B', @ReceiptDate = '2019-04-19', @EndDate = '2025-11-30'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0803883483', @Category='BE', @ReceiptDate = '2018-09-03', @EndDate = '2029-01-19'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0803883483', @Category='B1', @ReceiptDate = '2017-10-02', @EndDate = '2021-04-26'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0803883483', @Category='CE', @ReceiptDate = '2018-07-24', @EndDate = '2026-06-28'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0803883483', @Category='D1E', @ReceiptDate = '2017-09-09', @EndDate = '2027-12-05'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0803883483', @Category='Tb', @ReceiptDate = '2017-01-18', @EndDate = '2030-06-09'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0400226437', @Category='B', @ReceiptDate = '2018-08-01', @EndDate = '2030-02-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0400226437', @Category='C', @ReceiptDate = '2017-02-28', @EndDate = '2024-11-13'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0400226437', @Category='CE', @ReceiptDate = '2017-03-17', @EndDate = '2022-07-02'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0400226437', @Category='C1', @ReceiptDate = '2017-03-23', @EndDate = '2026-12-16'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0400226437', @Category='C1E', @ReceiptDate = '2018-12-10', @EndDate = '2029-09-16'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0400226437', @Category='DE', @ReceiptDate = '2019-04-11', @EndDate = '2020-03-10'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0400226437', @Category='M', @ReceiptDate = '2018-08-23', @EndDate = '2029-05-18'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1185992697', @Category='A1', @ReceiptDate = '2018-05-25', @EndDate = '2028-12-08'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1185992697', @Category='B', @ReceiptDate = '2017-09-11', @EndDate = '2020-11-16'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1185992697', @Category='C', @ReceiptDate = '2017-03-07', @EndDate = '2022-04-16'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1185992697', @Category='D', @ReceiptDate = '2017-04-20', @EndDate = '2022-04-24'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1185992697', @Category='D1', @ReceiptDate = '2017-10-27', @EndDate = '2021-12-05'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1185992697', @Category='M', @ReceiptDate = '2017-06-18', @EndDate = '2033-03-11'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1185992697', @Category='Tb', @ReceiptDate = '2019-10-28', @EndDate = '2031-02-20'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0935049134', @Category='A', @ReceiptDate = '2018-07-21', @EndDate = '2023-10-20'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0935049134', @Category='B', @ReceiptDate = '2017-03-05', @EndDate = '2021-12-21'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0935049134', @Category='B1', @ReceiptDate = '2019-03-11', @EndDate = '2023-06-06'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0935049134', @Category='CE', @ReceiptDate = '2018-05-08', @EndDate = '2026-05-08'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0935049134', @Category='C1E', @ReceiptDate = '2019-10-15', @EndDate = '2024-04-08'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0935049134', @Category='D', @ReceiptDate = '2017-06-18', @EndDate = '2020-09-11'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0935049134', @Category='D1', @ReceiptDate = '2017-07-16', @EndDate = '2027-11-11'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0935049134', @Category='Tm', @ReceiptDate = '2019-06-08', @EndDate = '2030-10-30'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0935049134', @Category='Tb', @ReceiptDate = '2017-07-18', @EndDate = '2031-07-10'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1465177079', @Category='A', @ReceiptDate = '2018-02-28', @EndDate = '2021-08-07'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1465177079', @Category='A1', @ReceiptDate = '2018-12-02', @EndDate = '2022-07-04'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1465177079', @Category='B', @ReceiptDate = '2018-03-13', @EndDate = '2022-06-20'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1465177079', @Category='BE', @ReceiptDate = '2017-09-11', @EndDate = '2029-12-06'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1465177079', @Category='B1', @ReceiptDate = '2017-03-25', @EndDate = '2024-03-04'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1465177079', @Category='CE', @ReceiptDate = '2018-02-12', @EndDate = '2031-08-14'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1465177079', @Category='D', @ReceiptDate = '2019-03-10', @EndDate = '2023-08-26'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1465177079', @Category='DE', @ReceiptDate = '2018-02-27', @EndDate = '2028-09-23'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1465177079', @Category='Tm', @ReceiptDate = '2019-09-23', @EndDate = '2022-01-23'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0005587950', @Category='A1', @ReceiptDate = '2019-10-13', @EndDate = '2033-07-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0005587950', @Category='B', @ReceiptDate = '2017-07-25', @EndDate = '2025-12-10'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0005587950', @Category='CE', @ReceiptDate = '2017-11-18', @EndDate = '2030-04-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0005587950', @Category='C1E', @ReceiptDate = '2017-10-18', @EndDate = '2031-08-29'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0005587950', @Category='D1', @ReceiptDate = '2019-09-28', @EndDate = '2025-02-14'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0005587950', @Category='D1E', @ReceiptDate = '2019-12-21', @EndDate = '2023-09-21'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0005587950', @Category='M', @ReceiptDate = '2017-05-29', @EndDate = '2030-03-22'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='0005587950', @Category='Tm', @ReceiptDate = '2019-07-01', @EndDate = '2026-03-16'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4790923517', @Category='A', @ReceiptDate = '2019-10-11', @EndDate = '2027-02-21'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4790923517', @Category='B', @ReceiptDate = '2019-06-22', @EndDate = '2026-03-13'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4790923517', @Category='C', @ReceiptDate = '2017-01-04', @EndDate = '2032-05-22'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4790923517', @Category='C1', @ReceiptDate = '2019-07-06', @EndDate = '2029-03-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4790923517', @Category='D1', @ReceiptDate = '2019-12-22', @EndDate = '2031-10-26'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='4790923517', @Category='M', @ReceiptDate = '2017-07-03', @EndDate = '2021-10-13'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1295210502', @Category='A', @ReceiptDate = '2017-03-14', @EndDate = '2033-11-23'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1295210502', @Category='A1', @ReceiptDate = '2018-03-24', @EndDate = '2031-08-24'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1295210502', @Category='B', @ReceiptDate = '2018-04-11', @EndDate = '2031-04-17'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1295210502', @Category='B1', @ReceiptDate = '2018-02-25', @EndDate = '2028-01-22'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1295210502', @Category='D', @ReceiptDate = '2018-06-09', @EndDate = '2023-02-17'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1295210502', @Category='D1E', @ReceiptDate = '2019-08-17', @EndDate = '2028-06-25'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='1295210502', @Category='Tb', @ReceiptDate = '2017-03-19', @EndDate = '2033-03-25'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5030944030', @Category='A', @ReceiptDate = '2017-09-16', @EndDate = '2032-01-23'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5030944030', @Category='B', @ReceiptDate = '2019-09-23', @EndDate = '2023-07-19'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5030944030', @Category='B1', @ReceiptDate = '2017-01-27', @EndDate = '2023-09-26'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5030944030', @Category='C', @ReceiptDate = '2019-01-06', @EndDate = '2027-08-27'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5030944030', @Category='C1', @ReceiptDate = '2018-08-01', @EndDate = '2028-02-24'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5030944030', @Category='D', @ReceiptDate = '2017-07-14', @EndDate = '2032-12-29'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5030944030', @Category='M', @ReceiptDate = '2018-06-02', @EndDate = '2030-11-22'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='9072590828', @Category='B', @ReceiptDate = '2019-08-12', @EndDate = '2030-06-26'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='9072590828', @Category='CE', @ReceiptDate = '2018-08-28', @EndDate = '2030-06-21'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='9072590828', @Category='DE', @ReceiptDate = '2017-01-29', @EndDate = '2029-02-07'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='9072590828', @Category='D1', @ReceiptDate = '2017-11-01', @EndDate = '2026-10-07'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='9072590828', @Category='D1E', @ReceiptDate = '2017-02-04', @EndDate = '2031-07-01'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='9072590828', @Category='M', @ReceiptDate = '2019-09-19', @EndDate = '2031-05-11'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='A', @ReceiptDate = '2018-02-14', @EndDate = '2032-10-18'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='A1', @ReceiptDate = '2017-10-23', @EndDate = '2032-03-06'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='B', @ReceiptDate = '2017-04-03', @EndDate = '2022-08-26'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='B1', @ReceiptDate = '2017-07-18', @EndDate = '2023-11-09'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='C', @ReceiptDate = '2018-09-29', @EndDate = '2025-11-08'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='CE', @ReceiptDate = '2018-01-28', @EndDate = '2032-07-12'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='C1', @ReceiptDate = '2018-07-27', @EndDate = '2021-10-30'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='C1E', @ReceiptDate = '2019-06-21', @EndDate = '2023-03-18'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='D', @ReceiptDate = '2019-03-11', @EndDate = '2024-01-10'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='D1E', @ReceiptDate = '2019-11-20', @EndDate = '2026-06-06'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='M', @ReceiptDate = '2019-10-12', @EndDate = '2027-05-01'
+GO
+	EXEC AddCategoryToDriverLicence @DriverLicence_ID='5434523453', @Category='Tb', @ReceiptDate = '2019-11-14', @EndDate = '2032-04-30'
 GO
 	USE VehicleRental
 	INSERT Classes (Class) VALUES
-		('Бизнес'),
-		('Эконом'),
-		('Стандарт'),
-		('Спорт'),
-		('Комфорт')
+		('A'),
+		('B'),
+		('C'),
+		('D'),
+		('E'),
+		('F'),
+		('S'),
+		('M'),
+		('J')
 
 GO
 	USE VehicleRental
 
 	INSERT Vehicles VALUES
-		(146.0,	'Бизнес',		NULL),
-		(70.9,		'Эконом',		NULL),
-		(97.8,		'Стандарт',		NULL),
-		(230.1,	'Спорт',		NULL),
-		(170.5,	'Бизнес',		NULL),
-		(130.54,	'Комфорт',		NULL),
-		(150.23,	'Стандарт',		NULL),
-		(168.1,	'Спорт',		NULL),
-		(146.4,	'Бизнес',		NULL),
-		(70.32,		'Эконом',		NULL),
-		(97.12,		'Стандарт',		NULL),
-		(230.43,	'Спорт',		NULL),
-		(170.85,	'Бизнес',		NULL),
-		(130.5,	'Комфорт',		NULL),
-		(150.7,	'Стандарт',		NULL),
-		(160.3,	'Спорт',		NULL)
+		(146.0,		'E',		NULL),
+		(70.9,		'C',		NULL),
+		(97.8,		'C',		NULL),
+		(230.1,		'S',		NULL),
+		(170.5,		'E',		NULL),
+		(130.54,	'F',		NULL),
+		(150.23,	'C',		NULL),
+		(168.1,		'S',		NULL),
+		(146.4,		'E',		NULL),
+		(70.32,		'C',		NULL),
+		(97.12,		'C',		NULL),
+		(230.43,	'S',		NULL),
+		(170.85,	'E',		NULL),
+		(130.5,		'F',		NULL),
+		(150.7,		'C',		NULL),
+		(160.3,		'S',		NULL)
 
 GO
 	USE VehicleRental
@@ -107,36 +650,68 @@ GO
 
 	USE VehicleRental
 	INSERT VehicleCoordinates VALUES
-	(1,		37.628310329218785,		55.783562264913726,		@YESTERDAY),
-	(2,		37.62496863084447,		55.77968409403343,		@YESTERDAY),
-	(3,		37.60988838934319,		55.771697388745174,		@YESTERDAY),
-	(4,		37.63784366449218,		55.80634960848172,		@YESTERDAY),
-	(5,		37.64351317690392,		55.75885752573489,		@YESTERDAY),
-	(6,		37.650152394817006,		55.79318597301102,		@YESTERDAY),
-	(7,		37.64382665235103,		55.767218191902586,		@YESTERDAY),
-	(8,		37.631991990646156,		55.754565408911894,		@YESTERDAY),
-	(9,		37.60679471254363,		55.76311732978595,		@YESTERDAY),
-	(10,	37.60886742602116,		55.7729332932597,		@YESTERDAY),
-	(11,	37.61629258607224,		55.79079936483427,		@YESTERDAY),
-	(12,	37.62285999673869,		55.81227549857955,		@YESTERDAY),
-	(13,	37.61330564444986,		55.79759711490164,		@YESTERDAY),
-	(14,	37.64433763929462,		55.81538058758365,		@YESTERDAY),
-	(15,	37.644649815415036,		55.79659831246247,		@YESTERDAY),
-	(16,	37.612114115149616,		55.78038656884442,		@YESTERDAY)
+	(1, 37.65969877564661,	 55.80001973263291,  @YESTERDAY),
+	(2, 37.544516153076316,	 55.7579959930967,	 @YESTERDAY),
+	(3, 37.584456835886364,  55.7913021325439,	 @YESTERDAY),
+	(4, 37.5689722097825,	 55.74051592208222,  @YESTERDAY),
+	(5, 37.60193018065875,	 55.80793570262627,  @YESTERDAY),
+	(6, 37.55830206231448,	 55.71349013586292,  @YESTERDAY),
+	(7, 37.641429626959805,  55.80616272516173,  @YESTERDAY),
+	(8, 37.53702387528526,	 55.81168233164703,  @YESTERDAY),
+	(9, 37.64558712827913,	 55.72541023633203,  @YESTERDAY),
+	(10, 37.63319433750586,  55.719222025729785, @YESTERDAY),
+	(11, 37.65613956077303,  55.72629940265382,  @YESTERDAY),
+	(12, 37.65091597151423,  55.75521685925605,  @YESTERDAY),
+	(13, 37.5560665187472,	 55.81395742719647,  @YESTERDAY),
+	(14, 37.63698071835554,  55.791731094384204, @YESTERDAY),
+	(15, 37.56201790936684,	 55.762119475325605, @YESTERDAY),
+	(16, 37.641333205056235, 55.75209733039342, @YESTERDAY)
 
 GO
 	USE VehicleRental
 	INSERT Rentals VALUES
-	('8989834554', 1 , GETDATE(), '12:00', 2, 123.7, 'досрочная'),
-	('5463454355', 3 , GETDATE(), '15:00', 3, 304.2, 'досрочная'),
-	('8989834554', 4 , GETDATE(), '12:00', 1, 855.2, 'досрочная'),
-	('5463454355', 7 , GETDATE(), '15:00', 3, 1610.7, 'стандартная')
+	('7878443544', 6,	GETDATE(), '14:57:29', 4,	394.37,		'досрочная'),
+	('8989834554', 16,	GETDATE(), '02:45:25', 12,	197.16,		'досрочная'),
+	('5463454355', 10,	GETDATE(), '12:06:14', 14,	107.47,		'досрочная'),
+	('5434523453', 14,	GETDATE(), '10:00:54', 24,	606.23,		'досрочная'),
+	('3317733078', 1,	GETDATE(), '19:49:47', 3,	414.9,		'стандартаная'),
+	('0238573913', 1,	GETDATE(), '17:20:02', 11,	757.2,		'досрочная'),
+	('4348856822', 6,	GETDATE(), '10:38:24', 24,	508.35,		'досрочная'),
+	('5808466282', 11,	GETDATE(), '23:25:17', 23,	651.57,		'досрочная'),
+	('2004572607', 13,	GETDATE(), '05:39:43', 10,	389.14,		'стандартаная'),
+	('5984045667', 12,	GETDATE(), '20:15:34', 21,	708.81,		'досрочная'),
+	('5492232307', 5,	GETDATE(), '09:31:57', 13,	280.36,		'досрочная'),
+	('6803262584', 2,	GETDATE(), '16:41:41', 1,	644.86,		'досрочная'),
+	('7901264374', 13,	GETDATE(), '04:31:50', 21,	363.46,		'досрочная'),
+	('2367355897', 2,	GETDATE(), '18:23:25', 3,	431.43,		'стандартаная'),
+	('4531785002', 4,	GETDATE(), '04:53:11', 13,	312.6,		'досрочная'),
+	('3917476879', 7,	GETDATE(), '13:36:39', 1,	156.7,		'стандартаная'),
+	('5646226654', 1,	GETDATE(), '22:54:20', 9,	523.06,		'стандартаная'),
+	('8949489429', 3,	GETDATE(), '15:31:20', 1,	354.46,		'стандартаная'),
+	('0803883483', 8,	GETDATE(), '11:26:37', 9,	594.67,		'досрочная'),
+	('0400226437', 15,	GETDATE(), '22:04:52', 7,	650.58,		'стандартаная'),
+	('1185992697', 6,	GETDATE(), '12:29:47', 2,	291.64,		'стандартаная'),
+	('0935049134', 5,	GETDATE(), '22:05:19', 11,	436.33,		'стандартаная'),
+	('1465177079', 9,	GETDATE(), '11:07:07', 8,	280.58,		'стандартаная'),
+	('0005587950', 15,	GETDATE(), '20:16:29', 23,	300.26,		'досрочная'),
+	('4790923517', 12,	GETDATE(), '15:49:28', 22,	672.24,		'досрочная'),
+	('1295210502', 3,	GETDATE(), '19:54:35', 6,	157.17,		'досрочная'),
+	('5030944030', 4,	GETDATE(), '18:31:57', 9,	570.14,		'стандартаная'),
+	('9072590828', 12,	GETDATE(), '04:50:31', 1,	665.47,		'досрочная')
+
 
 GO
 	USE VehicleRental
 	INSERT TrafficAccidentTypes VALUES 
-	('ДТП'),
-	('Неисправность тс, не связанная с пользователем')
+	('Столкновение'),
+	('Опрокидывание'),
+	('Наезд на препятствие'),
+	('Наезд на пешехода'),
+	('Наезд на велосипедиста'),
+	('Наезд на животное'),
+	('Наезд на гужевой транспорт'),
+	('Наезд на стоящее транспортное средство'),
+	('Прочие происшествия')
 
 GO 
 	USE VehicleRental

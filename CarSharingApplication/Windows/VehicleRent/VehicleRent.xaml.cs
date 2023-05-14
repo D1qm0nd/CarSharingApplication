@@ -14,6 +14,8 @@ namespace CarSharingApplication.Windows.VehicleRent
         private UsersINFO _User;
         private VehiclesINFO _Vehicle;
         private bool _ShowOwner;
+        private string DLHANDLERconnectionString { get; set; } = App.GetConnectionString("DLHANDLERConnection");
+        private string USERHANDLERconnectionString { get; set; } = App.GetConnectionString("USERHANDLERConnection");
         public VehicleRent(UsersINFO user, VehiclesINFO Vehicle, Window owner, bool showOwner)
         {
             _ShowOwner = showOwner;
@@ -43,8 +45,10 @@ namespace CarSharingApplication.Windows.VehicleRent
                 this.Close();
                 return;
             }
-            List<string> categories = App.GetQueryResult<string>(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("DLHANDLERConnection")),
-                     $"SELECT Category FROM [dbo].GetDriverLicenceCategories ('{_User.ID_DriverLicence}')");
+            App.AppDataBase.OpenConnection(DLHANDLERconnectionString);
+            List<string> categories = App.AppDataBase.GetQueryResult<string>(
+                $"SELECT Category FROM [dbo].GetDriverLicenceCategories ('{_User.ID_DriverLicence}')");
+            App.AppDataBase.CloseConnection();
             if (categories == null)
                 return;
             if (!(categories.Contains(_Vehicle.Vehicle_Category.Trim().ToLower())))
@@ -52,7 +56,8 @@ namespace CarSharingApplication.Windows.VehicleRent
                 MessageBox.Show("У вас отсутсвтует нужная категория в водительском удостоверении");
                 return;
             }
-            if (App.ExecuteNonQuery(new CarSharingDataBaseClassesDataContext(App.GetConnectionString("USERHANDLERConnection")),
+            App.AppDataBase.OpenConnection(USERHANDLERconnectionString);
+            if (App.AppDataBase.ExecuteNonQuery(
                 "EXEC Rent " +
                 $"@DriverLicence = '{_User.ID_DriverLicence}', " +
                 $"@ID_Vehicle = {_Vehicle.ID_Vehicle}, " +
@@ -76,6 +81,7 @@ namespace CarSharingApplication.Windows.VehicleRent
                     this.Visibility = Visibility.Collapsed;
                 }
             }
+            App.AppDataBase.CloseConnection();
         }
         /// <summary>
         /// Закрытие окна
