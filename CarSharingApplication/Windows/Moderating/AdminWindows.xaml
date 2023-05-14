@@ -53,14 +53,14 @@
                 </Grid.RowDefinitions>
                 <Button x:Name="UsersButton" Margin="1" Grid.Column="0" Grid.Row="0" Click="UsersButton_Click">Пользователи</Button>
                 <Button x:Name="DriverLicencesButton" Margin="1" Grid.Column="0" Grid.Row="1" Click="DriverLicencesButton_Click">Водительские Удостоверения</Button>
-                <Button x:Name="DriverLicencesCategoriesButton" Margin="1" Grid.Column="0" Grid.Row="2" Click="DriverLicencesCategoriesButton_Click">Категории Водителького Удостоверения</Button>
+                <Button x:Name="DriverLicencesCategoriesButton" Margin="1" Grid.Column="0" Grid.Row="2" Click="DriverLicencesCategoriesButton_Click">Категории Вод. Удостоверений</Button>
                 <Button x:Name="VehicleClassesButon" Margin="1" Grid.Column="0" Grid.Row="3" Click="VehicleClassesButon_Click">Классы Транспортных Средств</Button>
                 <Button x:Name="VehiclesButton" Margin="1" Grid.Column="0" Grid.Row="4" Click="VehiclesButton_Click">Транспортные средства</Button>
                 <Button x:Name="VehiclesPassportsButton" Margin="1" Grid.Column="1" Grid.Row="0" Click="VehiclesPassportsButton_Click">Свидетельства регистрации ТС</Button>
                 <Button x:Name="VehicleCoordinatesButton" Margin="1" Grid.Column="1" Grid.Row="1" Click="VehicleCoordinatesButton_Click">Координаты Транспортных Средств</Button>
                 <Button x:Name="TrafficAccidentsTypeButton" Margin="1" Grid.Column="1" Grid.Row="2" Click="TrafficAccidentsTypeButton_Click">Типы Аварийных случаев</Button>
                 <Button x:Name="TrafficAccidentsButton" Margin="1" Grid.Column="1" Grid.Row="3" Click="TrafficAccidentsButton_Click">Аварийные случаи</Button>
-                <Button x:Name="RentalsButton"  Margin="1" Grid.Column="1" Grid.Row="4" Click="RentalsButton_Click">Аренда</Button>
+                <Button x:Name="RentalsButton"  Margin="1" Grid.Column="1" Grid.Row="4" Click="RentalsButton_Click">Аренды</Button>
                 <Button x:Name="BackButton" VerticalAlignment="Bottom" Margin="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Background="Red" Click="ButtonBACK_Click">Выход</Button>
                 <Button x:Name="UsersINFO"  Margin="1" Grid.Column="2" Grid.Row="0" Click="UsersINFO_Click"  Background="Green" BorderBrush="DarkGreen">Информация о пользователях</Button>
                 <Button x:Name="DriversLicencesCategoriesINFO"  Margin="1" Grid.Column="2" Grid.Row="1" Click="DriversLicencesCategoriesINFO_Click" Background="Green" BorderBrush="DarkGreen" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Информация о категориях вод.удост</Button>

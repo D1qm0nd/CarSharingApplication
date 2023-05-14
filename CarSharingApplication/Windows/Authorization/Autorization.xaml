@@ -59,7 +59,7 @@
                         <RowDefinition MinHeight="60"/>
                     </Grid.RowDefinitions>
                     <Grid x:Name="LoginGrid" Grid.Row="0" Tag="0">
-                        <TextBox Text="{Binding login_, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="Login" Margin="20 0 20 0" Padding="0 6 0 5" CharacterCasing="Lower" KeyDown="Login_TextChanged" materialDesign:HintAssist.Hint="Имя для входа"/>
+                        <TextBox Text="{Binding login_, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="Login" Margin="20 0 20 0" Padding="0 6 0 5" CharacterCasing="Lower" materialDesign:HintAssist.Hint="Имя для входа"/>
                     </Grid>
                     <Grid x:Name="EmailGrid" Grid.Row="1" Tag="1">
                         <TextBox Text="{Binding email_, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="Email" Margin="20,0,20,0" Padding="0 6 0 5" CharacterCasing="Lower" Height="28" VerticalAlignment="Bottom" materialDesign:HintAssist.Hint="Почта"/>

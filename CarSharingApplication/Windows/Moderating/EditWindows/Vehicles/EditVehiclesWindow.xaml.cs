@@ -49,7 +49,6 @@ namespace CarSharingApplication
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            App.AppDataBase.CloseConnection();
             this.Owner.Visibility = Visibility.Visible;
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Перестал просматривать {this.Title}", null, LogType.UserAction));
         }

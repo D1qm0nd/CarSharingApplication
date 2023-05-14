@@ -233,10 +233,5 @@ namespace CarSharingApplication
             UserMiddleName.Clear();
             BDatePicker.Text = "";
         }
-
-        private void Login_TextChanged(object sender, KeyEventArgs e)
-        {
-
-        }
     }
 }

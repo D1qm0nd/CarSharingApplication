@@ -39,12 +39,12 @@ namespace CarSharingApplication.Validation
         private string _middlename = "";
 
 
-        public string login_ 
+        public string login_
         {
             get => _login;
-            set 
-            { 
-                _login = value; 
+            set
+            {
+                _login = value;
                 OnPropertyChanged(nameof(login_));
             }
         }
@@ -52,10 +52,10 @@ namespace CarSharingApplication.Validation
         public string email_
         {
             get => _email;
-            set 
-            { 
-                _email = value; 
-                OnPropertyChanged(nameof(email_)); 
+            set
+            {
+                _email = value;
+                OnPropertyChanged(nameof(email_));
             }
         }
 
@@ -90,8 +90,8 @@ namespace CarSharingApplication.Validation
             }
         }
 
-        public AuthValidation() 
-        { 
+        public AuthValidation()
+        {
             PropertyChanged += Validate;
         }
 
@@ -102,29 +102,29 @@ namespace CarSharingApplication.Validation
                 switch (e?.PropertyName)
                 {
                     case "login_":
-                        foreach (char c in Login.AsParallel())
-                            if (login_.Contains(c))
-                                login_ = login_.Trim(c);
+                        foreach (char c in Login)
+                            if (_login.Contains(c))
+                                _login = login_.Trim(c);
                         break;
                     case "email_":
-                        foreach (char c in Email.AsParallel())
-                            if (email_.Contains(c))
-                                email_ = email_.Trim(c);
+                        foreach (char c in Email)
+                            if (_email.Contains(c))
+                                _email = _email.Trim(c);
                         break;
                     case "surname_":
-                        foreach (char c in Name.AsParallel())
-                            if (middlename_.Contains(c))
-                                middlename_ = middlename_.Trim(c);
+                        foreach (char c in Name)
+                            if (_middlename.Contains(c))
+                                _middlename = _middlename.Trim(c);
                         break;
                     case "username_":
-                        foreach (char c in Name.AsParallel())
-                            if (username_.Contains(c))
-                                username_ = username_.Trim(c);
+                        foreach (char c in Name)
+                            if (_username.Contains(c))
+                                _username = _username.Trim(c);
                         break;
                     case "middlename_":
-                        foreach (char c in Name.AsParallel())
-                            if (middlename_.Contains(c))
-                                middlename_ = middlename_.Trim(c);
+                        foreach (char c in Name)
+                            if (_middlename.Contains(c))
+                                _middlename = _middlename.Trim(c);
                         break;
                     default:
                         break;
@@ -132,7 +132,7 @@ namespace CarSharingApplication.Validation
             }
             catch
             {
-                
+
             }
         }
     }
