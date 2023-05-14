@@ -1,11 +1,14 @@
 ﻿GO
 	PRINT '==================================База Данных======================================='
+
 	USE master
-		IF EXISTS(SELECT * FROM SYSOBJECTS WHERE lower(NAME) = LOWER('VehicleRental') AND TYPE = 'u')
+		IF EXISTS(SELECT * FROM sys.databases WHERE LOWER([name]) = LOWER(N'VehicleRental'))
 		BEGIN
+			ALTER DATABASE VehicleRental 
+				SET SINGLE_USER WITH ROLLBACK IMMEDIATE
 			DROP DATABASE VehicleRental
 			PRINT 'Дропнул БД'
-		END ELSE PRINT 'Error: Не удалось дропнуть БД'
+		END ELSE PRINT 'Базы Данных не существует'
 GO
 	IF EXISTS (SELECT * FROM master.INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = 'PROCEDURE' AND ROUTINE_NAME = 'CreateDataBase')
 	BEGIN
@@ -31,14 +34,19 @@ GO
 
 /*Создание БД*/
 GO 
-	EXEC CreateDataBase @DBName = 'VehicleRental', @DBPath = 'C:\Users\Public'
-	PRINT 'Создал БД'
-
+	IF NOT EXISTS(SELECT * FROM sys.databases WHERE LOWER([name]) = LOWER(N'VehicleRental'))
+	BEGIN
+		EXEC CreateDataBase @DBName = 'VehicleRental', @DBPath = 'C:\Users\Public'
+		PRINT 'Создал БД'
+	END
 /*Создание таблиц*/
+
+
+
 GO 
 	PRINT '==================================Таблицы======================================='
 	USE VehicleRental
-	
+
 	CREATE TABLE Vehicle_Rental_logs
 	(
 		ID_Log INT IDENTITY(1,1) NOT NULL,
@@ -64,11 +72,9 @@ GO
 	(
 		ID_Admin INT IDENTITY(1,1) NOT NULL,
 		ID_User INT NOT NULL
-		FOREIGN KEY (ID_User) REFERENCES Rental_Users (ID_User)
 	)
 
 	PRINT 'Создал Таблицу Rental_Admins'
-
 
 	CREATE TABLE DriversLicences
 	(
@@ -102,7 +108,6 @@ GO
 
 	PRINT 'Создал Таблицу Classes'
 
-
 	CREATE TABLE Vehicles 
 	(
 		ID_Vehicle INT IDENTITY(1,1) NOT NULL,
@@ -124,7 +129,6 @@ GO
 	)
 	PRINT 'Создал Таблицу VehicleCoordinates'
 
-	
 	CREATE TABLE Rentals
 	(
 		ID_Rental INT IDENTITY(1,1)  NOT NULL,
@@ -165,9 +169,6 @@ GO
 	)
 	PRINT 'Создал Таблицу TrafficAccidents'
 
-GO
-	USE VehicleRental
-
 	CREATE TABLE VehicleRegistrCertificates
 	(
 		CertificateSeries INT NOT NULL,
@@ -205,8 +206,20 @@ GO
 
 	
 /*Связи*/
+
 GO
 	PRINT '==================================Связи======================================='
+
+	USE VehicleRental
+
+		ALTER TABLE Rental_Admins
+		ADD CONSTRAINT FK_Rental_Admins_Rental_Users 
+			FOREIGN KEY (ID_User) REFERENCES Rental_Users (ID_User)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
+
+		PRINT 'Создал Ключ FK_Rental_Admins_Rental_Users'
+GO
 	USE VehicleRental
 
 	ALTER TABLE DriversLicences
