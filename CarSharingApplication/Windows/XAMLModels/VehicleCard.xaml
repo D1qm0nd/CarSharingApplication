@@ -21,7 +21,7 @@
         <StackPanel x:Name="InfoPanel">
             <Border CornerRadius="10" MinHeight="230"  Margin="3,3,3,0">
                 <Border.Background>
-                    <ImageBrush x:Name="CarPicture" ImageSource="../Images/NullImage2.png"/>
+                    <ImageBrush x:Name="CarPicture" ImageSource="../Images/NullImage2.png" Stretch="UniformToFill"/>
                 </Border.Background>
                 <!--<Image x:Name="CarPicture" Source="../Images/mustang.jpg"  />-->
             </Border>

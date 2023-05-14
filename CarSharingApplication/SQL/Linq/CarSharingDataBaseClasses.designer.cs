@@ -60,10 +60,13 @@ namespace CarSharingApplication.SQL.Linq
     partial void InsertVehicleRegistrCertificates(VehicleRegistrCertificates instance);
     partial void UpdateVehicleRegistrCertificates(VehicleRegistrCertificates instance);
     partial void DeleteVehicleRegistrCertificates(VehicleRegistrCertificates instance);
+    partial void InsertVehicle_Rental_logs(Vehicle_Rental_logs instance);
+    partial void UpdateVehicle_Rental_logs(Vehicle_Rental_logs instance);
+    partial void DeleteVehicle_Rental_logs(Vehicle_Rental_logs instance);
     #endregion
 		
 		public CarSharingDataBaseClassesDataContext() : 
-				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString2, mappingSource)
+				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -209,6 +212,14 @@ namespace CarSharingApplication.SQL.Linq
 			get
 			{
 				return this.GetTable<VehicleRegistrCertificates>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Vehicle_Rental_logs> Vehicle_Rental_logs
+		{
+			get
+			{
+				return this.GetTable<Vehicle_Rental_logs>();
 			}
 		}
 	}
@@ -3367,6 +3378,92 @@ namespace CarSharingApplication.SQL.Linq
 						this._ID_Vehicle = default(int);
 					}
 					this.SendPropertyChanged("Vehicles");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Vehicle_Rental_logs")]
+	public partial class Vehicle_Rental_logs : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Log;
+		
+		private string _LogString;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_LogChanging(int value);
+    partial void OnID_LogChanged();
+    partial void OnLogStringChanging(string value);
+    partial void OnLogStringChanged();
+    #endregion
+		
+		public Vehicle_Rental_logs()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Log", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_Log
+		{
+			get
+			{
+				return this._ID_Log;
+			}
+			set
+			{
+				if ((this._ID_Log != value))
+				{
+					this.OnID_LogChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Log = value;
+					this.SendPropertyChanged("ID_Log");
+					this.OnID_LogChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LogString", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string LogString
+		{
+			get
+			{
+				return this._LogString;
+			}
+			set
+			{
+				if ((this._LogString != value))
+				{
+					this.OnLogStringChanging(value);
+					this.SendPropertyChanging();
+					this._LogString = value;
+					this.SendPropertyChanged("LogString");
+					this.OnLogStringChanged();
 				}
 			}
 		}

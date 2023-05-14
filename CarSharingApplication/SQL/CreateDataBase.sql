@@ -38,6 +38,13 @@ GO
 GO 
 	PRINT '==================================Таблицы======================================='
 	USE VehicleRental
+	
+	CREATE TABLE Vehicle_Rental_logs
+	(
+		ID_Log INT IDENTITY(1,1) NOT NULL,
+		LogString NVARCHAR(MAX) NOT NULL
+		PRIMARY KEY (ID_Log)
+	)
 
 	CREATE TABLE Rental_Users
 	(
@@ -827,3 +834,9 @@ GO
 
 		
 		GRANT EXEC ON REG_USER TO DB_USER_USERHANDLER
+
+
+		CREATE LOGIN DBLOGGER WITH PASSWORD = 'LOGDATABASE'
+		CREATE USER LOGGER FOR LOGIN DBLOGGER
+
+		GRANT SELECT, INSERT ON Vehicle_Rental_Logs TO LOGGER

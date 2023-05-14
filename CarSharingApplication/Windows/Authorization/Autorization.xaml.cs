@@ -26,7 +26,8 @@ namespace CarSharingApplication
             {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
             };
-            App._Logger.LogPath = Environment.CurrentDirectory + @"\logs.json";
+            //App._Logger.LogPath = Environment.CurrentDirectory + @"\logs.json";
+            App._Logger.LogPath = App.GetConnectionString("LoggerConnection");
             InitializeComponent();
             Reg_Button_Click(null, null);
         }

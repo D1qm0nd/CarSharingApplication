@@ -168,6 +168,7 @@
     <Compile Include="Validation\AuthValidation.cs" />
     <Compile Include="Validation\CreditCardValidation.cs" />
     <Compile Include="Validation\DataPropertyChanged.cs" />
+    <Compile Include="Validation\DriverLicenceValidation.cs" />
     <Compile Include="Validation\TextBoxValidation.cs" />
     <Compile Include="VehicleRentalDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -13,10 +13,10 @@ namespace CarSharingApplication.Validation
         private string _date;
         private string _cvs;
 
-        public string cardnum_ 
+        public string cardnum_
         {
             get => _cardnum;
-            set 
+            set
             {
                 _cardnum = value;
                 OnPropertyChanged(nameof(cardnum_));
@@ -43,26 +43,21 @@ namespace CarSharingApplication.Validation
             }
         }
 
-        public CreditCardValidation() 
+        public CreditCardValidation()
         {
             PropertyChanged += Validation;
         }
 
         public void Validation(object sender, PropertyChangedEventArgs e)
         {
-            char[] digits = { '0', '1', '2',
-                               '3', '4', '5',
-                               '6', '7', '8',
-                                '9' };
-            
-            switch (e?.PropertyName) 
+            switch (e?.PropertyName)
             {
                 case "cardnum_":
                     foreach (char c in cardnum_)
                     {
-                        if (!digits.Append(' ').Contains(c)) 
+                        if (!(Char.IsDigit(c)) && !(c == ' '))
                             cardnum_ = cardnum_.Trim(c);
-                        
+
                     }
                     break;
                 case "date_":
@@ -72,14 +67,14 @@ namespace CarSharingApplication.Validation
                         date_ = date_.TrimEnd('/');
                     foreach (char c in date_)
                     {
-                        if (!digits.Append('/').Contains(c))
+                        if (!(Char.IsDigit(c)) && !(c == '/'))
                             date_ = date_.Trim(c);
                     }
                     break;
                 case "cvs_":
                     foreach (char c in cvs_)
                     {
-                        if (!digits.Contains(c))
+                        if (Char.IsDigit(c))
                             cvs_ = cvs_.Trim(c);
                     }
                     break;
