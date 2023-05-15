@@ -77,13 +77,13 @@ namespace CarSharingApplication
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Multiselect = false;
-            dialog.Filter = " |*.png| |*jpeg";
+            dialog.Filter = "|*| |*.png| |*jpeg| |*jpg";
             dialog.Title = "Выберите изображение Транспортного средства";
             dialog.FileOk += (f, e) => 
             {
                 if (dialog.FileName.Contains(".png"))
                     ((Vehicles)dt_grid.Items[dt_grid.SelectedIndex]).CarPicture = ImageConvertor.ImageToBytes(System.Drawing.Image.FromFile(dialog.FileName),ImageFormat.Png);
-                if (dialog.FileName.Contains(".jpeg"))
+                if (dialog.FileName.Contains(".jpeg") || dialog.FileName.Contains(".jpg"))
                     ((Vehicles)dt_grid.Items[dt_grid.SelectedIndex]).CarPicture = ImageConvertor.ImageToBytes(System.Drawing.Image.FromFile(dialog.FileName), ImageFormat.Jpeg);
             };
             dialog.ShowDialog();

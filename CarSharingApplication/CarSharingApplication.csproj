@@ -420,6 +420,7 @@
     <None Include="Documents\DATA.xlsx" />
     <None Include="Documents\Описание таблиц.xlsx" />
     <None Include="Documents\Пояснительная записка Разухин М.Н.docx" />
+    <None Include="Documents\Презентация Куросвая Работа Разухин Максим.pptx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -458,6 +459,17 @@
   <ItemGroup>
     <Content Include="SQL\CreateDataBase.sql" />
     <Content Include="SQL\FillUp.sql" />
+    <Resource Include="Windows\Images\Vehicles\b80dd69s-1920.jpeg" />
+    <Resource Include="Windows\Images\Vehicles\BMV X1 E84.jpg" />
+    <Resource Include="Windows\Images\Vehicles\Cayene.jpeg" />
+    <Resource Include="Windows\Images\Vehicles\KIA RIO.png" />
+    <Resource Include="Windows\Images\Vehicles\LADA RIVA.jpeg" />
+    <Resource Include="Windows\Images\Vehicles\mercedes-benz-e-class.jpeg" />
+    <Resource Include="Windows\Images\Vehicles\MERSEDES C_Class GRAY.png" />
+    <Resource Include="Windows\Images\Vehicles\OPEL ASTRA.jpeg" />
+    <Resource Include="Windows\Images\Vehicles\RENAULT SCENICII.jpeg" />
+    <Resource Include="Windows\Images\Vehicles\SKODA KODIAQ.png" />
+    <Resource Include="Windows\Images\Vehicles\SKODA OKTAVIA II.png" />
     <Resource Include="Windows\Images\Vehicles\TOYOTA-HILUX.jpeg" />
     <Resource Include="Windows\Images\Vehicles\aventador.png" />
     <Resource Include="Windows\Images\Vehicles\c_class.png" />

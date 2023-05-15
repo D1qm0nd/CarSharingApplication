@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CarSharingApplication"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Height="500" Width="1100"
+        Height="470" Width="1100"
         Closing="Window_Closing"
         ResizeMode="NoResize"
         Title="Аварийные случаи"
@@ -23,7 +23,7 @@
     </Window.Resources>
 
     <Grid>
-        <ScrollViewer MaxHeight="400" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer Height="400" VerticalAlignment="Top" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto">
             <DataGrid
                 ItemsSource="{Binding}"
                 AlternatingRowBackground="White"

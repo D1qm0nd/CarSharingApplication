@@ -13,7 +13,7 @@
         Title="Категории водительских удостоверений"
     >
     <Grid>
-        <ScrollViewer MaxHeight="400" VerticalAlignment="Top">
+        <ScrollViewer Height="400" VerticalAlignment="Top" HorizontalScrollBarVisibility="Visible">
             <DataGrid 
                 ItemsSource="{Binding}"
                 AlternatingRowBackground="White"
