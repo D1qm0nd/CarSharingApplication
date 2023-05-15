@@ -80,7 +80,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
                             MessageBox.Show($"Что-то пошло не так, проверьте введённые поля связанных с категорией {category.Name}");
                             return;
                         }
-
+                        App.AppDataBase.OpenConnection(USERHANDLERconnectionString);
                         if (!App.AppDataBase.ExecuteNonQuery(
                             $"EXEC AddCategoryToDriverLicence " +
                             $"@DriverLicence_ID='{uDriverLicence.Text}', " +
@@ -88,7 +88,7 @@ namespace CarSharingApplication.Windows.Moderating.EditWindows.Users
                             $"@ReceiptDate = '{category.ReceiptDate}', " +
                             $"@EndDate = '{category.EndDate}'"))
                         {
-                            MessageBox.Show("Ошибка добавления категории водительского удостоверения");
+                            MessageBox.Show($"Ошибка добавления категории {category.Name} водительского удостоверения");
                             return;
                         }
                         else 

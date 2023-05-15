@@ -10,6 +10,7 @@
         ResizeMode="NoResize"
         Title="Окно информации о пользователях"
         Icon="../../Images/icon.jpeg"
+        WindowStartupLocation="CenterScreen"
     >
     <Grid>
         <ScrollViewer MaxHeight="430" MaxWidth="850" VerticalAlignment="Top" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">

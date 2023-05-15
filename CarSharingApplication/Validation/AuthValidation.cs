@@ -14,7 +14,7 @@ namespace CarSharingApplication.Validation
                                            '%', '[', ']', '{',
                                            '}', '-', '^', '~',
                                            '`', '№', '&', '*',
-                                           '\'', '(', ')' , ';', '+', ' ' };
+                                           '\'', '(', ')' , ';', '+', ' ', '<', '>' };
         private char[] Login = new char[] {'@', ',', '.', '|',
                                            ' ', '\\', '/', '!',
                                            '?', '#', '"', '$',
@@ -22,7 +22,7 @@ namespace CarSharingApplication.Validation
                                            '}', '-', '^', '~',
                                            '`', '№', '&', '*',
                                            '\'', '(', ')' , ';',
-                                           ':', '=', '+', ' '};
+                                           ':', '=', '+', ' ', '<', '>'};
         private char[] Name = new char[] {'@', ',', '.', '|',
                                            ' ', '\\', '/', '!',
                                            '?', '#', '"', '$',
@@ -30,7 +30,7 @@ namespace CarSharingApplication.Validation
                                            '}', '-', '^', '~',
                                            '`', '№', '&', '*',
                                            '\'', '(', ')' , ';',
-                                           ':', '=', '+', '_', ' '};
+                                           ':', '=', '+', '_', ' ', '<', '>'};
 
         private string _login = "";
         private string _email = "";

@@ -171,6 +171,7 @@
     <Compile Include="Validation\DataPropertyChanged.cs" />
     <Compile Include="Validation\DriverLicenceValidation.cs" />
     <Compile Include="Validation\TextBoxValidation.cs" />
+    <Compile Include="VehicleEmulator.cs" />
     <Compile Include="VehicleRentalDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -12,6 +12,7 @@
         Closing="Window_Closing"
         Title="Окно поездки"
         Icon="..\Images\icon.jpeg"
+        WindowStartupLocation="CenterScreen"
         >
     <Grid>
         <Grid.RowDefinitions>

@@ -11,6 +11,7 @@
         AllowDrop="False"
         Title="Окно информации о ТС"
         Icon="../../Images/icon.jpeg"
+        WindowStartupLocation="CenterScreen"
     >
 
     <Window.Resources>

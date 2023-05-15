@@ -10,6 +10,7 @@
       Title="Вход"
       WindowStartupLocation="CenterScreen"
       WindowState="Maximized"
+      Closing="Window_Closing"
       Icon="../Images/icon.jpeg"
     >
     <Window.DataContext>

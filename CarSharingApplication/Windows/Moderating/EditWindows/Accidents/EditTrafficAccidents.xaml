@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarSharingApplication"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Height="500" Width="1100"
         Closing="Window_Closing"
         ResizeMode="NoResize"

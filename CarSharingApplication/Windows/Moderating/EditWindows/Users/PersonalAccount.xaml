@@ -10,6 +10,7 @@
         Title="Личный кабинет" Height="580" Width="415"
         ResizeMode="NoResize"
         Closing="Window_Closing"
+        WindowStartupLocation="CenterScreen"
         >
     <Grid>
         <Grid.ColumnDefinitions>

@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarSharingApplication"
         mc:Ignorable="d"
-        Height="500" Width="1100"
+        Height="470" Width="1100"
         Closing="Window_Closing"
+        WindowStartupLocation="CenterScreen"
         Icon="../../../Images/icon.jpeg"
         ResizeMode="NoResize"
         Title="Аренды">

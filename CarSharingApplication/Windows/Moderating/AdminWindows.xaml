@@ -12,6 +12,7 @@
         Closing="Window_Closing"
         ResizeMode="NoResize"
         Title="Окно администратора"
+        WindowStartupLocation="CenterScreen"
         >
     <Grid>
         <Grid.RowDefinitions>

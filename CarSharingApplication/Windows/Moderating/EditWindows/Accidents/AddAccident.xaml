@@ -9,6 +9,7 @@
         mc:Ignorable="d"
         Title="Окно описания аварии" 
         Height="600" Width="450"
+        WindowStartupLocation="CenterScreen"
         Closing="Window_Closing"
         Icon="..\..\..\Images\icon.jpeg"
         ResizeMode="NoResize"

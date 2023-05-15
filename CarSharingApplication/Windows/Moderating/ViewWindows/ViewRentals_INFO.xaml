@@ -10,7 +10,7 @@
         ResizeMode="NoResize"
         Title="Окно информации о арендах"
         Icon="../../Images/icon.jpeg"
-        
+        WindowStartupLocation="CenterScreen"
         >
 
     <Window.Resources>

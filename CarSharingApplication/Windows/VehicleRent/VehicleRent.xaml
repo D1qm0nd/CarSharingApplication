@@ -11,6 +11,7 @@
         Closing="Window_Closing"
         ResizeMode="NoResize"
         Title="Аренда ТС"
+        WindowStartupLocation="CenterScreen"
         >
     <Grid>
         <Grid.ColumnDefinitions>
