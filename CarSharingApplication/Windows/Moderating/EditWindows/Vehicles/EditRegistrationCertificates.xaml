@@ -23,7 +23,7 @@
         </Window.Resources>
 
         <Grid>
-        <ScrollViewer MaxHeight="400" MaxWidth="800" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer Height="400" MaxWidth="800" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible">
             <DataGrid
                 ItemsSource="{Binding}"
                 AlternatingRowBackground="White"

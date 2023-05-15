@@ -420,6 +420,7 @@
     <None Include="Documents\DATA.xlsx" />
     <None Include="Documents\Описание таблиц.xlsx" />
     <None Include="Documents\Пояснительная записка Разухин М.Н.docx" />
+    <None Include="Documents\Презентация Куросвая Работа Разухин Максим.pptx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

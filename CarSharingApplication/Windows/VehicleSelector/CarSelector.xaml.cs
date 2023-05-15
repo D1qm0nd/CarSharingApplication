@@ -147,6 +147,8 @@ namespace CarSharingApplication
                             Visibility = Visibility.Visible,
                             Tag = vehicle
                         };
+                        marker.Shape.MouseEnter += (s, e) => { Mouse.OverrideCursor = Cursors.Hand;};
+                        marker.Shape.MouseLeave += (s, e) => { Mouse.OverrideCursor = Cursors.Arrow; };
                         marker.Shape.MouseLeftButtonDown += MarkerClick;
                         VehiclesMarkers.Add(marker);
                     }
