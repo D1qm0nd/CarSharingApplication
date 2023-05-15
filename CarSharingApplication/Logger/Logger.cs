@@ -51,10 +51,10 @@ namespace LoggerLib
         public bool Log<T>(T logObj)
         {
             var log = JsonSerializer.Serialize(logObj, options);
-            App.AppDataBase.OpenConnection(App.GetConnectionString("LoggerConnection"));
-            var ret = App.AppDataBase.ExecuteNonQuery($"INSERT INTO Vehicle_Rental_logs (LogString) VALUES ('{log}')");
-            App.AppDataBase.CloseConnection();
-            return ret;
+            int ret;
+            using (var context = new CarSharingDataBaseClassesDataContext(App.GetConnectionString("LoggerConnection")))
+                ret = context.ExecuteCommand($"INSERT INTO Vehicle_Rental_logs (LogString) VALUES ('{log}')");
+            return ret > 0;
         }
         private Logger()
         {

@@ -14,7 +14,7 @@ namespace CarSharingApplication.Validation
                                            '%', '[', ']', '{',
                                            '}', '-', '^', '~',
                                            '`', '№', '&', '*',
-                                           '\'', '(', ')' , ';', '+' };
+                                           '\'', '(', ')' , ';', '+', ' ' };
         private char[] Login = new char[] {'@', ',', '.', '|',
                                            ' ', '\\', '/', '!',
                                            '?', '#', '"', '$',
@@ -22,7 +22,7 @@ namespace CarSharingApplication.Validation
                                            '}', '-', '^', '~',
                                            '`', '№', '&', '*',
                                            '\'', '(', ')' , ';',
-                                           ':', '=', '+'};
+                                           ':', '=', '+', ' '};
         private char[] Name = new char[] {'@', ',', '.', '|',
                                            ' ', '\\', '/', '!',
                                            '?', '#', '"', '$',
@@ -30,7 +30,7 @@ namespace CarSharingApplication.Validation
                                            '}', '-', '^', '~',
                                            '`', '№', '&', '*',
                                            '\'', '(', ')' , ';',
-                                           ':', '=', '+', '_'};
+                                           ':', '=', '+', '_', ' '};
 
         private string _login = "";
         private string _email = "";
@@ -102,29 +102,34 @@ namespace CarSharingApplication.Validation
                 switch (e?.PropertyName)
                 {
                     case "login_":
-                        foreach (char c in Login)
-                            if (_login.Contains(c))
-                                _login = login_.Trim(c);
+                        foreach (var c in Login)
+                            _login = login_.Replace(c.ToString(), string.Empty);
+                        if (_login.Length > 20)
+                            _login = _login.Substring(0, 20);
                         break;
                     case "email_":
                         foreach (char c in Email)
-                            if (_email.Contains(c))
-                                _email = _email.Trim(c);
+                            _email = _email.Replace(c.ToString(), string.Empty);
+                        if (_email.Length > 60)
+                            _email = _email.Substring(0, 60);
                         break;
                     case "surname_":
                         foreach (char c in Name)
-                            if (_middlename.Contains(c))
-                                _middlename = _middlename.Trim(c);
+                            _surname = _surname.Replace(c.ToString(), string.Empty);
+                        if (_surname.Length > 70)
+                            _surname = _surname.Substring(0, 70);
                         break;
                     case "username_":
                         foreach (char c in Name)
-                            if (_username.Contains(c))
-                                _username = _username.Trim(c);
+                            _username = _username.Replace(c.ToString(), string.Empty);
+                        if (_username.Length > 70)
+                            _username = _username.Substring(0, 70);
                         break;
                     case "middlename_":
                         foreach (char c in Name)
-                            if (_middlename.Contains(c))
-                                _middlename = _middlename.Trim(c);
+                            _middlename = _middlename.Replace(c.ToString(), string.Empty);
+                        if (_middlename.Length > 70)
+                            _middlename = _middlename.Substring(0, 70);
                         break;
                     default:
                         break;
