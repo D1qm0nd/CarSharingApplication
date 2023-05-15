@@ -59,6 +59,11 @@ namespace CarSharingApplication.Windows.VehicleRent
             }
         }
 
+        /// <summary>
+        /// Нажатие кнопки завершения поездки 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FinishTripClick(object sender, RoutedEventArgs e)
         {
             try
@@ -81,6 +86,11 @@ namespace CarSharingApplication.Windows.VehicleRent
             }
         }
 
+        /// <summary>
+        /// Нажатие кнопки Произошла авария
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AccidentClick(object sender, RoutedEventArgs e)
         {
             var accidentWND = new AddAccident(ref _User, ref _Rental, this, true);
