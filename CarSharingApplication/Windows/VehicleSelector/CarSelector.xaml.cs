@@ -24,7 +24,13 @@ namespace CarSharingApplication
         private bool _ShowOwner;
             
         private string ConnectionString { get { return App.GetConnectionString("CARHANDLERConnection"); } }
+        /// <summary>
+        /// Текст в случае если в системе нет автомобилей соответстующим критериям пользователя
+        /// </summary>
         private string ZeroVehiclesByCriteries = "Отсутствуют транспотрные\nсредтва соответствующие\nзаданным критериям";
+        /// <summary>
+        /// Текст в случае если нет свободных автомобилей в системе
+        /// </summary>
         private string HaveNotAvaliableVehicles = "В данный момент\nнет свободных авто\nзаходите позже";
 
         public CarSelector(ref UsersINFO user, Window owner, bool showOwner)
@@ -56,11 +62,19 @@ namespace CarSharingApplication
             }
         }
 
+        /// <summary>
+        /// Показывать окно родителя при закрытии
+        /// </summary>
+        /// <param name="value"></param>
         public void OwnerShow(bool value)
         {
             _ShowOwner = value;
         }
 
+        /// <summary>
+        /// Отобразить информацию в окно
+        /// </summary>
+        /// <param name="vehData"></param>
         public void SetInfo(VehiclesData vehData)
         {
             vehData.selectedVehicle = vehData.vehiclesInfoList.First();
@@ -96,11 +110,6 @@ namespace CarSharingApplication
             ListViewVehicleCategories.ItemsSource = vehData.vehCategories.OrderBy(str => str);
         }
 
-        /// <summary>
-        /// Загрузка карты
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
 
         /// <summary>
         /// Нажатие кнопки, выхода
@@ -157,7 +166,7 @@ namespace CarSharingApplication
         }
 
         /// <summary>
-        /// Вывести информацию о авто
+        /// Вывести информацию о автомобиле
         /// </summary>
         /// <param name="info"></param>
         /// <param name="errorMessage"></param>
@@ -168,7 +177,7 @@ namespace CarSharingApplication
         }
 
         /// <summary>
-        /// Нажатие на маркер авто
+        /// Нажатие на маркер автобиля
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
@@ -180,10 +189,10 @@ namespace CarSharingApplication
             RentalMap.MoveCursorToVehicleOnMap(VehiclesData.GetInstance.selectedVehicle);
         }
 
-       
+
 
         /// <summary>
-        /// Найти авто по критериям
+        /// Найти автомобиль/автомобили по критериям
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -229,7 +238,7 @@ namespace CarSharingApplication
         }
 
         /// <summary>
-        /// Сортировать авто по цене
+        /// Сортировать автомобили по цене
         /// </summary>
         /// <param name="list"></param>
         /// <returns>List<VehiclesINFO</returns>
@@ -239,7 +248,7 @@ namespace CarSharingApplication
             select vehicle).ToList();
 
         /// <summary>
-        /// Нажатие кнопки арендовать
+        /// Нажатие кнопки Арендовать
         /// </summary>     
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -261,7 +270,7 @@ namespace CarSharingApplication
         }
 
         /// <summary>
-        /// Нажатие кнопки Личный аккаунт
+        /// Нажатие кнопки Личный кабинет
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -274,7 +283,7 @@ namespace CarSharingApplication
         }
 
         /// <summary>
-        /// Закрытия окна
+        /// Закрытие окна
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -294,7 +303,7 @@ namespace CarSharingApplication
         }
 
         /// <summary>
-        /// Показать информацию о следующем авто
+        /// Показать информацию о следующем автомобиле
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

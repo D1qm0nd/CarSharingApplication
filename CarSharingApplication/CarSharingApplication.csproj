@@ -458,6 +458,7 @@
   <ItemGroup>
     <Content Include="SQL\CreateDataBase.sql" />
     <Content Include="SQL\FillUp.sql" />
+    <Resource Include="Windows\Images\Vehicles\TOYOTA-HILUX.jpeg" />
     <Resource Include="Windows\Images\Vehicles\aventador.png" />
     <Resource Include="Windows\Images\Vehicles\c_class.png" />
     <Resource Include="Windows\Images\Vehicles\gallardo.png" />
