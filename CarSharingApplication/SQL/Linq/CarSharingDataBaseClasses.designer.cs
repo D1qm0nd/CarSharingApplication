@@ -33,40 +33,40 @@ namespace CarSharingApplication.SQL.Linq
     partial void InsertClasses(Classes instance);
     partial void UpdateClasses(Classes instance);
     partial void DeleteClasses(Classes instance);
-    partial void InsertVehicles(Vehicles instance);
-    partial void UpdateVehicles(Vehicles instance);
-    partial void DeleteVehicles(Vehicles instance);
-    partial void InsertRental_Users(Rental_Users instance);
-    partial void UpdateRental_Users(Rental_Users instance);
-    partial void DeleteRental_Users(Rental_Users instance);
-    partial void InsertVehicleCoordinates(VehicleCoordinates instance);
-    partial void UpdateVehicleCoordinates(VehicleCoordinates instance);
-    partial void DeleteVehicleCoordinates(VehicleCoordinates instance);
-    partial void InsertTrafficAccidentTypes(TrafficAccidentTypes instance);
-    partial void UpdateTrafficAccidentTypes(TrafficAccidentTypes instance);
-    partial void DeleteTrafficAccidentTypes(TrafficAccidentTypes instance);
-    partial void InsertTrafficAccidents(TrafficAccidents instance);
-    partial void UpdateTrafficAccidents(TrafficAccidents instance);
-    partial void DeleteTrafficAccidents(TrafficAccidents instance);
-    partial void InsertVehicleRegistrCertificates(VehicleRegistrCertificates instance);
-    partial void UpdateVehicleRegistrCertificates(VehicleRegistrCertificates instance);
-    partial void DeleteVehicleRegistrCertificates(VehicleRegistrCertificates instance);
     partial void InsertVehicle_Rental_logs(Vehicle_Rental_logs instance);
     partial void UpdateVehicle_Rental_logs(Vehicle_Rental_logs instance);
     partial void DeleteVehicle_Rental_logs(Vehicle_Rental_logs instance);
+    partial void InsertVehicleCoordinates(VehicleCoordinates instance);
+    partial void UpdateVehicleCoordinates(VehicleCoordinates instance);
+    partial void DeleteVehicleCoordinates(VehicleCoordinates instance);
+    partial void InsertVehicles(Vehicles instance);
+    partial void UpdateVehicles(Vehicles instance);
+    partial void DeleteVehicles(Vehicles instance);
+    partial void InsertVehicleRegistrCertificates(VehicleRegistrCertificates instance);
+    partial void UpdateVehicleRegistrCertificates(VehicleRegistrCertificates instance);
+    partial void DeleteVehicleRegistrCertificates(VehicleRegistrCertificates instance);
     partial void InsertRentals(Rentals instance);
     partial void UpdateRentals(Rentals instance);
     partial void DeleteRentals(Rentals instance);
+    partial void InsertTrafficAccidents(TrafficAccidents instance);
+    partial void UpdateTrafficAccidents(TrafficAccidents instance);
+    partial void DeleteTrafficAccidents(TrafficAccidents instance);
+    partial void InsertTrafficAccidentTypes(TrafficAccidentTypes instance);
+    partial void UpdateTrafficAccidentTypes(TrafficAccidentTypes instance);
+    partial void DeleteTrafficAccidentTypes(TrafficAccidentTypes instance);
     partial void InsertDriversLicences(DriversLicences instance);
     partial void UpdateDriversLicences(DriversLicences instance);
     partial void DeleteDriversLicences(DriversLicences instance);
     partial void InsertCategories(Categories instance);
     partial void UpdateCategories(Categories instance);
     partial void DeleteCategories(Categories instance);
+    partial void InsertRental_Users(Rental_Users instance);
+    partial void UpdateRental_Users(Rental_Users instance);
+    partial void DeleteRental_Users(Rental_Users instance);
     #endregion
 		
 		public CarSharingDataBaseClassesDataContext() : 
-				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString2, mappingSource)
+				base(global::CarSharingApplication.Properties.Settings.Default.VehicleRentalConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -100,62 +100,6 @@ namespace CarSharingApplication.SQL.Linq
 			get
 			{
 				return this.GetTable<Classes>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Rental_Admins> Rental_Admins
-		{
-			get
-			{
-				return this.GetTable<Rental_Admins>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Vehicles> Vehicles
-		{
-			get
-			{
-				return this.GetTable<Vehicles>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Rental_Users> Rental_Users
-		{
-			get
-			{
-				return this.GetTable<Rental_Users>();
-			}
-		}
-		
-		public System.Data.Linq.Table<VehicleCoordinates> VehicleCoordinates
-		{
-			get
-			{
-				return this.GetTable<VehicleCoordinates>();
-			}
-		}
-		
-		public System.Data.Linq.Table<TrafficAccidentTypes> TrafficAccidentTypes
-		{
-			get
-			{
-				return this.GetTable<TrafficAccidentTypes>();
-			}
-		}
-		
-		public System.Data.Linq.Table<TrafficAccidents> TrafficAccidents
-		{
-			get
-			{
-				return this.GetTable<TrafficAccidents>();
-			}
-		}
-		
-		public System.Data.Linq.Table<VehicleRegistrCertificates> VehicleRegistrCertificates
-		{
-			get
-			{
-				return this.GetTable<VehicleRegistrCertificates>();
 			}
 		}
 		
@@ -199,11 +143,51 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
+		public System.Data.Linq.Table<VehicleCoordinates> VehicleCoordinates
+		{
+			get
+			{
+				return this.GetTable<VehicleCoordinates>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Vehicles> Vehicles
+		{
+			get
+			{
+				return this.GetTable<Vehicles>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VehicleRegistrCertificates> VehicleRegistrCertificates
+		{
+			get
+			{
+				return this.GetTable<VehicleRegistrCertificates>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Rentals> Rentals
 		{
 			get
 			{
 				return this.GetTable<Rentals>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TrafficAccidents> TrafficAccidents
+		{
+			get
+			{
+				return this.GetTable<TrafficAccidents>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TrafficAccidentTypes> TrafficAccidentTypes
+		{
+			get
+			{
+				return this.GetTable<TrafficAccidentTypes>();
 			}
 		}
 		
@@ -220,6 +204,22 @@ namespace CarSharingApplication.SQL.Linq
 			get
 			{
 				return this.GetTable<Categories>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Rental_Admins> Rental_Admins
+		{
+			get
+			{
+				return this.GetTable<Rental_Admins>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Rental_Users> Rental_Users
+		{
+			get
+			{
+				return this.GetTable<Rental_Users>();
 			}
 		}
 	}
@@ -311,1632 +311,6 @@ namespace CarSharingApplication.SQL.Linq
 		{
 			this.SendPropertyChanging();
 			entity.Classes = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rental_Admins")]
-	public partial class Rental_Admins
-	{
-		
-		private int _ID_Admin;
-		
-		private int _ID_User;
-		
-		public Rental_Admins()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Admin", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		public int ID_Admin
-		{
-			get
-			{
-				return this._ID_Admin;
-			}
-			set
-			{
-				if ((this._ID_Admin != value))
-				{
-					this._ID_Admin = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", DbType="Int NOT NULL")]
-		public int ID_User
-		{
-			get
-			{
-				return this._ID_User;
-			}
-			set
-			{
-				if ((this._ID_User != value))
-				{
-					this._ID_User = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Vehicles")]
-	public partial class Vehicles : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_Vehicle;
-		
-		private decimal _PricePerHour;
-		
-		private string _Class;
-		
-		private System.Data.Linq.Binary _CarPicture;
-		
-		private EntitySet<VehicleCoordinates> _VehicleCoordinates;
-		
-		private EntitySet<TrafficAccidents> _TrafficAccidents;
-		
-		private EntitySet<VehicleRegistrCertificates> _VehicleRegistrCertificates;
-		
-		private EntitySet<Rentals> _Rentals;
-		
-		private EntityRef<Classes> _Classes;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_VehicleChanging(int value);
-    partial void OnID_VehicleChanged();
-    partial void OnPricePerHourChanging(decimal value);
-    partial void OnPricePerHourChanged();
-    partial void OnClassChanging(string value);
-    partial void OnClassChanged();
-    partial void OnCarPictureChanging(System.Data.Linq.Binary value);
-    partial void OnCarPictureChanged();
-    #endregion
-		
-		public Vehicles()
-		{
-			this._VehicleCoordinates = new EntitySet<VehicleCoordinates>(new Action<VehicleCoordinates>(this.attach_VehicleCoordinates), new Action<VehicleCoordinates>(this.detach_VehicleCoordinates));
-			this._TrafficAccidents = new EntitySet<TrafficAccidents>(new Action<TrafficAccidents>(this.attach_TrafficAccidents), new Action<TrafficAccidents>(this.detach_TrafficAccidents));
-			this._VehicleRegistrCertificates = new EntitySet<VehicleRegistrCertificates>(new Action<VehicleRegistrCertificates>(this.attach_VehicleRegistrCertificates), new Action<VehicleRegistrCertificates>(this.detach_VehicleRegistrCertificates));
-			this._Rentals = new EntitySet<Rentals>(new Action<Rentals>(this.attach_Rentals), new Action<Rentals>(this.detach_Rentals));
-			this._Classes = default(EntityRef<Classes>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_Vehicle
-		{
-			get
-			{
-				return this._ID_Vehicle;
-			}
-			set
-			{
-				if ((this._ID_Vehicle != value))
-				{
-					this.OnID_VehicleChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Vehicle = value;
-					this.SendPropertyChanged("ID_Vehicle");
-					this.OnID_VehicleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PricePerHour", DbType="Money NOT NULL")]
-		public decimal PricePerHour
-		{
-			get
-			{
-				return this._PricePerHour;
-			}
-			set
-			{
-				if ((this._PricePerHour != value))
-				{
-					this.OnPricePerHourChanging(value);
-					this.SendPropertyChanging();
-					this._PricePerHour = value;
-					this.SendPropertyChanged("PricePerHour");
-					this.OnPricePerHourChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Class", DbType="Char(20) NOT NULL", CanBeNull=false)]
-		public string Class
-		{
-			get
-			{
-				return this._Class;
-			}
-			set
-			{
-				if ((this._Class != value))
-				{
-					if (this._Classes.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnClassChanging(value);
-					this.SendPropertyChanging();
-					this._Class = value;
-					this.SendPropertyChanged("Class");
-					this.OnClassChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CarPicture", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary CarPicture
-		{
-			get
-			{
-				return this._CarPicture;
-			}
-			set
-			{
-				if ((this._CarPicture != value))
-				{
-					this.OnCarPictureChanging(value);
-					this.SendPropertyChanging();
-					this._CarPicture = value;
-					this.SendPropertyChanged("CarPicture");
-					this.OnCarPictureChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_VehicleCoordinates", Storage="_VehicleCoordinates", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
-		public EntitySet<VehicleCoordinates> VehicleCoordinates
-		{
-			get
-			{
-				return this._VehicleCoordinates;
-			}
-			set
-			{
-				this._VehicleCoordinates.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_TrafficAccidents", Storage="_TrafficAccidents", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
-		public EntitySet<TrafficAccidents> TrafficAccidents
-		{
-			get
-			{
-				return this._TrafficAccidents;
-			}
-			set
-			{
-				this._TrafficAccidents.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_VehicleRegistrCertificates", Storage="_VehicleRegistrCertificates", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
-		public EntitySet<VehicleRegistrCertificates> VehicleRegistrCertificates
-		{
-			get
-			{
-				return this._VehicleRegistrCertificates;
-			}
-			set
-			{
-				this._VehicleRegistrCertificates.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_Rentals1", Storage="_Rentals", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
-		public EntitySet<Rentals> Rentals
-		{
-			get
-			{
-				return this._Rentals;
-			}
-			set
-			{
-				this._Rentals.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Classes_Vehicles", Storage="_Classes", ThisKey="Class", OtherKey="Class", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Classes Classes
-		{
-			get
-			{
-				return this._Classes.Entity;
-			}
-			set
-			{
-				Classes previousValue = this._Classes.Entity;
-				if (((previousValue != value) 
-							|| (this._Classes.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Classes.Entity = null;
-						previousValue.Vehicles.Remove(this);
-					}
-					this._Classes.Entity = value;
-					if ((value != null))
-					{
-						value.Vehicles.Add(this);
-						this._Class = value.Class;
-					}
-					else
-					{
-						this._Class = default(string);
-					}
-					this.SendPropertyChanged("Classes");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_VehicleCoordinates(VehicleCoordinates entity)
-		{
-			this.SendPropertyChanging();
-			entity.Vehicles = this;
-		}
-		
-		private void detach_VehicleCoordinates(VehicleCoordinates entity)
-		{
-			this.SendPropertyChanging();
-			entity.Vehicles = null;
-		}
-		
-		private void attach_TrafficAccidents(TrafficAccidents entity)
-		{
-			this.SendPropertyChanging();
-			entity.Vehicles = this;
-		}
-		
-		private void detach_TrafficAccidents(TrafficAccidents entity)
-		{
-			this.SendPropertyChanging();
-			entity.Vehicles = null;
-		}
-		
-		private void attach_VehicleRegistrCertificates(VehicleRegistrCertificates entity)
-		{
-			this.SendPropertyChanging();
-			entity.Vehicles = this;
-		}
-		
-		private void detach_VehicleRegistrCertificates(VehicleRegistrCertificates entity)
-		{
-			this.SendPropertyChanging();
-			entity.Vehicles = null;
-		}
-		
-		private void attach_Rentals(Rentals entity)
-		{
-			this.SendPropertyChanging();
-			entity.Vehicles = this;
-		}
-		
-		private void detach_Rentals(Rentals entity)
-		{
-			this.SendPropertyChanging();
-			entity.Vehicles = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rental_Users")]
-	public partial class Rental_Users : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_User;
-		
-		private string _UserLogin;
-		
-		private string _UserEMail;
-		
-		private string _UserPassword;
-		
-		private string _UserSurname;
-		
-		private string _UserName;
-		
-		private string _UserMiddleName;
-		
-		private System.DateTime _UserBirthDay;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_UserChanging(int value);
-    partial void OnID_UserChanged();
-    partial void OnUserLoginChanging(string value);
-    partial void OnUserLoginChanged();
-    partial void OnUserEMailChanging(string value);
-    partial void OnUserEMailChanged();
-    partial void OnUserPasswordChanging(string value);
-    partial void OnUserPasswordChanged();
-    partial void OnUserSurnameChanging(string value);
-    partial void OnUserSurnameChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnUserMiddleNameChanging(string value);
-    partial void OnUserMiddleNameChanged();
-    partial void OnUserBirthDayChanging(System.DateTime value);
-    partial void OnUserBirthDayChanged();
-    #endregion
-		
-		public Rental_Users()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_User
-		{
-			get
-			{
-				return this._ID_User;
-			}
-			set
-			{
-				if ((this._ID_User != value))
-				{
-					this.OnID_UserChanging(value);
-					this.SendPropertyChanging();
-					this._ID_User = value;
-					this.SendPropertyChanged("ID_User");
-					this.OnID_UserChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserLogin", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
-		public string UserLogin
-		{
-			get
-			{
-				return this._UserLogin;
-			}
-			set
-			{
-				if ((this._UserLogin != value))
-				{
-					this.OnUserLoginChanging(value);
-					this.SendPropertyChanging();
-					this._UserLogin = value;
-					this.SendPropertyChanged("UserLogin");
-					this.OnUserLoginChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserEMail", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
-		public string UserEMail
-		{
-			get
-			{
-				return this._UserEMail;
-			}
-			set
-			{
-				if ((this._UserEMail != value))
-				{
-					this.OnUserEMailChanging(value);
-					this.SendPropertyChanging();
-					this._UserEMail = value;
-					this.SendPropertyChanged("UserEMail");
-					this.OnUserEMailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserPassword", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
-		public string UserPassword
-		{
-			get
-			{
-				return this._UserPassword;
-			}
-			set
-			{
-				if ((this._UserPassword != value))
-				{
-					this.OnUserPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._UserPassword = value;
-					this.SendPropertyChanged("UserPassword");
-					this.OnUserPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserSurname", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
-		public string UserSurname
-		{
-			get
-			{
-				return this._UserSurname;
-			}
-			set
-			{
-				if ((this._UserSurname != value))
-				{
-					this.OnUserSurnameChanging(value);
-					this.SendPropertyChanging();
-					this._UserSurname = value;
-					this.SendPropertyChanged("UserSurname");
-					this.OnUserSurnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserMiddleName", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
-		public string UserMiddleName
-		{
-			get
-			{
-				return this._UserMiddleName;
-			}
-			set
-			{
-				if ((this._UserMiddleName != value))
-				{
-					this.OnUserMiddleNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserMiddleName = value;
-					this.SendPropertyChanged("UserMiddleName");
-					this.OnUserMiddleNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserBirthDay", DbType="Date NOT NULL")]
-		public System.DateTime UserBirthDay
-		{
-			get
-			{
-				return this._UserBirthDay;
-			}
-			set
-			{
-				if ((this._UserBirthDay != value))
-				{
-					this.OnUserBirthDayChanging(value);
-					this.SendPropertyChanging();
-					this._UserBirthDay = value;
-					this.SendPropertyChanged("UserBirthDay");
-					this.OnUserBirthDayChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VehicleCoordinates")]
-	public partial class VehicleCoordinates : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_Coordinates;
-		
-		private int _ID_Vehicle;
-		
-		private double _Longitude;
-		
-		private double _Latitude;
-		
-		private System.DateTime _StayDateTime;
-		
-		private EntityRef<Vehicles> _Vehicles;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_CoordinatesChanging(int value);
-    partial void OnID_CoordinatesChanged();
-    partial void OnID_VehicleChanging(int value);
-    partial void OnID_VehicleChanged();
-    partial void OnLongitudeChanging(double value);
-    partial void OnLongitudeChanged();
-    partial void OnLatitudeChanging(double value);
-    partial void OnLatitudeChanged();
-    partial void OnStayDateTimeChanging(System.DateTime value);
-    partial void OnStayDateTimeChanged();
-    #endregion
-		
-		public VehicleCoordinates()
-		{
-			this._Vehicles = default(EntityRef<Vehicles>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Coordinates", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_Coordinates
-		{
-			get
-			{
-				return this._ID_Coordinates;
-			}
-			set
-			{
-				if ((this._ID_Coordinates != value))
-				{
-					this.OnID_CoordinatesChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Coordinates = value;
-					this.SendPropertyChanged("ID_Coordinates");
-					this.OnID_CoordinatesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
-		public int ID_Vehicle
-		{
-			get
-			{
-				return this._ID_Vehicle;
-			}
-			set
-			{
-				if ((this._ID_Vehicle != value))
-				{
-					if (this._Vehicles.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_VehicleChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Vehicle = value;
-					this.SendPropertyChanged("ID_Vehicle");
-					this.OnID_VehicleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Longitude", DbType="Float NOT NULL")]
-		public double Longitude
-		{
-			get
-			{
-				return this._Longitude;
-			}
-			set
-			{
-				if ((this._Longitude != value))
-				{
-					this.OnLongitudeChanging(value);
-					this.SendPropertyChanging();
-					this._Longitude = value;
-					this.SendPropertyChanged("Longitude");
-					this.OnLongitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Latitude", DbType="Float NOT NULL")]
-		public double Latitude
-		{
-			get
-			{
-				return this._Latitude;
-			}
-			set
-			{
-				if ((this._Latitude != value))
-				{
-					this.OnLatitudeChanging(value);
-					this.SendPropertyChanging();
-					this._Latitude = value;
-					this.SendPropertyChanged("Latitude");
-					this.OnLatitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StayDateTime", DbType="DateTime NOT NULL")]
-		public System.DateTime StayDateTime
-		{
-			get
-			{
-				return this._StayDateTime;
-			}
-			set
-			{
-				if ((this._StayDateTime != value))
-				{
-					this.OnStayDateTimeChanging(value);
-					this.SendPropertyChanging();
-					this._StayDateTime = value;
-					this.SendPropertyChanged("StayDateTime");
-					this.OnStayDateTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_VehicleCoordinates", Storage="_Vehicles", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Vehicles Vehicles
-		{
-			get
-			{
-				return this._Vehicles.Entity;
-			}
-			set
-			{
-				Vehicles previousValue = this._Vehicles.Entity;
-				if (((previousValue != value) 
-							|| (this._Vehicles.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Vehicles.Entity = null;
-						previousValue.VehicleCoordinates.Remove(this);
-					}
-					this._Vehicles.Entity = value;
-					if ((value != null))
-					{
-						value.VehicleCoordinates.Add(this);
-						this._ID_Vehicle = value.ID_Vehicle;
-					}
-					else
-					{
-						this._ID_Vehicle = default(int);
-					}
-					this.SendPropertyChanged("Vehicles");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TrafficAccidentTypes")]
-	public partial class TrafficAccidentTypes : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_TrafficAccidentType;
-		
-		private string _TrafficAccidentTypeName;
-		
-		private EntitySet<TrafficAccidents> _TrafficAccidents;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_TrafficAccidentTypeChanging(int value);
-    partial void OnID_TrafficAccidentTypeChanged();
-    partial void OnTrafficAccidentTypeNameChanging(string value);
-    partial void OnTrafficAccidentTypeNameChanged();
-    #endregion
-		
-		public TrafficAccidentTypes()
-		{
-			this._TrafficAccidents = new EntitySet<TrafficAccidents>(new Action<TrafficAccidents>(this.attach_TrafficAccidents), new Action<TrafficAccidents>(this.detach_TrafficAccidents));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_TrafficAccidentType", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_TrafficAccidentType
-		{
-			get
-			{
-				return this._ID_TrafficAccidentType;
-			}
-			set
-			{
-				if ((this._ID_TrafficAccidentType != value))
-				{
-					this.OnID_TrafficAccidentTypeChanging(value);
-					this.SendPropertyChanging();
-					this._ID_TrafficAccidentType = value;
-					this.SendPropertyChanged("ID_TrafficAccidentType");
-					this.OnID_TrafficAccidentTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrafficAccidentTypeName", DbType="NVarChar(60) NOT NULL", CanBeNull=false)]
-		public string TrafficAccidentTypeName
-		{
-			get
-			{
-				return this._TrafficAccidentTypeName;
-			}
-			set
-			{
-				if ((this._TrafficAccidentTypeName != value))
-				{
-					this.OnTrafficAccidentTypeNameChanging(value);
-					this.SendPropertyChanging();
-					this._TrafficAccidentTypeName = value;
-					this.SendPropertyChanged("TrafficAccidentTypeName");
-					this.OnTrafficAccidentTypeNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrafficAccidentTypes_TrafficAccidents", Storage="_TrafficAccidents", ThisKey="ID_TrafficAccidentType", OtherKey="ID_TrafficAccidentType")]
-		public EntitySet<TrafficAccidents> TrafficAccidents
-		{
-			get
-			{
-				return this._TrafficAccidents;
-			}
-			set
-			{
-				this._TrafficAccidents.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_TrafficAccidents(TrafficAccidents entity)
-		{
-			this.SendPropertyChanging();
-			entity.TrafficAccidentTypes = this;
-		}
-		
-		private void detach_TrafficAccidents(TrafficAccidents entity)
-		{
-			this.SendPropertyChanging();
-			entity.TrafficAccidentTypes = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TrafficAccidents")]
-	public partial class TrafficAccidents : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_TrafficAccident;
-		
-		private int _ID_Vehicle;
-		
-		private string _ID_DriverLicence;
-		
-		private int _ID_TrafficAccidentType;
-		
-		private decimal _Damage;
-		
-		private string _TrafficAccidentDescription;
-		
-		private EntityRef<TrafficAccidentTypes> _TrafficAccidentTypes;
-		
-		private EntityRef<Vehicles> _Vehicles;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_TrafficAccidentChanging(int value);
-    partial void OnID_TrafficAccidentChanged();
-    partial void OnID_VehicleChanging(int value);
-    partial void OnID_VehicleChanged();
-    partial void OnID_DriverLicenceChanging(string value);
-    partial void OnID_DriverLicenceChanged();
-    partial void OnID_TrafficAccidentTypeChanging(int value);
-    partial void OnID_TrafficAccidentTypeChanged();
-    partial void OnDamageChanging(decimal value);
-    partial void OnDamageChanged();
-    partial void OnTrafficAccidentDescriptionChanging(string value);
-    partial void OnTrafficAccidentDescriptionChanged();
-    #endregion
-		
-		public TrafficAccidents()
-		{
-			this._TrafficAccidentTypes = default(EntityRef<TrafficAccidentTypes>);
-			this._Vehicles = default(EntityRef<Vehicles>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_TrafficAccident", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_TrafficAccident
-		{
-			get
-			{
-				return this._ID_TrafficAccident;
-			}
-			set
-			{
-				if ((this._ID_TrafficAccident != value))
-				{
-					this.OnID_TrafficAccidentChanging(value);
-					this.SendPropertyChanging();
-					this._ID_TrafficAccident = value;
-					this.SendPropertyChanged("ID_TrafficAccident");
-					this.OnID_TrafficAccidentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
-		public int ID_Vehicle
-		{
-			get
-			{
-				return this._ID_Vehicle;
-			}
-			set
-			{
-				if ((this._ID_Vehicle != value))
-				{
-					if (this._Vehicles.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_VehicleChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Vehicle = value;
-					this.SendPropertyChanged("ID_Vehicle");
-					this.OnID_VehicleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DriverLicence", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string ID_DriverLicence
-		{
-			get
-			{
-				return this._ID_DriverLicence;
-			}
-			set
-			{
-				if ((this._ID_DriverLicence != value))
-				{
-					this.OnID_DriverLicenceChanging(value);
-					this.SendPropertyChanging();
-					this._ID_DriverLicence = value;
-					this.SendPropertyChanged("ID_DriverLicence");
-					this.OnID_DriverLicenceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_TrafficAccidentType", DbType="Int NOT NULL")]
-		public int ID_TrafficAccidentType
-		{
-			get
-			{
-				return this._ID_TrafficAccidentType;
-			}
-			set
-			{
-				if ((this._ID_TrafficAccidentType != value))
-				{
-					if (this._TrafficAccidentTypes.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_TrafficAccidentTypeChanging(value);
-					this.SendPropertyChanging();
-					this._ID_TrafficAccidentType = value;
-					this.SendPropertyChanged("ID_TrafficAccidentType");
-					this.OnID_TrafficAccidentTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Damage", DbType="Money NOT NULL")]
-		public decimal Damage
-		{
-			get
-			{
-				return this._Damage;
-			}
-			set
-			{
-				if ((this._Damage != value))
-				{
-					this.OnDamageChanging(value);
-					this.SendPropertyChanging();
-					this._Damage = value;
-					this.SendPropertyChanged("Damage");
-					this.OnDamageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrafficAccidentDescription", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string TrafficAccidentDescription
-		{
-			get
-			{
-				return this._TrafficAccidentDescription;
-			}
-			set
-			{
-				if ((this._TrafficAccidentDescription != value))
-				{
-					this.OnTrafficAccidentDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._TrafficAccidentDescription = value;
-					this.SendPropertyChanged("TrafficAccidentDescription");
-					this.OnTrafficAccidentDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TrafficAccidentTypes_TrafficAccidents", Storage="_TrafficAccidentTypes", ThisKey="ID_TrafficAccidentType", OtherKey="ID_TrafficAccidentType", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public TrafficAccidentTypes TrafficAccidentTypes
-		{
-			get
-			{
-				return this._TrafficAccidentTypes.Entity;
-			}
-			set
-			{
-				TrafficAccidentTypes previousValue = this._TrafficAccidentTypes.Entity;
-				if (((previousValue != value) 
-							|| (this._TrafficAccidentTypes.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TrafficAccidentTypes.Entity = null;
-						previousValue.TrafficAccidents.Remove(this);
-					}
-					this._TrafficAccidentTypes.Entity = value;
-					if ((value != null))
-					{
-						value.TrafficAccidents.Add(this);
-						this._ID_TrafficAccidentType = value.ID_TrafficAccidentType;
-					}
-					else
-					{
-						this._ID_TrafficAccidentType = default(int);
-					}
-					this.SendPropertyChanged("TrafficAccidentTypes");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_TrafficAccidents", Storage="_Vehicles", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Vehicles Vehicles
-		{
-			get
-			{
-				return this._Vehicles.Entity;
-			}
-			set
-			{
-				Vehicles previousValue = this._Vehicles.Entity;
-				if (((previousValue != value) 
-							|| (this._Vehicles.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Vehicles.Entity = null;
-						previousValue.TrafficAccidents.Remove(this);
-					}
-					this._Vehicles.Entity = value;
-					if ((value != null))
-					{
-						value.TrafficAccidents.Add(this);
-						this._ID_Vehicle = value.ID_Vehicle;
-					}
-					else
-					{
-						this._ID_Vehicle = default(int);
-					}
-					this.SendPropertyChanged("Vehicles");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VehicleRegistrCertificates")]
-	public partial class VehicleRegistrCertificates : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _CertificateSeries;
-		
-		private int _CertificateNumber;
-		
-		private int _ID_Vehicle;
-		
-		private string _VIN;
-		
-		private string _RegistrationNum;
-		
-		private string _Brand;
-		
-		private string _Mark;
-		
-		private string _Vehicle_Type;
-		
-		private string _Vehicle_Category;
-		
-		private int _ManufactureYear;
-		
-		private string _Chassis;
-		
-		private string _BodyNo;
-		
-		private string _Color;
-		
-		private double _EngineHP_kW;
-		
-		private string _EcologicalClass;
-		
-		private int _PermissibleMaximumWeightKg;
-		
-		private int _WeightWithoutLoadKg;
-		
-		private EntityRef<Vehicles> _Vehicles;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCertificateSeriesChanging(int value);
-    partial void OnCertificateSeriesChanged();
-    partial void OnCertificateNumberChanging(int value);
-    partial void OnCertificateNumberChanged();
-    partial void OnID_VehicleChanging(int value);
-    partial void OnID_VehicleChanged();
-    partial void OnVINChanging(string value);
-    partial void OnVINChanged();
-    partial void OnRegistrationNumChanging(string value);
-    partial void OnRegistrationNumChanged();
-    partial void OnBrandChanging(string value);
-    partial void OnBrandChanged();
-    partial void OnMarkChanging(string value);
-    partial void OnMarkChanged();
-    partial void OnVehicle_TypeChanging(string value);
-    partial void OnVehicle_TypeChanged();
-    partial void OnVehicle_CategoryChanging(string value);
-    partial void OnVehicle_CategoryChanged();
-    partial void OnManufactureYearChanging(int value);
-    partial void OnManufactureYearChanged();
-    partial void OnChassisChanging(string value);
-    partial void OnChassisChanged();
-    partial void OnBodyNoChanging(string value);
-    partial void OnBodyNoChanged();
-    partial void OnColorChanging(string value);
-    partial void OnColorChanged();
-    partial void OnEngineHP_kWChanging(double value);
-    partial void OnEngineHP_kWChanged();
-    partial void OnEcologicalClassChanging(string value);
-    partial void OnEcologicalClassChanged();
-    partial void OnPermissibleMaximumWeightKgChanging(int value);
-    partial void OnPermissibleMaximumWeightKgChanged();
-    partial void OnWeightWithoutLoadKgChanging(int value);
-    partial void OnWeightWithoutLoadKgChanged();
-    #endregion
-		
-		public VehicleRegistrCertificates()
-		{
-			this._Vehicles = default(EntityRef<Vehicles>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CertificateSeries", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int CertificateSeries
-		{
-			get
-			{
-				return this._CertificateSeries;
-			}
-			set
-			{
-				if ((this._CertificateSeries != value))
-				{
-					this.OnCertificateSeriesChanging(value);
-					this.SendPropertyChanging();
-					this._CertificateSeries = value;
-					this.SendPropertyChanged("CertificateSeries");
-					this.OnCertificateSeriesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CertificateNumber", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int CertificateNumber
-		{
-			get
-			{
-				return this._CertificateNumber;
-			}
-			set
-			{
-				if ((this._CertificateNumber != value))
-				{
-					this.OnCertificateNumberChanging(value);
-					this.SendPropertyChanging();
-					this._CertificateNumber = value;
-					this.SendPropertyChanged("CertificateNumber");
-					this.OnCertificateNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
-		public int ID_Vehicle
-		{
-			get
-			{
-				return this._ID_Vehicle;
-			}
-			set
-			{
-				if ((this._ID_Vehicle != value))
-				{
-					if (this._Vehicles.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_VehicleChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Vehicle = value;
-					this.SendPropertyChanged("ID_Vehicle");
-					this.OnID_VehicleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VIN", DbType="Char(14) NOT NULL", CanBeNull=false)]
-		public string VIN
-		{
-			get
-			{
-				return this._VIN;
-			}
-			set
-			{
-				if ((this._VIN != value))
-				{
-					this.OnVINChanging(value);
-					this.SendPropertyChanging();
-					this._VIN = value;
-					this.SendPropertyChanged("VIN");
-					this.OnVINChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegistrationNum", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string RegistrationNum
-		{
-			get
-			{
-				return this._RegistrationNum;
-			}
-			set
-			{
-				if ((this._RegistrationNum != value))
-				{
-					this.OnRegistrationNumChanging(value);
-					this.SendPropertyChanging();
-					this._RegistrationNum = value;
-					this.SendPropertyChanged("RegistrationNum");
-					this.OnRegistrationNumChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Brand", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string Brand
-		{
-			get
-			{
-				return this._Brand;
-			}
-			set
-			{
-				if ((this._Brand != value))
-				{
-					this.OnBrandChanging(value);
-					this.SendPropertyChanging();
-					this._Brand = value;
-					this.SendPropertyChanged("Brand");
-					this.OnBrandChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mark", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string Mark
-		{
-			get
-			{
-				return this._Mark;
-			}
-			set
-			{
-				if ((this._Mark != value))
-				{
-					this.OnMarkChanging(value);
-					this.SendPropertyChanging();
-					this._Mark = value;
-					this.SendPropertyChanged("Mark");
-					this.OnMarkChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vehicle_Type", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string Vehicle_Type
-		{
-			get
-			{
-				return this._Vehicle_Type;
-			}
-			set
-			{
-				if ((this._Vehicle_Type != value))
-				{
-					this.OnVehicle_TypeChanging(value);
-					this.SendPropertyChanging();
-					this._Vehicle_Type = value;
-					this.SendPropertyChanged("Vehicle_Type");
-					this.OnVehicle_TypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vehicle_Category", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
-		public string Vehicle_Category
-		{
-			get
-			{
-				return this._Vehicle_Category;
-			}
-			set
-			{
-				if ((this._Vehicle_Category != value))
-				{
-					this.OnVehicle_CategoryChanging(value);
-					this.SendPropertyChanging();
-					this._Vehicle_Category = value;
-					this.SendPropertyChanged("Vehicle_Category");
-					this.OnVehicle_CategoryChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ManufactureYear", DbType="Int NOT NULL")]
-		public int ManufactureYear
-		{
-			get
-			{
-				return this._ManufactureYear;
-			}
-			set
-			{
-				if ((this._ManufactureYear != value))
-				{
-					this.OnManufactureYearChanging(value);
-					this.SendPropertyChanging();
-					this._ManufactureYear = value;
-					this.SendPropertyChanged("ManufactureYear");
-					this.OnManufactureYearChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Chassis", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string Chassis
-		{
-			get
-			{
-				return this._Chassis;
-			}
-			set
-			{
-				if ((this._Chassis != value))
-				{
-					this.OnChassisChanging(value);
-					this.SendPropertyChanging();
-					this._Chassis = value;
-					this.SendPropertyChanged("Chassis");
-					this.OnChassisChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BodyNo", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
-		public string BodyNo
-		{
-			get
-			{
-				return this._BodyNo;
-			}
-			set
-			{
-				if ((this._BodyNo != value))
-				{
-					this.OnBodyNoChanging(value);
-					this.SendPropertyChanging();
-					this._BodyNo = value;
-					this.SendPropertyChanged("BodyNo");
-					this.OnBodyNoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(120) NOT NULL", CanBeNull=false)]
-		public string Color
-		{
-			get
-			{
-				return this._Color;
-			}
-			set
-			{
-				if ((this._Color != value))
-				{
-					this.OnColorChanging(value);
-					this.SendPropertyChanging();
-					this._Color = value;
-					this.SendPropertyChanged("Color");
-					this.OnColorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EngineHP_kW", DbType="Float NOT NULL")]
-		public double EngineHP_kW
-		{
-			get
-			{
-				return this._EngineHP_kW;
-			}
-			set
-			{
-				if ((this._EngineHP_kW != value))
-				{
-					this.OnEngineHP_kWChanging(value);
-					this.SendPropertyChanging();
-					this._EngineHP_kW = value;
-					this.SendPropertyChanged("EngineHP_kW");
-					this.OnEngineHP_kWChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EcologicalClass", DbType="Char(100) NOT NULL", CanBeNull=false)]
-		public string EcologicalClass
-		{
-			get
-			{
-				return this._EcologicalClass;
-			}
-			set
-			{
-				if ((this._EcologicalClass != value))
-				{
-					this.OnEcologicalClassChanging(value);
-					this.SendPropertyChanging();
-					this._EcologicalClass = value;
-					this.SendPropertyChanged("EcologicalClass");
-					this.OnEcologicalClassChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PermissibleMaximumWeightKg", DbType="Int NOT NULL")]
-		public int PermissibleMaximumWeightKg
-		{
-			get
-			{
-				return this._PermissibleMaximumWeightKg;
-			}
-			set
-			{
-				if ((this._PermissibleMaximumWeightKg != value))
-				{
-					this.OnPermissibleMaximumWeightKgChanging(value);
-					this.SendPropertyChanging();
-					this._PermissibleMaximumWeightKg = value;
-					this.SendPropertyChanged("PermissibleMaximumWeightKg");
-					this.OnPermissibleMaximumWeightKgChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WeightWithoutLoadKg", DbType="Int NOT NULL")]
-		public int WeightWithoutLoadKg
-		{
-			get
-			{
-				return this._WeightWithoutLoadKg;
-			}
-			set
-			{
-				if ((this._WeightWithoutLoadKg != value))
-				{
-					this.OnWeightWithoutLoadKgChanging(value);
-					this.SendPropertyChanging();
-					this._WeightWithoutLoadKg = value;
-					this.SendPropertyChanged("WeightWithoutLoadKg");
-					this.OnWeightWithoutLoadKgChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_VehicleRegistrCertificates", Storage="_Vehicles", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle", IsForeignKey=true)]
-		public Vehicles Vehicles
-		{
-			get
-			{
-				return this._Vehicles.Entity;
-			}
-			set
-			{
-				Vehicles previousValue = this._Vehicles.Entity;
-				if (((previousValue != value) 
-							|| (this._Vehicles.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Vehicles.Entity = null;
-						previousValue.VehicleRegistrCertificates.Remove(this);
-					}
-					this._Vehicles.Entity = value;
-					if ((value != null))
-					{
-						value.VehicleRegistrCertificates.Add(this);
-						this._ID_Vehicle = value.ID_Vehicle;
-					}
-					else
-					{
-						this._ID_Vehicle = default(int);
-					}
-					this.SendPropertyChanged("Vehicles");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -2674,6 +1048,951 @@ namespace CarSharingApplication.SQL.Linq
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VehicleCoordinates")]
+	public partial class VehicleCoordinates : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Coordinates;
+		
+		private int _ID_Vehicle;
+		
+		private double _Longitude;
+		
+		private double _Latitude;
+		
+		private System.DateTime _StayDateTime;
+		
+		private EntityRef<Vehicles> _Vehicles;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_CoordinatesChanging(int value);
+    partial void OnID_CoordinatesChanged();
+    partial void OnID_VehicleChanging(int value);
+    partial void OnID_VehicleChanged();
+    partial void OnLongitudeChanging(double value);
+    partial void OnLongitudeChanged();
+    partial void OnLatitudeChanging(double value);
+    partial void OnLatitudeChanged();
+    partial void OnStayDateTimeChanging(System.DateTime value);
+    partial void OnStayDateTimeChanged();
+    #endregion
+		
+		public VehicleCoordinates()
+		{
+			this._Vehicles = default(EntityRef<Vehicles>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Coordinates", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_Coordinates
+		{
+			get
+			{
+				return this._ID_Coordinates;
+			}
+			set
+			{
+				if ((this._ID_Coordinates != value))
+				{
+					this.OnID_CoordinatesChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Coordinates = value;
+					this.SendPropertyChanged("ID_Coordinates");
+					this.OnID_CoordinatesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
+		public int ID_Vehicle
+		{
+			get
+			{
+				return this._ID_Vehicle;
+			}
+			set
+			{
+				if ((this._ID_Vehicle != value))
+				{
+					if (this._Vehicles.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_VehicleChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Vehicle = value;
+					this.SendPropertyChanged("ID_Vehicle");
+					this.OnID_VehicleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Longitude", DbType="Float NOT NULL")]
+		public double Longitude
+		{
+			get
+			{
+				return this._Longitude;
+			}
+			set
+			{
+				if ((this._Longitude != value))
+				{
+					this.OnLongitudeChanging(value);
+					this.SendPropertyChanging();
+					this._Longitude = value;
+					this.SendPropertyChanged("Longitude");
+					this.OnLongitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Latitude", DbType="Float NOT NULL")]
+		public double Latitude
+		{
+			get
+			{
+				return this._Latitude;
+			}
+			set
+			{
+				if ((this._Latitude != value))
+				{
+					this.OnLatitudeChanging(value);
+					this.SendPropertyChanging();
+					this._Latitude = value;
+					this.SendPropertyChanged("Latitude");
+					this.OnLatitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StayDateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime StayDateTime
+		{
+			get
+			{
+				return this._StayDateTime;
+			}
+			set
+			{
+				if ((this._StayDateTime != value))
+				{
+					this.OnStayDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._StayDateTime = value;
+					this.SendPropertyChanged("StayDateTime");
+					this.OnStayDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_VehicleCoordinates", Storage="_Vehicles", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Vehicles Vehicles
+		{
+			get
+			{
+				return this._Vehicles.Entity;
+			}
+			set
+			{
+				Vehicles previousValue = this._Vehicles.Entity;
+				if (((previousValue != value) 
+							|| (this._Vehicles.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Vehicles.Entity = null;
+						previousValue.VehicleCoordinates.Remove(this);
+					}
+					this._Vehicles.Entity = value;
+					if ((value != null))
+					{
+						value.VehicleCoordinates.Add(this);
+						this._ID_Vehicle = value.ID_Vehicle;
+					}
+					else
+					{
+						this._ID_Vehicle = default(int);
+					}
+					this.SendPropertyChanged("Vehicles");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Vehicles")]
+	public partial class Vehicles : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Vehicle;
+		
+		private decimal _PricePerHour;
+		
+		private string _Class;
+		
+		private System.Data.Linq.Binary _CarPicture;
+		
+		private EntitySet<VehicleCoordinates> _VehicleCoordinates;
+		
+		private EntitySet<VehicleRegistrCertificates> _VehicleRegistrCertificates;
+		
+		private EntitySet<Rentals> _Rentals;
+		
+		private EntityRef<Classes> _Classes;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_VehicleChanging(int value);
+    partial void OnID_VehicleChanged();
+    partial void OnPricePerHourChanging(decimal value);
+    partial void OnPricePerHourChanged();
+    partial void OnClassChanging(string value);
+    partial void OnClassChanged();
+    partial void OnCarPictureChanging(System.Data.Linq.Binary value);
+    partial void OnCarPictureChanged();
+    #endregion
+		
+		public Vehicles()
+		{
+			this._VehicleCoordinates = new EntitySet<VehicleCoordinates>(new Action<VehicleCoordinates>(this.attach_VehicleCoordinates), new Action<VehicleCoordinates>(this.detach_VehicleCoordinates));
+			this._VehicleRegistrCertificates = new EntitySet<VehicleRegistrCertificates>(new Action<VehicleRegistrCertificates>(this.attach_VehicleRegistrCertificates), new Action<VehicleRegistrCertificates>(this.detach_VehicleRegistrCertificates));
+			this._Rentals = new EntitySet<Rentals>(new Action<Rentals>(this.attach_Rentals), new Action<Rentals>(this.detach_Rentals));
+			this._Classes = default(EntityRef<Classes>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_Vehicle
+		{
+			get
+			{
+				return this._ID_Vehicle;
+			}
+			set
+			{
+				if ((this._ID_Vehicle != value))
+				{
+					this.OnID_VehicleChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Vehicle = value;
+					this.SendPropertyChanged("ID_Vehicle");
+					this.OnID_VehicleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PricePerHour", DbType="Money NOT NULL")]
+		public decimal PricePerHour
+		{
+			get
+			{
+				return this._PricePerHour;
+			}
+			set
+			{
+				if ((this._PricePerHour != value))
+				{
+					this.OnPricePerHourChanging(value);
+					this.SendPropertyChanging();
+					this._PricePerHour = value;
+					this.SendPropertyChanged("PricePerHour");
+					this.OnPricePerHourChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Class", DbType="Char(20) NOT NULL", CanBeNull=false)]
+		public string Class
+		{
+			get
+			{
+				return this._Class;
+			}
+			set
+			{
+				if ((this._Class != value))
+				{
+					if (this._Classes.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnClassChanging(value);
+					this.SendPropertyChanging();
+					this._Class = value;
+					this.SendPropertyChanged("Class");
+					this.OnClassChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CarPicture", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary CarPicture
+		{
+			get
+			{
+				return this._CarPicture;
+			}
+			set
+			{
+				if ((this._CarPicture != value))
+				{
+					this.OnCarPictureChanging(value);
+					this.SendPropertyChanging();
+					this._CarPicture = value;
+					this.SendPropertyChanged("CarPicture");
+					this.OnCarPictureChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_VehicleCoordinates", Storage="_VehicleCoordinates", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
+		public EntitySet<VehicleCoordinates> VehicleCoordinates
+		{
+			get
+			{
+				return this._VehicleCoordinates;
+			}
+			set
+			{
+				this._VehicleCoordinates.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_VehicleRegistrCertificates", Storage="_VehicleRegistrCertificates", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
+		public EntitySet<VehicleRegistrCertificates> VehicleRegistrCertificates
+		{
+			get
+			{
+				return this._VehicleRegistrCertificates;
+			}
+			set
+			{
+				this._VehicleRegistrCertificates.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_Rentals", Storage="_Rentals", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle")]
+		public EntitySet<Rentals> Rentals
+		{
+			get
+			{
+				return this._Rentals;
+			}
+			set
+			{
+				this._Rentals.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Classes_Vehicles", Storage="_Classes", ThisKey="Class", OtherKey="Class", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Classes Classes
+		{
+			get
+			{
+				return this._Classes.Entity;
+			}
+			set
+			{
+				Classes previousValue = this._Classes.Entity;
+				if (((previousValue != value) 
+							|| (this._Classes.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Classes.Entity = null;
+						previousValue.Vehicles.Remove(this);
+					}
+					this._Classes.Entity = value;
+					if ((value != null))
+					{
+						value.Vehicles.Add(this);
+						this._Class = value.Class;
+					}
+					else
+					{
+						this._Class = default(string);
+					}
+					this.SendPropertyChanged("Classes");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_VehicleCoordinates(VehicleCoordinates entity)
+		{
+			this.SendPropertyChanging();
+			entity.Vehicles = this;
+		}
+		
+		private void detach_VehicleCoordinates(VehicleCoordinates entity)
+		{
+			this.SendPropertyChanging();
+			entity.Vehicles = null;
+		}
+		
+		private void attach_VehicleRegistrCertificates(VehicleRegistrCertificates entity)
+		{
+			this.SendPropertyChanging();
+			entity.Vehicles = this;
+		}
+		
+		private void detach_VehicleRegistrCertificates(VehicleRegistrCertificates entity)
+		{
+			this.SendPropertyChanging();
+			entity.Vehicles = null;
+		}
+		
+		private void attach_Rentals(Rentals entity)
+		{
+			this.SendPropertyChanging();
+			entity.Vehicles = this;
+		}
+		
+		private void detach_Rentals(Rentals entity)
+		{
+			this.SendPropertyChanging();
+			entity.Vehicles = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VehicleRegistrCertificates")]
+	public partial class VehicleRegistrCertificates : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CertificateSeries;
+		
+		private int _CertificateNumber;
+		
+		private int _ID_Vehicle;
+		
+		private string _VIN;
+		
+		private string _RegistrationNum;
+		
+		private string _Brand;
+		
+		private string _Mark;
+		
+		private string _Vehicle_Type;
+		
+		private string _Vehicle_Category;
+		
+		private int _ManufactureYear;
+		
+		private string _Chassis;
+		
+		private string _BodyNo;
+		
+		private string _Color;
+		
+		private double _EngineHP_kW;
+		
+		private string _EcologicalClass;
+		
+		private int _PermissibleMaximumWeightKg;
+		
+		private int _WeightWithoutLoadKg;
+		
+		private EntityRef<Vehicles> _Vehicles;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCertificateSeriesChanging(int value);
+    partial void OnCertificateSeriesChanged();
+    partial void OnCertificateNumberChanging(int value);
+    partial void OnCertificateNumberChanged();
+    partial void OnID_VehicleChanging(int value);
+    partial void OnID_VehicleChanged();
+    partial void OnVINChanging(string value);
+    partial void OnVINChanged();
+    partial void OnRegistrationNumChanging(string value);
+    partial void OnRegistrationNumChanged();
+    partial void OnBrandChanging(string value);
+    partial void OnBrandChanged();
+    partial void OnMarkChanging(string value);
+    partial void OnMarkChanged();
+    partial void OnVehicle_TypeChanging(string value);
+    partial void OnVehicle_TypeChanged();
+    partial void OnVehicle_CategoryChanging(string value);
+    partial void OnVehicle_CategoryChanged();
+    partial void OnManufactureYearChanging(int value);
+    partial void OnManufactureYearChanged();
+    partial void OnChassisChanging(string value);
+    partial void OnChassisChanged();
+    partial void OnBodyNoChanging(string value);
+    partial void OnBodyNoChanged();
+    partial void OnColorChanging(string value);
+    partial void OnColorChanged();
+    partial void OnEngineHP_kWChanging(double value);
+    partial void OnEngineHP_kWChanged();
+    partial void OnEcologicalClassChanging(string value);
+    partial void OnEcologicalClassChanged();
+    partial void OnPermissibleMaximumWeightKgChanging(int value);
+    partial void OnPermissibleMaximumWeightKgChanged();
+    partial void OnWeightWithoutLoadKgChanging(int value);
+    partial void OnWeightWithoutLoadKgChanged();
+    #endregion
+		
+		public VehicleRegistrCertificates()
+		{
+			this._Vehicles = default(EntityRef<Vehicles>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CertificateSeries", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int CertificateSeries
+		{
+			get
+			{
+				return this._CertificateSeries;
+			}
+			set
+			{
+				if ((this._CertificateSeries != value))
+				{
+					this.OnCertificateSeriesChanging(value);
+					this.SendPropertyChanging();
+					this._CertificateSeries = value;
+					this.SendPropertyChanged("CertificateSeries");
+					this.OnCertificateSeriesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CertificateNumber", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int CertificateNumber
+		{
+			get
+			{
+				return this._CertificateNumber;
+			}
+			set
+			{
+				if ((this._CertificateNumber != value))
+				{
+					this.OnCertificateNumberChanging(value);
+					this.SendPropertyChanging();
+					this._CertificateNumber = value;
+					this.SendPropertyChanged("CertificateNumber");
+					this.OnCertificateNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
+		public int ID_Vehicle
+		{
+			get
+			{
+				return this._ID_Vehicle;
+			}
+			set
+			{
+				if ((this._ID_Vehicle != value))
+				{
+					if (this._Vehicles.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_VehicleChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Vehicle = value;
+					this.SendPropertyChanged("ID_Vehicle");
+					this.OnID_VehicleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VIN", DbType="Char(14) NOT NULL", CanBeNull=false)]
+		public string VIN
+		{
+			get
+			{
+				return this._VIN;
+			}
+			set
+			{
+				if ((this._VIN != value))
+				{
+					this.OnVINChanging(value);
+					this.SendPropertyChanging();
+					this._VIN = value;
+					this.SendPropertyChanged("VIN");
+					this.OnVINChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegistrationNum", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string RegistrationNum
+		{
+			get
+			{
+				return this._RegistrationNum;
+			}
+			set
+			{
+				if ((this._RegistrationNum != value))
+				{
+					this.OnRegistrationNumChanging(value);
+					this.SendPropertyChanging();
+					this._RegistrationNum = value;
+					this.SendPropertyChanged("RegistrationNum");
+					this.OnRegistrationNumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Brand", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Brand
+		{
+			get
+			{
+				return this._Brand;
+			}
+			set
+			{
+				if ((this._Brand != value))
+				{
+					this.OnBrandChanging(value);
+					this.SendPropertyChanging();
+					this._Brand = value;
+					this.SendPropertyChanged("Brand");
+					this.OnBrandChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mark", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Mark
+		{
+			get
+			{
+				return this._Mark;
+			}
+			set
+			{
+				if ((this._Mark != value))
+				{
+					this.OnMarkChanging(value);
+					this.SendPropertyChanging();
+					this._Mark = value;
+					this.SendPropertyChanged("Mark");
+					this.OnMarkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vehicle_Type", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Vehicle_Type
+		{
+			get
+			{
+				return this._Vehicle_Type;
+			}
+			set
+			{
+				if ((this._Vehicle_Type != value))
+				{
+					this.OnVehicle_TypeChanging(value);
+					this.SendPropertyChanging();
+					this._Vehicle_Type = value;
+					this.SendPropertyChanged("Vehicle_Type");
+					this.OnVehicle_TypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vehicle_Category", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
+		public string Vehicle_Category
+		{
+			get
+			{
+				return this._Vehicle_Category;
+			}
+			set
+			{
+				if ((this._Vehicle_Category != value))
+				{
+					this.OnVehicle_CategoryChanging(value);
+					this.SendPropertyChanging();
+					this._Vehicle_Category = value;
+					this.SendPropertyChanged("Vehicle_Category");
+					this.OnVehicle_CategoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ManufactureYear", DbType="Int NOT NULL")]
+		public int ManufactureYear
+		{
+			get
+			{
+				return this._ManufactureYear;
+			}
+			set
+			{
+				if ((this._ManufactureYear != value))
+				{
+					this.OnManufactureYearChanging(value);
+					this.SendPropertyChanging();
+					this._ManufactureYear = value;
+					this.SendPropertyChanged("ManufactureYear");
+					this.OnManufactureYearChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Chassis", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Chassis
+		{
+			get
+			{
+				return this._Chassis;
+			}
+			set
+			{
+				if ((this._Chassis != value))
+				{
+					this.OnChassisChanging(value);
+					this.SendPropertyChanging();
+					this._Chassis = value;
+					this.SendPropertyChanged("Chassis");
+					this.OnChassisChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BodyNo", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
+		public string BodyNo
+		{
+			get
+			{
+				return this._BodyNo;
+			}
+			set
+			{
+				if ((this._BodyNo != value))
+				{
+					this.OnBodyNoChanging(value);
+					this.SendPropertyChanging();
+					this._BodyNo = value;
+					this.SendPropertyChanged("BodyNo");
+					this.OnBodyNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(120) NOT NULL", CanBeNull=false)]
+		public string Color
+		{
+			get
+			{
+				return this._Color;
+			}
+			set
+			{
+				if ((this._Color != value))
+				{
+					this.OnColorChanging(value);
+					this.SendPropertyChanging();
+					this._Color = value;
+					this.SendPropertyChanged("Color");
+					this.OnColorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EngineHP_kW", DbType="Float NOT NULL")]
+		public double EngineHP_kW
+		{
+			get
+			{
+				return this._EngineHP_kW;
+			}
+			set
+			{
+				if ((this._EngineHP_kW != value))
+				{
+					this.OnEngineHP_kWChanging(value);
+					this.SendPropertyChanging();
+					this._EngineHP_kW = value;
+					this.SendPropertyChanged("EngineHP_kW");
+					this.OnEngineHP_kWChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EcologicalClass", DbType="Char(100) NOT NULL", CanBeNull=false)]
+		public string EcologicalClass
+		{
+			get
+			{
+				return this._EcologicalClass;
+			}
+			set
+			{
+				if ((this._EcologicalClass != value))
+				{
+					this.OnEcologicalClassChanging(value);
+					this.SendPropertyChanging();
+					this._EcologicalClass = value;
+					this.SendPropertyChanged("EcologicalClass");
+					this.OnEcologicalClassChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PermissibleMaximumWeightKg", DbType="Int NOT NULL")]
+		public int PermissibleMaximumWeightKg
+		{
+			get
+			{
+				return this._PermissibleMaximumWeightKg;
+			}
+			set
+			{
+				if ((this._PermissibleMaximumWeightKg != value))
+				{
+					this.OnPermissibleMaximumWeightKgChanging(value);
+					this.SendPropertyChanging();
+					this._PermissibleMaximumWeightKg = value;
+					this.SendPropertyChanged("PermissibleMaximumWeightKg");
+					this.OnPermissibleMaximumWeightKgChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WeightWithoutLoadKg", DbType="Int NOT NULL")]
+		public int WeightWithoutLoadKg
+		{
+			get
+			{
+				return this._WeightWithoutLoadKg;
+			}
+			set
+			{
+				if ((this._WeightWithoutLoadKg != value))
+				{
+					this.OnWeightWithoutLoadKgChanging(value);
+					this.SendPropertyChanging();
+					this._WeightWithoutLoadKg = value;
+					this.SendPropertyChanged("WeightWithoutLoadKg");
+					this.OnWeightWithoutLoadKgChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_VehicleRegistrCertificates", Storage="_Vehicles", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Vehicles Vehicles
+		{
+			get
+			{
+				return this._Vehicles.Entity;
+			}
+			set
+			{
+				Vehicles previousValue = this._Vehicles.Entity;
+				if (((previousValue != value) 
+							|| (this._Vehicles.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Vehicles.Entity = null;
+						previousValue.VehicleRegistrCertificates.Remove(this);
+					}
+					this._Vehicles.Entity = value;
+					if ((value != null))
+					{
+						value.VehicleRegistrCertificates.Add(this);
+						this._ID_Vehicle = value.ID_Vehicle;
+					}
+					else
+					{
+						this._ID_Vehicle = default(int);
+					}
+					this.SendPropertyChanged("Vehicles");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rentals")]
 	public partial class Rentals : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2697,8 +2016,6 @@ namespace CarSharingApplication.SQL.Linq
 		private string _RentalStatus;
 		
 		private EntityRef<Vehicles> _Vehicles;
-		
-		private EntityRef<DriversLicences> _DriversLicences;
 		
     #region Определения метода расширяемости
     partial void OnLoaded();
@@ -2725,7 +2042,6 @@ namespace CarSharingApplication.SQL.Linq
 		public Rentals()
 		{
 			this._Vehicles = default(EntityRef<Vehicles>);
-			this._DriversLicences = default(EntityRef<DriversLicences>);
 			OnCreated();
 		}
 		
@@ -2760,10 +2076,6 @@ namespace CarSharingApplication.SQL.Linq
 			{
 				if ((this._ID_DriverLicence != value))
 				{
-					if (this._DriversLicences.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnID_DriverLicenceChanging(value);
 					this.SendPropertyChanging();
 					this._ID_DriverLicence = value;
@@ -2897,7 +2209,7 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_Rentals1", Storage="_Vehicles", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle", IsForeignKey=true, DeleteRule="SET DEFAULT")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vehicles_Rentals", Storage="_Vehicles", ThisKey="ID_Vehicle", OtherKey="ID_Vehicle", IsForeignKey=true, DeleteRule="SET DEFAULT")]
 		public Vehicles Vehicles
 		{
 			get
@@ -2931,36 +2243,270 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_Rentals1", Storage="_DriversLicences", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public DriversLicences DriversLicences
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TrafficAccidents")]
+	public partial class TrafficAccidents : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_TrafficAccident;
+		
+		private int _ID_Vehicle;
+		
+		private string _ID_DriverLicence;
+		
+		private int _ID_TrafficAccidentType;
+		
+		private decimal _Damage;
+		
+		private string _TrafficAccidentDescription;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_TrafficAccidentChanging(int value);
+    partial void OnID_TrafficAccidentChanged();
+    partial void OnID_VehicleChanging(int value);
+    partial void OnID_VehicleChanged();
+    partial void OnID_DriverLicenceChanging(string value);
+    partial void OnID_DriverLicenceChanged();
+    partial void OnID_TrafficAccidentTypeChanging(int value);
+    partial void OnID_TrafficAccidentTypeChanged();
+    partial void OnDamageChanging(decimal value);
+    partial void OnDamageChanged();
+    partial void OnTrafficAccidentDescriptionChanging(string value);
+    partial void OnTrafficAccidentDescriptionChanged();
+    #endregion
+		
+		public TrafficAccidents()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_TrafficAccident", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_TrafficAccident
 		{
 			get
 			{
-				return this._DriversLicences.Entity;
+				return this._ID_TrafficAccident;
 			}
 			set
 			{
-				DriversLicences previousValue = this._DriversLicences.Entity;
-				if (((previousValue != value) 
-							|| (this._DriversLicences.HasLoadedOrAssignedValue == false)))
+				if ((this._ID_TrafficAccident != value))
 				{
+					this.OnID_TrafficAccidentChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DriversLicences.Entity = null;
-						previousValue.Rentals.Remove(this);
-					}
-					this._DriversLicences.Entity = value;
-					if ((value != null))
-					{
-						value.Rentals.Add(this);
-						this._ID_DriverLicence = value.ID_DriverLicence;
-					}
-					else
-					{
-						this._ID_DriverLicence = default(string);
-					}
-					this.SendPropertyChanged("DriversLicences");
+					this._ID_TrafficAccident = value;
+					this.SendPropertyChanged("ID_TrafficAccident");
+					this.OnID_TrafficAccidentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Vehicle", DbType="Int NOT NULL")]
+		public int ID_Vehicle
+		{
+			get
+			{
+				return this._ID_Vehicle;
+			}
+			set
+			{
+				if ((this._ID_Vehicle != value))
+				{
+					this.OnID_VehicleChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Vehicle = value;
+					this.SendPropertyChanged("ID_Vehicle");
+					this.OnID_VehicleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DriverLicence", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string ID_DriverLicence
+		{
+			get
+			{
+				return this._ID_DriverLicence;
+			}
+			set
+			{
+				if ((this._ID_DriverLicence != value))
+				{
+					this.OnID_DriverLicenceChanging(value);
+					this.SendPropertyChanging();
+					this._ID_DriverLicence = value;
+					this.SendPropertyChanged("ID_DriverLicence");
+					this.OnID_DriverLicenceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_TrafficAccidentType", DbType="Int NOT NULL")]
+		public int ID_TrafficAccidentType
+		{
+			get
+			{
+				return this._ID_TrafficAccidentType;
+			}
+			set
+			{
+				if ((this._ID_TrafficAccidentType != value))
+				{
+					this.OnID_TrafficAccidentTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ID_TrafficAccidentType = value;
+					this.SendPropertyChanged("ID_TrafficAccidentType");
+					this.OnID_TrafficAccidentTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Damage", DbType="Money NOT NULL")]
+		public decimal Damage
+		{
+			get
+			{
+				return this._Damage;
+			}
+			set
+			{
+				if ((this._Damage != value))
+				{
+					this.OnDamageChanging(value);
+					this.SendPropertyChanging();
+					this._Damage = value;
+					this.SendPropertyChanged("Damage");
+					this.OnDamageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrafficAccidentDescription", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string TrafficAccidentDescription
+		{
+			get
+			{
+				return this._TrafficAccidentDescription;
+			}
+			set
+			{
+				if ((this._TrafficAccidentDescription != value))
+				{
+					this.OnTrafficAccidentDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._TrafficAccidentDescription = value;
+					this.SendPropertyChanged("TrafficAccidentDescription");
+					this.OnTrafficAccidentDescriptionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TrafficAccidentTypes")]
+	public partial class TrafficAccidentTypes : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_TrafficAccidentType;
+		
+		private string _TrafficAccidentTypeName;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_TrafficAccidentTypeChanging(int value);
+    partial void OnID_TrafficAccidentTypeChanged();
+    partial void OnTrafficAccidentTypeNameChanging(string value);
+    partial void OnTrafficAccidentTypeNameChanged();
+    #endregion
+		
+		public TrafficAccidentTypes()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_TrafficAccidentType", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_TrafficAccidentType
+		{
+			get
+			{
+				return this._ID_TrafficAccidentType;
+			}
+			set
+			{
+				if ((this._ID_TrafficAccidentType != value))
+				{
+					this.OnID_TrafficAccidentTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ID_TrafficAccidentType = value;
+					this.SendPropertyChanged("ID_TrafficAccidentType");
+					this.OnID_TrafficAccidentTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrafficAccidentTypeName", DbType="NVarChar(60) NOT NULL", CanBeNull=false)]
+		public string TrafficAccidentTypeName
+		{
+			get
+			{
+				return this._TrafficAccidentTypeName;
+			}
+			set
+			{
+				if ((this._TrafficAccidentTypeName != value))
+				{
+					this.OnTrafficAccidentTypeNameChanging(value);
+					this.SendPropertyChanging();
+					this._TrafficAccidentTypeName = value;
+					this.SendPropertyChanged("TrafficAccidentTypeName");
+					this.OnTrafficAccidentTypeNameChanged();
 				}
 			}
 		}
@@ -2998,7 +2544,9 @@ namespace CarSharingApplication.SQL.Linq
 		
 		private int _ID_User;
 		
-		private EntitySet<Rentals> _Rentals;
+		private EntitySet<Categories> _Categories;
+		
+		private EntityRef<Rental_Users> _Rental_Users;
 		
     #region Определения метода расширяемости
     partial void OnLoaded();
@@ -3014,7 +2562,8 @@ namespace CarSharingApplication.SQL.Linq
 		
 		public DriversLicences()
 		{
-			this._Rentals = new EntitySet<Rentals>(new Action<Rentals>(this.attach_Rentals), new Action<Rentals>(this.detach_Rentals));
+			this._Categories = new EntitySet<Categories>(new Action<Categories>(this.attach_Categories), new Action<Categories>(this.detach_Categories));
+			this._Rental_Users = default(EntityRef<Rental_Users>);
 			OnCreated();
 		}
 		
@@ -3069,6 +2618,10 @@ namespace CarSharingApplication.SQL.Linq
 			{
 				if ((this._ID_User != value))
 				{
+					if (this._Rental_Users.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnID_UserChanging(value);
 					this.SendPropertyChanging();
 					this._ID_User = value;
@@ -3078,16 +2631,50 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_Rentals1", Storage="_Rentals", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence")]
-		public EntitySet<Rentals> Rentals
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_Categories", Storage="_Categories", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence")]
+		public EntitySet<Categories> Categories
 		{
 			get
 			{
-				return this._Rentals;
+				return this._Categories;
 			}
 			set
 			{
-				this._Rentals.Assign(value);
+				this._Categories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rental_Users_DriversLicences", Storage="_Rental_Users", ThisKey="ID_User", OtherKey="ID_User", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Rental_Users Rental_Users
+		{
+			get
+			{
+				return this._Rental_Users.Entity;
+			}
+			set
+			{
+				Rental_Users previousValue = this._Rental_Users.Entity;
+				if (((previousValue != value) 
+							|| (this._Rental_Users.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Rental_Users.Entity = null;
+						previousValue.DriversLicences.Remove(this);
+					}
+					this._Rental_Users.Entity = value;
+					if ((value != null))
+					{
+						value.DriversLicences.Add(this);
+						this._ID_User = value.ID_User;
+					}
+					else
+					{
+						this._ID_User = default(int);
+					}
+					this.SendPropertyChanged("Rental_Users");
+				}
 			}
 		}
 		
@@ -3111,13 +2698,13 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
-		private void attach_Rentals(Rentals entity)
+		private void attach_Categories(Categories entity)
 		{
 			this.SendPropertyChanging();
 			entity.DriversLicences = this;
 		}
 		
-		private void detach_Rentals(Rentals entity)
+		private void detach_Categories(Categories entity)
 		{
 			this.SendPropertyChanging();
 			entity.DriversLicences = null;
@@ -3140,6 +2727,8 @@ namespace CarSharingApplication.SQL.Linq
 		
 		private System.DateTime _EndDate;
 		
+		private EntityRef<DriversLicences> _DriversLicences;
+		
     #region Определения метода расширяемости
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3158,6 +2747,7 @@ namespace CarSharingApplication.SQL.Linq
 		
 		public Categories()
 		{
+			this._DriversLicences = default(EntityRef<DriversLicences>);
 			OnCreated();
 		}
 		
@@ -3192,6 +2782,10 @@ namespace CarSharingApplication.SQL.Linq
 			{
 				if ((this._ID_DriverLicence != value))
 				{
+					if (this._DriversLicences.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnID_DriverLicenceChanging(value);
 					this.SendPropertyChanging();
 					this._ID_DriverLicence = value;
@@ -3261,6 +2855,40 @@ namespace CarSharingApplication.SQL.Linq
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DriversLicences_Categories", Storage="_DriversLicences", ThisKey="ID_DriverLicence", OtherKey="ID_DriverLicence", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public DriversLicences DriversLicences
+		{
+			get
+			{
+				return this._DriversLicences.Entity;
+			}
+			set
+			{
+				DriversLicences previousValue = this._DriversLicences.Entity;
+				if (((previousValue != value) 
+							|| (this._DriversLicences.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DriversLicences.Entity = null;
+						previousValue.Categories.Remove(this);
+					}
+					this._DriversLicences.Entity = value;
+					if ((value != null))
+					{
+						value.Categories.Add(this);
+						this._ID_DriverLicence = value.ID_DriverLicence;
+					}
+					else
+					{
+						this._ID_DriverLicence = default(string);
+					}
+					this.SendPropertyChanged("DriversLicences");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3279,6 +2907,309 @@ namespace CarSharingApplication.SQL.Linq
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rental_Admins")]
+	public partial class Rental_Admins
+	{
+		
+		private int _ID_Admin;
+		
+		private int _ID_User;
+		
+		public Rental_Admins()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Admin", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int ID_Admin
+		{
+			get
+			{
+				return this._ID_Admin;
+			}
+			set
+			{
+				if ((this._ID_Admin != value))
+				{
+					this._ID_Admin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", DbType="Int NOT NULL")]
+		public int ID_User
+		{
+			get
+			{
+				return this._ID_User;
+			}
+			set
+			{
+				if ((this._ID_User != value))
+				{
+					this._ID_User = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rental_Users")]
+	public partial class Rental_Users : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_User;
+		
+		private string _UserLogin;
+		
+		private string _UserEMail;
+		
+		private string _UserPassword;
+		
+		private string _UserSurname;
+		
+		private string _UserName;
+		
+		private string _UserMiddleName;
+		
+		private System.DateTime _UserBirthDay;
+		
+		private EntitySet<DriversLicences> _DriversLicences;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_UserChanging(int value);
+    partial void OnID_UserChanged();
+    partial void OnUserLoginChanging(string value);
+    partial void OnUserLoginChanged();
+    partial void OnUserEMailChanging(string value);
+    partial void OnUserEMailChanged();
+    partial void OnUserPasswordChanging(string value);
+    partial void OnUserPasswordChanged();
+    partial void OnUserSurnameChanging(string value);
+    partial void OnUserSurnameChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnUserMiddleNameChanging(string value);
+    partial void OnUserMiddleNameChanged();
+    partial void OnUserBirthDayChanging(System.DateTime value);
+    partial void OnUserBirthDayChanged();
+    #endregion
+		
+		public Rental_Users()
+		{
+			this._DriversLicences = new EntitySet<DriversLicences>(new Action<DriversLicences>(this.attach_DriversLicences), new Action<DriversLicences>(this.detach_DriversLicences));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_User
+		{
+			get
+			{
+				return this._ID_User;
+			}
+			set
+			{
+				if ((this._ID_User != value))
+				{
+					this.OnID_UserChanging(value);
+					this.SendPropertyChanging();
+					this._ID_User = value;
+					this.SendPropertyChanged("ID_User");
+					this.OnID_UserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserLogin", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
+		public string UserLogin
+		{
+			get
+			{
+				return this._UserLogin;
+			}
+			set
+			{
+				if ((this._UserLogin != value))
+				{
+					this.OnUserLoginChanging(value);
+					this.SendPropertyChanging();
+					this._UserLogin = value;
+					this.SendPropertyChanged("UserLogin");
+					this.OnUserLoginChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserEMail", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
+		public string UserEMail
+		{
+			get
+			{
+				return this._UserEMail;
+			}
+			set
+			{
+				if ((this._UserEMail != value))
+				{
+					this.OnUserEMailChanging(value);
+					this.SendPropertyChanging();
+					this._UserEMail = value;
+					this.SendPropertyChanged("UserEMail");
+					this.OnUserEMailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserPassword", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
+		public string UserPassword
+		{
+			get
+			{
+				return this._UserPassword;
+			}
+			set
+			{
+				if ((this._UserPassword != value))
+				{
+					this.OnUserPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._UserPassword = value;
+					this.SendPropertyChanged("UserPassword");
+					this.OnUserPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserSurname", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
+		public string UserSurname
+		{
+			get
+			{
+				return this._UserSurname;
+			}
+			set
+			{
+				if ((this._UserSurname != value))
+				{
+					this.OnUserSurnameChanging(value);
+					this.SendPropertyChanging();
+					this._UserSurname = value;
+					this.SendPropertyChanged("UserSurname");
+					this.OnUserSurnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserMiddleName", DbType="NVarChar(120) NOT NULL", CanBeNull=false)]
+		public string UserMiddleName
+		{
+			get
+			{
+				return this._UserMiddleName;
+			}
+			set
+			{
+				if ((this._UserMiddleName != value))
+				{
+					this.OnUserMiddleNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserMiddleName = value;
+					this.SendPropertyChanged("UserMiddleName");
+					this.OnUserMiddleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserBirthDay", DbType="Date NOT NULL")]
+		public System.DateTime UserBirthDay
+		{
+			get
+			{
+				return this._UserBirthDay;
+			}
+			set
+			{
+				if ((this._UserBirthDay != value))
+				{
+					this.OnUserBirthDayChanging(value);
+					this.SendPropertyChanging();
+					this._UserBirthDay = value;
+					this.SendPropertyChanged("UserBirthDay");
+					this.OnUserBirthDayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rental_Users_DriversLicences", Storage="_DriversLicences", ThisKey="ID_User", OtherKey="ID_User")]
+		public EntitySet<DriversLicences> DriversLicences
+		{
+			get
+			{
+				return this._DriversLicences;
+			}
+			set
+			{
+				this._DriversLicences.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_DriversLicences(DriversLicences entity)
+		{
+			this.SendPropertyChanging();
+			entity.Rental_Users = this;
+		}
+		
+		private void detach_DriversLicences(DriversLicences entity)
+		{
+			this.SendPropertyChanging();
+			entity.Rental_Users = null;
 		}
 	}
 }
