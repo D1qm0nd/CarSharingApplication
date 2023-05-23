@@ -29,11 +29,13 @@ namespace CarSharingApplication
 
         public delegate ContextT CtxCreateFunc(string Connection);
 
-        public CtxCreateFunc createfunc;
+        public CtxCreateFunc? createfunc;
 
         public void OpenConnection(string ConnectionString)
         {
             CloseConnection();
+            if (createfunc == null)
+                throw new NullReferenceException(nameof(createfunc) + " = null");
             _Context = createfunc(ConnectionString);
         }
 

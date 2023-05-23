@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0414: Полю "VehicleEmulator.isWorking" присвоено значение, но оно ни разу не использовано.
+dotnet_diagnostic.CS0414.severity = silent

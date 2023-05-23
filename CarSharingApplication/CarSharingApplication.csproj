@@ -418,6 +418,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="Documents\DATA.xlsx" />
     <None Include="Documents\Описание таблиц.xlsx" />
     <None Include="Documents\Пояснительная записка Разухин М.Н.docx" />

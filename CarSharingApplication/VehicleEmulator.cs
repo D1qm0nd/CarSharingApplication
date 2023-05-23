@@ -12,6 +12,7 @@ namespace CarSharingApplication
     public static class VehicleEmulator
     {
         private static string conectionstring = App.GetConnectionString("CARHANDLERConnection");
+#line 700 
         private static bool isWorking = false; 
 
         public static async void AsyncStartEmulate()
