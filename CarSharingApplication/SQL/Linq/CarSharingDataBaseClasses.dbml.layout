@@ -1,17 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17.5, 11.875" name="CarSharingDataBaseClasses">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17.75, 13.375" name="CarSharingDataBaseClasses">
   <DataContextMoniker Name="/CarSharingDataBaseClassesDataContext" />
   <nestedChildShapes>
     <classShape Id="07945163-b5ab-4c32-8490-86999f255bc2" absoluteBounds="15.125, 0.625, 2, 1.0016910807291668">
       <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/Classes" />
       <nestedChildShapes>
         <elementListCompartment Id="635abb98-8d43-4900-a273-378700878300" absoluteBounds="15.14, 1.085, 1.9700000000000002, 0.44169108072916669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="dbf95deb-6c70-43ec-97ab-e48ce12c93ce" absoluteBounds="5, 3.875, 2, 1.3862939453125">
-      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/DriversLicences" />
-      <nestedChildShapes>
-        <elementListCompartment Id="ff8036ef-2ba4-4c34-86ad-fe17fd24c0ee" absoluteBounds="5.015, 4.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="53810114-73a9-40b0-b3ef-7291c57212f3" absoluteBounds="0.5, 1.375, 2, 1.1939925130208333">
@@ -39,13 +33,6 @@
         <elementListCompartment Id="252e20e9-2681-455e-8713-e8556f1b4c04" absoluteBounds="5.39, 1.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.1875 : 3.34780110677083); (6.1875 : 3.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/Rental_Users/Rental_Users_DriversLicences" />
-      <nodes>
-        <classShapeMoniker Id="3d9b5e97-085f-45b7-a8ee-2780472d26d1" />
-        <classShapeMoniker Id="dbf95deb-6c70-43ec-97ab-e48ce12c93ce" />
-      </nodes>
-    </associationConnector>
     <associationConnector edgePoints="[(5.375 : 1.97199625651042); (2.5 : 1.97199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/Rental_Users/Rental_Users_Rental_Admins" />
       <nodes>
@@ -53,18 +40,6 @@
         <classShapeMoniker Id="53810114-73a9-40b0-b3ef-7291c57212f3" />
       </nodes>
     </associationConnector>
-    <classShape Id="cc8bcc0d-ee9e-485e-9147-0f38e9642258" absoluteBounds="2.75, 8.5, 2, 3.1170068359375">
-      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/UsersINFO" />
-      <nestedChildShapes>
-        <elementListCompartment Id="8b412367-db60-4c2a-8c6d-fa4790b873c1" absoluteBounds="2.7649999999999997, 8.96, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="16f63029-2e62-45b3-8b16-9f59dc5bc02b" absoluteBounds="0.5, 8.5, 2, 3.1170068359375">
-      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/VehiclesINFO" />
-      <nestedChildShapes>
-        <elementListCompartment Id="4685058a-0b4f-44da-be33-4c5dbbe9fc60" absoluteBounds="0.515, 8.96, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="3d044167-a253-49c7-a89c-98ea9b16b0d5" absoluteBounds="9.125, 0.75, 2, 1.7708968098958331">
       <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/VehicleCoordinates" />
       <nestedChildShapes>
@@ -78,12 +53,6 @@
         <classShapeMoniker Id="3d044167-a253-49c7-a89c-98ea9b16b0d5" />
       </nodes>
     </associationConnector>
-    <classShape Id="d8eda5b0-240d-4463-a7f3-5dcc8e5a837a" absoluteBounds="0.5, 6.75, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/DriversLicencesCategoriesINFO" />
-      <nestedChildShapes>
-        <elementListCompartment Id="6adae829-029c-45c5-839c-33ee396af5fc" absoluteBounds="0.51500000000000012, 7.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="9c73baea-4de7-4459-a22b-306bf15c9870" absoluteBounds="7.75, 5.875, 2, 1.1939925130208333">
       <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/TrafficAccidentTypes" />
       <nestedChildShapes>
@@ -96,13 +65,6 @@
         <elementListCompartment Id="2ee3f33b-d154-4695-8875-0c33eb77802d" absoluteBounds="10.64, 4.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7 : 4.81814697265625); (10.625 : 4.81814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/DriversLicences/DriversLicences_TrafficAccidents" />
-      <nodes>
-        <classShapeMoniker Id="dbf95deb-6c70-43ec-97ab-e48ce12c93ce" />
-        <classShapeMoniker Id="0892ce85-7203-429d-8b54-ce969a0a88d7" />
-      </nodes>
-    </associationConnector>
     <associationConnector edgePoints="[(9.75 : 6.10659912109375); (10.625 : 6.10659912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/TrafficAccidentTypes/TrafficAccidentTypes_TrafficAccidents" />
       <nodes>
@@ -117,39 +79,13 @@
         <classShapeMoniker Id="0892ce85-7203-429d-8b54-ce969a0a88d7" />
       </nodes>
     </associationConnector>
-    <classShape Id="2972c21c-23ea-47a9-bb3c-9afef3492350" absoluteBounds="2.75, 6.375, 2, 1.9631982421875">
-      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/RentalsINFO" />
-      <nestedChildShapes>
-        <elementListCompartment Id="f43cfa23-5289-4492-828e-69cdfa7c11fa" absoluteBounds="2.765, 6.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="2da30589-61d5-453c-83e5-f0bff39dc678" absoluteBounds="11.875, 6.875, 2, 2.3478011067708335">
-      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/Rentals" />
-      <nestedChildShapes>
-        <elementListCompartment Id="55ef987d-0d24-4ac0-93db-836de25e27f7" absoluteBounds="11.89, 7.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(6 : 5.2612939453125); (6 : 8.17714680989583); (11.875 : 8.17714680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/DriversLicences/DriversLicences_Rentals" />
-      <nodes>
-        <classShapeMoniker Id="dbf95deb-6c70-43ec-97ab-e48ce12c93ce" />
-        <classShapeMoniker Id="2da30589-61d5-453c-83e5-f0bff39dc678" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(13.567381578125 : 2.32859537760417); (13.567381578125 : 6.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/Vehicles/Vehicles_Rentals" />
-      <nodes>
-        <classShapeMoniker Id="d6e5e4a7-8c53-4bcb-b4af-cabfdf23edb1" />
-        <classShapeMoniker Id="2da30589-61d5-453c-83e5-f0bff39dc678" />
-      </nodes>
-    </associationConnector>
     <classShape Id="0a34edea-5dc6-46d1-b125-5dac22f74f41" absoluteBounds="15.25, 4.25, 2, 4.0785139973958326">
       <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/VehicleRegistrCertificates" />
       <nestedChildShapes>
         <elementListCompartment Id="d65bc6e2-ee7d-41e8-af2e-cd0a90421139" absoluteBounds="15.265, 4.71, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(14.21875 : 2.32859537760417); (14.21875 : 6.60659912109375); (15.25 : 6.60659912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(14.5 : 2.00889322916667); (17.21875 : 2.00889322916667); (17.21875 : 4.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/Vehicles/Vehicles_VehicleRegistrCertificates" />
       <nodes>
         <classShapeMoniker Id="d6e5e4a7-8c53-4bcb-b4af-cabfdf23edb1" />
@@ -162,18 +98,61 @@
         <elementListCompartment Id="4c85a419-083a-4b0a-8dc2-d88aa28e4364" absoluteBounds="7.7650000000000006, 9.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ed9f144b-5a78-410d-a08b-897c373afaa2" absoluteBounds="2.375, 3.875, 2, 1.7708968098958331">
-      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/Categories" />
+    <classShape Id="1c985a19-f509-45d6-8169-e7b339ce6ab9" absoluteBounds="3, 8.125, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/DriversLicencesCategoriesINFO" />
       <nestedChildShapes>
-        <elementListCompartment Id="40401f79-42c8-4f22-bc5d-fdb0c7178ee0" absoluteBounds="2.39, 4.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f818e175-fe75-40b8-ae94-760776b71e55" absoluteBounds="3.015, 8.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5 : 4.56814697265625); (4.375 : 4.56814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/DriversLicences/DriversLicences_Categories" />
+    <classShape Id="e1331713-4d39-4678-b52a-9eddcfb2ce8f" absoluteBounds="0.75, 7.75, 2, 1.9631982421875">
+      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/RentalsINFO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cf3a776c-fda4-41eb-aaa5-656a84282eec" absoluteBounds="0.76500000000000012, 8.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cb78a4b3-8071-4523-bc37-eeb80bd76478" absoluteBounds="3, 10, 2, 3.1170068359375">
+      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/UsersINFO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9d50e49c-3e0a-4c9c-8350-3e78bd5c6e29" absoluteBounds="3.015, 10.46, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3e17069d-eaf9-4e80-8852-9375ae012ae3" absoluteBounds="0.75, 10, 2, 3.1170068359375">
+      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/VehiclesINFO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4ccb47f3-a818-40e6-8fcb-47e93b55076a" absoluteBounds="0.76500000000000012, 10.46, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="be06b5fe-8640-4fb6-abc3-f4cb36ef86c5" absoluteBounds="12.125, 7.625, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/Rentals" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e7a99db4-f2a3-4352-a5cc-e9e642b31f01" absoluteBounds="12.14, 8.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(13.692381578125 : 2.32859537760417); (13.692381578125 : 7.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/Vehicles/Vehicles_Rentals1" />
       <nodes>
-        <classShapeMoniker Id="dbf95deb-6c70-43ec-97ab-e48ce12c93ce" />
-        <classShapeMoniker Id="ed9f144b-5a78-410d-a08b-897c373afaa2" />
+        <classShapeMoniker Id="d6e5e4a7-8c53-4bcb-b4af-cabfdf23edb1" />
+        <classShapeMoniker Id="be06b5fe-8640-4fb6-abc3-f4cb36ef86c5" />
       </nodes>
     </associationConnector>
+    <classShape Id="039f99dd-3537-422e-9db1-ebcb3d139c34" absoluteBounds="5.375, 4.125, 2, 1.3862939453125">
+      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/DriversLicences" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9a170787-aee9-4ebc-b1dd-ef214b1b8c65" absoluteBounds="5.39, 4.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.375 : 5.5112939453125); (6.375 : 8.40625); (12.125 : 8.40625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CarSharingDataBaseClassesDataContext/DriversLicences/DriversLicences_Rentals1" />
+      <nodes>
+        <classShapeMoniker Id="039f99dd-3537-422e-9db1-ebcb3d139c34" />
+        <classShapeMoniker Id="be06b5fe-8640-4fb6-abc3-f4cb36ef86c5" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="7d277802-0db1-4eea-9adb-54e441a2d937" absoluteBounds="2.125, 4.125, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/CarSharingDataBaseClassesDataContext/Categories" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7924ba68-0257-47f2-a378-2d9237e8e23f" absoluteBounds="2.14, 4.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

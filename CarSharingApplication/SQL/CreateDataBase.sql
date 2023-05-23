@@ -136,7 +136,7 @@ GO
 			CHECK (
 				ID_DriverLicence LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
 				),
-		ID_Vehicle INT NOT NULL,
+		ID_Vehicle INT NULL,
 		StartDate DATE NOT NULL,
 		RentalTime TIME NOT NULL,
 		CountOfHours INT NOT NULL,
@@ -246,7 +246,7 @@ GO
 	ALTER TABLE Rentals
 	ADD CONSTRAINT FK_Rentals_DriversLicences
 		FOREIGN KEY (ID_DriverLicence) REFERENCES DriversLicences (ID_DriverLicence)
-		ON DELETE CASCADE
+		ON DELETE SET DEFAULT
 		ON UPDATE CASCADE
 
 	PRINT 'Создал Ключ FK_Rentals_DriversLicences'
@@ -256,7 +256,7 @@ GO
 	ALTER TABLE Rentals
 	ADD CONSTRAINT FK_Rentals_Vehicles
 		FOREIGN KEY (ID_Vehicle) REFERENCES Vehicles (ID_Vehicle)
-		ON DELETE CASCADE
+		ON DELETE SET DEFAULT
 		ON UPDATE CASCADE
 	PRINT 'Создал Ключ FK_Rentals_Vehicles'
 
@@ -278,7 +278,7 @@ GO
 	ALTER TABLE TrafficAccidents
 	ADD CONSTRAINT FK_TrafficAccidents_Vehicles
 		FOREIGN KEY (ID_Vehicle) REFERENCES Vehicles (ID_Vehicle)
-		ON DELETE CASCADE
+		ON DELETE SET DEFAULT
 		ON UPDATE CASCADE
 	PRINT 'Создал Ключ FK_TrafficAccidents_Vehicles'
 
@@ -288,7 +288,7 @@ GO
 	ALTER TABLE TrafficAccidents
 	ADD CONSTRAINT FK_TrafficAccidents_TrafficAccidentTypes
 		FOREIGN KEY (ID_TrafficAccidentType) REFERENCES TrafficAccidentTypes (ID_TrafficAccidentType)
-		ON DELETE CASCADE
+		ON DELETE SET DEFAULT
 		ON UPDATE CASCADE
 	PRINT 'Создал Ключ FK_TrafficAccidents_TrafficAccidentTypes'
 
@@ -298,7 +298,7 @@ GO
 	ALTER TABLE TrafficAccidents
 	ADD CONSTRAINT FK_TrafficAccidents_DriversLincences
 		FOREIGN KEY (ID_DriverLicence) REFERENCES DriversLicences (ID_DriverLicence)
-		ON DELETE CASCADE
+		ON DELETE SET DEFAULT
 		ON UPDATE CASCADE
 	PRINT 'Создал Ключ FK_TrafficAccidents_DriversLincences'
 	
@@ -309,6 +309,9 @@ GO
 	ADD CONSTRAINT FK_VehicleRegistrCertificates_Vehicles
 		FOREIGN KEY (ID_Vehicle) 
 		REFERENCES Vehicles (ID_Vehicle)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+
 
 	PRINT 'Создал Ключ FK_VehicleRegistrCertificates_Vehicles'
 GO
