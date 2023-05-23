@@ -12,6 +12,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using CarSharingApplication.Windows.Images;
 
 namespace CarSharingApplication
 {
@@ -38,6 +39,7 @@ namespace CarSharingApplication
             this.Owner = owner;
             _ShowOwner = showOwner;
             _User = user;
+            VehicleEmulator.AsyncStartEmulate();
             App._Logger.Log(new LogMessage((ulong)_User.ID_User, this.Title, $"Просматривает {this.Title}", null, LogType.UserAction));
             InitializeComponent();
             GetVehiclesData(VehiclesData.GetInstance);
@@ -140,7 +142,7 @@ namespace CarSharingApplication
                         marker.Tag = vehicle.ID_Vehicle;
                         marker.Shape = new System.Windows.Controls.Image
                         {
-                            Source = new BitmapImage(new Uri($@"{App.path}\Windows\Images\CarMarker2.png")),
+                            Source = ImageConvertor.Base64ToBitmapImage(AppImages.CarMarker2),
                             Width = 30,
                             Height = 30,
                             ToolTip = $"{vehicle.Brand} {vehicle.Mark}",

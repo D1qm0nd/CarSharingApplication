@@ -183,6 +183,7 @@
     <Compile Include="Windows\Authorization\ChoiceLoginWindow.xaml.cs">
       <DependentUpon>ChoiceLoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Images\AppImages.cs" />
     <Compile Include="Windows\Moderating\AdminWindows.xaml.cs">
       <DependentUpon>AdminWindows.xaml</DependentUpon>
     </Compile>

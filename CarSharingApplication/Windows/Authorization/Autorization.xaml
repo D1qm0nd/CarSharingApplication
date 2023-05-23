@@ -66,13 +66,13 @@
                         <TextBox Text="{Binding email_, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="Email" Margin="20,0,20,0" Padding="0 6 0 5" CharacterCasing="Lower" Height="28" VerticalAlignment="Bottom" materialDesign:HintAssist.Hint="Почта"/>
                     </Grid>
                     <Grid x:Name="PasswordGrid" Grid.Row="2" Tag="2">
-                        <PasswordBox x:Name="Password" Margin="20 0 20 0" Padding="0 6 0 5" materialDesign:HintAssist.Hint="Пароль"></PasswordBox>
+                        <PasswordBox x:Name="Password" Margin="20 0 20 0" Padding="0 6 0 5" MaxLength="120" materialDesign:HintAssist.Hint="Пароль"></PasswordBox>
                     </Grid>
                     <Grid x:Name="RepeatPasswordGrid" Grid.Row="3" Tag="3">
-                        <PasswordBox x:Name="RepeatPassword" Margin="20 0 20 0" Padding="0 6 0 5" materialDesign:HintAssist.Hint="Повторите пароль"></PasswordBox>
+                        <PasswordBox x:Name="RepeatPassword" Margin="20 0 20 0" Padding="0 6 0 5" MaxLength="120" materialDesign:HintAssist.Hint="Повторите пароль"></PasswordBox>
                     </Grid>
                     <Grid x:Name="UserSurnameGrid" Grid.Row="4" Tag="4">
-                        <TextBox Text="{Binding surnname_, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="UserSurname" Margin="20 0 20 0" Padding="0 6 0 5" materialDesign:HintAssist.Hint="Фамилия"/>
+                        <TextBox Text="{Binding surname_, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="UserSurname" Margin="20 0 20 0" Padding="0 6 0 5" materialDesign:HintAssist.Hint="Фамилия"/>
                     </Grid>
                     <Grid x:Name="UserNameGrid" Grid.Row="5" Tag="5">
                         <TextBox Text="{Binding username_, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="UserName" Margin="20 0 20 0" Padding="0 6 0 5" materialDesign:HintAssist.Hint="Имя"/>

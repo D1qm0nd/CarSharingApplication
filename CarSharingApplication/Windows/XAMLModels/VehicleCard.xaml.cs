@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using CarSharingApplication.Windows.Images;
 
 namespace CarSharingApplication.Windows.XAMLModels
 {
@@ -45,11 +46,11 @@ namespace CarSharingApplication.Windows.XAMLModels
                         MessageBox.Show(ex.Message);
                     }
                 }
-                else CarPicture.ImageSource = new BitmapImage(new Uri($@"{App.path}\Windows\Images\NullImage2.png"));
+                else CarPicture.ImageSource = ImageConvertor.Base64ToBitmapImage(AppImages.NullImage2);//new BitmapImage(new Uri($@"{App.path}\Windows\Images\NullImage2.png"));
             }
             else
             {
-                CarPicture.ImageSource = new BitmapImage(new Uri(App.path + @"\Windows\Images\NullImage2.png"));
+                CarPicture.ImageSource = ImageConvertor.Base64ToBitmapImage(AppImages.NullImage2);//new BitmapImage(new Uri(App.path + @"\Windows\Images\NullImage2.png"));
                 infolist.Add(errorMessage);
                 VehicleInfoList.ItemsSource = infolist;
             }

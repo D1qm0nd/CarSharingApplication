@@ -22,15 +22,6 @@ namespace CarSharingApplication
         public static DataBase<CarSharingDataBaseClassesDataContext> AppDataBase { get => DataBase<CarSharingDataBaseClassesDataContext>.Instance; }
 
         public static CarSharingDataBaseClassesDataContext ContextCreateFunc(string ConnectionString) => new CarSharingDataBaseClassesDataContext(ConnectionString);
-        
-
-        
-        public static string path { get
-            {
-                string _path = App.GetConnectionString("AppPath");
-                return _path;
-            }
-        }
 
         public static Logger _Logger { get => Logger.Instance(); }
     }

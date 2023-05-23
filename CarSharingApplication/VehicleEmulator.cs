@@ -54,7 +54,7 @@ namespace CarSharingApplication
                             );
                         }
                     }
-                    Thread.Sleep(10000);
+                    Thread.Sleep(15000);
                 }
             }
         }

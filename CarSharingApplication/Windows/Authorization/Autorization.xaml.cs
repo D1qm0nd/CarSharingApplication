@@ -30,7 +30,6 @@ namespace CarSharingApplication
             //App._Logger.LogPath = Environment.CurrentDirectory + @"\logs.json";
             App._Logger.LogPath = App.GetConnectionString("LoggerConnection");
             App.AppDataBase.createfunc += App.ContextCreateFunc;
-            VehicleEmulator.AsyncStartEmulate();
             InitializeComponent();
             Reg_Button_Click(null, null);
         }
