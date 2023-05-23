@@ -21,6 +21,7 @@
                 x:Name="dt_grid"
                 CanUserAddRows="False"
                 CanUserDeleteRows="False"
+                IsReadOnly="True"
                 AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding ID_DriverLicence, StringFormat=d}" Header="Серия номер вод. удостоверения" MinWidth="200" MaxWidth="300" CanUserSort="True" SortDirection="Descending"/>

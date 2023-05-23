@@ -33,6 +33,7 @@
                 CanUserAddRows="False"
                 CanUserDeleteRows="False"
                 AutoGenerateColumns="False"
+                IsReadOnly="True"
                 >
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">
