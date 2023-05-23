@@ -37,6 +37,7 @@ namespace CarSharingApplication
         public CarSelector(ref UsersINFO user, Window owner, bool showOwner)
         {
             this.Owner = owner;
+            this.Title = "Окно выбора ТС";
             _ShowOwner = showOwner;
             _User = user;
             VehicleEmulator.AsyncStartEmulate();
