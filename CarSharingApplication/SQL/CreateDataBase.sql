@@ -856,3 +856,20 @@ GO
 		CREATE USER LOGGER FOR LOGIN DBLOGGER
 
 		GRANT SELECT, INSERT ON Vehicle_Rental_Logs TO LOGGER
+
+GO
+    PRINT('====================БЭКАПЫ==========================')
+    USE MASTER
+    GO
+    CREATE PROCEDURE MakeDataBaseBackup
+    (
+        @databaseName NVARCHAR(MAX),
+        @backupLocation NVARCHAR(MAX)
+    )
+    AS
+        DECLARE @FName NVARCHAR(MAX) = 'Full Backup of ' + @databaseName
+        BACKUP DATABASE VehicleRental 
+        TO DISK = @backupLocation 
+        WITH FORMAT, 
+        MEDIANAME = 'SQLServerBackups',
+        NAME =  @FName;

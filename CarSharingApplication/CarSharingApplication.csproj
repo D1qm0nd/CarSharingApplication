@@ -459,10 +459,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DataBaseBackUps\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="SQL\CreateDataBase.sql" />
     <Content Include="SQL\FillUp.sql" />
+    <Content Include="SQL\MakeBackUp.bat" />
     <Resource Include="Windows\Images\Vehicles\b80dd69s-1920.jpeg" />
     <Resource Include="Windows\Images\Vehicles\BMV X1 E84.jpg" />
     <Resource Include="Windows\Images\Vehicles\Cayene.jpeg" />
