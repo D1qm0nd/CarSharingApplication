@@ -52,9 +52,16 @@ namespace LoggerLib
         {
             var log = JsonSerializer.Serialize(logObj, options);
             int ret;
-            using (var context = new CarSharingDataBaseClassesDataContext(App.GetConnectionString("LoggerConnection")))
-                ret = context.ExecuteCommand($"INSERT INTO Vehicle_Rental_logs (LogString) VALUES ('{log}')");
-            return ret > 0;
+            try
+            {
+                using (var context = new CarSharingDataBaseClassesDataContext(App.GetConnectionString("LoggerConnection")))
+                    ret = context.ExecuteCommand($"INSERT INTO Vehicle_Rental_logs (LogString) VALUES ('{log}')");
+                return ret > 0;
+            }
+            catch 
+            { 
+                return false;
+            }
         }
         private Logger()
         {

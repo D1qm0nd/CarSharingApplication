@@ -62,40 +62,57 @@ namespace CarSharingApplication
                     #region NEW CODE SUPPORT FROM 25.04.2023
                     using (DESCryptoServiceProvider des = new DESCryptoServiceProvider())
                     {
-                        string encLogin = PasswordEncryptor.EncryptString(Login.Text);
-                        string encPass = PasswordEncryptor.EncryptString(Password.Password);
-
-                        App.AppDataBase.OpenConnection(connectionString);
-                        if (App.AppDataBase.GetQueryResult<string>($"SELECT UserLogin FROM Rental_Users WHERE UserLogin = '{encLogin}'").Count > 0)
+                        string encLogin = "";
+                        string encPass = "";
+                        try
                         {
-                            MessageBox.Show("Логин занят");
+                            encLogin = PasswordEncryptor.EncryptString(Login.Text);
+                            encPass = PasswordEncryptor.EncryptString(Password.Password);
+                        
+                        }
+                        catch 
+                        {
+                            MessageBox.Show("Произошла ошибка,\nпопробуйте перезагрузить программу");
                             return;
                         }
-
-                        var answ = App.AppDataBase.GetScalarResult<int>($"SELECT [dbo].CheckExistingUser('{encLogin}','{encPass}')");
-
-                        if (answ == -1)
+                        try
                         {
+                            App.AppDataBase.OpenConnection(connectionString);
+                            if (App.AppDataBase.GetQueryResult<string>($"SELECT UserLogin FROM Rental_Users WHERE UserLogin = '{encLogin}'").Count > 0)
+                            {
+                                MessageBox.Show("Логин занят");
+                                return;
+                            }
 
-                            if (App.AppDataBase.ExecuteNonQuery(
-                                "EXEC REG_USER " +
-                                $"@UserLogin='{encLogin}', " +
-                                $"@UserEmail='{Email.Text}', " +
-                                $"@UserPassword='{encPass}', " +
-                                $"@UserSurname='{UserSurname.Text}', " +
-                                $"@UserName='{UserName.Text}', " +
-                                $"@UserMiddleName='{UserMiddleName.Text}'," +
-                                $"@UserBirthDayDate='{BDatePicker.Text}'"))
-                            
-                            registered = true;
+                            var answ = App.AppDataBase.GetScalarResult<int>($"SELECT [dbo].CheckExistingUser('{encLogin}','{encPass}')");
+
+                            if (answ == -1)
+                            {
+
+                                if (App.AppDataBase.ExecuteNonQuery(
+                                    "EXEC REG_USER " +
+                                    $"@UserLogin='{encLogin}', " +
+                                    $"@UserEmail='{Email.Text}', " +
+                                    $"@UserPassword='{encPass}', " +
+                                    $"@UserSurname='{UserSurname.Text}', " +
+                                    $"@UserName='{UserName.Text}', " +
+                                    $"@UserMiddleName='{UserMiddleName.Text}'," +
+                                    $"@UserBirthDayDate='{BDatePicker.Text}'"))
+
+                                    registered = true;
+                            }
+                            else if (answ > 0)
+                            {
+                                registered = true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Проверьте корректность введённых данных");
+                            }
                         }
-                        else if (answ > 0)
+                        catch
                         {
-                            registered = true;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Проверьте корректность введённых данных");
+                            MessageBox.Show("Попробуйте позже");
                         }
                     }
                     #endregion
@@ -203,7 +220,7 @@ namespace CarSharingApplication
             if (condition != 2) 
             {
                 ShowFields();
-                lbl.Content = "Аутентификация";
+                lbl.Content = "Регистрация";
                 inputButton.Click -= MakeLogIn;
                 inputButton.Click += MakeRegister;
                 inputButton.Content = "Зарегистрироваться";
@@ -215,7 +232,7 @@ namespace CarSharingApplication
             if (condition != 1)
             {
                 HideFields();
-                lbl.Content = "Авторизация";
+                lbl.Content = "Аутентификация";
                 inputButton.Click -= MakeRegister;
                 inputButton.Click += MakeLogIn;
                 inputButton.Content = "Войти";

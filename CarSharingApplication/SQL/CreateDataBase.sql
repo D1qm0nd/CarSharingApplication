@@ -873,3 +873,105 @@ GO
         WITH FORMAT, 
         MEDIANAME = 'SQLServerBackups',
         NAME =  @FName;
+
+GO
+PRINT ('====================Логгирование==========================')
+USE VehicleRental
+GO
+CREATE TABLE DATA_BASE_AUDIT
+(
+	ID_Log INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	Table_Name NVARCHAR(255) NOT NULL,
+	ActionWithTable NVARCHAR(255) NOT NULL
+)
+
+GO
+CREATE PROCEDURE CreateChangeTrigger
+(
+	@TableName NVARCHAR(MAX),
+	@Action NVARCHAR(MAX)
+)
+AS
+BEGIN
+	DECLARE @TRIGGER NVARCHAR(MAX) = 
+	'CREATE TRIGGER '+ @TableName + '_'+@Action+'_Tracking'+
+	' ON Categories'+
+	' AFTER UPDATE'+
+	' AS'+
+	' INSERT INTO DATA_BASE_AUDIT VALUES'+
+	'('''+ @TableName+''','''+@Action+''')'
+	PRINT('Создан триггер: '+@TableName + '_'+@Action+'_Tracking')
+	EXEC (@TRIGGER)
+END
+
+
+GO 
+	EXEC CreateChangeTrigger @TableName='Categories', @Action='UPDATE'
+GO 
+	EXEC CreateChangeTrigger @TableName='Classes', @Action='UPDATE'
+GO 
+	EXEC CreateChangeTrigger @TableName='DriversLicences', @Action='UPDATE'
+GO 
+	EXEC CreateChangeTrigger @TableName='Rental_Admins', @Action='UPDATE'
+GO 
+	EXEC CreateChangeTrigger @TableName='Rental_Users', @Action='UPDATE'
+GO 
+	EXEC CreateChangeTrigger @TableName='Rentals', @Action='UPDATE'
+GO 
+	EXEC CreateChangeTrigger @TableName='TrafficAccidents', @Action='UPDATE'
+GO 
+	EXEC CreateChangeTrigger @TableName='TrafficAccidentTypes', @Action='UPDATE'
+GO 
+	EXEC CreateChangeTrigger @TableName='VehicleCoordinates', @Action='UPDATE'
+GO 
+	EXEC CreateChangeTrigger @TableName='VehicleRegistrCertificates', @Action='UPDATE'
+GO 
+	EXEC CreateChangeTrigger @TableName='Vehicles', @Action='UPDATE'
+
+
+GO 
+	EXEC CreateChangeTrigger @TableName='Categories', @Action='DELETE'
+GO 
+	EXEC CreateChangeTrigger @TableName='Classes', @Action='DELETE'
+GO 
+	EXEC CreateChangeTrigger @TableName='DriversLicences', @Action='DELETE'
+GO 
+	EXEC CreateChangeTrigger @TableName='Rental_Admins', @Action='DELETE'
+GO 
+	EXEC CreateChangeTrigger @TableName='Rental_Users', @Action='DELETE'
+GO 
+	EXEC CreateChangeTrigger @TableName='Rentals', @Action='DELETE'
+GO 
+	EXEC CreateChangeTrigger @TableName='TrafficAccidents', @Action='DELETE'
+GO 
+	EXEC CreateChangeTrigger @TableName='TrafficAccidentTypes', @Action='DELETE'
+GO 
+	EXEC CreateChangeTrigger @TableName='VehicleCoordinates', @Action='DELETE'
+GO 
+	EXEC CreateChangeTrigger @TableName='VehicleRegistrCertificates', @Action='DELETE'
+GO 
+	EXEC CreateChangeTrigger @TableName='Vehicles', @Action='DELETE'
+
+
+GO 
+	EXEC CreateChangeTrigger @TableName='Categories', @Action='INSERT'
+GO 
+	EXEC CreateChangeTrigger @TableName='Classes', @Action='INSERT'
+GO 
+	EXEC CreateChangeTrigger @TableName='DriversLicences', @Action='INSERT'
+GO 
+	EXEC CreateChangeTrigger @TableName='Rental_Admins', @Action='INSERT'
+GO 
+	EXEC CreateChangeTrigger @TableName='Rental_Users', @Action='INSERT'
+GO 
+	EXEC CreateChangeTrigger @TableName='Rentals', @Action='INSERT'
+GO 
+	EXEC CreateChangeTrigger @TableName='TrafficAccidents', @Action='INSERT'
+GO 
+	EXEC CreateChangeTrigger @TableName='TrafficAccidentTypes', @Action='INSERT'
+GO 
+	EXEC CreateChangeTrigger @TableName='VehicleCoordinates', @Action='INSERT'
+GO 
+	EXEC CreateChangeTrigger @TableName='VehicleRegistrCertificates', @Action='INSERT'
+GO 
+	EXEC CreateChangeTrigger @TableName='Vehicles', @Action='INSERT'
